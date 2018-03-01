@@ -8,7 +8,7 @@ public class POJOTest
 {
 
     @Test
-    public void testMethode()
+    public void testTestMethode()
     {
         int a = 234;
         int b = 42346;
