@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="datauitwisselingssysteemmodule:war">
+    <output-path>$PROJECT_DIR$/datauitwisselingssysteemmodule/target</output-path>
+    <root id="archive" name="datauitwisselingssysteemmodule.war">
+      <element id="artifact" artifact-name="datauitwisselingssysteemmodule:war exploded" />
+    </root>
+  </artifact>
+</component>
