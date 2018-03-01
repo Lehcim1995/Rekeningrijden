@@ -15,13 +15,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="datauitwisselingssysteemmodule" target="1.5" />
-      <module name="monitoringsysteemmodule" target="1.5" />
-      <module name="politiesysteemmodule" target="1.5" />
-      <module name="rekeningadministratiemodule" target="1.5" />
-      <module name="rekeningrijdersapplicatiemodule" target="1.5" />
-      <module name="simulatiemodule" target="1.5" />
-      <module name="verplaatsingsmodule" target="1.5" />
+      <module name="datauitwisselingssysteemmodule" target="1.8" />
+      <module name="monitoringsysteemmodule" target="1.8" />
+      <module name="politiesysteemmodule" target="1.8" />
+      <module name="rekeningadministratiemodule" target="1.8" />
+      <module name="rekeningrijdersapplicatiemodule" target="1.8" />
+      <module name="simulatiemodule" target="1.8" />
+      <module name="verplaatsingsmodule" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
