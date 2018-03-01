@@ -5,9 +5,6 @@
   <artifactId>simulatiemodule</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>rekeningadministratiemodule</module>
-    </modules>
     <name>simulatiemodule Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
