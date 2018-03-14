@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface SimulatieDao extends DaoFacade<String, String>
+public interface SimulatieDao //extends DaoFacade<String, String>
 {
 
 }
