@@ -13,5 +13,15 @@ public class Verplaatsing
 
     private Data time;
 
-
+    public Verplaatsing(
+            List<Checkpoint> checkpoints,
+            String voertuigId,
+            long serieID,
+            Data time)
+    {
+        this.checkpoints = checkpoints;
+        this.voertuigId = voertuigId;
+        this.serieID = serieID;
+        this.time = time;
+    }
 }

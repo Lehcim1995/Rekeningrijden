@@ -14,13 +14,15 @@ public class VerplaatsingRestService
     @Path("waypoint")
     public Response addWaypoint(Verplaatsing verplaatsing)
     {
-        return null;
+        return Response.ok("added waypoint")
+                       .build();
     }
 
     @GET
     @Path("waypointall")
     public Response addWaypoints(List<Verplaatsing> verplaatsings)
     {
-        return null;
+        return Response.ok("added waypoints")
+                       .build();
     }
 }
