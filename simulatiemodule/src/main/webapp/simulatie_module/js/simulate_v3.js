@@ -91,11 +91,29 @@ function newAnimate(route, line)
 		
 		if(i < route.routes[0].overview_path.length)
 		{
-			value = route.routes[0].overview_path[i];
+			var value = route.routes[0].overview_path[i];
 			stepCoordinates.stepLat = value.lat().toFixed(6);
 			stepCoordinates.stepLon = value.lng().toFixed(6);
-			moveToStep(stepCoordinates, i, line, route)
-			//console.log(stepCoordinates);
+			stepCoordinates.id = line.carId;
+
+            console.log('creating post request');
+
+            $.ajax({
+                type: "POST",
+                //the url where you want to sent the userName and password to
+                url: "http://localhost:8080/simulatiemodule/rest/simulatie",
+                dataType: 'json',
+                contentType: 'application/json',
+                async: false,
+                //json object to sent to the authentication url
+                data: JSON.stringify(stepCoordinates),
+                success: function (data, status) {
+                    console.log(data);
+                }
+            });
+
+			moveToStep(stepCoordinates, i, line, route);
+			console.log(stepCoordinates);
 		}
 		else{
 			console.log("done");

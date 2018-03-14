@@ -1,6 +1,8 @@
 package interfaces;
 
-public interface SimulatieDao //extends DaoFacade<String, String>
+import classes.Verplaatsing;
+
+public interface SimulatieDao extends DaoFacade<String, Verplaatsing>
 {
 
 }
