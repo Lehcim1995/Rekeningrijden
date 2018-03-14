@@ -10,27 +10,24 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
     List<Verplaatsing> verplaatsings;
 
     @Override
-    public Object create(Object object)
-    {
+    public Verplaatsing create(Verplaatsing object) {
         return null;
     }
 
     @Override
-    public void delete(Object object)
-    {
+    public void delete(Verplaatsing object) {
 
     }
 
     @Override
-    public void delete(Long id)
-    {
+    public void delete(Long id) {
 
     }
 
     @Override
     public void edit(
-            Object object,
-            Object object2)
+            Verplaatsing object,
+            Verplaatsing object2)
     {
 
     }
@@ -38,7 +35,7 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
     @Override
     public void edit(
             Long id,
-            Object object)
+            Verplaatsing object)
     {
 
     }

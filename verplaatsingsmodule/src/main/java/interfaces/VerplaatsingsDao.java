@@ -1,6 +1,8 @@
 package interfaces;
 
-public interface VerplaatsingsDao extends DaoFacade
+import classes.Verplaatsing;
+
+public interface VerplaatsingsDao extends DaoFacade<Verplaatsing>
 {
 
 }
