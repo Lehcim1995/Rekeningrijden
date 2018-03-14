@@ -1,6 +1,13 @@
 package interfaces;
 
-public interface DaoFacade<F>
+import java.io.Serializable;
+
+/**
+ *
+ * @param <F> The Doa object
+ * @param <ID> The key type for the object
+ */
+public interface DaoFacade<F extends Serializable, ID>
 {
     /**
      *
@@ -11,15 +18,16 @@ public interface DaoFacade<F>
 
     /**
      *
-     * @param object
+     * @param id
      */
-    void delete(F object);
+    ID delete(ID id);
 
     /**
      *
      * @param id
+     * @return
      */
-    void delete(Long id);
+    F get(ID id);
 
     /**
      *
@@ -33,5 +41,5 @@ public interface DaoFacade<F>
      * @param id
      * @param object
      */
-    void edit(Long id, F object);
+    void edit(ID id, F object);
 }
