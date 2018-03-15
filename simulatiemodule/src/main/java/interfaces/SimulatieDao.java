@@ -1,8 +1,8 @@
 package interfaces;
 
-import classes.Verplaatsing;
+import classes.Checkpoint;
 
-public interface SimulatieDao extends DaoFacade<String, Verplaatsing>
+public interface SimulatieDao extends DaoFacade<Checkpoint, String>
 {
 
 }

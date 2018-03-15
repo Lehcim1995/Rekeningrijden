@@ -12,6 +12,7 @@ public class RestApplication extends Application
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<>();
         classes.add(SimulatieRest.class);
+        classes.add(CORSFilter.class);
 
         return classes;
     }

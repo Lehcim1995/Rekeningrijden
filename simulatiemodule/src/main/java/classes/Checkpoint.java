@@ -1,20 +1,21 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Checkpoint
+public class Checkpoint implements Serializable
 {
-    long Long;
-    long lat;
+    double lon;
+    double lat;
 
     Date time;
 
     public Checkpoint(
-            long lon,
-            long lat,
+            double lon,
+            double lat,
             Date time)
     {
-        Long = lon;
+        this.lon = lon;
         this.lat = lat;
         this.time = time;
     }
@@ -24,5 +25,17 @@ public class Checkpoint
             double stepLat)
     {
 
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public Date getTime() {
+        return time;
     }
 }

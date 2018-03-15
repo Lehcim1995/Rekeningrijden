@@ -1,46 +1,39 @@
-package dao;
+package services;
 
 import classes.Checkpoint;
 import classes.Verplaatsing;
 import interfaces.SimulatieDao;
 
-import javax.ejb.Stateless;
-import java.util.Map;
+import javax.inject.Inject;
 
-@Stateless
-public class SimulatieDaoImpl implements SimulatieDao
+public class SimulatieService
 {
+    @Inject
+    private SimulatieDao simulatieDao;
 
-    Map<String, Checkpoint> checkpointMap;
-
-    @Override
     public Checkpoint create(Checkpoint object) {
-        return checkpointMap.put(checkpointMap.size() + "", object);
+        return simulatieDao.create(object);
     }
 
-    @Override
     public String delete(String s) {
-        return null;
+        return simulatieDao.delete(s);
     }
 
-    @Override
     public Checkpoint get(String s) {
-        return null;
+        return simulatieDao.get(s);
     }
 
-    @Override
     public void edit(
             Checkpoint object,
             Checkpoint object2)
     {
-
+        simulatieDao.edit(object, object2);
     }
 
-    @Override
     public void edit(
             String s,
             Checkpoint object)
     {
-
+        simulatieDao.edit(s, object);
     }
 }
