@@ -3,6 +3,7 @@ package classes;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -12,6 +13,8 @@ public class DataObject
     private double stepLat;
     private double stepLon;
     private String id;
+//    private Date date;
+    private long stepId;
 
     public DataObject() {
     }
@@ -38,5 +41,21 @@ public class DataObject
 
     public void setId(String id) {
         this.id = id;
+    }
+
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+
+    public long getStepId() {
+        return stepId;
+    }
+
+    public void setStepId(long stepId) {
+        this.stepId = stepId;
     }
 }
