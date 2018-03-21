@@ -1,0 +1,8 @@
+interfaces\VerplaatsingsDao.class
+rest\VerplaatsingRestEndpoint.class
+services\VerplaatsingsService.class
+dao\VerplaatsingsDaoCollection.class
+classes\Verplaatsing.class
+rest\RestApplication.class
+interfaces\DaoFacade.class
+classes\Checkpoint.class
