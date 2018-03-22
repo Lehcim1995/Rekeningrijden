@@ -1,14 +1,25 @@
 package classes;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Checkpoint implements Serializable
 {
+    @Id
+    @GeneratedValue
+    long id;
+
     double lon;
     double lat;
 
     Date time;
+
+    public Checkpoint() {
+    }
 
     public Checkpoint(
             double lon,
