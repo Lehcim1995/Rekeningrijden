@@ -1,4 +1,4 @@
-package dao;
+package Interfaces;
 
 import classes.Invoice;
 import classes.Owner;

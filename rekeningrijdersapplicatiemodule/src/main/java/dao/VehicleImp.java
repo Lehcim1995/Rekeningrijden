@@ -1,4 +1,6 @@
 package dao;
 
-public class VehicleImp {
+import Interfaces.VehicleDAO;
+
+public class VehicleImp implements VehicleDAO {
 }
