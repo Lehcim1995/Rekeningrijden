@@ -1,4 +1,6 @@
 package dao;
 
-public class CheckpointImp {
+import Interfaces.CheckpointDAO;
+
+public class CheckpointImp implements CheckpointDAO {
 }

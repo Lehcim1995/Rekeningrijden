@@ -1,4 +1,4 @@
-package dao;
+package Interfaces;
 
 public interface VehicleDAO {
 }
