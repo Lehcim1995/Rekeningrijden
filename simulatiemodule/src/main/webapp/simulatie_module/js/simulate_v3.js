@@ -100,7 +100,6 @@ function calcRoute(startpoint, endpoint) {
 		{
 			console.log("ZERO_RESULTS");
 			generateInitialCars();
-
 		}
     });
 	
