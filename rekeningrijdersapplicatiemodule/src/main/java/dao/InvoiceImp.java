@@ -1,13 +1,14 @@
 package dao;
 
+import Interfaces.InvoiceDAO;
 import classes.Invoice;
 import classes.Owner;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 public class InvoiceImp implements InvoiceDAO {
 
-    private ConcurrentHashMap<String, Invoice> vehicleInvoices;
+    private Map<String, Invoice> vehicleInvoices;
 
 
     @Override
