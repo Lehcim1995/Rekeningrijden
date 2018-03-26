@@ -1,16 +1,20 @@
 package bean;
 
+import classes.Invoice;
+import service.InvoiceService;
+
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped
 @Named(value="invoiceBean")
 public class invoiceBean {
+
+    @Inject
+    private InvoiceService invoiceService;
 
     private List<String> invoiceCalcs = new ArrayList<String>();
 
@@ -28,6 +32,14 @@ public class invoiceBean {
         this.invoiceCalcs = invoiceCalcs;
     }
 
+    public List<Invoice> getAllInvoices() {
+        return invoiceService.getAllInvoices();
+    }
 
-
+    public Invoice getInvoiceByTrackerId(String trackerId) {
+        if (trackerId != null) {
+            return invoiceService.getInvoiceByTrackerId(trackerId);
+        }
+        return null;
+    }
 }
