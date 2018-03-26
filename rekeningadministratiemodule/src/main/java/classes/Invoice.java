@@ -14,15 +14,14 @@ public class Invoice implements Serializable {
     @GeneratedValue
     private int invoiceId;
     private String vehicleTrackerId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Owner owner;
     private double overall;
-    @OneToOne
+    @Enumerated(EnumType.STRING)
     private PaymentEnum paymentStatus;
-    private Date date;
+    private MonthEnum date;
 
-    public Invoice(int invoiceId, String vehicleTrackerId, Owner owner, double overall, PaymentEnum paymentStatus, Date date) {
-        this.invoiceId = invoiceId;
+    public Invoice(String vehicleTrackerId, Owner owner, double overall, PaymentEnum paymentStatus, MonthEnum date) {
         this.vehicleTrackerId = vehicleTrackerId;
         this.owner = owner;
         this.overall = overall;
@@ -72,11 +71,11 @@ public class Invoice implements Serializable {
         this.paymentStatus = paymentStatus;
     }
 
-    public Date getDate() {
+    public MonthEnum getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(MonthEnum date) {
         this.date = date;
     }
 }
