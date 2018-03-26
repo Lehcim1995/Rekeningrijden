@@ -12,4 +12,6 @@ public interface InvoiceDao {
 
     List<Invoice> getAllInvoices();
 
+    Invoice getInvoiceByTrackerId(String trackerId);
+
 }

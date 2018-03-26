@@ -29,4 +29,8 @@ public class InvoiceService {
     public List<Invoice> getAllInvoices() {
         return invoiceDao.getAllInvoices();
     }
+
+    public Invoice getInvoiceByTrackerId(String trackerId) {
+        return invoiceDao.getInvoiceByTrackerId(trackerId);
+    }
 }
