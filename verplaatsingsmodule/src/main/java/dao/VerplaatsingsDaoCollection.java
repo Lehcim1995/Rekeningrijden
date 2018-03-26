@@ -25,7 +25,7 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
 
         if (VerplaatsingMissing(object)) {
             carMissedTranslations.get(object.getVoertuigId())
-                    .add(new MissedVerplaatsing(object));
+                    .add(new MissedVerplaatsing(object.getVoertuigId(), object.getSerieID() - 1));
         }
 
         carTranslations.get(object.getVoertuigId())
