@@ -1,25 +1,32 @@
 package dao;
 
+import classes.MissedVerplaatsing;
 import classes.Verplaatsing;
 import interfaces.VerplaatsingsDao;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Stateless
+@Default
 public class VerplaatsingsDaoCollection implements VerplaatsingsDao
 {
 
     private Map<String, List<Verplaatsing>> carTranslations;
+    private Map<String, List<MissedVerplaatsing>> carMissedTranslations;
 
     @Override
     public Verplaatsing create(Verplaatsing object) {
 
         carTranslations.computeIfAbsent(object.getVoertuigId(), k -> new ArrayList<>());
 
-        boolean verplaatsingGemist = CheckVerplaatsingMissing(object);
+        if (VerplaatsingMissing(object)) {
+            carMissedTranslations.get(object.getVoertuigId())
+                    .add(new MissedVerplaatsing(object));
+        }
 
         carTranslations.get(object.getVoertuigId())
                        .add(object);
@@ -67,7 +74,7 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
      * @return
      */
     @Override
-    public boolean CheckVerplaatsingMissing(Verplaatsing verplaatsing) {
+    public boolean VerplaatsingMissing(Verplaatsing verplaatsing) {
 
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 

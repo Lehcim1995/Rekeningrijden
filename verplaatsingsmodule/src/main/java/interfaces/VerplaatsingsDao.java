@@ -18,5 +18,5 @@ public interface VerplaatsingsDao extends DaoFacade<Verplaatsing, String>
      * @param verplaatsing
      * @return
      */
-    boolean CheckVerplaatsingMissing(Verplaatsing verplaatsing);
+    boolean VerplaatsingMissing(Verplaatsing verplaatsing);
 }
