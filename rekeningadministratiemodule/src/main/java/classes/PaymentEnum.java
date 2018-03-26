@@ -1,5 +1,7 @@
 package classes;
 
-public enum PaymentEnum {
+import java.io.Serializable;
+
+public enum PaymentEnum implements Serializable {
     Open, Betaald, Geannuleerd
 }
