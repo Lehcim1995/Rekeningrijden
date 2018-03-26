@@ -31,37 +31,32 @@
                 <h:outputLabel for="trackerid" value="trackerid" />
                 <input type="text" name="trackerid" class="input" />
             </div>
-            <div id="factuurDeatils" class="flexbox wrap row">
+            <div id="factuurDetails" class="flexbox wrap row evenly">
                 <div class="factuurColumn half">
-                    <h:outputLabel for="ownerFirstName" value="ownerFirstName" />
-                    <input type="text" name="ownerFirstName" class="input" />
-
-                    <h:outputLabel for="ownerMiddleName" value="ownerMiddleName" />
-                    <input type="text" name="ownerMiddleName" class="input" />
-
-                    <h:outputLabel for="ownerLastName" value="ownerLastName" />
-                    <input type="text" name="ownerLastName" class="input" />
-
-                    <h:outputLabel for="ownerAddress" value="ownerAddress" />
-                    <input type="text" name="ownerAddress" class="input" />
-
-                    <h:outputLabel for="ownerCity" value="ownerCity" />
-                    <input type="text" name="ownerCity" class="input" />
+                    <table>
+                        <tr><td><h:outputLabel for="ownerFirstName" value="ownerFirstName" /></td><td><input type="text" name="ownerFirstName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerMiddleName" value="ownerMiddleName" /></td><td><input type="text" name="ownerMiddleName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerLastName" value="ownerLastName" /></td><td><input type="text" name="ownerLastName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerAddress" value="ownerAddress" /></td><td><input type="text" name="ownerAddress" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerCity" value="ownerCity" /></td><td><input type="text" name="ownerCity" class="input" /></td></tr>
+                    </table>
                 </div>
                 <div class="factuurColumn half">
-                    <h:outputLabel for="invoiceOverall" value="invoiceOverall" />
-                    <input type="text" name="invoiceOverall" class="input" />
-
-
-                    <h:outputLabel for="invoicePaymentStatus" value="invoicePaymentStatus" />
-                    <h:selectOneMenu name="invoicePaymentStatus" value="#{invoiceBean.paymentStatus}" class="input">
-                        <f:selectItem itemValue="Voldaan" itemLabel="Voldaan" />
-                        <f:selectItem itemValue="Niet voldaan" itemLabel="Niet voldaan" />
-                    </h:selectOneMenu>
-
-                    <h:outputLabel for="invoiceMonth" value="invoiceMonth" />
-                    <input type="text" name="invoiceMonth" class="input" />
-
+                    <table>
+                        <tr><td><h:outputLabel for="invoiceOverall" value="invoiceOverall" /></td><td><input type="text" name="invoiceOverall" class="input" /></td></tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel for="invoicePaymentStatus" value="invoicePaymentStatus" />
+                            </td>
+                            <td>
+                                <h:selectOneMenu name="invoicePaymentStatus" value="#{invoiceBean.paymentStatus}" class="input">
+                                    <f:selectItem itemValue="Voldaan" itemLabel="Voldaan" />
+                                    <f:selectItem itemValue="Niet voldaan" itemLabel="Niet voldaan" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr><td><h:outputLabel for="invoiceMonth" value="invoiceMonth" /></td><td><input type="text" name="invoiceMonth" class="input" /></td></tr>
+                    </table>
                 </div>
             </div>
             <h:inputTextarea value="#{invoiceBean.invoiceCalcs}" rows="16" id="factuurBerekeningen" class="input"/>

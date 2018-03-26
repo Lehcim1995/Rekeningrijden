@@ -137,15 +137,18 @@ body{
 }
 #factuurBerekeningen
 {
-    widht:50%;
+    width:99%;
+    margin: 3px;
 }
-#factuurDeatils{
+#factuurDetails{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    margin:5px 0 5px 0;
 }
 .factuurColumn {
-    flex: 0 0 50%;
+    flex: 0 0 49%;
     border: 2px solid #f2f2f2;
+
 
 }

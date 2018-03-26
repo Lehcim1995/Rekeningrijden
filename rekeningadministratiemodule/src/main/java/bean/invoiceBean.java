@@ -16,6 +16,7 @@ public class invoiceBean {
     @Inject
     private InvoiceService invoiceService;
 
+    private String paymentStatus = "";
     private List<String> invoiceCalcs = new ArrayList<String>();
 
     public String getInvoiceCalcs() {
@@ -30,6 +31,14 @@ public class invoiceBean {
     }
     public void setInvoiceCalcs(List<String> invoiceCals) {
         this.invoiceCalcs = invoiceCalcs;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public List<Invoice> getAllInvoices() {
