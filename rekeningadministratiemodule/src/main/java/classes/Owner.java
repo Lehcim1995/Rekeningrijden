@@ -10,7 +10,8 @@ public class Owner implements Serializable {
 
     @Id
     @GeneratedValue
-    private int citizenID;
+    private int id;
+    private int citizenId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -19,7 +20,8 @@ public class Owner implements Serializable {
 
     public Owner() {}
 
-    public Owner(String firstName, String middleName, String lastName, String address, String city) {
+    public Owner(int citizenId, String firstName, String middleName, String lastName, String address, String city) {
+        this.citizenId = citizenId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -27,7 +29,8 @@ public class Owner implements Serializable {
         this.city = city;
     }
 
-    public Owner(String firstName, String lastName, String address, String city) {
+    public Owner(int citizenId, String firstName, String lastName, String address, String city) {
+        this.citizenId = citizenId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
