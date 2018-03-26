@@ -1,13 +1,23 @@
 package classes;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Invoice {
+@Entity
+@Table(name="invoice_class")
+@XmlRootElement
+public class Invoice implements Serializable {
 
+    @Id
+    @GeneratedValue
     private int invoiceId;
     private String vehicleTrackerId;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
     private double overall;
+    @OneToOne
     private PaymentEnum paymentStatus;
     private Date date;
 
@@ -19,6 +29,8 @@ public class Invoice {
         this.paymentStatus = paymentStatus;
         this.date = date;
     }
+
+    public Invoice(){}
 
     public int getInvoiceId() {
         return invoiceId;
