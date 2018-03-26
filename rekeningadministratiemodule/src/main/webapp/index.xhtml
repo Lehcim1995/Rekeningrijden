@@ -18,7 +18,7 @@
         <h1>Tax &amp; Tracks</h1>
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
-    <div id="main" class="flexbox row wrap">
+    <div id="main" class="flexbox column wrap">
         <h3>Facturen</h3>
         <div id="factuurinfo" class="flexbox column wrap">
             <div id="factuurGeneral">
@@ -31,8 +31,40 @@
                 <h:outputLabel for="trackerid" value="trackerid" />
                 <input type="text" name="trackerid" class="input" />
             </div>
+            <div id="factuurDeatils" class="flexbox wrap row">
+                <div class="factuurColumn half">
+                    <h:outputLabel for="ownerFirstName" value="ownerFirstName" />
+                    <input type="text" name="ownerFirstName" class="input" />
 
-            <h:inputTextarea value="#{invoiceBean.invoiceCalcs}" rows="16" cols="100" class="input"/>
+                    <h:outputLabel for="ownerMiddleName" value="ownerMiddleName" />
+                    <input type="text" name="ownerMiddleName" class="input" />
+
+                    <h:outputLabel for="ownerLastName" value="ownerLastName" />
+                    <input type="text" name="ownerLastName" class="input" />
+
+                    <h:outputLabel for="ownerAddress" value="ownerAddress" />
+                    <input type="text" name="ownerAddress" class="input" />
+
+                    <h:outputLabel for="ownerCity" value="ownerCity" />
+                    <input type="text" name="ownerCity" class="input" />
+                </div>
+                <div class="factuurColumn half">
+                    <h:outputLabel for="invoiceOverall" value="invoiceOverall" />
+                    <input type="text" name="invoiceOverall" class="input" />
+
+
+                    <h:outputLabel for="invoicePaymentStatus" value="invoicePaymentStatus" />
+                    <h:selectOneMenu name="invoicePaymentStatus" value="#{invoiceBean.paymentStatus}" class="input">
+                        <f:selectItem itemValue="Voldaan" itemLabel="Voldaan" />
+                        <f:selectItem itemValue="Niet voldaan" itemLabel="Niet voldaan" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="invoiceMonth" value="invoiceMonth" />
+                    <input type="text" name="invoiceMonth" class="input" />
+
+                </div>
+            </div>
+            <h:inputTextarea value="#{invoiceBean.invoiceCalcs}" rows="16" id="factuurBerekeningen" class="input"/>
         </div>
 
     </div>

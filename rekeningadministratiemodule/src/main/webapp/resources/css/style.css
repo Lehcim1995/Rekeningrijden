@@ -135,3 +135,17 @@ body{
 {
     width:100%;
 }
+#factuurBerekeningen
+{
+    widht:50%;
+}
+#factuurDeatils{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.factuurColumn {
+    flex: 0 0 50%;
+    border: 2px solid #f2f2f2;
+
+}
