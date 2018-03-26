@@ -18,6 +18,9 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
     public Verplaatsing create(Verplaatsing object) {
 
         carTranslations.computeIfAbsent(object.getVoertuigId(), k -> new ArrayList<>());
+
+        boolean verplaatsingGemist = CheckVerplaatsingMissing(object);
+
         carTranslations.get(object.getVoertuigId())
                        .add(object);
         return object;
@@ -48,5 +51,27 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
     @Override
     public Verplaatsing get(String key) {
         return carTranslations.get(key).get(0);
+    }
+
+    /**
+     * @param key
+     * @return
+     */
+    @Override
+    public List<Verplaatsing> getVerplaatsingen(String key) {
+        return carTranslations.get(key);
+    }
+
+    /**
+     * @param verplaatsing
+     * @return
+     */
+    @Override
+    public boolean CheckVerplaatsingMissing(Verplaatsing verplaatsing) {
+
+        List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
+
+        if (verplaatsingen.isEmpty()) return verplaatsing.getSerieID() == 0 ? true : false;
+        else return verplaatsingen.get(verplaatsingen.size() - 1).getSerieID() == verplaatsing.getSerieID() - 1 ? true : false;
     }
 }
