@@ -6,6 +6,8 @@ import interfaces.SimulatieDao;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +17,9 @@ public class SimulatieDaoImpl implements SimulatieDao
 
     Map<String, Checkpoint> checkpointMap;
 
+    @PersistenceContext(unitName = "simPU")
+    private EntityManager em;
+
     @PostConstruct
     public void init()
     {
@@ -23,6 +28,7 @@ public class SimulatieDaoImpl implements SimulatieDao
 
     @Override
     public Checkpoint create(Checkpoint object) {
+        em.persist(object);
         return checkpointMap.put(checkpointMap.size() + "", object);
     }
 

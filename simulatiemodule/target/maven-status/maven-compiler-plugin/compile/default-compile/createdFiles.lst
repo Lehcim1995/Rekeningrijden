@@ -1,10 +1,10 @@
 services\SimulatieService.class
 rest\SimulatieRest.class
-classes\Verplaatsing.class
 interfaces\SimulatieDao.class
-rest\CORSFilter.class
 classes\DataObject.class
 rest\RestApplication.class
+classes\Verplaatsing.class
+rest\CORSFilter.class
 dao\SimulatieDaoImpl.class
 interfaces\DaoFacade.class
 communicator\Communicator.class
