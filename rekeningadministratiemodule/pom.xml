@@ -25,6 +25,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.primefaces.extensions</groupId>
+      <artifactId>primefaces-extensions</artifactId>
+      <version>0.3.0</version>
+  </dependency>
   </dependencies>
   <build>
     <finalName>rekeningadministratiemodule</finalName>
