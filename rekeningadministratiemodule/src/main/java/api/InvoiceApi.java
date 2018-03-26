@@ -6,10 +6,7 @@ import service.InvoiceService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import java.util.List;
@@ -27,6 +24,13 @@ public class InvoiceApi {
     @Produces(APPLICATION_JSON)
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/{trackerId}")
+    public Invoice getInvoiceByTrackerId(@PathParam("trackerId") String trackerId) {
+        return invoiceService.getInvoiceByTrackerId(trackerId);
     }
 
     @POST

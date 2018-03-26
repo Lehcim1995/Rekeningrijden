@@ -45,4 +45,15 @@ public class InvoiceDaoJPA implements InvoiceDao {
         }
         return null;
     }
+
+    @Override
+    public Invoice getInvoiceByTrackerId(String trackerId) {
+        try {
+            return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId", Invoice.class).setParameter("trackerId", trackerId).getSingleResult();
+        }
+        catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        return null;
+    }
 }
