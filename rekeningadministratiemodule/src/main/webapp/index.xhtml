@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tax&amp;Tracks - Facturen</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <div id="header">
+        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+        <h1>Tax &amp; Tracks</h1>
+        <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+    </div>
+    <div id="main" class="flexbox column wrap">
+        <h3>Facturen</h3>
+        <div id="factuurinfo" class="flexbox column wrap">
+            <div id="factuurGeneral">
+                <h:outputLabel for="factuurnr" value="factuurnr" />
+                <input type="text" name="factuurnr" class="input" />
+
+                <h:outputLabel for="eigenaar" value="eigenaar" />
+                <input type="text" name="eigenaar" class="input" />
+
+                <h:outputLabel for="trackerid" value="trackerid" />
+                <input type="text" name="trackerid" class="input" />
+            </div>
+            <div id="factuurDetails" class="flexbox wrap row evenly">
+                <div class="factuurColumn half">
+                    <table>
+                        <tr><td><h:outputLabel for="ownerFirstName" value="ownerFirstName" /></td><td><input type="text" name="ownerFirstName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerMiddleName" value="ownerMiddleName" /></td><td><input type="text" name="ownerMiddleName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerLastName" value="ownerLastName" /></td><td><input type="text" name="ownerLastName" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerAddress" value="ownerAddress" /></td><td><input type="text" name="ownerAddress" class="input" /></td></tr>
+                        <tr><td><h:outputLabel for="ownerCity" value="ownerCity" /></td><td><input type="text" name="ownerCity" class="input" /></td></tr>
+                    </table>
+                </div>
+                <div class="factuurColumn half">
+                    <table>
+                        <tr><td><h:outputLabel for="invoiceOverall" value="invoiceOverall" /></td><td><input type="text" name="invoiceOverall" class="input" /></td></tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel for="invoicePaymentStatus" value="invoicePaymentStatus" />
+                            </td>
+                            <td>
+                                <h:selectOneMenu name="invoicePaymentStatus" value="#{invoiceBean.paymentStatus}" class="input">
+                                    <f:selectItem itemValue="Voldaan" itemLabel="Voldaan" />
+                                    <f:selectItem itemValue="Niet voldaan" itemLabel="Niet voldaan" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr><td><h:outputLabel for="invoiceMonth" value="invoiceMonth" /></td><td><input type="text" name="invoiceMonth" class="input" /></td></tr>
+                    </table>
+                </div>
+            </div>
+            <h:inputTextarea value="#{invoiceBean.invoiceCalcs}" rows="16" id="factuurBerekeningen" class="input"/>
+        </div>
+
+    </div>
+    <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
+</h:body>
+</html>
