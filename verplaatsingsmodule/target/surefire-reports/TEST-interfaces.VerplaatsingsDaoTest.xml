@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="interfaces.VerplaatsingsDaoTest" time="0" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="interfaces.VerplaatsingsDaoTest" time="0.016" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2017.3.4"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="D:\Java_JDK\jre\bin"/>
     <property name="java.vm.version" value="25.161-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\stefa\OneDrive\Documenten\GitHub\Rekeningrijden\verplaatsingsmodule"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\stefa\OneDrive\Documenten\GitHub\Rekeningrijden_good\verplaatsingsmodule"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\stefa\OneDrive\Documenten\GitHub\Rekeningrijden\verplaatsingsmodule"/>
+    <property name="user.dir" value="C:\Users\stefa\OneDrive\Documenten\GitHub\Rekeningrijden_good\verplaatsingsmodule"/>
     <property name="java.runtime.version" value="1.8.0_161-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="D:\Java_JDK\jre\lib\endorsed"/>
@@ -62,5 +62,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="interfaces.VerplaatsingsDaoTest" name="test" time="0"/>
+  <testcase classname="interfaces.VerplaatsingsDaoTest" name="test" time="0.016"/>
 </testsuite>
