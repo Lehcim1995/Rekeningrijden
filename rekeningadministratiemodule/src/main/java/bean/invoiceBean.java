@@ -1,10 +1,11 @@
 package bean;
 
+import classes.Invoice;
+import service.InvoiceService;
+
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,10 @@ import java.util.List;
 @Named(value="invoiceBean")
 public class invoiceBean {
 
+    @Inject
+    private InvoiceService invoiceService;
+
+    private String paymentStatus = "";
     private List<String> invoiceCalcs = new ArrayList<String>();
 
     public String getInvoiceCalcs() {
@@ -28,6 +33,22 @@ public class invoiceBean {
         this.invoiceCalcs = invoiceCalcs;
     }
 
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
 
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
 
+    public List<Invoice> getAllInvoices() {
+        return invoiceService.getAllInvoices();
+    }
+
+    public Invoice getInvoiceByTrackerId(String trackerId) {
+        if (trackerId != null) {
+            return invoiceService.getInvoiceByTrackerId(trackerId);
+        }
+        return null;
+    }
 }
