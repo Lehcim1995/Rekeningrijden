@@ -1,6 +1,9 @@
 package api;
 
 import classes.Invoice;
+import classes.MonthEnum;
+import classes.Owner;
+import classes.PaymentEnum;
 import jsonBodies.InvoiceBody;
 import service.InvoiceService;
 
@@ -28,9 +31,44 @@ public class InvoiceApi {
 
     @GET
     @Produces(APPLICATION_JSON)
-    @Path("/{trackerId}")
+    @Path("/tracker/{trackerId}")
     public Invoice getInvoiceByTrackerId(@PathParam("trackerId") String trackerId) {
         return invoiceService.getInvoiceByTrackerId(trackerId);
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/owner/{ownerId}")
+    public List<Invoice> getInvoicesByOwner(@PathParam("ownerId") int ownerId) {
+        return invoiceService.getInvoicesByOwner(invoiceService.findOwnerById(ownerId));
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/payment/{paymentStatus}")
+    public List<Invoice> getInvoicesByPaymentStatus(@PathParam("paymentStatus") PaymentEnum paymentEnum) {
+        return invoiceService.getInvoicesByPaymentStatus(paymentEnum);
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/tracker/{trackerId}/{month}")
+    public List<Invoice> getInvoicesByTrackerIdAndMonth(@PathParam("trackerId") String trackerId, @PathParam("month") MonthEnum monthEnum) {
+        return invoiceService.getInvoicesByTrackerIdAndMonth(trackerId, monthEnum);
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/owner/{ownerId}/{month}")
+    public List<Invoice> getInvoicesByOwnerAndMonth(@PathParam("ownerId") int ownerId, @PathParam("month") MonthEnum monthEnum) {
+        return invoiceService.getInvoicesByOwnerAndMonth(invoiceService.findOwnerById(ownerId), monthEnum);
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/payment/{paymentStatus}/{month}")
+    public List<Invoice> getInvoicesByPaymentStatusAndMonth(@PathParam("paymentStatus") PaymentEnum paymentEnum, @PathParam("month") MonthEnum monthEnum) {
+        return invoiceService.getInvoicesByPaymentStatusAndMonth(paymentEnum, monthEnum);
     }
 
     @POST
