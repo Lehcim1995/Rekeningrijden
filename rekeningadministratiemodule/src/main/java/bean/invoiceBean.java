@@ -18,6 +18,7 @@ public class invoiceBean {
 
     private String paymentStatus = "";
     private List<String> invoiceCalcs = new ArrayList<String>();
+    private Invoice selectedInvoice;
 
     public String getInvoiceCalcs() {
         invoiceCalcs.add("2+2 = 4 - 1 = 3 quick Mafs");
@@ -50,5 +51,18 @@ public class invoiceBean {
             return invoiceService.getInvoiceByTrackerId(trackerId);
         }
         return null;
+    }
+
+    public Invoice getSelectedInvoice() {
+        return selectedInvoice;
+    }
+
+    public void setSelectedInvoice(Invoice selectedInvoice) {
+        this.selectedInvoice = selectedInvoice;
+    }
+
+    public String showInvoice()
+    {
+        return "index.xhtml?faces-redirect=true&includeViewParams=true";
     }
 }
