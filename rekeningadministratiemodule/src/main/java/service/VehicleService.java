@@ -15,40 +15,40 @@ public class VehicleService implements Serializable {
 
     public VehicleService() {}
 
-    public List<VehicleTracker> GetVehicleTrackers() {
-        return vehicleDao.GetVehicleTrackers();
+    public List<VehicleTracker> getVehicleTrackers() {
+        return vehicleDao.getVehicleTrackers();
     }
 
-    public VehicleTracker GetVehicleTrackerByID(String ID) {
+    public VehicleTracker getVehicleTrackerByID(String ID) {
         if(ID == null || ID.isEmpty()) return null;
-        else return vehicleDao.GetVehicleTrackerByID(ID);
+        else return vehicleDao.getVehicleTrackerByID(ID);
     }
 
-    public VehicleTracker CreateVehicleTracker(VehicleTracker tracker) {
-        if(tracker != null) return vehicleDao.CreateVehicleTracker(tracker);
+    public VehicleTracker createVehicleTracker(VehicleTracker tracker) {
+        if(tracker != null) return vehicleDao.createVehicleTracker(tracker);
         else return null;
     }
 
-    public List<Vehicle> GetVehicles() {
-        return vehicleDao.GetVehicles();
+    public List<Vehicle> getVehicles() {
+        return vehicleDao.getVehicles();
     }
 
-    public Vehicle GetVehicleByID(int ID) {
+    public Vehicle getVehicleByID(int ID) {
         if(ID <= 0) return null;
-        else return vehicleDao.GetVehicleByID(ID);
+        else return vehicleDao.getVehicleByID(ID);
     }
 
-    public Vehicle GetVehicleByVehicleTracker(String ID) {
+    public Vehicle getVehicleByVehicleTracker(String ID) {
         if(ID == null || ID.isEmpty()) return null;
-        else return vehicleDao.GetVehicleByVehicleTracker(ID);
+        else return vehicleDao.getVehicleByVehicleTracker(ID);
     }
 
-    public Vehicle CreateVehicle(Vehicle vehicle) {
-        if(vehicle != null) return vehicleDao.CreateVehicle(vehicle);
+    public Vehicle createVehicle(Vehicle vehicle) {
+        if(vehicle != null) return vehicleDao.createVehicle(vehicle);
         else return null;
     }
 
-    public void SetVehicleTracker(int vehicleID, String vehicleTrackerID) {
-        vehicleDao.SetVehicleTracker(vehicleID, vehicleTrackerID);
+    public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {
+        vehicleDao.setVehicleTracker(vehicleID, vehicleTrackerID);
     }
 }

@@ -33,19 +33,19 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public List<VehicleTracker> GetVehicleTrackers() {
+    public List<VehicleTracker> getVehicleTrackers() {
         setupVehicleTrackerJPA();
         return em.createQuery(cvt).getResultList();
     }
 
     @Override
-    public VehicleTracker GetVehicleTrackerByID(String ID) {
+    public VehicleTracker getVehicleTrackerByID(String ID) {
         setupVehicleTrackerJPA();
         return em.find(VehicleTracker.class, ID);
     }
 
     @Override
-    public VehicleTracker CreateVehicleTracker(VehicleTracker tracker) {
+    public VehicleTracker createVehicleTracker(VehicleTracker tracker) {
 
         VehicleTracker vehicleTracker = new VehicleTracker(tracker);
         em.persist(vehicleTracker);
@@ -54,19 +54,19 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public List<Vehicle> GetVehicles() {
+    public List<Vehicle> getVehicles() {
         setupVehicleJPA();
         return em.createQuery(cv).getResultList();
     }
 
     @Override
-    public Vehicle GetVehicleByID(int ID) {
+    public Vehicle getVehicleByID(int ID) {
         setupVehicleJPA();
         return em.find(Vehicle.class, ID);
     }
 
     @Override
-    public Vehicle CreateVehicle(Vehicle vehicle) {
+    public Vehicle createVehicle(Vehicle vehicle) {
 
         Vehicle createdVehicle = new Vehicle(vehicle);
         em.persist(createdVehicle);
@@ -75,7 +75,7 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public Vehicle GetVehicleByVehicleTracker(String ID) {
+    public Vehicle getVehicleByVehicleTracker(String ID) {
 
         VehicleTracker tracker = em.find(VehicleTracker.class, ID);
 
@@ -84,7 +84,7 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public void SetVehicleTracker(int vehicleID, String vehicleTrackerID) {
+    public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {
 
         Vehicle vehicle = em.find(Vehicle.class, vehicleID);
         VehicleTracker tracker = em.find(VehicleTracker.class, vehicleTrackerID);

@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface VehicleDao {
 
-    List<VehicleTracker> GetVehicleTrackers();
+    List<VehicleTracker> getVehicleTrackers();
 
-    VehicleTracker GetVehicleTrackerByID(String ID);
+    VehicleTracker getVehicleTrackerByID(String ID);
 
-    VehicleTracker CreateVehicleTracker(VehicleTracker tracker);
+    VehicleTracker createVehicleTracker(VehicleTracker tracker);
 
-    List<Vehicle> GetVehicles();
+    List<Vehicle> getVehicles();
 
-    Vehicle GetVehicleByID(int ID);
+    Vehicle getVehicleByID(int ID);
 
-    Vehicle GetVehicleByVehicleTracker(String ID);
+    Vehicle getVehicleByVehicleTracker(String ID);
 
-    Vehicle CreateVehicle(Vehicle vehicle);
+    Vehicle createVehicle(Vehicle vehicle);
 
-    void SetVehicleTracker(int vehicleID, String vehicleTrackerID);
+    void setVehicleTracker(int vehicleID, String vehicleTrackerID);
 }
