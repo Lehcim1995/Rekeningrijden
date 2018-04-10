@@ -30,10 +30,10 @@ public class PdfCreator
             contentStream.beginText();
             contentStream.setFont(font, 12);
             contentStream.transform(Matrix.getTranslateInstance(100, 700));
-            contentStream.showText(invoice.getOwner().getFirstName() + " " + invoice.getOwner().getLastName());
+            contentStream.showText(invoice.getOwner()
+                                          .getFirstName() + " " + invoice.getOwner()
+                                                                         .getLastName());
             contentStream.endText();
-
-
 
 
 // Make sure that the content stream is closed:
@@ -41,8 +41,16 @@ public class PdfCreator
 
 // Save the results and ensure that the document is properly closed:
 
-            String filename = invoice.getOwner().getFirstName() + "_" + invoice.getOwner().getLastName();
-            filename += "_" + invoice.getDate();
+            String filename = invoice.getOwner()
+                                     .getCitizenId() + "";
+            filename += "_";
+            filename += invoice.getOwner()
+                               .getFirstName();
+            filename += "_";
+            filename += invoice.getOwner()
+                               .getLastName();
+            filename += "_";
+            filename += invoice.getDate();
             filename += ".pdf";
             document.save(filename);
         }
