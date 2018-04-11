@@ -3,21 +3,32 @@ package bean;
 import classes.Invoice;
 import service.InvoiceService;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestScoped
+@SessionScoped
 @Named(value="invoiceBean")
-public class invoiceBean {
+public class invoiceBean implements Serializable {
 
     @Inject
     private InvoiceService invoiceService;
 
     private String paymentStatus = "";
     private List<String> invoiceCalcs = new ArrayList<String>();
+    private Invoice selectedInvoice;
+
+
+    @PostConstruct
+    public void init(){
+
+    }
 
     public String getInvoiceCalcs() {
         invoiceCalcs.add("2+2 = 4 - 1 = 3 quick Mafs");
@@ -50,5 +61,18 @@ public class invoiceBean {
             return invoiceService.getInvoiceByTrackerId(trackerId);
         }
         return null;
+    }
+
+    public Invoice getSelectedInvoice() {
+        return selectedInvoice;
+    }
+
+    public void setSelectedInvoice(Invoice selectedInvoice) {
+        this.selectedInvoice = selectedInvoice;
+    }
+
+    public String showInvoice()
+    {
+        return "/index.xhtml?faces-redirect=true&includeViewParams=true";
     }
 }

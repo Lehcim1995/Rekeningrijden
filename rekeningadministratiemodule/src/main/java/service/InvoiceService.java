@@ -8,12 +8,13 @@ import dao.InvoiceDao;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Stateless
-public class InvoiceService {
+public class InvoiceService implements Serializable{
 
     @Inject
     private InvoiceDao invoiceDao;
