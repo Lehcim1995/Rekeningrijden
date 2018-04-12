@@ -53,11 +53,12 @@
                                 <h:outputLabel value="Payment status" />
                             </td>
                             <td>
-                                <h:selectOneMenu value="#{invoiceBean.paymentStatus}" valueChangeListener="#{invoiceBean.valueChanged}" onchange="submit()" class="input">
-                                    <f:selectItem itemValue="Open" itemLabel="Open" />
-                                    <f:selectItem itemValue="Betaald" itemLabel="Betaald" />
-                                    <f:selectItem itemValue="Geannuleerd" itemLabel="Geannuleerd" />
-                                </h:selectOneMenu>
+                                <h:form>
+                                    <h:selectOneMenu value="#{invoiceBean.selectedInvoice.paymentStatus}" valueChangeListener="#{invoiceBean.valueChanged}" onchange="submit()" class="input">
+                                        <f:selectItems value="#{invoiceBean.enumList}" var="enumItem" itemDisabled="#{invoiceBean.isDisabled(enumItem)}" />
+                                    </h:selectOneMenu>
+                                </h:form>
+
                             </td>
                         </tr>
                         <tr><td><h:outputLabel value="Month" /></td><td><h:outputLabel type="text" value="#{invoiceBean.selectedInvoice.date}"/></td></tr>
