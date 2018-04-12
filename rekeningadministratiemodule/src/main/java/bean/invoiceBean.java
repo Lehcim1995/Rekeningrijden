@@ -6,6 +6,7 @@ import service.InvoiceService;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
@@ -71,8 +72,7 @@ public class invoiceBean implements Serializable {
         this.selectedInvoice = selectedInvoice;
     }
 
-    public String showInvoice()
-    {
-        return "/index.xhtml?faces-redirect=true&includeViewParams=true";
+    public void valueChanged(ValueChangeEvent event){
+        //invoiceService.changePaymentStatus(selectedInvoice.getInvoiceId(), event.getNewValue());
     }
 }

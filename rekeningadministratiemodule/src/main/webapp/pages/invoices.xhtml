@@ -46,7 +46,7 @@
                     <h:outputText value="#{invoice.paymentStatus}" />
                 </p:column>
                 <p:column headerText="View">
-                    <p:commandButton icon="ui-icon-search" action="#{invoiceBean.showInvoice()}" title="View">
+                    <p:commandButton icon="ui-icon-search" action="#{routerBean.showInvoice()}" title="View">
                         <f:setPropertyActionListener value="#{invoice}" target="#{invoiceBean.selectedInvoice}" />
                     </p:commandButton>
                 </p:column>
