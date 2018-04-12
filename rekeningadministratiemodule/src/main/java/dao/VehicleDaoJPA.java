@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -54,6 +55,14 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
+    public VehicleTracker createVehicleTrackerId(String Id) {
+        VehicleTracker vehicleTracker = new VehicleTracker(Id);
+        em.persist(vehicleTracker);
+
+        return vehicleTracker;
+    }
+
+    @Override
     public List<Vehicle> getVehicles() {
         setupVehicleJPA();
         return em.createQuery(cv).getResultList();
@@ -69,6 +78,14 @@ public class VehicleDaoJPA implements VehicleDao {
     public Vehicle createVehicle(Vehicle vehicle) {
 
         Vehicle createdVehicle = new Vehicle(vehicle);
+        em.persist(createdVehicle);
+
+        return createdVehicle;
+    }
+
+    @Override
+    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear) {
+        Vehicle createdVehicle = new Vehicle(rateCategorie, licensePlate, buildYear);
         em.persist(createdVehicle);
 
         return createdVehicle;
