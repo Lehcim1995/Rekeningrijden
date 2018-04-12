@@ -27,6 +27,10 @@ public class InvoiceService implements Serializable{
         return false;
     }
 
+    public boolean changePaymentStatusById(int invoiceId, String paymentStatus) {
+        return invoiceDao.changePaymentStatusById(invoiceId, paymentStatus);
+    }
+
     public List<Invoice> getAllInvoices() {
         return invoiceDao.getAllInvoices();
     }

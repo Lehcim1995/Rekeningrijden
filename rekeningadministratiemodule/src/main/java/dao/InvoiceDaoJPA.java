@@ -40,6 +40,32 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    public boolean changePaymentStatusById(int invoiceId, String paymentStatus) {
+        try {
+            Invoice newInvoice = getInvoiceByInvoiceId(invoiceId);
+            newInvoice.setPaymentStatus(PaymentEnum.valueOf(paymentStatus));
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public Invoice getInvoiceByInvoiceId(int invoiceId) {
+        try {
+            return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.invoiceId = :invoiceId", Invoice.class)
+                    .setParameter("invoiceId", invoiceId)
+                    .getSingleResult();
+        }
+        catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
     public List<Invoice> getAllInvoices() {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice", Invoice.class).getResultList();
