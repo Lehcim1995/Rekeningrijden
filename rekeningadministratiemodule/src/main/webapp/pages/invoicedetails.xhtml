@@ -19,6 +19,9 @@
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
     <div id="main" class="flexbox column wrap">
+        <h:form>
+            <p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/>
+        </h:form>
         <h3>Facturen</h3>
         <div id="factuurinfo" class="flexbox column wrap">
             <div id="factuurGeneral">
