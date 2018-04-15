@@ -1,7 +1,8 @@
 package bean;
 
-import classes.PaymentEnum;
 import classes.RateCategory;
+import classes.Vehicle;
+import classes.VehicleTracker;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
@@ -80,5 +81,8 @@ public class CarBean implements Serializable {
         else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Please fill in all the required fields!"));
         }
+    }
+    public List<Vehicle> getAllCars() {
+        return vehicleService.getVehicles();
     }
 }

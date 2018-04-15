@@ -178,11 +178,11 @@ body{
 {
     width:100%;
 }
-.carForm > div, .cartrackerform >div{
+.carForm > div, .cartrackerform >div, #allcarsform{
     margin: 5px 0 5px 0;
 }
 
-.cartrackersview > *
+.cartrackersview > *, .carview > *
 {
     flex:1;
     margin: 0px 5px 0px 5px;

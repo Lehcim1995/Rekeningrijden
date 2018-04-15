@@ -68,10 +68,6 @@ public class CartrackerBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CreationException", "Could not create the Cartracker, please check all the fields for spellingerrors. The Vehicletracker may already exist."));
         }
     }
-
-    public void updateAllCarTrackers(){
-        getAllCarTrackers();
-    }
     public List<VehicleTracker> getAllCarTrackers() {
         return vehicleService.getVehicleTrackers();
     }
