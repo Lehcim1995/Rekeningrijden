@@ -1,5 +1,6 @@
 package dao;
 
+import Exceptions.CreationException;
 import classes.Vehicle;
 import classes.VehicleTracker;
 
@@ -15,6 +16,8 @@ public interface VehicleDao {
     VehicleTracker createVehicleTracker(VehicleTracker tracker);
 
     VehicleTracker createVehicleTrackerId(String Id);
+
+    VehicleTracker createVehicleTrackerId(String Id, String manufacturer) throws CreationException;
 
     List<Vehicle> getVehicles();
 

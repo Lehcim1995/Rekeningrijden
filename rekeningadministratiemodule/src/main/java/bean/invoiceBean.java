@@ -24,7 +24,6 @@ public class invoiceBean implements Serializable {
     private InvoiceService invoiceService;
 
     private PaymentEnum paymentStatus;
-    private PaymentEnum disabled;
     private List<String> invoiceCalcs = new ArrayList<String>();
     private Invoice selectedInvoice;
     private List<PaymentEnum> enumList = Arrays.asList(PaymentEnum.values());
@@ -92,13 +91,5 @@ public class invoiceBean implements Serializable {
 
     public boolean isDisabled(String item) {
         return "Open".equals(item);
-    }
-
-    public PaymentEnum getDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(PaymentEnum disabled) {
-        this.disabled = disabled;
     }
 }

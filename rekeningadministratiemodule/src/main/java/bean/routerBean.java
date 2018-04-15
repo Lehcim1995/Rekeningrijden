@@ -22,5 +22,15 @@ public class routerBean implements Serializable{
         return "/pages/createcar.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
+    public String goToCreateCartracker()
+    {
+        return "/pages/createcartracker.xhtml?faces-redirect=true&includeViewParams=true";
+    }
+
+    public String goToHome()
+    {
+        return "/index.xhtml?faces-redirect=true&includeViewParams=true";
+    }
+
 
 }

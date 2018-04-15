@@ -65,6 +65,11 @@ body{
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     text-decoration:none;
 }
+#header form a{
+    color: #fcfcfc;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-decoration:none;
+}
 #header img{
     height:150px;
     width:150px;
@@ -150,17 +155,17 @@ body{
     flex: 0 0 49%;
     border: 2px solid #f2f2f2;
 }
-.carForm{
+.carForm, cartrackerform{
     max-width: 500px;
 }
 .carForm .row > span{
     display:flex;
     flex-wrap:wrap;
 }
-.carForm .carFormSubmit{
+.carFormSubmit, .cartrackerFormSubmit{
     max-width: 200px;
 }
-.carForm .row > *{
+.carForm .row > *, .cartrackerform .row > *{
     flex: 1;
     margin:0;
     min-width: 245px;
@@ -173,6 +178,12 @@ body{
 {
     width:100%;
 }
-.carForm > div{
+.carForm > div, .cartrackerform >div{
     margin: 5px 0 5px 0;
+}
+
+.cartrackersview > *
+{
+    flex:1;
+    margin: 0px 5px 0px 5px;
 }
