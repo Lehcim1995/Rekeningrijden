@@ -1,12 +1,15 @@
 package dao;
 
+import Exceptions.CreationException;
 import classes.Vehicle;
 import classes.VehicleTracker;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -61,6 +64,20 @@ public class VehicleDaoJPA implements VehicleDao {
 
         return vehicleTracker;
     }
+    @Override
+    public VehicleTracker createVehicleTrackerId(String Id, String manufacturer) throws CreationException {
+        try{
+            VehicleTracker vehicleTracker = new VehicleTracker(Id, manufacturer);
+            em.persist(vehicleTracker);
+            return vehicleTracker;
+        }
+        catch(IllegalArgumentException | TransactionRequiredException | EntityExistsException e)
+        {
+            throw new CreationException("Could not create Vehicletracker due to an error: " + e.getMessage());
+        }
+
+    }
+
 
     @Override
     public List<Vehicle> getVehicles() {
