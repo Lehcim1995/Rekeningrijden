@@ -16,6 +16,7 @@ public class Vehicle implements Serializable {
     @OneToOne
     private VehicleTracker tracker;
     private String rateCategorie;
+    //TODO: Make licenseplate unique value
     private String licensePlate;
     private Date buildYear;
     @OneToOne

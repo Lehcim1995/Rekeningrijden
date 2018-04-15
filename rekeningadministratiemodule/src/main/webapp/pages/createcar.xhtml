@@ -41,8 +41,34 @@
                     <f:selectItems value="#{carBean.classificationList}" var="enumItem" />
                 </h:selectOneMenu>
             </div>
-            <p:commandButton class="carFormSubmit" value="Invoeren" action="#{carBean.createCar()}"/>
+            <p:commandButton class="carFormSubmit" value="Invoeren" update=":allcarsform:allcarstable" action="#{carBean.createCar()}">
+            </p:commandButton>
         </h:form>
+
+        <h:form id="allcarsform">
+            <p:dataTable id="allcarstable" var="car" value="#{carBean.allCars}">
+                <p:column headerText="Kentekenplaat">
+                    <h:outputText value="#{car.licensePlate}" />
+                </p:column>
+                <p:column headerText="Bouwjaar">
+                    <h:outputText value="#{car.buildYear}" />
+                </p:column>
+                <p:column headerText="Tracker ID">
+                    <h:outputText value="#{car.tracker.ID}" />
+                </p:column>
+                <p:column headerText="Classificatie">
+                    <h:outputText value="#{car.rateCategorie}" />
+                </p:column>
+                <p:column headerText="Eigenaar BSN">
+                    <h:outputText value="#{car.owner.citizenId}" />
+                </p:column>
+                <p:column headerText="Eigenaar achternaam">
+                    <h:outputText value="#{car.owner.lastName}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>
