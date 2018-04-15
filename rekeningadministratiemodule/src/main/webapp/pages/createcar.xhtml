@@ -15,7 +15,7 @@
 <h:body>
     <div id="header">
         <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
-        <h1>Tax &amp; Tracks</h1>
+        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
     <div id="main" class="flexbox column wrap">

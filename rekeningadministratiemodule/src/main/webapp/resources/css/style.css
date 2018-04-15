@@ -65,6 +65,11 @@ body{
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     text-decoration:none;
 }
+#header form a{
+    color: #fcfcfc;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-decoration:none;
+}
 #header img{
     height:150px;
     width:150px;
