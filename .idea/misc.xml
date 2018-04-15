@@ -23,6 +23,7 @@
         <option value="$PROJECT_DIR$/politiesysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/monitoringsysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/datauitwisselingssysteemmodule/pom.xml" />
+        <option value="$PROJECT_DIR$/queuingmodule/pom.xml" />
       </list>
     </option>
   </component>
