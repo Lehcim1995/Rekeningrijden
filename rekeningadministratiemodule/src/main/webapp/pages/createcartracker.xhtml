@@ -43,21 +43,19 @@
                 </p:commandButton>
 
             </h:form>
+          
+            <h:form id="trackerform">
+                <p:dataTable id="trackertable" var="tracker" value="#{cartrackerBean.allCarTrackers}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{tracker.ID}" />
+                    </p:column>
 
-        <h:form id="trackerform">
-            <p:dataTable id="trackertable" var="tracker" value="#{cartrackerBean.allCarTrackers}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{tracker.ID}" />
-                </p:column>
-
-                <p:column headerText="manufacturer">
-                    <h:outputText value="#{tracker.manufacturer}" />
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                    <p:column headerText="manufacturer">
+                        <h:outputText value="#{tracker.manufacturer}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
         </div>
-
-
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>

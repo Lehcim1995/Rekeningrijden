@@ -17,6 +17,7 @@ public class Vehicle implements Serializable {
     private VehicleTracker tracker;
     private String rateCategorie;
     private int weight;
+    //TODO: Make licenseplate unique value
     private String licensePlate;
     @Enumerated(EnumType.STRING)
     private FuelEnum fueltype;

@@ -2,6 +2,9 @@ package bean;
 
 import Exceptions.CreationException;
 import classes.*;
+import classes.RateCategory;
+import classes.Vehicle;
+import classes.VehicleTracker;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
@@ -127,6 +130,9 @@ public class CarBean implements Serializable {
 
     }
 
+    public List<Vehicle> getAllCars() {
+        return vehicleService.getVehicles();
+    }
     public List<Vehicle> getAllCars() {
         return vehicleService.getVehicles();
     }
