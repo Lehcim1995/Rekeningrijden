@@ -20,6 +20,7 @@ public class VehicleTracker implements Serializable {
     @XmlTransient
     @JsonIgnore
     private String ID;
+    private String manufacturer;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "tracker")
     private Vehicle vehicle;
     private Date addDate;
@@ -35,6 +36,11 @@ public class VehicleTracker implements Serializable {
         this.ID = id;
         this.addDate = new Date();
     }
+    public VehicleTracker(String id, String manufacturer)
+    {
+        this.ID = id;
+        this.manufacturer = manufacturer;
+    }
 
     public String getID() {
         return ID;
@@ -42,6 +48,14 @@ public class VehicleTracker implements Serializable {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public void setVehicle(Vehicle vehicle) {

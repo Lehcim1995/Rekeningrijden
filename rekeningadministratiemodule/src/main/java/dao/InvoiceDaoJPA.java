@@ -8,6 +8,7 @@ import classes.PaymentEnum;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,36 @@ public class InvoiceDaoJPA implements InvoiceDao {
         }
         em.merge(invoice);
         return invoice;
+    }
+
+    @Override
+    public boolean changePaymentStatusById(int invoiceId, String paymentStatus) {
+        if(!paymentStatus.equals("Open"))
+        {
+            try {
+                Invoice newInvoice = getInvoiceByInvoiceId(invoiceId);
+                newInvoice.setPaymentStatus(PaymentEnum.valueOf(paymentStatus));
+                em.merge(newInvoice);
+                return true;
+            }
+            catch (IllegalArgumentException | TransactionRequiredException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Invoice getInvoiceByInvoiceId(int invoiceId) {
+        try {
+            return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.invoiceId = :invoiceId", Invoice.class)
+                    .setParameter("invoiceId", invoiceId)
+                    .getSingleResult();
+        }
+        catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        return null;
     }
 
     @Override

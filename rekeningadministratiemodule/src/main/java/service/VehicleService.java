@@ -1,11 +1,16 @@
 package service;
 
+import Exceptions.CreationException;
 import classes.Vehicle;
 import classes.VehicleTracker;
 import dao.VehicleDao;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
+import javax.persistence.EntityExistsException;
+import javax.persistence.TransactionRequiredException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class VehicleService implements Serializable {
@@ -29,6 +34,23 @@ public class VehicleService implements Serializable {
         else return null;
     }
 
+    public VehicleTracker createVehicleTrackerId(String Id) {
+        if (Id != null) {
+            return vehicleDao.createVehicleTrackerId(Id);
+        }
+        else {
+            return null;
+        }
+    }
+    public VehicleTracker createVehicleTrackerId(String Id, String manufacturer) throws CreationException {
+        if(!manufacturer.isEmpty() && manufacturer != null && !Id.isEmpty() && Id != null) {
+            return vehicleDao.createVehicleTrackerId(Id, manufacturer);
+        }
+        else {
+            return null;
+        }
+    }
+
     public List<Vehicle> getVehicles() {
         return vehicleDao.getVehicles();
     }
@@ -46,6 +68,15 @@ public class VehicleService implements Serializable {
     public Vehicle createVehicle(Vehicle vehicle) {
         if(vehicle != null) return vehicleDao.createVehicle(vehicle);
         else return null;
+    }
+
+    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear) {
+        if (rateCategorie != null && licensePlate != null && buildYear != null) {
+            return vehicleDao.createVehicleParam(rateCategorie, licensePlate, buildYear);
+        }
+        else {
+            return null;
+        }
     }
 
     public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {

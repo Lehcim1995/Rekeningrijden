@@ -1,15 +1,19 @@
 package dao;
 
+import Exceptions.CreationException;
 import classes.Vehicle;
 import classes.VehicleTracker;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -54,6 +58,28 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
+    public VehicleTracker createVehicleTrackerId(String Id) {
+        VehicleTracker vehicleTracker = new VehicleTracker(Id);
+        em.persist(vehicleTracker);
+
+        return vehicleTracker;
+    }
+    @Override
+    public VehicleTracker createVehicleTrackerId(String Id, String manufacturer) throws CreationException {
+        try{
+            VehicleTracker vehicleTracker = new VehicleTracker(Id, manufacturer);
+            em.persist(vehicleTracker);
+            return vehicleTracker;
+        }
+        catch(IllegalArgumentException | TransactionRequiredException | EntityExistsException e)
+        {
+            throw new CreationException("Could not create Vehicletracker due to an error: " + e.getMessage());
+        }
+
+    }
+
+
+    @Override
     public List<Vehicle> getVehicles() {
         setupVehicleJPA();
         return em.createQuery(cv).getResultList();
@@ -69,6 +95,14 @@ public class VehicleDaoJPA implements VehicleDao {
     public Vehicle createVehicle(Vehicle vehicle) {
 
         Vehicle createdVehicle = new Vehicle(vehicle);
+        em.persist(createdVehicle);
+
+        return createdVehicle;
+    }
+
+    @Override
+    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear) {
+        Vehicle createdVehicle = new Vehicle(rateCategorie, licensePlate, buildYear);
         em.persist(createdVehicle);
 
         return createdVehicle;
