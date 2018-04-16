@@ -4,6 +4,7 @@ import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.datatable.DataTable;
+import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -82,17 +83,7 @@ public class PdfCreator
         //Create Header row
         Row<PDPage> headerRow = table.createRow(15f);
         Cell<PDPage> cell = headerRow.createCell(100, "Awesome Facts About Belgium");
-//        cell.setFont(PDType1Font.HELVETICA_BOLD);
-//        cell.setFillColor(Color.BLACK);
         table.addHeaderRow(headerRow);
-//        List<String[]> facts = Arrays.asList(new String[]{"man"}, new String[]{"Man"}, new String[]{"man"});
-//        for (String[] fact : facts) {
-//            Row<PDPage> row = table.createRow(10f);
-//            cell = row.createCell((100 / 3.0f) * 2, fact[0] );
-//            for (int i = 1; i < fact.length; i++) {
-//                cell = row.createCell((100 / 9f), fact[i]);
-//            }
-//        }
         table.draw();
     }
 
