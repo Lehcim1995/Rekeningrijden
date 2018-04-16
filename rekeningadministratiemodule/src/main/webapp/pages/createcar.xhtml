@@ -41,23 +41,23 @@
                     <f:selectItems value="#{carBean.classificationList}" var="enumItem" />
                 </h:selectOneMenu>
             </div>
-            <p:commandButton class="carFormSubmit" value="Invoeren" update=":allcarsform:allcarstable" action="#{carBean.createCar()}">
-            </p:commandButton>
+            <div class="flexbox row wrap">
+                <h:outputLabel for="weight">Gewicht:</h:outputLabel>
+                <p:inputText value="#{carBean.weight}" name="weight" />
+            </div>
+            <div class="flexbox row wrap">
+                <h:outputLabel for="fueltype">Brandstoftype:</h:outputLabel>
+                <h:selectOneMenu value="#{carBean.fueltype}" valueChangeListener="#{carBean.fueltypeValueChanged}" name="fueltype" class="input">
+                    <f:selectItems value="#{carBean.fueltypes}" var="enumItem" />
+                </h:selectOneMenu>
+            </div>
+            <p:commandButton class="carFormSubmit" update=":allcarsform:cartable" value="Invoeren" action="#{carBean.createCar()}"/>
         </h:form>
 
         <h:form id="allcarsform">
-            <p:dataTable id="allcarstable" var="car" value="#{carBean.allCars}">
+            <p:dataTable id="cartable" var="car" value="#{carBean.allCars}">
                 <p:column headerText="Kentekenplaat">
                     <h:outputText value="#{car.licensePlate}" />
-                </p:column>
-                <p:column headerText="Bouwjaar">
-                    <h:outputText value="#{car.buildYear}" />
-                </p:column>
-                <p:column headerText="Tracker ID">
-                    <h:outputText value="#{car.tracker.ID}" />
-                </p:column>
-                <p:column headerText="Classificatie">
-                    <h:outputText value="#{car.rateCategorie}" />
                 </p:column>
                 <p:column headerText="Eigenaar BSN">
                     <h:outputText value="#{car.owner.citizenId}" />
@@ -65,10 +65,23 @@
                 <p:column headerText="Eigenaar achternaam">
                     <h:outputText value="#{car.owner.lastName}" />
                 </p:column>
+                <p:column headerText="Bouwjaar">
+                    <h:outputText value="#{car.buildYear}" />
+                </p:column>
+                <p:column headerText="Classificatie">
+                    <h:outputText value="#{car.rateCategorie}" />
+                </p:column>
+                <p:column headerText="Tracker ID">
+                    <h:outputText value="#{car.tracker.ID}" />
+                </p:column>
+                <p:column headerText="Gewicht">
+                    <h:outputText value="#{car.weight}" />
+                </p:column>
+                <p:column headerText="Brandstoftype">
+                    <h:outputText value="#{car.fueltype}" />
+                </p:column>
             </p:dataTable>
         </h:form>
-
-
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>

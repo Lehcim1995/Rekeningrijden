@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/datauitwisselingssysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/monitoringsysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/politiesysteemmodule" />
     <file type="web" url="file://$PROJECT_DIR$/rekeningadministratiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/rekeningrijdersapplicatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/simulatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/verplaatsingsmodule" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/simulatiemodule/pom.xml" />
-        <option value="$PROJECT_DIR$/verplaatsingsmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/politiesysteemmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/monitoringsysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/rekeningadministratiemodule/pom.xml" />
-        <option value="$PROJECT_DIR$/datauitwisselingssysteemmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/rekeningrijdersapplicatiemodule/pom.xml" />
       </list>
     </option>
   </component>
