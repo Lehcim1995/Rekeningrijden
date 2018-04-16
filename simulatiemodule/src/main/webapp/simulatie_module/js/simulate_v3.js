@@ -3,8 +3,10 @@ var directionsService = new google.maps.DirectionsService();
 var map;
 var cars = 0;
 var secondsToMilliSeconds = 1000;
-var amountOfCars = 5;
+var amountOfCars = 1;
 var d = new Date();
+var geocoder = new google.maps.Geocoder;
+var infowindow = new google.maps.InfoWindow;
 var cities = ["Vejle",
 "Hillerod",
 "Soro",
@@ -36,12 +38,8 @@ function init() {
 	{
 		generateInitialCars();
 	}
-};
+}
 
-/*function setMapToCenter()
-{
-	map.setCenter(new google.maps.LatLng(55.8837213, 10.5169774));
-}*/
 function generateInitialCars()
 {
 	var startpoint = cities[Math.floor(Math.random() * cities.length)];
@@ -130,6 +128,23 @@ function createPolyline(directionResult) {
   return line;
 };
 
+function reverseGeoCode(lat, lng){
+        var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                    	return results[0];
+                    }
+                    else {
+                        window.alert('No results found');
+                    }
+                }
+                else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+}
+
 function animate(line) {
 	
 	var count = 0;
@@ -146,6 +161,38 @@ function animate(line) {
 
 function newAnimate(route, line)
 {
+	console.log(route);
+	var stepsarray = [];
+	var coordinatesarray = [];
+    var j = 0;
+
+    var intervalForWegen = window.setInterval(function() {
+    	if(j < route.routes[0].legs[0].steps.length)
+	   	{
+           stepsarray.push(route.routes[0].legs[0].steps[j].instructions);
+           var lat = route.routes[0].legs[0].steps[j].start_point.lat();
+           var lng = route.routes[0].legs[0].steps[j].start_point.lng();
+           //console.log("weg", reverseGeoCode(lat,lng));
+           coordinatesarray.push(reverseGeoCode(lat,lng));
+			j++
+	   	}
+	   	else{
+            clearInterval(intervalForWegen);
+            console.log("wegen zijn ", coordinatesarray);
+		}
+    }, 3000, 3000);
+
+
+
+	// for(var j = 0; j < route.routes[0].legs[0].steps.length; j++ )
+	// {
+	// 	stepsarray.push(route.routes[0].legs[0].steps[j].instructions);
+     //    var lat = route.routes[0].legs[0].steps[j].start_point.lat();
+     //    var lng = route.routes[0].legs[0].steps[j].start_point.lng();
+     //    coordinatesarray.push(reverseGeoCode(lat,lng));
+	// }
+
+
 	//console.log(line.carId);
 	//console.log("duration = " + route.routes[0].legs[0].duration.value);
 	//console.log(route.routes[0].overview_path.length);
@@ -167,7 +214,7 @@ function newAnimate(route, line)
 			stepCoordinates.stepId = line.stepId;
 			stepCoordinates.date = line.date;
 
-            console.log('creating post request');
+            //console.log('creating post request');
 
             $.ajax({
                 type: "POST",
@@ -184,10 +231,10 @@ function newAnimate(route, line)
             });
 
 			moveToStep(stepCoordinates, i, line, route);
-			console.log(stepCoordinates);
+			//console.log(stepCoordinates);
 		}
 		else{
-			console.log("done");
+			//console.log("done");
 			clearInterval(intervalForRoute);
 		}
 			
@@ -197,13 +244,13 @@ function newAnimate(route, line)
 
 function moveToStep(stepCoordinates, index, line, route)
 {
-	console.log("step " + index);
+	//console.log("step " + index);
 	var icons = line.get('icons');
 	
 	//Ajax call to java layer with line.carId and stepcoordinates
 	
 	icons[0].offset = (index/route.routes[0].overview_path.length) * 100 + '%';
-	console.log("offset = " +((index/route.routes[0].overview_path.length) * 100 + '%'));
+	//console.log("offset = " +((index/route.routes[0].overview_path.length) * 100 + '%'));
 	line.set('icons', icons);
 	line.stepId = index;
 }
