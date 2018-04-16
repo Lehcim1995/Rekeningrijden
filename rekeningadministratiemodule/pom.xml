@@ -30,7 +30,14 @@
         <dependency>
             <groupId>com.github.dhorions</groupId>
             <artifactId>boxable</artifactId>
-            <version>1.5</version>
+            <version>1.5-RC</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-core -->
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-core</artifactId>
+            <version>0.0.1-RC13</version>
         </dependency>
 
         <dependency>
