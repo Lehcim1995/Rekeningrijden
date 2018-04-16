@@ -133,7 +133,4 @@ public class CarBean implements Serializable {
     public List<Vehicle> getAllCars() {
         return vehicleService.getVehicles();
     }
-    public List<Vehicle> getAllCars() {
-        return vehicleService.getVehicles();
-    }
 }
