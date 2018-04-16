@@ -1,51 +1,164 @@
 package classes;
 
-import be.quodlibet.boxable.BaseTable;
-import be.quodlibet.boxable.Cell;
-import be.quodlibet.boxable.Row;
-import be.quodlibet.boxable.datatable.DataTable;
-import org.apache.pdfbox.cos.COSDocument;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.util.Matrix;
+import com.openhtmltopdf.DOMBuilder;
+import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import org.jsoup.Jsoup;
 
-import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.OutputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class PdfCreator
 {
+    // todo add files here
 
-    public void createFacature(Invoice invoice)
+    public static void main(String[] args)
     {
-        try (PDDocument document = new PDDocument())
+        Owner owner = new Owner(5, "firstname", "middelname", "lastname", "a", "c");
+
+        Invoice invoice = new Invoice("id", owner, 10, PaymentEnum.Open, MonthEnum.December);
+        invoice.setInvoiceId(5);
+
+        new PdfCreator().createHTMLTemplateForInvoice(invoice);
+    }
+
+    public void createInvoicePdf(Invoice invoice)
+    {
+        String path = createHTMLTemplateForInvoice(invoice);
+
+        exportToPdfBoxFromHtml5File(path, "output.pdf");
+    }
+
+    public void exportToPdfBoxFromHtml5File(
+            String path,
+            String out)
+    {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(path)
+                                        .getFile());
+
+        exportToPdfBox(file.toURI()
+                           .toString(), out);
+    }
+
+    public org.w3c.dom.Document html5ParseDocument(
+            String urlStr,
+            int timeoutMs) throws IOException
+    {
+        URL url = new URL(urlStr);
+        org.jsoup.nodes.Document doc;
+
+        if (url.getProtocol()
+               .equalsIgnoreCase("file"))
         {
-            PDPage page = new PDPage(PDRectangle.A4);
-            document.addPage(page);
+            doc = Jsoup.parse(new File(url.getPath()), "UTF-8");
+        }
+        else
+        {
+            doc = Jsoup.parse(url, timeoutMs);
+        }
 
-// Create a new font object selecting one of the PDF base fonts
-            PDFont font = PDType1Font.HELVETICA_BOLD;
+        return DOMBuilder.jsoup2DOM(doc);
+    }
 
-// Start a new content stream which will "hold" the to be created content
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+    private void setInvoiceNumber(
+            String file,
+            Invoice invoice)
+    {
+        replaceOnFile(file, "\\{\\{ invoice_id \\}\\}", invoice.getInvoiceId() + "");
+    }
 
-// Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
-            createHeader(document, contentStream, invoice);
-            createTable(document, contentStream, page, invoice);
+    private void setInvoiceOwner(
+            String file,
+            Invoice invoice)
+    {
+        Owner owner = invoice.getOwner();
+
+        String user = new StringBuilder().append(owner.getFirstName())
+                                         .append(" ")
+                                         .append(owner.getMiddleName())
+                                         .append(" ")
+                                         .append(owner.getLastName())
+                                         .append("\n")
+                                         .toString();
+
+        replaceOnFile(file, "\\{\\{ invoice_user \\}\\}", user);
+    }
+
+    private void setInvoiceCreateDate(
+            String file,
+            Invoice invoice)
+    {
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MMMM-yyyy");
+        String date = dt.format(new Date());
+
+        replaceOnFile(file, "\\{\\{ created_date \\}\\}", date);
+    }
+
+    private void setInvoiceDueDate(
+            String file,
+            Invoice invoice)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_MONTH, 30); //minus number would decrement the days
+
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MMMM-yyyy");
+        String date = dt.format(cal.getTime());
+
+        replaceOnFile(file, "\\{\\{ due_date \\}\\}", date);
+    }
+
+    private void setInvoiceCarData(
+            String file,
+            Invoice invoice)
+    {
+        String htmlTable = new StringBuilder().append("<tr class=\"item\">\n")
+                                              .append("            <td>23</td>\n")
+                                              .append("            <td>723</td>\n")
+                                              .append("            <td>54 ads d</td>\n")
+                                              .append("            <td>Fuel</td>\n")
+                                              .append("            <td>C</td>\n")
+                                              .append("            <td>12354 km</td>\n")
+                                              .append("            <td>142 Euro</td>\n")
+                                              .append("        </tr>")
+                                              .toString();
 
 
-// Make sure that the content stream is closed:
-            contentStream.close();
+        StringBuilder output = new StringBuilder();
 
-// Save the results and ensure that the document is properly closed:
-            document.save(createFilename(invoice));
+        for (int i = 0; i < 10; i++)
+        {
+            output.append(htmlTable)
+                  .append("\n");
+        }
+
+        replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", output.toString());
+    }
+
+    private void replaceOnFile(
+            String file,
+            String original,
+            String replace)
+    {
+        Path path = Paths.get(file);
+        Charset charset = StandardCharsets.UTF_8;
+
+        try
+        {
+            String content = new String(Files.readAllBytes(path), charset);
+            content = content.replaceAll(original, replace);
+            Files.write(path, content.getBytes(charset));
         }
         catch (IOException e)
         {
@@ -53,86 +166,82 @@ public class PdfCreator
         }
     }
 
-    public void createHeader(PDDocument document, PDPageContentStream contentStream, Invoice invoice) throws IOException
+    private String createHTMLTemplateForInvoice(Invoice invoice)
     {
-        String ownerLastname = invoice.getOwner().getLastName();
-
-        PDFont font = PDType1Font.HELVETICA_BOLD;
-
-        String image = Image.class.getResource("/logo.png").getFile();
-        PDImageXObject pdImage = PDImageXObject.createFromFile(image, document);
-        contentStream.drawImage(pdImage, 0, 700);
-
-        contentStream.beginText();
-
-        contentStream.setLeading(12);
-
-        contentStream.setFont(font, 12);
-        contentStream.transform(Matrix.getTranslateInstance(100, 700));
-        contentStream.showText("Geachte heer " + ownerLastname + ",");
-        contentStream.newLine();
-        contentStream.showText("Dit is de vacature van " + invoice.getDate().name());
-
-        contentStream.endText();
-    }
-
-    public void createTable(PDDocument document, PDPageContentStream contentStream, PDPage page,  Invoice invoice) throws IOException
-    {
-        BaseTable table = new BaseTable(0, 0, 0, 150, 5, document, page, true,
-                false);
-        //Create Header row
-        Row<PDPage> headerRow = table.createRow(15f);
-        Cell<PDPage> cell = headerRow.createCell(100, "Awesome Facts About Belgium");
-        table.addHeaderRow(headerRow);
-        table.draw();
-    }
-
-    public String createFilename(Invoice invoice)
-    {
-        String filename = invoice.getOwner()
-                                 .getCitizenId() + "";
-        filename += "_";
-        filename += invoice.getOwner()
-                           .getFirstName();
-        filename += "_";
-        filename += invoice.getOwner()
-                           .getLastName();
-        filename += "_";
-        filename += invoice.getDate();
-        filename += ".pdf";
-
-        return filename;
-    }
-
-    public void createPdf(String text)
-    {
-        try (PDDocument document = new PDDocument())
+        Path output = null;
+        try
         {
-            PDPage page = new PDPage();
-            document.addPage(page);
+            String filename = invoice.getInvoiceId() + " " + invoice.getOwner()
+                                                                    .getFirstName() + ".html";
 
-// Create a new font object selecting one of the PDF base fonts
-            PDFont font = PDType1Font.HELVETICA_BOLD;
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("templates/invoiceTemplate.html")
+                                            .getFile());
+            output = Paths.get(filename);
 
-// Start a new content stream which will "hold" the to be created content
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            Files.copy(file.toPath(), output);
 
-// Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
-            contentStream.beginText();
-            contentStream.setFont(font, 12);
-            contentStream.moveTextPositionByAmount(100, 700);
-            contentStream.drawString(text);
-            contentStream.endText();
+            setInvoiceNumber(filename, invoice);
 
-// Make sure that the content stream is closed:
-            contentStream.close();
+            setInvoiceOwner(filename, invoice);
 
-// Save the results and ensure that the document is properly closed:
-            document.save("Hello World.pdf");
+            setInvoiceCreateDate(filename, invoice);
+
+            setInvoiceDueDate(filename, invoice);
+
+            setInvoiceCarData(filename, invoice);
         }
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+
+        return output.toFile()
+                     .toURI()
+                     .toString();
+    }
+
+    private void exportToPdfBox(
+            String url,
+            String out)
+    {
+        OutputStream os = null;
+
+        try
+        {
+            os = new FileOutputStream(out);
+
+            try
+            {
+                // There are more options on the builder than shown below.
+                PdfRendererBuilder builder = new PdfRendererBuilder();
+
+                builder.withW3cDocument(html5ParseDocument(url, 10), url);
+                builder.toStream(os);
+                builder.run();
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                // LOG exception
+            }
+            finally
+            {
+                try
+                {
+                    os.close();
+                }
+                catch (IOException e)
+                {
+                    // swallow
+                }
+            }
+        }
+        catch (IOException e1)
+        {
+            e1.printStackTrace();
+            // LOG exception.
         }
     }
 }
