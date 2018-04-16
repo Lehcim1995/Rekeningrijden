@@ -69,9 +69,6 @@ public class CartrackerBean implements Serializable {
         }
     }
 
-    public void updateAllCarTrackers(){
-        getAllCarTrackers();
-    }
     public List<VehicleTracker> getAllCarTrackers() {
         return vehicleService.getVehicleTrackers();
     }

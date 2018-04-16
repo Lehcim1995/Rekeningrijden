@@ -16,7 +16,10 @@ public class Vehicle implements Serializable {
     @OneToOne
     private VehicleTracker tracker;
     private String rateCategorie;
+    private int weight;
     private String licensePlate;
+    @Enumerated(EnumType.STRING)
+    private FuelEnum fueltype;
     private Date buildYear;
     @OneToOne
     private Owner owner;
@@ -29,10 +32,12 @@ public class Vehicle implements Serializable {
         this.buildYear = vehicle.getBuildYear();
     }
 
-    public Vehicle(String rateCategorie, String licensePlate, Date buildYear) {
+    public Vehicle(String rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
         this.rateCategorie = rateCategorie;
         this.licensePlate = licensePlate;
         this.buildYear = buildYear;
+        this.weight = weight;
+        this.fueltype = fueltype;
     }
 
     public int getID() {
@@ -65,5 +70,21 @@ public class Vehicle implements Serializable {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public FuelEnum getFueltype() {
+        return fueltype;
+    }
+
+    public void setFueltype(FuelEnum fueltype) {
+        this.fueltype = fueltype;
     }
 }

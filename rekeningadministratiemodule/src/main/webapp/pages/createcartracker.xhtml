@@ -40,12 +40,11 @@
                 </div>
 
                 <p:commandButton class="cartrackerFormSubmit" value="Invoeren" update=":trackerform:trackertable" action="#{cartrackerBean.createCartracker()}">
-                    <p:ajax event="click" update="trackertable" listener="#{cartrackerBean.updateAllCarTrackers()}" />
                 </p:commandButton>
 
             </h:form>
 
-            <h:form id="trackerform">
+        <h:form id="trackerform">
             <p:dataTable id="trackertable" var="tracker" value="#{cartrackerBean.allCarTrackers}">
                 <p:column headerText="Id">
                     <h:outputText value="#{tracker.ID}" />

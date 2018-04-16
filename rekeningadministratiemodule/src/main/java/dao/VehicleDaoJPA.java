@@ -1,6 +1,7 @@
 package dao;
 
 import Exceptions.CreationException;
+import classes.FuelEnum;
 import classes.Vehicle;
 import classes.VehicleTracker;
 
@@ -101,8 +102,8 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear) {
-        Vehicle createdVehicle = new Vehicle(rateCategorie, licensePlate, buildYear);
+    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
+        Vehicle createdVehicle = new Vehicle(rateCategorie, licensePlate, buildYear, weight, fueltype);
         em.persist(createdVehicle);
 
         return createdVehicle;
