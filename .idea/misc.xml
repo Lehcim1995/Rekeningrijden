@@ -5,13 +5,7 @@
     <groovy codeStyle="LEGACY" />
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/datauitwisselingssysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/monitoringsysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/politiesysteemmodule" />
     <file type="web" url="file://$PROJECT_DIR$/rekeningadministratiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/rekeningrijdersapplicatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/simulatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/verplaatsingsmodule" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

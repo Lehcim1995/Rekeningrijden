@@ -25,9 +25,9 @@ public class initinvoices {
     public void initData(){
         try
         {
-            Owner stefano = new Owner(878746, "Stefano", "Verhoeve", "Havikstraat", "Sliedrecht");
-            Owner jasper = new Owner(887746, "Jasper", "van" ,"Son", "Dokkumstraat", "Tilburg");
-            Owner nick = new Owner(874687, "Nick", "Liebregts", "Steenkoolfabriek", "Gilze");
+            Owner stefano = new Owner(878746, "Stefano", "", "Verhoeve", "Havikstraat", "Sliedrecht", "INGB12039", "Cactus");
+            Owner jasper = new Owner(887746, "Jasper", "van" ,"Son", "Dokkumstraat", "Tilburg", "INGB128397", "Cactus");
+            Owner nick = new Owner(874687, "Nick", "", "Liebregts", "Steenkoolfabriek", "Gilze", "INGB1823971", "Cactus");
 
 
             invoiceService.createInvoice("DEN0849", stefano,  50, PaymentEnum.Open, MonthEnum.April);
