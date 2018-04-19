@@ -6,6 +6,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="rekeningrijdersapplicatiemodule" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.4" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/rekeningrijdersapplicatiemodule/target/rekeningrijdersapplicatiemodule/META-INF/MANIFEST.MF" />
