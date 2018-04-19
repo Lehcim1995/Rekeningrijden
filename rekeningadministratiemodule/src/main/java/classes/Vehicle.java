@@ -22,7 +22,7 @@ public class Vehicle implements Serializable {
     @Enumerated(EnumType.STRING)
     private FuelEnum fueltype;
     private Date buildYear;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Owner owner;
 
     public Vehicle() {}

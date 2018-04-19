@@ -164,17 +164,4 @@ public class InvoiceDaoJPA implements InvoiceDao {
         }
         return new ArrayList<>();
     }
-
-    @Override
-    public Owner findOwnerById(int citizenId) {
-        try {
-            return em.createQuery("SELECT owner FROM Owner owner WHERE owner.citizenId = :citizenId", Owner.class)
-                    .setParameter("citizenId", citizenId)
-                    .getSingleResult();
-        }
-        catch (Exception e) {
-            System.out.print(e.getMessage());
-        }
-        return null;
-    }
 }
