@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -15,12 +17,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class PdfCreator
 {
     // todo add files here
+
+    // todo split generation from invoice and pdf and html
+
+    private static final String RESOURCE_PATH = "rekeningadministratiemodule/src/main/java/resources/";
+
+    public static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
+
+    public static final String INVOICES_FOLDER = RESOURCE_PATH + "invoices";
+
 
     public static void main(String[] args)
     {
@@ -29,7 +42,21 @@ public class PdfCreator
         Invoice invoice = new Invoice("id", owner, 10, PaymentEnum.Open, MonthEnum.December);
         invoice.setInvoiceId(5);
 
-        new PdfCreator().createHTMLTemplateForInvoice(invoice);
+        List<InvoiceData> data = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.add(Calendar.DAY_OF_MONTH, i); //minus number would decrement the days
+
+            data.add(new InvoiceData("1", cal.getTime(), 10d));
+        }
+
+        invoice.setInvoiceData(data);
+
+
+        new PdfCreator().createInvoicePdf(invoice);
     }
 
     public void createInvoicePdf(Invoice invoice)
@@ -37,6 +64,10 @@ public class PdfCreator
         String path = createHTMLTemplateForInvoice(invoice);
 
         exportToPdfBoxFromHtml5File(path, "output.pdf");
+
+        File f = new File(path);
+
+        f.delete();
     }
 
     public void exportToPdfBoxFromHtml5File(
@@ -123,27 +154,92 @@ public class PdfCreator
             String file,
             Invoice invoice)
     {
-        String htmlTable = new StringBuilder().append("<tr class=\"item\">\n")
-                                              .append("            <td>23</td>\n")
-                                              .append("            <td>723</td>\n")
-                                              .append("            <td>54 ads d</td>\n")
-                                              .append("            <td>Fuel</td>\n")
-                                              .append("            <td>C</td>\n")
-                                              .append("            <td>12354 km</td>\n")
-                                              .append("            <td>142 Euro</td>\n")
-                                              .append("        </tr>")
-                                              .toString();
+        String outputString = createHtmlTable(invoice.getInvoiceData());
 
+        replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", outputString);
+    }
 
-        StringBuilder output = new StringBuilder();
+    private <T> String createHtmlTable(final List<T> data)
+    {
+        //TODO refactor this
 
-        for (int i = 0; i < 10; i++)
+        if (data == null || data.isEmpty())
         {
-            output.append(htmlTable)
-                  .append("\n");
+            return "<p> no data found </p>";
         }
 
-        replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", output.toString());
+        // Load first item
+        // TODO try, to load field header even if there is no data
+        T single = data.get(0);
+
+        String table; // return this
+
+        String header;
+
+        // get all the field names and store them in a list
+        // TODO java.beans is better
+        List<String> objectFields = new ArrayList<>(Arrays.asList(single.getClass()
+                                                                        .getDeclaredFields())).stream()
+                                                                                              .map(Field::getName)
+                                                                                              .collect(Collectors.toList());
+
+        // loop though all the field names and create the table header
+        StringBuilder headerBuilder = new StringBuilder("<tr class=\"heading\">");
+        for (String fields : objectFields)
+        {
+            headerBuilder.append("<td>")
+                         .append(fields)
+                         .append("</td> \n");
+        }
+        header = headerBuilder.toString();
+        header += "</tr>";
+
+
+        // Start table data
+        String tableData = "";
+
+        // loop though the list of data
+        for (T d : data)
+        {
+
+            String tableItem = "<tr class=\"item\">";
+            for (String fields : objectFields)
+            {
+                // get the field name and capitalize the first letter
+                String field = fields.substring(0, 1)
+                                     .toUpperCase() + fields.substring(1);
+
+                // try to make the method name
+                String methodName = "get" + field;
+                try
+                {
+                    // excecute the method name, in this case a getter for the field
+                    String get = d.getClass()
+                                  .getMethod(methodName)
+                                  .invoke(d)
+                                  .toString();
+
+                    // add result to the table
+                    tableItem += "<td>" + get + "</td> \n";
+                }
+                catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
+                {
+                    e.printStackTrace();
+                    // TODO make error nice
+                    tableItem += "<td> no data found </td> \n";
+                }
+            }
+            tableItem += "</tr> \n";
+            tableData += tableItem;
+
+        }
+
+        tableData += "\n";
+
+        table = header + "\n" + tableData;
+
+
+        return table;
     }
 
     private void replaceOnFile(
@@ -175,11 +271,17 @@ public class PdfCreator
                                                                     .getFirstName() + ".html";
 
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("templates/invoiceTemplate.html")
-                                            .getFile());
-            output = Paths.get(filename);
 
-            Files.copy(file.toPath(), output);
+            File file = new File(classLoader.getResource("templates/invoiceTemplate.html") // todo make a static string
+                                            .getFile());
+
+            File outputFile = new File(classLoader.getResource("templates/invoice" + filename)
+                                                  .getFile());
+//            output = Paths.get(filename);
+
+            output = outputFile.toPath();
+
+            Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING);
 
             setInvoiceNumber(filename, invoice);
 
@@ -205,43 +307,25 @@ public class PdfCreator
             String url,
             String out)
     {
-        OutputStream os = null;
-
-        try
+        try (OutputStream os = new FileOutputStream(out))
         {
-            os = new FileOutputStream(out);
 
-            try
-            {
-                // There are more options on the builder than shown below.
-                PdfRendererBuilder builder = new PdfRendererBuilder();
+            // There are more options on the builder than shown below.
+            PdfRendererBuilder builder = new PdfRendererBuilder();
 
-                builder.withW3cDocument(html5ParseDocument(url, 10), url);
-                builder.toStream(os);
-                builder.run();
-
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                // LOG exception
-            }
-            finally
-            {
-                try
-                {
-                    os.close();
-                }
-                catch (IOException e)
-                {
-                    // swallow
-                }
-            }
+            builder.withW3cDocument(html5ParseDocument(url, 10), url);
+            builder.toStream(os);
+            builder.run();
         }
         catch (IOException e1)
         {
             e1.printStackTrace();
             // LOG exception.
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            // LOG exception
         }
     }
 }
