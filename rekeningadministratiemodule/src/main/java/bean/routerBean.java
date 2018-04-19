@@ -32,5 +32,10 @@ public class routerBean implements Serializable{
         return "/index.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
+    public String goToLinkcarowner()
+    {
+        return "/pages/linkcarowner.xhtml?faces-redirect=true&includeViewParams=true";
+    }
+
 
 }
