@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -28,19 +29,20 @@ public class PdfCreator
 
     // todo split generation from invoice and pdf and html
 
-    private static final String RESOURCE_PATH = "rekeningadministratiemodule/src/main/java/resources/";
+    private static final String RESOURCE_PATH = "rekeningadministratiemodule/src/main/resources/";
 
-    public static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
+    //D:\School\JavaProjects\ProftaakSem6\rekeningadministratiemodule\src\main\resources\templates\invoiceTemplate.html
+    private static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
 
-    public static final String INVOICES_FOLDER = RESOURCE_PATH + "invoices";
+    private static final String INVOICES_FOLDER = RESOURCE_PATH + "invoices/";
 
 
     public static void main(String[] args)
     {
-        Owner owner = new Owner(5, "firstname", "middelname", "lastname", "a", "c");
+        Owner owner = new Owner(6, "firstname", "middelname", "lastname", "a", "c");
 
         Invoice invoice = new Invoice("id", owner, 10, PaymentEnum.Open, MonthEnum.December);
-        invoice.setInvoiceId(5);
+        invoice.setInvoiceId(6);
 
         List<InvoiceData> data = new ArrayList<>();
 
@@ -59,29 +61,36 @@ public class PdfCreator
         new PdfCreator().createInvoicePdf(invoice);
     }
 
+    /**
+     * @param invoice
+     */
     public void createInvoicePdf(Invoice invoice)
     {
         String path = createHTMLTemplateForInvoice(invoice);
 
-        exportToPdfBoxFromHtml5File(path, "output.pdf");
+        String output = INVOICES_FOLDER + createFileName(invoice, "pdf");
 
-        File f = new File(path);
+        exportToPdfBox(path, output);
 
-        f.delete();
+        try
+        {
+            URL url = new URL(path);
+            File f = new File(url.getFile());
+            f.delete();
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+            // TODO throw nice error
+        }
     }
 
-    public void exportToPdfBoxFromHtml5File(
-            String path,
-            String out)
-    {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(path)
-                                        .getFile());
-
-        exportToPdfBox(file.toURI()
-                           .toString(), out);
-    }
-
+    /**
+     * @param urlStr
+     * @param timeoutMs
+     * @return
+     * @throws IOException
+     */
     public org.w3c.dom.Document html5ParseDocument(
             String urlStr,
             int timeoutMs) throws IOException
@@ -102,6 +111,24 @@ public class PdfCreator
         return DOMBuilder.jsoup2DOM(doc);
     }
 
+    /**
+     *
+     * @param invoice
+     * @param extension
+     * @return
+     */
+    private String createFileName(
+            Invoice invoice,
+            String extension)
+    {
+        return invoice.getInvoiceId() + "_" + invoice.getOwner()
+                                                     .getFirstName() + "." + extension;
+    }
+
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceNumber(
             String file,
             Invoice invoice)
@@ -109,6 +136,10 @@ public class PdfCreator
         replaceOnFile(file, "\\{\\{ invoice_id \\}\\}", invoice.getInvoiceId() + "");
     }
 
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceOwner(
             String file,
             Invoice invoice)
@@ -126,6 +157,10 @@ public class PdfCreator
         replaceOnFile(file, "\\{\\{ invoice_user \\}\\}", user);
     }
 
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceCreateDate(
             String file,
             Invoice invoice)
@@ -136,6 +171,10 @@ public class PdfCreator
         replaceOnFile(file, "\\{\\{ created_date \\}\\}", date);
     }
 
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceDueDate(
             String file,
             Invoice invoice)
@@ -150,6 +189,10 @@ public class PdfCreator
         replaceOnFile(file, "\\{\\{ due_date \\}\\}", date);
     }
 
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceCarData(
             String file,
             Invoice invoice)
@@ -159,6 +202,11 @@ public class PdfCreator
         replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", outputString);
     }
 
+    /**
+     * @param data
+     * @param <T>
+     * @return
+     */
     private <T> String createHtmlTable(final List<T> data)
     {
         //TODO refactor this
@@ -242,6 +290,11 @@ public class PdfCreator
         return table;
     }
 
+    /**
+     * @param file
+     * @param original
+     * @param replace
+     */
     private void replaceOnFile(
             String file,
             String original,
@@ -262,36 +315,39 @@ public class PdfCreator
         }
     }
 
+    /**
+     * @param invoice
+     * @return
+     */
     private String createHTMLTemplateForInvoice(Invoice invoice)
     {
         Path output = null;
         try
         {
-            String filename = invoice.getInvoiceId() + " " + invoice.getOwner()
-                                                                    .getFirstName() + ".html";
+            String filename = createFileName(invoice, "html");
 
-            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(INVOICE_TEMPLATE);
 
-            File file = new File(classLoader.getResource("templates/invoiceTemplate.html") // todo make a static string
-                                            .getFile());
-
-            File outputFile = new File(classLoader.getResource("templates/invoice" + filename)
-                                                  .getFile());
-//            output = Paths.get(filename);
+            File outputFile = new File(INVOICES_FOLDER + filename);
 
             output = outputFile.toPath();
 
             Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING);
 
-            setInvoiceNumber(filename, invoice);
+            setInvoiceNumber(outputFile.toPath()
+                                       .toString(), invoice);
 
-            setInvoiceOwner(filename, invoice);
+            setInvoiceOwner(outputFile.toPath()
+                                      .toString(), invoice);
 
-            setInvoiceCreateDate(filename, invoice);
+            setInvoiceCreateDate(outputFile.toPath()
+                                           .toString(), invoice);
 
-            setInvoiceDueDate(filename, invoice);
+            setInvoiceDueDate(outputFile.toPath()
+                                        .toString(), invoice);
 
-            setInvoiceCarData(filename, invoice);
+            setInvoiceCarData(outputFile.toPath()
+                                        .toString(), invoice);
         }
         catch (IOException e)
         {
@@ -303,6 +359,10 @@ public class PdfCreator
                      .toString();
     }
 
+    /**
+     * @param url
+     * @param out
+     */
     private void exportToPdfBox(
             String url,
             String out)
@@ -312,6 +372,7 @@ public class PdfCreator
 
             // There are more options on the builder than shown below.
             PdfRendererBuilder builder = new PdfRendererBuilder();
+
 
             builder.withW3cDocument(html5ParseDocument(url, 10), url);
             builder.toStream(os);
