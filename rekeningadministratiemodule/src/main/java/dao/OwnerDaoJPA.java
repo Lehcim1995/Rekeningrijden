@@ -5,6 +5,7 @@ import classes.Vehicle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +62,12 @@ public class OwnerDaoJPA implements OwnerDao {
     }
 
     @Override
+    @Transactional
     public boolean linkVehicleToOwner(Vehicle vehicle, Owner owner) {
         try {
-            owner.getVehicles().add(vehicle);
-            em.merge(owner);
-            return true;
+                owner.add(vehicle);
+                em.merge(owner);
+                return true;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -76,7 +78,7 @@ public class OwnerDaoJPA implements OwnerDao {
     @Override
     public boolean linkPreviousVehicleToOwner(Vehicle vehicle, Owner owner) {
         try {
-            owner.getPreviousVehicles().add(vehicle);
+            owner.addPrevious(vehicle);
             em.merge(owner);
             return true;
         }

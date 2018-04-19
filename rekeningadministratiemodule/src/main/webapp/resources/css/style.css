@@ -191,3 +191,6 @@ body{
     width: 100%;
     margin: 0 0 5px 0;
 }
+.nav{
+    list-style-type:none;
+}

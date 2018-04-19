@@ -22,6 +22,8 @@
         <h2>Koppel een account aan een auto</h2>
         <h:form id="linkform">
             <p:growl id="msgs" showDetail="true" />
+            <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
+            </p:messages>
             <p:dataTable id="ownerTable" class="table" var="owner" value="#{ownerBean.allOwners}" selectionMode="single" selection="#{carOwnerBean.selectedOwner}" rowKey="#{owner.citizenId}">
 
                 <f:facet name="header">

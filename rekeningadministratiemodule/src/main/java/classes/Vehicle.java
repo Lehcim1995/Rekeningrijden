@@ -3,10 +3,12 @@ package classes;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Vehicle implements Serializable {
 
@@ -22,7 +24,7 @@ public class Vehicle implements Serializable {
     @Enumerated(EnumType.STRING)
     private FuelEnum fueltype;
     private Date buildYear;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Owner owner;
 
     public Vehicle() {}
