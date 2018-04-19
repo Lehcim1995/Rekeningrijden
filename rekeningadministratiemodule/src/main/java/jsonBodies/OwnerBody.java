@@ -1,16 +1,9 @@
-package classes;
+package jsonBodies;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-public class Owner implements Serializable {
+public class OwnerBody implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private int id;
     private int citizenId;
     private String firstName;
     private String middleName;
@@ -19,33 +12,6 @@ public class Owner implements Serializable {
     private String city;
     private String accountNumber;
     private String password;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Vehicle> vehicles;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Vehicle> previousVehicles;
-
-    public Owner() {}
-
-    public Owner(int citizenId, String firstName, String middleName, String lastName, String address, String city, String accountNumber, String password) {
-        this.citizenId = citizenId;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.accountNumber = accountNumber;
-        this.password = password;
-        vehicles = new ArrayList<>();
-        previousVehicles = new ArrayList<>();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getCitizenId() {
         return citizenId;
@@ -109,21 +75,5 @@ public class Owner implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
-    public List<Vehicle> getPreviousVehicles() {
-        return previousVehicles;
-    }
-
-    public void setPreviousVehicles(List<Vehicle> previousVehicles) {
-        this.previousVehicles = previousVehicles;
     }
 }
