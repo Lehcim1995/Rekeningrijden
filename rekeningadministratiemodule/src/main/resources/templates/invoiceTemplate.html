@@ -56,7 +56,7 @@
             padding-bottom: 20px;
         }
 
-        .invoice-box table tr.item td{
+        .invoice-box table tr.item td {
             border-bottom: 1px solid #eee;
         }
 
@@ -64,7 +64,7 @@
             border-bottom: none;
         }
 
-        .invoice-box table tr.total td:nth-child(2) {
+        .invoice-box table tr.total td:last-child {
             border-top: 2px solid #eee;
             font-weight: bold;
         }
@@ -82,20 +82,6 @@
                 text-align: center;
             }
         }
-
-        /** RTL **/
-        .rtl {
-            direction: rtl;
-            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-        }
-
-        .rtl table {
-            text-align: right;
-        }
-
-        .rtl table tr td:nth-child(2) {
-            text-align: left;
-        }
     </style>
 </head>
 
@@ -107,7 +93,7 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="../../../src/main/webapp/resources/img/logo.png" style="width:100%; max-width:300px;">
+                            <img src="../../webapp/resources/img/logo.png" style="width:100%; max-width:300px;">
                         </td>
 
                         <td>
@@ -144,77 +130,45 @@
             </td>
 
             <td>
-                Check #
+                Bank number
             </td>
         </tr>
 
         <tr class="details">
             <td>
-                Check
+                IBAN
             </td>
 
             <td>
-                1000
-            </td>
-        </tr>
-
-        <tr class="heading">
-            <td>
-                Item
-            </td>
-
-            <td>
-                Price
-            </td>
-        </tr>
-
-        <tr class="item">
-            <td>
-                Website design
-            </td>
-
-            <td>
-                $300.00
-            </td>
-        </tr>
-
-        <tr class="item">
-            <td>
-                Hosting (3 months)
-            </td>
-
-            <td>
-                $75.00
-            </td>
-        </tr>
-
-        <tr class="item last">
-            <td>
-                Domain name (1 year)
-            </td>
-
-            <td>
-                $10.00
-            </td>
-        </tr>
-
-        <tr class="total">
-            <td></td>
-
-            <td>
-                Total: $385.00
+                IBAN NUMBER
             </td>
         </tr>
     </table>
 </div>
 <div class="invoice-box">
+
+    <h1> Price information </h1>
+
     <table cellpadding="0" cellspacing="0">
         <tr class="heading">
-            <td>Car id</td>
+            <td>Price</td>
+        </tr>
+        <tr class="item">
+            <td>23</td>
+        </tr>
+    </table>
+</div>
+<div class="invoice-box">
+
+    <h1> Vehicle information </h1>
+
+    <table cellpadding="0" cellspacing="0">
+        <tr class="heading">
+            <td>Vehicle id</td>
             <td>Tracker id</td>
-            <td>Car license plate </td>
-            <td>Car fuel type</td>
-            <td>Car category</td>
+            <td>Vehicle license plate </td>
+            <td>Vehicle fuel type</td>
+            <td>Vehicle category</td>
             <td>Km traveled</td>
             <td>Price</td>
         </tr>
@@ -227,11 +181,26 @@
             <td>12354 km</td>
             <td>142 Euro</td>
         </tr>
+
+        {{ car_info }}
+
     </table>
 </div>
 <div class="invoice-box">
+
+    <h1> Specific vehicle information </h1>
+
     <table cellpadding="0" cellspacing="0">
         {{ car_invoice }}
+        <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td>
+                Total: $385.00
+            </td>
+        </tr>
     </table>
 </div>
 </body>

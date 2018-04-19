@@ -4,6 +4,10 @@ import com.openhtmltopdf.DOMBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.jsoup.Jsoup;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -112,7 +116,6 @@ public class PdfCreator
     }
 
     /**
-     *
      * @param invoice
      * @param extension
      * @return
@@ -161,6 +164,18 @@ public class PdfCreator
      * @param file
      * @param invoice
      */
+    private void setInvoiceVehicleInformation(
+            String file,
+            Invoice invoice)
+    {
+
+        replaceOnFile(file, "\\{\\{ car_info \\}\\}", "<p> TODO fix this </p> ");
+    }
+
+    /**
+     * @param file
+     * @param invoice
+     */
     private void setInvoiceCreateDate(
             String file,
             Invoice invoice)
@@ -197,7 +212,7 @@ public class PdfCreator
             String file,
             Invoice invoice)
     {
-        String outputString = createHtmlTable(invoice.getInvoiceData());
+        String outputString = createHtmlTable(invoice.getInvoiceData(), InvoiceData.class);
 
         replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", outputString);
     }
@@ -207,7 +222,9 @@ public class PdfCreator
      * @param <T>
      * @return
      */
-    private <T> String createHtmlTable(final List<T> data)
+    private <T> String createHtmlTable(
+            final List<T> data,
+            Class<T> instance)
     {
         //TODO refactor this
 
@@ -220,16 +237,28 @@ public class PdfCreator
         // TODO try, to load field header even if there is no data
         T single = data.get(0);
 
+
         String table; // return this
 
         String header;
 
         // get all the field names and store them in a list
         // TODO java.beans is better
-        List<String> objectFields = new ArrayList<>(Arrays.asList(single.getClass()
-                                                                        .getDeclaredFields())).stream()
-                                                                                              .map(Field::getName)
-                                                                                              .collect(Collectors.toList());
+
+        try
+        {
+            final BeanInfo beanInfo = Introspector.getBeanInfo(instance);
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+
+        }
+        catch (IntrospectionException e)
+        {
+            e.printStackTrace();
+        }
+
+        List<String> objectFields = new ArrayList<>(Arrays.asList(instance.getDeclaredFields())).stream()
+                                                                                                .map(Field::getName)
+                                                                                                .collect(Collectors.toList());
 
         // loop though all the field names and create the table header
         StringBuilder headerBuilder = new StringBuilder("<tr class=\"heading\">");
@@ -348,6 +377,9 @@ public class PdfCreator
 
             setInvoiceCarData(outputFile.toPath()
                                         .toString(), invoice);
+
+            setInvoiceVehicleInformation(outputFile.toPath()
+                                                   .toString(), invoice);
         }
         catch (IOException e)
         {

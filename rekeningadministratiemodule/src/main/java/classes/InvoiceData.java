@@ -11,7 +11,7 @@ public class InvoiceData
     @Id
     @GeneratedValue
     private long id;
-    private String carid;
+    private String vehicleId;
     private Date date;
     private double costs;
 
@@ -19,11 +19,11 @@ public class InvoiceData
     }
 
     public InvoiceData(
-            String carid,
+            String vehicleId,
             Date date,
             double costs)
     {
-        this.carid = carid;
+        this.vehicleId = vehicleId;
         this.date = date;
         this.costs = costs;
     }
@@ -36,12 +36,12 @@ public class InvoiceData
         this.id = id;
     }
 
-    public String getCarid() {
-        return carid;
+    public String getVehicleId() {
+        return vehicleId;
     }
 
-    public void setCarid(String carid) {
-        this.carid = carid;
+    public void setVehicleId(String carid) {
+        this.vehicleId = carid;
     }
 
     public Date getDate() {
