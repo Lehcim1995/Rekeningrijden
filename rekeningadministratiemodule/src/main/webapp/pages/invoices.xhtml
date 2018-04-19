@@ -15,36 +15,43 @@
 <h:body>
     <div id="header">
         <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
-        <h1>Tax &amp; Tracks</h1>
+        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
     <div id="main" class="flexbox column wrap">
         <h3>List of all invoices</h3>
-        <p:dataTable var="invoice" value="#{invoiceBean.allInvoices}">
-            <p:column headerText="Id">
-                <h:outputText value="#{invoice.invoiceId}" />
-            </p:column>
+        <h:form>
+            <p:dataTable var="invoice" value="#{invoiceBean.allInvoices}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{invoice.invoiceId}" />
+                </p:column>
 
-            <p:column headerText="CarTrackerID">
-                <h:outputText value="#{invoice.vehicleTrackerId}" />
-            </p:column>
+                <p:column headerText="CarTrackerID">
+                    <h:outputText value="#{invoice.vehicleTrackerId}" />
+                </p:column>
 
-            <p:column headerText="Month">
-                <h:outputText value="#{invoice.date}" />
-            </p:column>
+                <p:column headerText="Month">
+                    <h:outputText value="#{invoice.date}" />
+                </p:column>
 
-            <p:column headerText="owner(BSN)">
-                <h:outputText value="#{invoice.owner.citizenId}" />
-            </p:column>
+                <p:column headerText="owner(BSN)">
+                    <h:outputText value="#{invoice.owner.citizenId}" />
+                </p:column>
 
-            <p:column headerText="Totaalbedrag">
-                <h:outputText value="#{invoice.overall}" />
-            </p:column>
+                <p:column headerText="Totaalbedrag">
+                    <h:outputText value="#{invoice.overall}" />
+                </p:column>
 
-            <p:column headerText="betaalstatus">
-                <h:outputText value="#{invoice.paymentStatus}" />
-            </p:column>
-        </p:dataTable>
+                <p:column headerText="betaalstatus">
+                    <h:outputText value="#{invoice.paymentStatus}" />
+                </p:column>
+                <p:column headerText="View">
+                    <p:commandButton icon="ui-icon-search" action="#{routerBean.showInvoice()}" title="View">
+                        <f:setPropertyActionListener value="#{invoice}" target="#{invoiceBean.selectedInvoice}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>

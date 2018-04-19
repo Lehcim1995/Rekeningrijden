@@ -81,8 +81,8 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
 
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 
-        if (verplaatsingen.isEmpty()) return verplaatsing.getSerieID() == 0 ? true : false;
-        else return verplaatsingen.get(verplaatsingen.size() - 1).getSerieID() == verplaatsing.getSerieID() - 1 ? true : false;
+        if (verplaatsingen.isEmpty()) return verplaatsing.getSerieID() == 0;
+        else return verplaatsingen.get(verplaatsingen.size() - 1).getSerieID() == verplaatsing.getSerieID() - 1;
     }
 
     public void LogMissedVerplaatsingen(Verplaatsing verplaatsing) {

@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <h:outputStylesheet name="css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Tax&amp;Tracks - Facturen</title>
+    <title>Tax&amp;Tracks - Login</title>
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
 </h:head>
 <h:body>
     <div id="header">
         <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
-        <h1>Tax &amp; Tracks</h1>
+        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
     <div id="main" class="flexbox row wrap">
