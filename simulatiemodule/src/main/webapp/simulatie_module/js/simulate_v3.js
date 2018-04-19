@@ -133,14 +133,17 @@ function reverseGeoCode(lat, lng){
         geocoder.geocode({'location': latlng}, function(results, status) {
                 if (status === 'OK') {
                     if (results[0]) {
-                    	return results[0];
+                    	var result = results[0];
+                    	return result;
                     }
                     else {
-                        window.alert('No results found');
+                        window.alert('No Results Found');
+                    	return "No Results Found";
                     }
                 }
                 else {
                     window.alert('Geocoder failed due to: ' + status);
+                	return "Geocoder failed due to: ' + status";
                 }
             });
 }
@@ -173,7 +176,8 @@ function newAnimate(route, line)
            var lat = route.routes[0].legs[0].steps[j].start_point.lat();
            var lng = route.routes[0].legs[0].steps[j].start_point.lng();
            //console.log("weg", reverseGeoCode(lat,lng));
-           coordinatesarray.push(reverseGeoCode(lat,lng));
+			console.log(reverseGeoCode(lat,lng));
+           	coordinatesarray.push();
 			j++
 	   	}
 	   	else{
