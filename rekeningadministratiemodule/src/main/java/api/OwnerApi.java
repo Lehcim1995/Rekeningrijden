@@ -1,8 +1,6 @@
 package api;
 
-import classes.Invoice;
 import classes.Owner;
-import jsonBodies.InvoiceBody;
 import jsonBodies.OwnerBody;
 import service.OwnerService;
 
@@ -43,14 +41,14 @@ public class OwnerApi {
 
     @PUT
     @Produces(APPLICATION_JSON)
-    public Response updateOwner(OwnerBody ownerBody) {
+    public Owner updateOwner(OwnerBody ownerBody) {
         try {
-            ownerService.update(ownerBody.getCitizenId(), ownerBody.getFirstName(), ownerBody.getMiddleName(), ownerBody.getLastName(), ownerBody.getAddress(), ownerBody.getCity(), ownerBody.getAccountNumber(), ownerBody.getPassword());
-            return Response.ok("Ok").build();
+            return ownerService.update(ownerBody.getCitizenId(), ownerBody.getFirstName(), ownerBody.getMiddleName(), ownerBody.getLastName(), ownerBody.getAddress(), ownerBody.getCity(), ownerBody.getAccountNumber(), ownerBody.getPassword());
         }
         catch (Exception e) {
-            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @GET

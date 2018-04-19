@@ -30,17 +30,17 @@ public class OwnerService {
     }
 
 
-    public boolean update(int citizenId, String firstName, String middleName, String lastName, String address, String city, String accountNumber, String password){
+    public Owner update(int citizenId, String firstName, String middleName, String lastName, String address, String city, String accountNumber, String password){
         try {
             Owner owner = new Owner(citizenId, firstName, middleName, lastName, address, city, accountNumber, password);
             if (ownerDao.update(owner) != null) {
-                return true;
+                return owner;
             }
         }
         catch (Exception e) {
             e.getMessage();
         }
-        return false;
+        return null;
     }
 
     public Owner findOwnerById(int citizenId){
