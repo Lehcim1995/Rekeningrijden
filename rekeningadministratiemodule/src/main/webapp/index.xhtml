@@ -22,10 +22,12 @@
     <div id="main" class="flexbox column wrap">
         <h3>Avigate to a page</h3>
         <h:form class="flexbox column wrap">
-            <p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/>
-            <p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/>
-            <p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/>
-            <p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/>
+            <ul class="nav flexbox row wrap">
+                <li><p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/></li>
+                <li><p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/></li>
+                <li><p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/></li>
+                <li><p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/></li>
+            </ul>
         </h:form>
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>

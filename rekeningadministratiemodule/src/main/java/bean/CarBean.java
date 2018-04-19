@@ -9,6 +9,7 @@ import service.VehicleService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@RequestScoped
+@SessionScoped
 @Named(value="carBean")
 public class CarBean implements Serializable {
 

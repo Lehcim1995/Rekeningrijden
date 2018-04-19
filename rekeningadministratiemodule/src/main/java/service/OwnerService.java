@@ -6,9 +6,10 @@ import dao.OwnerDao;
 import dao.VehicleDao;
 
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
-public class OwnerService {
+public class OwnerService implements Serializable{
 
     @Inject
     private OwnerDao ownerDao;
@@ -55,8 +56,7 @@ public class OwnerService {
         try {
             Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
             Owner owner = ownerDao.findOwnerById(citizenId);
-            ownerDao.linkVehicleToOwner(vehicle, owner);
-            return true;
+            return ownerDao.linkVehicleToOwner(vehicle, owner);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -68,8 +68,7 @@ public class OwnerService {
         try {
             Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
             Owner owner = ownerDao.findOwnerById(citizenId);
-            ownerDao.linkPreviousVehicleToOwner(vehicle, owner);
-            return true;
+            return ownerDao.linkPreviousVehicleToOwner(vehicle, owner);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

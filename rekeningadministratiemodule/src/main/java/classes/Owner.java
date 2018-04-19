@@ -1,11 +1,17 @@
 package classes;
 
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Owner implements Serializable {
 
     @Id
@@ -19,9 +25,10 @@ public class Owner implements Serializable {
     private String city;
     private String accountNumber;
     private String password;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Vehicle> vehicles;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = true)
     private List<Vehicle> previousVehicles;
 
     public Owner() {}
@@ -125,5 +132,14 @@ public class Owner implements Serializable {
 
     public void setPreviousVehicles(List<Vehicle> previousVehicles) {
         this.previousVehicles = previousVehicles;
+    }
+
+    public void add(Vehicle vehicle){
+        vehicle.setOwner(this);
+        this.vehicles.add(vehicle);
+    }
+    public void addPrevious(Vehicle vehicle){
+        vehicle.setOwner(null);
+        this.previousVehicles.add(vehicle);
     }
 }

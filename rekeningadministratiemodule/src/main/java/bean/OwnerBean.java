@@ -1,21 +1,23 @@
 package bean;
 
 import classes.Owner;
+import service.OwnerService;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@RequestScoped
+@SessionScoped
 @Named(value = "ownerBean")
 public class OwnerBean implements Serializable {
 
     @Inject
-    private VehicleService vehicleService;
+    private OwnerService ownerService;
     private List<Owner> allOwners;
 
     @PostConstruct
@@ -24,7 +26,7 @@ public class OwnerBean implements Serializable {
     }
 
     public List<Owner> getAllOwners() {
-        return allOwners;
+        return this.ownerService.getAllOwners();
     }
 
     public void setAllOwners(List<Owner> allOwners) {
