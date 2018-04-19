@@ -13,6 +13,10 @@ public interface InvoiceDao {
 
     Invoice update(Invoice invoice);
 
+    boolean changePaymentStatusById(int invoiceId, String paymentStatus);
+
+    Invoice getInvoiceByInvoiceId(int invoiceId);
+
     List<Invoice> getAllInvoices();
 
     Invoice getInvoiceByTrackerId(String trackerId);

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tax&amp;Tracks - Factuurdetails</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <div id="header">
+        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+        <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+    </div>
+    <div id="main" class="flexbox column wrap">
+        <h:form>
+            <p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/>
+        </h:form>
+        <h3>Facturen</h3>
+        <div id="factuurinfo" class="flexbox column wrap">
+            <div id="factuurGeneral">
+                <h:outputLabel value="Invoice Id" />
+                <h:outputLabel value="#{invoiceBean.selectedInvoice.invoiceId}" class="input" />
+
+                <h:outputLabel value="Invoice Owner Citezen Id" />
+                <h:outputLabel value="#{invoiceBean.selectedInvoice.owner.citizenId}" class="input" />
+
+                <h:outputLabel value="Tracker Id" />
+                <h:outputLabel value="#{invoiceBean.selectedInvoice.vehicleTrackerId}" class="input" />
+            </div>
+            <div id="factuurDetails" class="flexbox wrap row evenly">
+                <div class="factuurColumn half">
+                    <table>
+                        <tr><td><h:outputLabel value="First name" /></td>
+                            <td>
+                                <h:outputLabel value="#{invoiceBean.selectedInvoice.owner.firstName}" id="firstName"/>
+                            </td>
+                        </tr>
+                        <tr><td><h:outputLabel value="Middle name:" /></td><td><h:outputLabel value="#{invoiceBean.selectedInvoice.owner.middleName}"/></td></tr>
+                        <tr><td><h:outputLabel value="Last name:" /></td><td><h:outputLabel value="#{invoiceBean.selectedInvoice.owner.lastName}" /></td></tr>
+                        <tr><td><h:outputLabel value="Address:" /></td><td><h:outputLabel value="#{invoiceBean.selectedInvoice.owner.address}"/></td></tr>
+                        <tr><td><h:outputLabel value="City:" /></td><td><h:outputLabel value="#{invoiceBean.selectedInvoice.owner.city}" /></td></tr>
+                    </table>
+                </div>
+                <div class="factuurColumn half">
+                    <table>
+                        <tr><td><h:outputLabel value="Total price" /></td><td><h:outputLabel value="#{invoiceBean.selectedInvoice.overall}" /></td></tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Payment status" />
+                            </td>
+                            <td>
+                                <h:form>
+                                    <h:selectOneMenu value="#{invoiceBean.selectedInvoice.paymentStatus}" valueChangeListener="#{invoiceBean.valueChanged}" onchange="submit()" class="input">
+                                        <f:selectItems value="#{invoiceBean.enumList}" var="enumItem" itemDisabled="#{invoiceBean.isDisabled(enumItem)}" />
+                                    </h:selectOneMenu>
+                                </h:form>
+
+                            </td>
+                        </tr>
+                        <tr><td><h:outputLabel value="Month" /></td><td><h:outputLabel type="text" value="#{invoiceBean.selectedInvoice.date}"/></td></tr>
+                    </table>
+                </div>
+            </div>
+            <h:inputTextarea value="#{invoiceBean.invoiceCalcs}" rows="16" id="factuurBerekeningen"/>
+        </div>
+
+    </div>
+    <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
+</h:body>
+</html>

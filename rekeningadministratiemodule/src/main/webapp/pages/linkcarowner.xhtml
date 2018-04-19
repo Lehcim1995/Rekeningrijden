@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tax&amp;Tracks - Facturen</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <div id="header">
+        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+        <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+    </div>
+    <div id="main" class="flexbox column wrap">
+        <h2>Koppel een account aan een auto</h2>
+        <h:form id="linkform">
+            <p:growl id="msgs" showDetail="true" />
+            <p:dataTable id="ownerTable" class="table" var="owner" value="#{ownerBean.allOwners}" selectionMode="single" selection="#{carOwnerBean.selectedOwner}" rowKey="#{owner.citizenId}">
+
+                <f:facet name="header">
+                    Selecteer een account
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{carOwnerBean.onOwnerRowSelect}" update=":linkform:msgs" />
+                <p:ajax event="rowUnselect" listener="#{carOwnerBean.onOwnerRowUnselect}" update=":linkform:msgs" />
+                <p:column headerText="BSN">
+                    <h:outputText value="#{owner.citizenId}" />
+                </p:column>
+                <p:column headerText="Voornaam">
+                    <h:outputText value="#{owner.firstName}" />
+                </p:column>
+                <p:column headerText="Tussenvoegsel">
+                    <h:outputText value="#{owner.middleName}" />
+                </p:column>
+                <p:column headerText="Achternaam">
+                    <h:outputText value="#{owner.lastName}" />
+                </p:column>
+                <p:column headerText="Stad">
+                    <h:outputText value="#{owner.city}" />
+                </p:column>
+                <p:column headerText="Adres">
+                    <h:outputText value="#{owner.address}" />
+                </p:column>
+            </p:dataTable>
+
+
+            <p:dataTable id="vehicleTable" class="table" var="vehicle" value="#{carBean.allCars}" selectionMode="single" selection="#{carOwnerBean.selectedCar}" rowKey="#{vehicle.licensePlate}">
+
+                <f:facet name="header">
+                    Selecteer een Voertuig
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{carOwnerBean.onVehicleRowSelect}" update=":linkform:msgs" />
+                <p:ajax event="rowUnselect" listener="#{carOwnerBean.onVehicleRowUnselect}" update=":linkform:msgs" />
+                <p:column headerText="Kenteken">
+                    <h:outputText value="#{vehicle.licensePlate}" />
+                </p:column>
+                <p:column headerText="Bouwjaar">
+                    <h:outputText value="#{vehicle.buildYear}" />
+                </p:column>
+                <p:column headerText="Brandstoftype">
+                    <h:outputText value="#{vehicle.fueltype}" />
+                </p:column>
+                <p:column headerText="Gewicht">
+                    <h:outputText value="#{vehicle.weight}" />
+                </p:column>
+                <p:column headerText="Classificatie">
+                    <h:outputText value="#{vehicle.rateCategorie}" />
+                </p:column>
+                <p:column headerText="BSN">
+                    <h:outputText value="#{vehicle.owner.citizenId}" />
+                </p:column>
+                <p:column headerText="Achternaam">
+                    <h:outputText value="#{vehicle.owner.lastName}" />
+                </p:column>
+                <p:column headerText="Tracker Id">
+                    <h:outputText value="#{vehicle.tracker.ID}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton class="linkOwnerVehicle" update=":linkform:ownerTable,:linkform:vehicleTable" value="Koppel" action="#{carOwnerBean.linkOwnerToCar()}"/>
+        </h:form>
+    </div>
+    <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
+</h:body>
+</html>
