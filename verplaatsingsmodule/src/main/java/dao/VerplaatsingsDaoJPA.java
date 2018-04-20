@@ -5,6 +5,7 @@ import classes.Verplaatsing;
 import interfaces.JPA;
 import interfaces.VerplaatsingsDao;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,11 +18,19 @@ import java.util.List;
 @JPA
 public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
 
-    @PersistenceContext(unitName = "kwetterPU")
+    @PersistenceContext(unitName = "displacementPU")
     private EntityManager em;
     private CriteriaBuilder cb;
     private CriteriaQuery<Verplaatsing> cp;
     private Root<Verplaatsing> verplaatsingRoot;
+
+    @PostConstruct
+    public void init() {
+        System.out.print("Initializing profiles query");
+
+        cb = em.getCriteriaBuilder();
+        setupJPA();
+    }
 
     @Override
     public Verplaatsing create(Verplaatsing verplaatsing) {

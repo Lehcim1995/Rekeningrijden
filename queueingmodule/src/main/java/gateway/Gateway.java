@@ -17,12 +17,17 @@ public class Gateway implements MessageListener {
     private GatewayMessageSender messageSender;
     private GatewayMessageReceiver messageReceiver;
 
-    public Gateway(IGatewayImplementor gatewayImplementor, String URL, String senderChannel, String receiverChannel) {
+    // Localhost ActiveMQ URL
+    final private String URL = "tcp://localhost:61616";
+    // TODO server ActiveMQ URL autoselect
+    //final private String URL = "tcp://192.168.25.137:61616";
+
+    public Gateway(IGatewayImplementor gatewayImplementor, String senderChannel, String receiverChannel) {
 
         this.gatewayImplementor = gatewayImplementor;
 
-        messageSender = new GatewayMessageSender(URL, senderChannel);
-        messageReceiver = new GatewayMessageReceiver(this, URL, receiverChannel);
+        if (!senderChannel.isEmpty()) messageSender = new GatewayMessageSender(URL, senderChannel);
+        if (!receiverChannel.isEmpty()) messageReceiver = new GatewayMessageReceiver(this, URL, receiverChannel);
     }
 
     public void SendMessage(Serializable obj) {

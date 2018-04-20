@@ -1,8 +1,11 @@
 package services;
 
 import classes.Verplaatsing;
+import gateway.DisplacementReceiverGateway;
+import interfaces.JPA;
 import interfaces.VerplaatsingsDao;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -10,7 +13,15 @@ import javax.inject.Inject;
 public class VerplaatsingsService
 {
     @Inject
+    @JPA
     private VerplaatsingsDao verplaatsingsDao;
+
+    private DisplacementReceiverGateway gateway;
+
+    @PostConstruct
+    public void init() {
+        gateway = new DisplacementReceiverGateway();
+    }
 
     public void setVerplaatsingsDao(VerplaatsingsDao verplaatsingsDao)
     {
