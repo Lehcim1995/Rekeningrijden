@@ -1,0 +1,151 @@
+<ns:Statistik xmlns:ns="http://skat.dk/dmr/2007/05/31/">
+    <ns:KoeretoejIdent>5195710009</ns:KoeretoejIdent>
+    <!--// Voertuig identiteit-->
+    <ns:KoeretoejArtNummer>5</ns:KoeretoejArtNummer>
+    <!--// Nummer van het voertuig-->
+    <ns:KoeretoejArtNavn>P h ngsvogn</ns:KoeretoejArtNavn>
+    <!--//Voertuig Art Name-->
+    <ns:KoeretoejAnvendelseStruktur><!--//Voertuiggebruiksstructuur-->
+        <ns:KoeretoejAnvendelseNummer>20</ns:KoeretoejAnvendelseNummer>
+        <!--// Voertuig applicatie nummer-->
+        <ns:KoeretoejAnvendelseNavn>Godstransport</ns:KoeretoejAnvendelseNavn>
+        <!--//Naam van voertuiggebruik-->
+    </ns:KoeretoejAnvendelseStruktur>
+    <ns:RegistreringNummerNummer>JU4041</ns:RegistreringNummerNummer>
+    <!--//Registratienummer-->
+    <ns:RegistreringNummerUdloebDato>2008-06-30+02:00</ns:RegistreringNummerUdloebDato>
+    <!--// Registratienummer Vervaldatum-->
+    <ns:KoeretoejOplysningGrundStruktur><!--//Voertuigbeschrijving Basisstructuur-->
+        <ns:KoeretoejOplysningOprettetUdFra>Registreringssyn</ns:KoeretoejOplysningOprettetUdFra>
+        <!--//Voertuigbeschrijving gemaakt vanaf-->
+        <ns:KoeretoejOplysningStatus>Afmeldt</ns:KoeretoejOplysningStatus>
+        <!--// Voertuiginformatiestatus-->
+        <ns:KoeretoejOplysningStatusDato>2008-06-30T00:00:00.000+02:00</ns:KoeretoejOplysningStatusDato>
+        <!--//Voertuiginformatie Statusdatum-->
+        <ns:KoeretoejOplysningFoersteRegistreringDato>1957-07-18+01:00</ns:KoeretoejOplysningFoersteRegistreringDato>
+        <!--// Voertuiginformatie Eerste registratiedatum-->
+        <ns:KoeretoejOplysningStelNummer>612</ns:KoeretoejOplysningStelNummer>
+        <!--// Voertuiggegevenssetnummer-->
+        <ns:KoeretoejOplysningTotalVaegt>550</ns:KoeretoejOplysningTotalVaegt>
+        <!--// Beschrijving voertuig Totaalgewicht-->
+        <ns:KoeretoejOplysningEgenVaegt>225</ns:KoeretoejOplysningEgenVaegt>
+        <!--// Voertuiginformatie Eigen gewicht-->
+        <ns:KoeretoejOplysningTekniskTotalVaegt>550</ns:KoeretoejOplysningTekniskTotalVaegt>
+        <!--// Beschrijving voertuig Totaal technisch gewicht-->
+        <ns:KoeretoejOplysningAkselAntal>1</ns:KoeretoejOplysningAkselAntal>
+        <!--// Beschrijving voertuig Asnummer-->
+        <ns:KoeretoejOplysningStoersteAkselTryk>550</ns:KoeretoejOplysningStoersteAkselTryk>
+        <!--// Voertuiginformatie Hoogste asdruk-->
+        <ns:KoeretoejOplysningTilkoblingMulighed>false</ns:KoeretoejOplysningTilkoblingMulighed>
+        <!--// Voertuigbeschrijving Verbindingsoptie-->
+        <ns:KoeretoejOplysningKommentar>DMR Konvertering</ns:KoeretoejOplysningKommentar>
+       <!-- // Voertuigbeschrijving Commentaar-->
+        <ns:KoeretoejBetegnelseStruktur><!--// Vehicle Designation Structure-->
+            <ns:KoeretoejMaerkeTypeNummer>0</ns:KoeretoejMaerkeTypeNummer>
+            <!--// Voertuig marks Type Nummer-->
+            <ns:KoeretoejMaerkeTypeNavn>10279</ns:KoeretoejMaerkeTypeNavn>
+            <!--//Voertuig marks type naam-->
+            <ns:Model>
+                <ns:KoeretoejModelTypeNummer>0</ns:KoeretoejModelTypeNummer><!--// voertuig model type nummer-->
+                <ns:KoeretoejModelTypeNavn>UOPLYST</ns:KoeretoejModelTypeNavn>
+                <!--// voertuig model type naam-->
+            </ns:Model>
+            <ns:Variant>
+                <ns:KoeretoejVariantTypeNummer>0</ns:KoeretoejVariantTypeNummer>
+               <!-- // voertuigvariant type nummer-->
+                <ns:KoeretoejVariantTypeNavn>UOPLYST</ns:KoeretoejVariantTypeNavn>
+                <!--//Voertuig variant type naam-->
+            </ns:Variant>
+            <ns:Type>
+                <ns:KoeretoejTypeTypeNummer>0</ns:KoeretoejTypeTypeNummer>
+                <!--//voertuig type typenummer-->
+                <ns:KoeretoejTypeTypeNavn>UOPLYST</ns:KoeretoejTypeTypeNavn>
+                <!--//voertuig type typenaam-->
+            </ns:Type>
+        </ns:KoeretoejBetegnelseStruktur>
+       <!-- //
+        Vehicle Designation Structure-->
+        <ns:KoeretoejFarveStruktur>
+            <ns:FarveTypeStruktur><!--//kleurtype structuur-->
+                <ns:FarveTypeNummer>1</ns:FarveTypeNummer>
+               <!-- kleurtype nummer-->
+                <ns:FarveTypeNavn>Ukendt</ns:FarveTypeNavn>
+               <!-- kleurtype naam-->
+            </ns:FarveTypeStruktur>
+        </ns:KoeretoejFarveStruktur>
+        <ns:KarrosseriTypeStruktur/>
+        <!--// carroseriestructuur denk ik, hij komt aan met lichaamstype-->
+        <ns:KoeretoejNormStruktur><!--//voertuignormstructuur-->
+            <ns:NormTypeStruktur><!--//normtypestructuur-->
+                <ns:NormTypeNummer>1</ns:NormTypeNummer>
+                <ns:NormTypeNavn>Ingen Norm</ns:NormTypeNavn>
+                <!--// norm type naam-->
+            </ns:NormTypeStruktur>
+        </ns:KoeretoejNormStruktur>
+        <ns:KoeretoejMiljoeOplysningStruktur>//
+           <!-- Voertuig Milieu Informatie Structuur-->
+            <ns:KoeretoejMiljoeOplysningPartikelFilter>false</ns:KoeretoejMiljoeOplysningPartikelFilter>
+            <!--//Voertuigomgeving Verlichting Particle Filter(iets van een roetfilter?)-->
+        </ns:KoeretoejMiljoeOplysningStruktur>
+        <!--//Voertuig Milieu Informatie Structuur-->
+        <ns:KoeretoejMotorStruktur>//voertuigmotorstructuur
+            <ns:DrivkraftTypeStruktur>//propulsion system structuur
+                <ns:DrivkraftTypeNummer>1</ns:DrivkraftTypeNummer>
+                <!--//propulsion system type nummer-->
+                <ns:DrivkraftTypeNavn>Benzin</ns:DrivkraftTypeNavn>
+                <!--//propulsiontype naam-->
+            </ns:DrivkraftTypeStruktur>
+        </ns:KoeretoejMotorStruktur>
+    </ns:KoeretoejOplysningGrundStruktur>
+    <ns:EjerBrugerSamling><!--//Eigenaar Gebruikerscollectie-->
+        <ns:EjerBruger><!--//eigenaar gebruiker-->
+            <ns:EjerBrugerForholdGrundStruktur><!--//Eigenaar Gebruiker Relation Basisstructuur-->
+                <ns:EjerBrugerForholdForhold>Ejer</ns:EjerBrugerForholdForhold>
+                <!--// eigenaar gebruiker relatie-->
+                <ns:EjerBrugerForholdPrimaer>false</ns:EjerBrugerForholdPrimaer>
+                <!--//Eigenaar Gebruikersrelatie Primair(hoofdgebruiker?)-->
+            </ns:EjerBrugerForholdGrundStruktur>
+            <ns:PersonKoen>1</ns:PersonKoen>
+            <!--//persoonsgeslacht-->
+        </ns:EjerBruger>
+        <ns:EjerBruger>
+            <ns:EjerBrugerForholdGrundStruktur>
+                <ns:EjerBrugerForholdForhold>Bruger</ns:EjerBrugerForholdForhold>
+                <ns:EjerBrugerForholdPrimaer>false</ns:EjerBrugerForholdPrimaer>
+            </ns:EjerBrugerForholdGrundStruktur>
+            <ns:PersonKoen>1</ns:PersonKoen>
+        </ns:EjerBruger>
+    </ns:EjerBrugerSamling>
+    <ns:SynResultatStruktur>//Bekijk de resultatenstructuur?
+        <ns:SynResultatSynsType>RegistreringsSyn</ns:SynResultatSynsType>
+        <!--//view Result view Type-->
+        <ns:SynResultatSynsDato>1990-07-11+02:00</ns:SynResultatSynsDato>
+       <!-- //view result view date-->
+        <ns:SynResultatSynsResultat>Godkendt</ns:SynResultatSynsResultat>
+       <!-- //view result view result-->
+        <ns:SynResultatSynStatus>Aktiv</ns:SynResultatSynStatus>
+        <!--//view result view status-->
+        <ns:SynResultatSynStatusDato>1990-07-11+02:00</ns:SynResultatSynStatusDato>
+       <!-- view result view status date-->
+    </ns:SynResultatStruktur>
+    <ns:KoeretoejRegistreringStatus>Afmeldt</ns:KoeretoejRegistreringStatus>
+    <!--// voertuig registratie status-->
+    <ns:KoeretoejRegistreringStatusDato>2008-06-30T00:00:00.000+02:00</ns:KoeretoejRegistreringStatusDato>
+    <!--//voertuig registratie datum-->
+    <ns:TilladelseSamling><!--//licentiecollectie-->
+        <ns:Tilladelse>
+            <ns:TilladelseStruktur><!--//licentiestructuur-->
+                <ns:TilladelseGyldigFra>2003-09-13T00:00:00.000+02:00</ns:TilladelseGyldigFra>
+                <!--//licentie geldig vanaf-->
+                <ns:TilladelseKommentar>DMR Konvertering</ns:TilladelseKommentar>
+                <!--//licentie commentaar-->
+                <ns:TilladelseTypeStruktur>//licentietype structuur
+                    <ns:TilladelseTypeNummer>1</ns:TilladelseTypeNummer>
+                    <!--licentie type structuur-->
+                    <ns:TilladelseTypeNavn>Synsfri Sammenkobling</ns:TilladelseTypeNavn>
+                    <!--// licentietype naam-->
+                </ns:TilladelseTypeStruktur>
+            </ns:TilladelseStruktur>
+        </ns:Tilladelse>
+    </ns:TilladelseSamling>
+</ns:Statistik>

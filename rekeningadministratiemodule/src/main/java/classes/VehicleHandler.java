@@ -1,0 +1,124 @@
+package classes;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class VehicleHandler extends DefaultHandler
+{
+
+    private Map<String, String> elementNameMap;
+
+    private Map<String, Boolean> elementBooleanMap;
+
+    private List<Vehicle> vehicles;
+
+    private Vehicle vehicle;
+
+    public VehicleHandler() {
+        elementNameMap = new HashMap<>();
+        elementNameMap.put("Start", "ns:Statistik");
+        elementNameMap.put("Vehicle id", "ns:KoeretoejIdent");
+        elementNameMap.put("Vehicle licences", "ns:RegistreringNummerNummer");
+        elementNameMap.put("Vehicle active", "ns:KoeretoejOplysningStatus");
+//        elementNameMap.put("Vehicle weight total", "ns:KoeretoejOplysningTotalVaegt");
+//        elementNameMap.put("Vehicle weight own", "ns:KoeretoejOplysningEgenVaegt");
+        elementNameMap.put("Vehicle fuel type", "ns:DrivkraftTypeNavn");
+
+        //
+
+        elementBooleanMap = new HashMap<>();
+        for (Map.Entry<String, String> entry : elementNameMap.entrySet())
+        {
+            String key = entry.getKey();
+            elementBooleanMap.put(key, false);
+        }
+
+        vehicles = new ArrayList<>();
+
+    }
+
+    @Override
+    public void startElement(
+            String uri,
+            String localName,
+            String qName,
+            Attributes attributes) throws SAXException
+    {
+//        System.out.println("Start Element :" + qName);
+
+        if (getKeyFromValue(qName).equals("Start"))
+        {
+            vehicle = new Vehicle();
+        }
+
+        if (hasValue(qName))
+        {
+            String key = getKeyFromValue(qName);
+            elementBooleanMap.put(key, true);
+        }
+    }
+
+    @Override
+    public void endElement(
+            String uri,
+            String localName,
+            String qName) throws SAXException
+    {
+//        System.out.println("End Element :" + qName);
+
+        // TODO check for the end of vehicle tag to add object
+
+        if (getKeyFromValue(qName).equals("Start"))
+        {
+            vehicles.add(vehicle);
+        }
+
+    }
+
+    @Override
+    public void characters(
+            char[] ch,
+            int start,
+            int length) throws SAXException
+    {
+        for (Map.Entry<String, Boolean> entry : elementBooleanMap.entrySet())
+        {
+            if (entry.getValue())
+            {
+                System.out.println(entry.getKey() + " : " + new String(ch, start, length));
+                entry.setValue(false);
+
+//                vehicle.setId();
+            }
+        }
+    }
+
+    private boolean hasValue(String value)
+    {
+        return elementNameMap.values().contains(value);
+    }
+
+    private String getKeyFromValue(String value)
+    {
+        for (Map.Entry<String, String> entry : elementNameMap.entrySet())
+        {
+            if (entry.getValue().equals(value))
+            {
+                return entry.getKey();
+            }
+        }
+
+        return "";
+    }
+
+    public List<Vehicle> getVehicles()
+    {
+        return vehicles;
+    }
+}
