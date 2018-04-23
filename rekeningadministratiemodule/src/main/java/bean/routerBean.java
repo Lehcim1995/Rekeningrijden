@@ -37,5 +37,10 @@ public class routerBean implements Serializable{
         return "/pages/linkcarowner.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
+    public String goToManageKilometerRate()
+    {
+        return "/pages/managekilometerrate.xhtml?faces-redirect=true&includeViewParams=true";
+    }
+
 
 }
