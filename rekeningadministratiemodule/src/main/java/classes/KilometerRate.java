@@ -25,6 +25,9 @@ public class KilometerRate implements Serializable {
         this.rateCategoryEnum = rateCategoryEnum;
     }
 
+    public KilometerRate() {
+    }
+
     public int getId() {
         return id;
     }

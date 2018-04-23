@@ -25,9 +25,9 @@
             <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
             <div>
-                <div class="flexbox row wrap">
+                <div class="flexbox row wrap createKilometerRate">
                     <!-- TODO: roadBean.allRoads -->
-                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRates}" selectionMode="single" selection="#{rateBean.selectedRoad}">
+                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRates}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.road}">
                         <f:facet name="header">
                             Selecteer een weg
                         </f:facet>
@@ -37,34 +37,67 @@
                             <h:outputText value="#{road.road}" />
                         </p:column>
                     </p:dataTable>
-                    <div>
-                        <h:outputLabel for="kilometerPrice">Tracker ID:</h:outputLabel>
-                        <p:inputText value="#{rateBean.kilometerprice}" name="kilometerPrice" >
-                        </p:inputText>
-
-                        <h:outputLabel for="startdate">Bouwjaar:</h:outputLabel>
-                        <p:calendar readonly="" nly="true" value="#{rateBean.startDate}" locale="de" navigator="true" name="startdate" pattern="yyyy-MMM-dd" class="correctCalendar"/>
+                    <div class="flexbox column wrap">
+                        <div class="flexbox row wrap createKilometerRate">
+                            <h:outputLabel for="kilometerPrice">Kilometerprijs:</h:outputLabel>
+                            <p:inputText value="#{rateBean.kilometerprice}" name="kilometerPrice" />
+                        </div>
+                        <div class="flexbox row wrap createKilometerRate">
+                            <h:outputLabel for="startdate">Startdatum:</h:outputLabel>
+                            <p:calendar readonly="" nly="true" value="#{rateBean.startDate}" locale="de" navigator="true" name="startdate" pattern="yyyy-MMM-dd" class="correctCalendar"/>
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
 
             </div>
+            <h:form id="editRateForm">
+                <p:growl id="editRateFormMsgs" showDetail="true" />
+                <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
+                </p:messages>
 
-            <p:dataTable id="rateTable" class="table" var="rate" value="#{rateBean.allRates}">
-                <p:column headerText="ID">
-                    <h:outputText value="#{rate.id}" />
-                </p:column>
-                <p:column headerText="Weg">
-                    <h:outputText value="#{rate.road}" />
-                </p:column>
-                <p:column headerText="Kilometerprijs">
-                    <h:outputText value="#{rate.startDate}" />
-                </p:column>
-                <p:column headerText="Einddatum">
-                    <h:outputText value="#{rate.endDate}" />
-                </p:column>
-            </p:dataTable>
+                <p:dataTable id="rateTable" var="rate" value="#{rateBean.selectedRate}" editable="true" editMode="cell">
+                    <f:facet name="header">
+                        Edit RateCategory
+                    </f:facet>
+
+                    <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
+
+                    <p:column headerText="Brandstof type">
+                        <f:facet name="output"><h:outputText value="#{rate.FuelType}" /></f:facet>
+                    </p:column>
+
+                    <p:column headerText="Percentage prijs">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{rate.percentagePrice}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{rate.percentagePrice}" label="percentagePrice"/></f:facet>
+                        </p:cellEditor>
+
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+            <!--<p:dataTable id="rateTable" class="table" var="rate" value="#{rateBean.allRates}">-->
+                <!--<p:column headerText="ID">-->
+                    <!--<h:outputText value="#{rate.id}" />-->
+                <!--</p:column>-->
+                <!--<p:column headerText="Weg">-->
+                    <!--<h:outputText value="#{rate.road}" />-->
+                <!--</p:column>-->
+                <!--<p:column headerText="Kilometerprijs">-->
+                    <!--<h:outputText value="#{rate.kilometerPrice}" />-->
+                <!--</p:column>-->
+                <!--<p:column headerText="Startdatum">-->
+                    <!--<h:outputText value="#{rate.startDate}" />-->
+                <!--</p:column>-->
+
+                <!--<p:column headerText="Einddatum">-->
+                    <!--<h:outputText value="#{rate.endDate}" />-->
+                <!--</p:column>-->
+            <!--</p:dataTable>-->
         </h:form>
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>

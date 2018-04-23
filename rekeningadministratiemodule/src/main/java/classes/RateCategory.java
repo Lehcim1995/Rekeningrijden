@@ -1,11 +1,18 @@
 package classes;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RateCategory implements Serializable {
 
     @Id
@@ -21,6 +28,10 @@ public class RateCategory implements Serializable {
         this.percentagePrice = percentagePrice;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public RateCategory() {
+
     }
 
     public int getId() {
@@ -45,5 +56,13 @@ public class RateCategory implements Serializable {
 
     public void setPercentagePrice(double percentagePrice) {
         this.percentagePrice = percentagePrice;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }
