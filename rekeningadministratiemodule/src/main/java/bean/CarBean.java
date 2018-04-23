@@ -1,14 +1,11 @@
 package bean;
 
-import Exceptions.CreationException;
 import classes.*;
-import classes.RateCategory;
+import classes.RateCategoryEnum;
 import classes.Vehicle;
-import classes.VehicleTracker;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -31,7 +28,7 @@ public class CarBean implements Serializable {
     private Date buildYear;
     private String rateCategorie = "";
     private String fueltype = "";
-    private List<RateCategory> classificationList = Arrays.asList(RateCategory.values());
+    private List<RateCategoryEnum> classificationList = Arrays.asList(RateCategoryEnum.values());
     private List<FuelEnum> fueltypes = Arrays.asList(FuelEnum.values());
     private int weight;
 
@@ -68,11 +65,11 @@ public class CarBean implements Serializable {
         this.rateCategorie = rateCategorie;
     }
 
-    public List<RateCategory> getClassificationList() {
+    public List<RateCategoryEnum> getClassificationList() {
         return classificationList;
     }
 
-    public void setClassificationList(List<RateCategory> classificationList) {
+    public void setClassificationList(List<RateCategoryEnum> classificationList) {
         this.classificationList = classificationList;
     }
 

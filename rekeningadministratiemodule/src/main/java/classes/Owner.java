@@ -46,6 +46,17 @@ public class Owner implements Serializable {
         previousVehicles = new ArrayList<>();
     }
 
+    public Owner(int citizenId, String firstName, String middleName, String lastName, String address, String city) {
+        this.citizenId = citizenId;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        vehicles = new ArrayList<>();
+        previousVehicles = new ArrayList<>();
+    }
+
     public int getId() {
         return id;
     }
