@@ -1,9 +1,6 @@
 package classes;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,6 +15,7 @@ public class RateCategory implements Serializable {
     @Id
     @GeneratedValue
     private int id;
+    @Enumerated(EnumType.STRING)
     private FuelEnum fuelEnum;
     private double percentagePrice;
     private Date startDate;

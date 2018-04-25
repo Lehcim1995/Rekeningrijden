@@ -12,6 +12,10 @@ public interface RateDao {
 
     RateCategory create (RateCategory rateCategory);
 
+    KilometerRate edit (KilometerRate kilometerRate);
+
+    RateCategory edit (RateCategory rateCategory);
+
     List<KilometerRate> getAllKilometerRates() throws SQLException;
 
     List<RateCategory> getAllRateCategories() throws SQLException;
