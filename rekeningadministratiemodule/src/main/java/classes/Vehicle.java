@@ -10,7 +10,8 @@ import java.util.Date;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,7 @@ public class Vehicle implements Serializable {
         this.buildYear = vehicle.getBuildYear();
     }
 
+
     public Vehicle(String rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
         this.rateCategorie = rateCategorie;
         this.licensePlate = licensePlate;
@@ -47,20 +49,35 @@ public class Vehicle implements Serializable {
         return ID;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public VehicleTracker getTracker() {
         return tracker;
     }
 
     public void setTracker(VehicleTracker tracker) {
-        if (this.tracker == null) this.tracker = tracker;
+        if (this.tracker == null)
+        {
+            this.tracker = tracker;
+        }
     }
 
     public String getRateCategorie() {
         return rateCategorie;
     }
 
+    public void setRateCategorie(String rateCategorie) {
+        this.rateCategorie = rateCategorie;
+    }
+
     public String getLicensePlate() {
         return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public Date getBuildYear() {
