@@ -29,17 +29,10 @@
                 <p:inputText value="#{carBean.licenseplate}" name="licenseplate" placeholder="e.g 'ZZ 92 394'" >
                     <f:validateLength minimum="7" maximum="9" />
                 </p:inputText>
-                <!--<h:message for="licenseplate" style="color:red" />-->
             </div>
             <div class="flexbox row wrap">
                 <h:outputLabel for="buildyear">Bouwjaar:</h:outputLabel>
                 <p:calendar readonly="" nly="true" value="#{carBean.buildYear}" locale="de" navigator="true" name="buildyear" pattern="yyyy-MMM-dd" class="correctCalendar"/>
-            </div>
-            <div class="flexbox row wrap">
-                <h:outputLabel for="category">Categorie:</h:outputLabel>
-                <h:selectOneMenu value="#{carBean.rateCategorie}" valueChangeListener="#{carBean.valueChanged}" name="category" class="input">
-                    <f:selectItems value="#{carBean.classificationList}" var="enumItem" />
-                </h:selectOneMenu>
             </div>
             <div class="flexbox row wrap">
                 <h:outputLabel for="weight">Gewicht:</h:outputLabel>
@@ -67,9 +60,6 @@
                 </p:column>
                 <p:column headerText="Bouwjaar">
                     <h:outputText value="#{car.buildYear}" />
-                </p:column>
-                <p:column headerText="Classificatie">
-                    <h:outputText value="#{car.rateCategorie}" />
                 </p:column>
                 <p:column headerText="Tracker ID">
                     <h:outputText value="#{car.tracker.ID}" />

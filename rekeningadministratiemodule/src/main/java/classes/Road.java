@@ -18,7 +18,7 @@ public class Road implements Serializable {
     @GeneratedValue
     private int id;
     private String name;
-    @OneToMany
+    @ElementCollection
     private List<String> geocodedAdresses;
     @OneToOne
     private KilometerRate kilometerRate;

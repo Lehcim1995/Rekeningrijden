@@ -21,6 +21,7 @@ public class RateCategory implements Serializable {
     private Date startDate;
     private Date endDate;
 
+
     public RateCategory(FuelEnum fuelEnum, double percentagePrice, Date startDate, Date endDate) {
         this.fuelEnum = fuelEnum;
         this.percentagePrice = percentagePrice;

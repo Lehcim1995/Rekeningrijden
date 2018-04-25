@@ -2,6 +2,7 @@ package service;
 
 import Exceptions.CreationException;
 import classes.FuelEnum;
+import classes.RateCategory;
 import classes.Vehicle;
 import classes.VehicleTracker;
 import dao.VehicleDao;
@@ -18,6 +19,7 @@ public class VehicleService implements Serializable {
 
     @Inject
     private VehicleDao vehicleDao;
+
 
     public VehicleService() {}
 
@@ -71,7 +73,7 @@ public class VehicleService implements Serializable {
         else return null;
     }
 
-    public Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear, int weight, String fueltype) throws CreationException {
+    public Vehicle createVehicleParam(String licensePlate, Date buildYear, int weight, String fueltype) throws CreationException {
         FuelEnum fuelType = null;
         try
         {
@@ -80,8 +82,8 @@ public class VehicleService implements Serializable {
         catch(IllegalArgumentException e){
             throw new CreationException("Something went wrong when creating the car. " + fueltype + " is not a valid value.");
         }
-        if (rateCategorie != null && !rateCategorie.isEmpty() && licensePlate != null && !licensePlate.isEmpty() && buildYear != null) {
-            return vehicleDao.createVehicleParam(rateCategorie, licensePlate, buildYear, weight, fuelType);
+        if (licensePlate != null && !licensePlate.isEmpty() && buildYear != null) {
+            return vehicleDao.createVehicleParam(licensePlate, buildYear, weight, fuelType);
         }
         else {
             return null;

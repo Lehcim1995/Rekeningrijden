@@ -103,8 +103,8 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public Vehicle createVehicleParam(RateCategory rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
-        Vehicle createdVehicle = new Vehicle(rateCategorie, licensePlate, buildYear, weight, fueltype);
+    public Vehicle createVehicleParam(String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
+        Vehicle createdVehicle = new Vehicle(licensePlate, buildYear, weight, fueltype);
         em.persist(createdVehicle);
 
         return createdVehicle;

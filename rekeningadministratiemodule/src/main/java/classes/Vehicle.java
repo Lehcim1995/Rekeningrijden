@@ -17,8 +17,6 @@ public class Vehicle implements Serializable {
     private int ID;
     @OneToOne
     private VehicleTracker tracker;
-    @OneToOne
-    private RateCategory rateCategorie;
     private int weight;
     @Column(unique = true)
     private String licensePlate;
@@ -31,13 +29,11 @@ public class Vehicle implements Serializable {
     public Vehicle() {}
 
     public Vehicle(Vehicle vehicle) {
-        this.rateCategorie = vehicle.getRateCategorie();
         this.licensePlate = vehicle.getLicensePlate();
         this.buildYear = vehicle.getBuildYear();
     }
 
-    public Vehicle(RateCategory rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
-        this.rateCategorie = rateCategorie;
+    public Vehicle(String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
         this.licensePlate = licensePlate;
         this.buildYear = buildYear;
         this.weight = weight;
@@ -54,10 +50,6 @@ public class Vehicle implements Serializable {
 
     public void setTracker(VehicleTracker tracker) {
         if (this.tracker == null) this.tracker = tracker;
-    }
-
-    public RateCategory getRateCategorie() {
-        return rateCategorie;
     }
 
     public String getLicensePlate() {

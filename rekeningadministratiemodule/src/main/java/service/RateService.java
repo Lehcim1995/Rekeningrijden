@@ -113,4 +113,14 @@ public class RateService implements Serializable {
             throw new IllegalArgumentException("Could not edit rate category percentage price");
         }
     }
+
+    /*public RateCategory findRateCategoryByName(String rateCategorie) {
+        try{
+            return rateDao.findRateCategoryByName(rateCategorie);
+        }
+        catch(Exception e)
+        {
+            throw new IllegalArgumentException("Could not find rate category with name "+ rateCategorie);
+        }
+    }*/
 }

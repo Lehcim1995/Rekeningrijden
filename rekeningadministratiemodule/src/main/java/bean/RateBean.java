@@ -33,7 +33,7 @@ public class RateBean implements Serializable{
 
     private Double kilometerprice ;
     //TODO: Change to Road DomainClass
-    private String selectedRoad;
+    private Road selectedRoad;
     private RateCategory selectedRate;
     private Date startDate;
 
@@ -43,11 +43,11 @@ public class RateBean implements Serializable{
 
     }
 
-    public String getSelectedRoad() {
+    public Road getSelectedRoad() {
         return selectedRoad;
     }
 
-    public void setSelectedRoad(String selectedRoad) {
+    public void setSelectedRoad(Road selectedRoad) {
         this.selectedRoad = selectedRoad;
     }
 
@@ -108,13 +108,13 @@ public class RateBean implements Serializable{
     public void onRoadRowSelect(SelectEvent event) {
         //TODO: Cast to Road Class
         this.selectedRoad = ((KilometerRate)event.getObject()).getRoad();
-        FacesMessage msg = new FacesMessage("Road selected", ((KilometerRate) event.getObject()).getRoad());
+        FacesMessage msg = new FacesMessage("Road selected", ((KilometerRate) event.getObject()).getRoad().getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
     }
 
     public void onRoadRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Road Unselected", ((KilometerRate) event.getObject()).getRoad());
+        FacesMessage msg = new FacesMessage("Road Unselected", ((KilometerRate) event.getObject()).getRoad().getName());
         this.selectedRoad = null;
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

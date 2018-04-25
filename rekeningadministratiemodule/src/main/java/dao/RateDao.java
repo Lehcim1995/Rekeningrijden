@@ -25,4 +25,6 @@ public interface RateDao {
     RateCategory findRateCategoryById(int rateCategoryId) throws SQLException;
 
     double calculateKilometerRatePriceByRateCategory(int kilomterRateId, int rateCategoryId) throws SQLException;
+
+    //RateCategory findRateCategoryByName(String rateCategorie) throws SQLException;
 }

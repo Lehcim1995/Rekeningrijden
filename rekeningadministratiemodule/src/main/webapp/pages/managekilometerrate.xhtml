@@ -27,7 +27,7 @@
             <div>
                 <div class="flexbox row wrap createKilometerRate">
                     <!-- TODO: roadBean.allRoads -->
-                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRoads}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.road}">
+                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRoads}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.name}">
                         <f:facet name="header">
                             Selecteer een weg
                         </f:facet>
@@ -37,6 +37,7 @@
                             <h:outputText value="#{road.name}" />
                         </p:column>
                     </p:dataTable>
+
                     <div class="flexbox column wrap">
                         <div class="flexbox row wrap createKilometerRate">
                             <h:outputLabel for="kilometerPrice">Kilometerprijs:</h:outputLabel>
@@ -58,23 +59,26 @@
             <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
 
-            <p:dataTable id="rateTable" var="rate" value="#{rateBean.selectedRate}" editable="true" editMode="cell">
+            <p:dataTable id="rateTable" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell">
                 <f:facet name="header">
                     Edit RateCategory
                 </f:facet>
 
                 <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
 
+                <p:column headerText="Ratecategory id">
+                    <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.id}" /></f:facet>
+                </p:column>
+
                 <p:column headerText="Brandstof type">
-                    <f:facet name="output"><h:outputText value="#{rate.FuelType}" /></f:facet>
+                    <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.fuelEnum}" /></f:facet>
                 </p:column>
 
                 <p:column headerText="Percentage prijs">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{rate.percentagePrice}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{rate.percentagePrice}" label="percentagePrice"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" label="percentagePrice"/></f:facet>
                     </p:cellEditor>
-
                 </p:column>
             </p:dataTable>
         </h:form>

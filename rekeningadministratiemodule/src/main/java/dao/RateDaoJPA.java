@@ -109,4 +109,17 @@ public class RateDaoJPA implements RateDao{
         df.format(price);
         return price;
     }
+
+    /*@Override
+    public RateCategory findRateCategoryByName(String rateCategorie) throws SQLException {
+        try{
+            em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE rateCategory.fuelEnum = :rateCategoryName AND rateCategory.kilometerRate.", RateCategory.class)
+                    .setParameter("rateCategoryName", rateCategorie)
+                    .getSingleResult();
+        }
+        catch(Exception e){
+            throw new SQLException("Dao could not find Ratecategory with name " + rateCategorie);
+        }
+        return null;
+    }*/
 }

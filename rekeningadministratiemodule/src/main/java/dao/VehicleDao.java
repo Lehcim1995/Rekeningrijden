@@ -25,7 +25,7 @@ public interface VehicleDao {
 
     Vehicle getVehicleByID(int ID);
 
-    Vehicle createVehicleParam(RateCategory rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype);
+    Vehicle createVehicleParam(String licensePlate, Date buildYear, int weight, FuelEnum fueltype);
 
     Vehicle getVehicleByVehicleTracker(String ID);
 
