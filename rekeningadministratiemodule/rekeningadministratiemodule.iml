@@ -32,6 +32,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.10" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.2" level="project" />
+    <orderEntry type="library" name="Maven: sax:sax:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC13" level="project" />
     <orderEntry type="library" name="Maven: com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC13" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:xmpbox:2.0.8" level="project" />
