@@ -25,7 +25,6 @@ import java.util.List;
 @Named(value = "rateBean")
 public class RateBean implements Serializable{
 
-
     @Inject
     RateService rateService;
     @Inject
@@ -107,14 +106,14 @@ public class RateBean implements Serializable{
 
     public void onRoadRowSelect(SelectEvent event) {
         //TODO: Cast to Road Class
-        this.selectedRoad = ((KilometerRate)event.getObject()).getRoad();
-        FacesMessage msg = new FacesMessage("Road selected", ((KilometerRate) event.getObject()).getRoad().getName());
+        this.selectedRoad = ((Road)event.getObject());
+        FacesMessage msg = new FacesMessage("Road selected", this.selectedRoad.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
     }
 
     public void onRoadRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Road Unselected", ((KilometerRate) event.getObject()).getRoad().getName());
+        FacesMessage msg = new FacesMessage("Road Unselected", ((Road) event.getObject()).getName());
         this.selectedRoad = null;
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

@@ -32,7 +32,7 @@
                             Selecteer een weg
                         </f:facet>
                         <p:ajax event="rowSelect" listener="#{rateBean.onRoadRowSelect}" update=":addRateForm:msgs" />
-                        <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}" update=":addRateForm:msgs" />
+                        <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}" update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate" />
                         <p:column headerText="Weg">
                             <h:outputText value="#{road.name}" />
                         </p:column>
@@ -51,9 +51,45 @@
                 </div>
             </div>
         </h:form>
-        <div>
 
-        </div>
+        <h:form id="editkilometerRateForm">
+            <p:growl id="editkilometerRateFormMsgs" showDetail="true" />
+            <p:messages id="editKilometerRateFormMessages" showDetail="true" closable="true" autoUpdate="true">
+            </p:messages>
+
+            <p:dataTable id="kilometerRate" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell">
+                <f:facet name="header">
+                    Edit Kilometerrate
+                </f:facet>
+
+                <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editkilometerRateForm:editkilometerRateFormMsgs" />
+
+                <p:column headerText="Weg">
+                    <f:facet name="output"><h:outputText value="#{road.name}" /></f:facet>
+                </p:column>
+
+                <p:column headerText="Heffing per kilometer">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.kilometerPrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.kilometerPrice}" label="kilometerPrice"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Heffing per kilometer">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.startDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.startDate}" label="kilometerRateStartdatum"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Startdatum">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" label="startdate"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
         <h:form id="editRateForm">
             <p:growl id="editRateFormMsgs" showDetail="true" />
             <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
@@ -66,10 +102,6 @@
 
                 <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
 
-                <p:column headerText="Ratecategory id">
-                    <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.id}" /></f:facet>
-                </p:column>
-
                 <p:column headerText="Brandstof type">
                     <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.fuelEnum}" /></f:facet>
                 </p:column>
@@ -78,6 +110,12 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" /></f:facet>
                         <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" label="percentagePrice"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Startdatum">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" label="startdate"/></f:facet>
                     </p:cellEditor>
                 </p:column>
             </p:dataTable>
