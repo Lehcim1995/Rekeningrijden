@@ -27,14 +27,14 @@
             <div>
                 <div class="flexbox row wrap createKilometerRate">
                     <!-- TODO: roadBean.allRoads -->
-                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRates}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.road}">
+                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRoads}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.road}">
                         <f:facet name="header">
                             Selecteer een weg
                         </f:facet>
                         <p:ajax event="rowSelect" listener="#{rateBean.onRoadRowSelect}" update=":addRateForm:msgs" />
                         <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}" update=":addRateForm:msgs" />
                         <p:column headerText="Weg">
-                            <h:outputText value="#{road.road}" />
+                            <h:outputText value="#{road.name}" />
                         </p:column>
                     </p:dataTable>
                     <div class="flexbox column wrap">

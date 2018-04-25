@@ -2,11 +2,13 @@ package bean;
 
 import classes.KilometerRate;
 import classes.RateCategory;
+import classes.Road;
 import javafx.scene.control.TableColumn;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import service.RateService;
+import service.RoadService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -21,11 +23,13 @@ import java.util.List;
 
 @SessionScoped
 @Named(value = "rateBean")
-public class RateRoadBean implements Serializable{
+public class RateBean implements Serializable{
 
 
     @Inject
     RateService rateService;
+    @Inject
+    RoadService roadService;
 
     private Double kilometerprice ;
     //TODO: Change to Road DomainClass
@@ -78,7 +82,7 @@ public class RateRoadBean implements Serializable{
         }
         catch(SQLException e)
         {
-            FacesMessage msg = new FacesMessage("Something went wrong when getting al the Roads " +
+            FacesMessage msg = new FacesMessage("Something went wrong when getting al the rates " +
                     e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
@@ -86,10 +90,19 @@ public class RateRoadBean implements Serializable{
 
     }
 
-    public String getAllRoads()
+    public List<Road> getAllRoads()
     {
-        //TODO: Service call getallrates
-        return "ToImplement";
+        try{
+            return roadService.getAllRoads();
+        }
+        catch(SQLException e)
+        {
+            FacesMessage msg = new FacesMessage("Something went wrong when getting al the Roads " +
+                    e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return null;
+        }
+
     }
 
     public void onRoadRowSelect(SelectEvent event) {
@@ -122,7 +135,7 @@ public class RateRoadBean implements Serializable{
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Something went wrong while editing the cell", "Old: " + oldValue);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
-
         }
     }
+
 }
