@@ -18,10 +18,11 @@ public class Road implements Serializable {
     @GeneratedValue
     private int id;
     private String name;
-    @Transient
+    @OneToMany
     private List<String> geocodedAdresses;
+    @OneToOne
     private KilometerRate kilometerRate;
-    @Transient
+    @OneToMany
     private List<KilometerRate> previousRates;
     private Date date;
 

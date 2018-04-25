@@ -39,6 +39,24 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    public KilometerRate edit(KilometerRate kilometerRate) {
+        if (kilometerRate == null) {
+            throw new IllegalArgumentException("Kilometer rate is null");
+        }
+        em.merge(kilometerRate);
+        return kilometerRate;
+    }
+
+    @Override
+    public RateCategory edit(RateCategory rateCategory) {
+        if (rateCategory == null) {
+            throw new IllegalArgumentException("Category rate is null");
+        }
+        em.merge(rateCategory);
+        return rateCategory;
+    }
+
+    @Override
     public List<KilometerRate> getAllKilometerRates() throws SQLException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate", KilometerRate.class).getResultList();

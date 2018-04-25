@@ -3,6 +3,7 @@ package classes;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,14 +18,15 @@ public class KilometerRate implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    //TODO: Make from String road a Road road object
-    private String road;
+    @OneToOne
+    private Road road;
     private double kilometerPrice;
     private Date startDate;
     private Date endDate;
+    @OneToOne
     private RateCategory rateCategoryEnum;
 
-    public KilometerRate(String road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
+    public KilometerRate(Road road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
         this.road = road;
         this.kilometerPrice = kilometerPrice;
         this.startDate = startDate;
@@ -43,11 +45,11 @@ public class KilometerRate implements Serializable {
         this.id = id;
     }
 
-    public String getRoad() {
+    public Road getRoad() {
         return road;
     }
 
-    public void setRoad(String road) {
+    public void setRoad(Road road) {
         this.road = road;
     }
 

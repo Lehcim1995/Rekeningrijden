@@ -3,6 +3,7 @@ package service;
 import classes.FuelEnum;
 import classes.KilometerRate;
 import classes.RateCategory;
+import classes.Road;
 import dao.RateDao;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ public class RateService implements Serializable {
     @Inject
     private RateDao rateDao;
 
-    public KilometerRate create(String road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
+    public KilometerRate create(Road road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
         if (startDate.before(new Date())) {
             throw new IllegalArgumentException("Start date can not be set before today");
         }
@@ -88,6 +89,28 @@ public class RateService implements Serializable {
         }
         catch (Exception e) {
             throw new IllegalArgumentException("Could not calculate price");
+        }
+    }
+
+    public KilometerRate editKilometerRate(int kilometerRateId, double kilometerPrice) throws SQLException {
+        try {
+            KilometerRate kilometerRate = findKilometerRateById(kilometerRateId);
+            kilometerRate.setKilometerPrice(kilometerPrice);
+            return rateDao.edit(kilometerRate);
+        }
+        catch (Exception e) {
+            throw new IllegalArgumentException("Could not edit kilometer price");
+        }
+    }
+
+    public RateCategory edit(int rateCategoryId, double percentagePrice) {
+        try {
+            RateCategory rateCategory = findRateCategoryById(rateCategoryId);
+            rateCategory.setPercentagePrice(percentagePrice);
+            return rateDao.edit(rateCategory);
+        }
+        catch (Exception e) {
+            throw new IllegalArgumentException("Could not edit rate category percentage price");
         }
     }
 }
