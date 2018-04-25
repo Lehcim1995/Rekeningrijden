@@ -1,10 +1,17 @@
 package classes;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class KilometerRate implements Serializable {
 
     @Id

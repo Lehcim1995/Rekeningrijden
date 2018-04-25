@@ -49,34 +49,36 @@
                     </div>
                 </div>
             </div>
-            <div>
+        </h:form>
+        <div>
 
-            </div>
-            <h:form id="editRateForm">
-                <p:growl id="editRateFormMsgs" showDetail="true" />
-                <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
-                </p:messages>
+        </div>
+        <h:form id="editRateForm">
+            <p:growl id="editRateFormMsgs" showDetail="true" />
+            <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
+            </p:messages>
 
-                <p:dataTable id="rateTable" var="rate" value="#{rateBean.selectedRate}" editable="true" editMode="cell">
-                    <f:facet name="header">
-                        Edit RateCategory
-                    </f:facet>
+            <p:dataTable id="rateTable" var="rate" value="#{rateBean.selectedRate}" editable="true" editMode="cell">
+                <f:facet name="header">
+                    Edit RateCategory
+                </f:facet>
 
-                    <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
+                <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
 
-                    <p:column headerText="Brandstof type">
-                        <f:facet name="output"><h:outputText value="#{rate.FuelType}" /></f:facet>
-                    </p:column>
+                <p:column headerText="Brandstof type">
+                    <f:facet name="output"><h:outputText value="#{rate.FuelType}" /></f:facet>
+                </p:column>
 
-                    <p:column headerText="Percentage prijs">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{rate.percentagePrice}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{rate.percentagePrice}" label="percentagePrice"/></f:facet>
-                        </p:cellEditor>
+                <p:column headerText="Percentage prijs">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{rate.percentagePrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{rate.percentagePrice}" label="percentagePrice"/></f:facet>
+                    </p:cellEditor>
 
-                    </p:column>
-                </p:dataTable>
-            </h:form>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
 
 
 
@@ -98,8 +100,6 @@
                     <!--<h:outputText value="#{rate.endDate}" />-->
                 <!--</p:column>-->
             <!--</p:dataTable>-->
-        </h:form>
-    </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>
 </html>

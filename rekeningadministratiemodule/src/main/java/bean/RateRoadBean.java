@@ -3,6 +3,7 @@ package bean;
 import classes.KilometerRate;
 import classes.RateCategory;
 import javafx.scene.control.TableColumn;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import service.RateService;
@@ -105,7 +106,7 @@ public class RateRoadBean implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onpercentagePriceCellEdit(TableColumn.CellEditEvent event){
+    public void onpercentagePriceCellEdit(CellEditEvent event){
         String oldValue = event.getOldValue().toString();
         String newValue = event.getNewValue().toString();
 
