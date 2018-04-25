@@ -1,6 +1,12 @@
 package classes;
 
 import javax.xml.parsers.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class VehicleParser
@@ -14,7 +20,7 @@ public class VehicleParser
 
             VehicleHandler vehicleHandler = new VehicleHandler();
 
-            saxParser.parse("data.xml", vehicleHandler);
+            saxParser.parse("newdata.xml", vehicleHandler);
 
             List<?> cars = vehicleHandler.getVehicles();
 
@@ -23,5 +29,36 @@ public class VehicleParser
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+//        try
+//        {
+//            Path dir = new File("").toPath();
+//            Path fileToCreatePath = dir.resolve("newdata.xml");
+//            File newFile = Files.createFile(fileToCreatePath)
+//                                .toFile();
+//
+//            try (FileWriter fw = new FileWriter(newFile))
+//            {
+//                Files.lines(Paths.get("D:\\School\\Jaar 3\\Semester 6\\Proftaak\\ESStatistikListeModtag.xml")).limit(10000).forEach(s -> {
+//                    try
+//                    {
+//                        fw.write(s + "\n");
+//                    }
+//                    catch (IOException e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+//                });
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 }

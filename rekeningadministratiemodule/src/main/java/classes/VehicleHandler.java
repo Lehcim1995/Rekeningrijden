@@ -91,10 +91,23 @@ public class VehicleHandler extends DefaultHandler
         {
             if (entry.getValue())
             {
-                System.out.println(entry.getKey() + " : " + new String(ch, start, length));
+                String value = new String(ch, start, length);
+
+                System.out.println(entry.getKey() + " : " + value);
                 entry.setValue(false);
 
-//                vehicle.setId();
+                if (entry.getKey().equals("Vehicle licences"))
+                {
+                    vehicle.setLicensePlate(value);
+                }
+
+                if (entry.getKey().equals("Vehicle id"))
+                {
+                    int id = Long.valueOf(value.substring(10)).intValue();
+
+                    System.out.println("Vehicle id (int): " + id);
+                    vehicle.setID(id);
+                }
             }
         }
     }
