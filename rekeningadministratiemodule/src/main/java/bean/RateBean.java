@@ -4,6 +4,7 @@ import classes.KilometerRate;
 import classes.RateCategory;
 import classes.Road;
 import javafx.scene.control.TableColumn;
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -118,13 +119,33 @@ public class RateBean implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onpercentagePriceCellEdit(CellEditEvent event){
+    public void onKilometerRateEdit(CellEditEvent event){
         String oldValue = event.getOldValue().toString();
         String newValue = event.getNewValue().toString();
 
         if(newValue != null && !newValue.equals(oldValue)) {
             try{
-                //TODO: Servicecall editpercentageprice
+                Road entity = (Road) ((DataTable) event.getComponent()).getRowData();
+                rateService.editKilometerRate(entity.getKilometerRate().getId(), Double.valueOf(newValue));
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + newValue);
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+            catch(Exception e)
+            {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Something went wrong while editing the cell", "error: " + e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        }
+    }
+
+    public void onRatecategoryCellEdit(CellEditEvent event){
+        String oldValue = event.getOldValue().toString();
+        String newValue = event.getNewValue().toString();
+
+        if(newValue != null && !newValue.equals(oldValue)) {
+            try{
+                Road entity = (Road) ((DataTable) event.getComponent()).getRowData();
+                rateService.edit(entity.getKilometerRate().getRateCategoryEnum().getId(), Double.valueOf(newValue));
 
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + newValue);
                 FacesContext.getCurrentInstance().addMessage(null, msg);

@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -14,46 +15,40 @@
 </h:head>
 <h:body>
     <div id="header">
-        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png"/></h:link>
         <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
         <p><h:link value="Login" outcome="user/login.xhtml"/></p>
     </div>
+
     <div id="main" class="flexbox column wrap">
         <h2>Beheer kilometerrates</h2>
+
         <h:form id="addRateForm" class="flexbox column wrap">
-            <p:growl id="msgs" showDetail="true" />
+            <p:growl id="msgs" showDetail="true"/>
             <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
             <div>
                 <div class="flexbox row wrap createKilometerRate">
                     <!-- TODO: roadBean.allRoads -->
-                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRoads}" selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.name}">
+                    <p:dataTable id="roadTable" class="table" var="road" value="#{rateBean.allRoads}"
+                                 selectionMode="single" selection="#{rateBean.selectedRoad}" rowKey="#{road.name}">
                         <f:facet name="header">
                             Selecteer een weg
                         </f:facet>
-                        <p:ajax event="rowSelect" listener="#{rateBean.onRoadRowSelect}" update=":addRateForm:msgs" />
-                        <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}" update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate" />
+                        <p:ajax event="rowSelect" listener="#{rateBean.onRoadRowSelect}"
+                                update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate, :editRateForm:rateTable"/>
+                        <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}"
+                                update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate"/>
                         <p:column headerText="Weg">
-                            <h:outputText value="#{road.name}" />
+                            <h:outputText value="#{road.name}"/>
                         </p:column>
                     </p:dataTable>
-
-                    <div class="flexbox column wrap">
-                        <div class="flexbox row wrap createKilometerRate">
-                            <h:outputLabel for="kilometerPrice">Kilometerprijs:</h:outputLabel>
-                            <p:inputText value="#{rateBean.kilometerprice}" name="kilometerPrice" />
-                        </div>
-                        <div class="flexbox row wrap createKilometerRate">
-                            <h:outputLabel for="startdate">Startdatum:</h:outputLabel>
-                            <p:calendar readonly="" nly="true" value="#{rateBean.startDate}" locale="de" navigator="true" name="startdate" pattern="yyyy-MMM-dd" class="correctCalendar"/>
-                        </div>
-                    </div>
                 </div>
             </div>
         </h:form>
 
         <h:form id="editkilometerRateForm">
-            <p:growl id="editkilometerRateFormMsgs" showDetail="true" />
+            <p:growl id="editkilometerRateFormMsgs" showDetail="true"/>
             <p:messages id="editKilometerRateFormMessages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
 
@@ -62,60 +57,77 @@
                     Edit Kilometerrate
                 </f:facet>
 
-                <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editkilometerRateForm:editkilometerRateFormMsgs" />
+                <p:ajax event="cellEdit" listener="#{rateBean.onKilometerRateEdit}"
+                        update=":editkilometerRateForm:editkilometerRateFormMsgs"/>
+
+                <p:column headerText="Kilometerrate id">
+                    <h:outputText value="#{road.kilometerRate.id}"/>
+                </p:column>
 
                 <p:column headerText="Weg">
-                    <f:facet name="output"><h:outputText value="#{road.name}" /></f:facet>
+                    <h:outputText value="#{road.name}"/>
                 </p:column>
 
                 <p:column headerText="Heffing per kilometer">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.kilometerPrice}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.kilometerPrice}" label="kilometerPrice"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.kilometerPrice}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.kilometerPrice}"
+                                                           label="kilometerPrice"/></f:facet>
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="Heffing per kilometer">
+                <p:column headerText="Ingangsdatum">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.startDate}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.startDate}" label="kilometerRateStartdatum"/></f:facet>
+                        <!--TODO:Calender inputfield -->
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.startDate}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.startDate}"
+                                                           label="kilometerRateStartdatum"/></f:facet>
                     </p:cellEditor>
                 </p:column>
                 <p:column headerText="Startdatum">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" label="startdate"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"
+                                                           label="startdate"/></f:facet>
                     </p:cellEditor>
                 </p:column>
             </p:dataTable>
         </h:form>
 
         <h:form id="editRateForm">
-            <p:growl id="editRateFormMsgs" showDetail="true" />
+            <p:growl id="editRateFormMsgs" showDetail="true"/>
             <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
 
-            <p:dataTable id="rateTable" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell">
+            <p:dataTable id="rateTable" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell" >
                 <f:facet name="header">
                     Edit RateCategory
                 </f:facet>
 
-                <p:ajax event="cellEdit" listener="#{rateBean.onpercentagePriceCellEdit}" update=":editRateForm:editRateFormMsgs" />
+                <p:ajax event="cellEdit" listener="#{rateBean.onRatecategoryCellEdit}"
+                        update=":editRateForm:editRateFormMsgs"/>
+
+                <p:column headerText="Ratecategory ID">
+                    <h:outputText value="#{road.kilometerRate.rateCategoryEnum.id}"/>
+                </p:column>
 
                 <p:column headerText="Brandstof type">
-                    <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.fuelEnum}" /></f:facet>
+                    <h:outputText value="#{road.kilometerRate.rateCategoryEnum.fuelEnum}"/>
                 </p:column>
 
                 <p:column headerText="Percentage prijs">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" label="percentagePrice"/></f:facet>
+                        <f:facet name="output"><h:outputText
+                                value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}"/></f:facet>
+                        <f:facet name="input"><p:inputText
+                                value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" label="percentagePrice"/></f:facet>
                     </p:cellEditor>
                 </p:column>
                 <p:column headerText="Startdatum">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}" label="startdate"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"
+                                                           label="startdate"/></f:facet>
                     </p:cellEditor>
                 </p:column>
             </p:dataTable>
@@ -123,25 +135,24 @@
     </div>
 
 
+    <!--<p:dataTable id="rateTable" class="table" var="rate" value="#{rateBean.allRates}">-->
+    <!--<p:column headerText="ID">-->
+    <!--<h:outputText value="#{rate.id}" />-->
+    <!--</p:column>-->
+    <!--<p:column headerText="Weg">-->
+    <!--<h:outputText value="#{rate.road}" />-->
+    <!--</p:column>-->
+    <!--<p:column headerText="Kilometerprijs">-->
+    <!--<h:outputText value="#{rate.kilometerPrice}" />-->
+    <!--</p:column>-->
+    <!--<p:column headerText="Startdatum">-->
+    <!--<h:outputText value="#{rate.startDate}" />-->
+    <!--</p:column>-->
 
-            <!--<p:dataTable id="rateTable" class="table" var="rate" value="#{rateBean.allRates}">-->
-                <!--<p:column headerText="ID">-->
-                    <!--<h:outputText value="#{rate.id}" />-->
-                <!--</p:column>-->
-                <!--<p:column headerText="Weg">-->
-                    <!--<h:outputText value="#{rate.road}" />-->
-                <!--</p:column>-->
-                <!--<p:column headerText="Kilometerprijs">-->
-                    <!--<h:outputText value="#{rate.kilometerPrice}" />-->
-                <!--</p:column>-->
-                <!--<p:column headerText="Startdatum">-->
-                    <!--<h:outputText value="#{rate.startDate}" />-->
-                <!--</p:column>-->
-
-                <!--<p:column headerText="Einddatum">-->
-                    <!--<h:outputText value="#{rate.endDate}" />-->
-                <!--</p:column>-->
-            <!--</p:dataTable>-->
+    <!--<p:column headerText="Einddatum">-->
+    <!--<h:outputText value="#{rate.endDate}" />-->
+    <!--</p:column>-->
+    <!--</p:dataTable>-->
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>
 </html>

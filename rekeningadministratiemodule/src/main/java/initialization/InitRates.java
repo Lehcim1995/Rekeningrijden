@@ -38,13 +38,15 @@ public class InitRates {
             Road road2 = roadService.createRoad("Weg 2", null, null);
 
             RateCategory rateRoad1 = rateService.create(FuelEnum.Benzine, 1.05, new Date(), null);
-            //TODO: road meegeven ipv van string
-            KilometerRate kilometerRateRoad1 = rateService.create(road1, 11, new Date(), null, rateRoad1);
-
-
             RateCategory rateRoad2 = rateService.create(FuelEnum.Diesel, 1.03, new Date(), null);
-            //TODO: road meegeven ipv van string
+
+            KilometerRate kilometerRateRoad1 = rateService.create(road1, 11, new Date(), null, rateRoad1);
             KilometerRate kilometerRateRoad2 = rateService.create(road2, 17, new Date(), null, rateRoad2);
+
+            road1.setKilometerRate(kilometerRateRoad1);
+            road2.setKilometerRate(kilometerRateRoad2);
+
+
 
         } catch (Exception e) {
             System.out.print("Something went wrong when initializing the rates: " + e.getStackTrace());

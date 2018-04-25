@@ -6,6 +6,7 @@ import classes.RateCategory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public KilometerRate edit(KilometerRate kilometerRate) {
         if (kilometerRate == null) {
             throw new IllegalArgumentException("Kilometer rate is null");
@@ -48,6 +50,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public RateCategory edit(RateCategory rateCategory) {
         if (rateCategory == null) {
             throw new IllegalArgumentException("Category rate is null");

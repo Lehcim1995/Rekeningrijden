@@ -18,12 +18,12 @@ public class RateService implements Serializable {
     private RateDao rateDao;
 
     public KilometerRate create(Road road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
-        if (startDate.before(new Date())) {
+        /*if (startDate.before(new Date())) {
             throw new IllegalArgumentException("Start date can not be set before today");
         }
         if (endDate.before(new Date()) || endDate.before(startDate)) {
             throw new IllegalArgumentException("End date can not be set before start date or today");
-        }
+        }*/
         if (kilometerPrice < 0) {
             throw new IllegalArgumentException("Price cannot be lower than 0");
         }
@@ -38,12 +38,13 @@ public class RateService implements Serializable {
     }
 
     public RateCategory create(FuelEnum fuelEnum, double percentagePrice, Date startDate, Date endDate) {
-        if (startDate.before(new Date())) {
+        //TODO:foolproof creationdate
+        /*if (startDate.before(new Date())) {
             throw new IllegalArgumentException("Start date can not be set before today");
-        }
-        if (endDate.before(new Date()) || endDate.before(startDate)) {
+        }*/
+        /*if (endDate.after(startDate)) {
             throw new IllegalArgumentException("End date can not be set before start date or today");
-        }
+        }*/
         if (percentagePrice < 0) {
             throw new IllegalArgumentException("Price cannot be lower than 0");
         }
