@@ -6,6 +6,7 @@ import classes.Owner;
 import classes.PaymentEnum;
 import jsonBodies.InvoiceBody;
 import service.InvoiceService;
+import service.OwnerService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -22,6 +23,9 @@ public class InvoiceApi {
 
     @Inject
     private InvoiceService invoiceService;
+
+    @Inject
+    private OwnerService ownerService;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -40,7 +44,7 @@ public class InvoiceApi {
     @Produces(APPLICATION_JSON)
     @Path("/owner/{ownerId}")
     public List<Invoice> getInvoicesByOwner(@PathParam("ownerId") int ownerId) {
-        return invoiceService.getInvoicesByOwner(invoiceService.findOwnerById(ownerId));
+        return invoiceService.getInvoicesByOwner(ownerService.findOwnerById(ownerId));
     }
 
     @GET
@@ -61,7 +65,7 @@ public class InvoiceApi {
     @Produces(APPLICATION_JSON)
     @Path("/owner/{ownerId}/{month}")
     public List<Invoice> getInvoicesByOwnerAndMonth(@PathParam("ownerId") int ownerId, @PathParam("month") MonthEnum monthEnum) {
-        return invoiceService.getInvoicesByOwnerAndMonth(invoiceService.findOwnerById(ownerId), monthEnum);
+        return invoiceService.getInvoicesByOwnerAndMonth(ownerService.findOwnerById(ownerId), monthEnum);
     }
 
     @GET

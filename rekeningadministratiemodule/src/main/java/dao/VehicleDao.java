@@ -1,6 +1,7 @@
 package dao;
 
 import Exceptions.CreationException;
+import classes.FuelEnum;
 import classes.Vehicle;
 import classes.VehicleTracker;
 
@@ -23,11 +24,11 @@ public interface VehicleDao {
 
     Vehicle getVehicleByID(int ID);
 
+    Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype);
+
     Vehicle getVehicleByVehicleTracker(String ID);
 
     Vehicle createVehicle(Vehicle vehicle);
-
-    Vehicle createVehicleParam(String rateCategorie, String licensePlate, Date buildYear);
 
     void setVehicleTracker(int vehicleID, String vehicleTrackerID);
 }

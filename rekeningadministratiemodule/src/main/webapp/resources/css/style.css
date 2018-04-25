@@ -48,6 +48,9 @@ body{
 {
     align-self: flex-end;
 }
+.border{
+    border:1px solid #f2f2f2;
+}
 #header{
     width:100%;
     min-height: 200px;
@@ -186,4 +189,14 @@ body{
 {
     flex:1;
     margin: 0px 5px 0px 5px;
+}
+.table{
+    width: 100%;
+    margin: 0 0 5px 0;
+}
+.nav{
+    list-style-type:none;
+}
+.nav > *{
+    border:1px solid #f2f2f2;
 }
