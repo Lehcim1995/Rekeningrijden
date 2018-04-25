@@ -7,29 +7,38 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleParser
 {
-    public static void main(String argv[]) {
 
-        //https://codereview.stackexchange.com/questions/79024/get-the-first-10-lines-of-a-file
-        try { // https://stackoverflow.com/questions/26310595/how-to-parse-big-50-gb-xml-files-in-java
+    public List<Vehicle> Parse(String file)
+    {
+        List<Vehicle> cars = new ArrayList<>();
+
+        try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
 
             VehicleHandler vehicleHandler = new VehicleHandler();
 
-            saxParser.parse("newdata.xml", vehicleHandler);
+            saxParser.parse(file, vehicleHandler);
 
-            List<?> cars = vehicleHandler.getVehicles();
+            cars = vehicleHandler.getVehicles();
 
-            System.out.println(cars);
+            System.out.println(cars); // TODO remove maybe?
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return cars;
+    }
+
+    public static void main(String argv[]) {
+
+        new VehicleParser().Parse("newdata.xml");
 
 //        try
 //        {
@@ -40,7 +49,7 @@ public class VehicleParser
 //
 //            try (FileWriter fw = new FileWriter(newFile))
 //            {
-//                Files.lines(Paths.get("D:\\School\\Jaar 3\\Semester 6\\Proftaak\\ESStatistikListeModtag.xml")).limit(10000).forEach(s -> {
+//                Files.lines(Paths.get("D:\\School\\Jaar 3\\Semester 6\\Proftaak\\ESStatistikListeModtag.xml")).limit(100000).forEach(s -> {
 //                    try
 //                    {
 //                        fw.write(s + "\n");

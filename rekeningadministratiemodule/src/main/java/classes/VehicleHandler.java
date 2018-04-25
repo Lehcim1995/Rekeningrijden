@@ -26,7 +26,8 @@ public class VehicleHandler extends DefaultHandler
         elementNameMap.put("Vehicle id", "ns:KoeretoejIdent");
         elementNameMap.put("Vehicle licences", "ns:RegistreringNummerNummer");
         elementNameMap.put("Vehicle active", "ns:KoeretoejOplysningStatus");
-//        elementNameMap.put("Vehicle weight total", "ns:KoeretoejOplysningTotalVaegt");
+        elementNameMap.put("Vehicle weight total", "ns:KoeretoejOplysningTotalVaegt");
+        elementNameMap.put("Vehicle build year", "ns:KoeretoejOplysningFoersteRegistreringDato");
 //        elementNameMap.put("Vehicle weight own", "ns:KoeretoejOplysningEgenVaegt");
         elementNameMap.put("Vehicle fuel type", "ns:DrivkraftTypeNavn");
 
@@ -96,14 +97,42 @@ public class VehicleHandler extends DefaultHandler
                 System.out.println(entry.getKey() + " : " + value);
                 entry.setValue(false);
 
-                if (entry.getKey().equals("Vehicle licences"))
+                if (entry.getKey()
+                         .equals("Vehicle licences"))
                 {
                     vehicle.setLicensePlate(value);
                 }
 
-                if (entry.getKey().equals("Vehicle id"))
+                if (entry.getKey()
+                         .equals("Vehicle fuel type"))
                 {
-                    int id = Long.valueOf(value.substring(10)).intValue();
+
+                    FuelEnum fuel;
+
+                    switch (value)
+                    {
+                        case "Benzin":
+                            fuel = FuelEnum.Benzine;
+                            break;
+                        case "Diesel":
+                            fuel = FuelEnum.Diesel;
+                            break;
+                        default:
+                            fuel = FuelEnum.Elektrisch;
+                    }
+
+                    vehicle.setFueltype(fuel);
+                }
+
+                if (entry.getKey()
+                         .equals("Vehicle id"))
+                {
+                    if (value.length() <= 10)
+                    {
+                        value = "101010101010101"; // TODO find better solution for this
+                    }
+                    int id = Long.valueOf(value.substring(10))
+                                 .intValue();
 
                     System.out.println("Vehicle id (int): " + id);
                     vehicle.setID(id);
@@ -112,26 +141,28 @@ public class VehicleHandler extends DefaultHandler
         }
     }
 
+    public List<Vehicle> getVehicles()
+    {
+        return vehicles;
+    }
+
     private boolean hasValue(String value)
     {
-        return elementNameMap.values().contains(value);
+        return elementNameMap.values()
+                             .contains(value);
     }
 
     private String getKeyFromValue(String value)
     {
         for (Map.Entry<String, String> entry : elementNameMap.entrySet())
         {
-            if (entry.getValue().equals(value))
+            if (entry.getValue()
+                     .equals(value))
             {
                 return entry.getKey();
             }
         }
 
         return "";
-    }
-
-    public List<Vehicle> getVehicles()
-    {
-        return vehicles;
     }
 }
