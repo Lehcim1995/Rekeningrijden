@@ -39,6 +39,24 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    public KilometerRate edit(KilometerRate kilometerRate) {
+        if (kilometerRate == null) {
+            throw new IllegalArgumentException("Kilometer rate is null");
+        }
+        em.merge(kilometerRate);
+        return kilometerRate;
+    }
+
+    @Override
+    public RateCategory edit(RateCategory rateCategory) {
+        if (rateCategory == null) {
+            throw new IllegalArgumentException("Category rate is null");
+        }
+        em.merge(rateCategory);
+        return rateCategory;
+    }
+
+    @Override
     public List<KilometerRate> getAllKilometerRates() throws SQLException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate", KilometerRate.class).getResultList();
@@ -91,4 +109,17 @@ public class RateDaoJPA implements RateDao{
         df.format(price);
         return price;
     }
+
+    /*@Override
+    public RateCategory findRateCategoryByName(String rateCategorie) throws SQLException {
+        try{
+            em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE rateCategory.fuelEnum = :rateCategoryName AND rateCategory.kilometerRate.", RateCategory.class)
+                    .setParameter("rateCategoryName", rateCategorie)
+                    .getSingleResult();
+        }
+        catch(Exception e){
+            throw new SQLException("Dao could not find Ratecategory with name " + rateCategorie);
+        }
+        return null;
+    }*/
 }

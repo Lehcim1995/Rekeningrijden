@@ -2,11 +2,13 @@ package bean;
 
 import classes.KilometerRate;
 import classes.RateCategory;
+import classes.Road;
 import javafx.scene.control.TableColumn;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import service.RateService;
+import service.RoadService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -21,15 +23,16 @@ import java.util.List;
 
 @SessionScoped
 @Named(value = "rateBean")
-public class RateRoadBean implements Serializable{
-
+public class RateBean implements Serializable{
 
     @Inject
     RateService rateService;
+    @Inject
+    RoadService roadService;
 
     private Double kilometerprice ;
     //TODO: Change to Road DomainClass
-    private String selectedRoad;
+    private Road selectedRoad;
     private RateCategory selectedRate;
     private Date startDate;
 
@@ -39,11 +42,11 @@ public class RateRoadBean implements Serializable{
 
     }
 
-    public String getSelectedRoad() {
+    public Road getSelectedRoad() {
         return selectedRoad;
     }
 
-    public void setSelectedRoad(String selectedRoad) {
+    public void setSelectedRoad(Road selectedRoad) {
         this.selectedRoad = selectedRoad;
     }
 
@@ -78,6 +81,21 @@ public class RateRoadBean implements Serializable{
         }
         catch(SQLException e)
         {
+            FacesMessage msg = new FacesMessage("Something went wrong when getting al the rates " +
+                    e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return null;
+        }
+
+    }
+
+    public List<Road> getAllRoads()
+    {
+        try{
+            return roadService.getAllRoads();
+        }
+        catch(SQLException e)
+        {
             FacesMessage msg = new FacesMessage("Something went wrong when getting al the Roads " +
                     e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -86,22 +104,16 @@ public class RateRoadBean implements Serializable{
 
     }
 
-    public String getAllRoads()
-    {
-        //TODO: Service call getallrates
-        return "ToImplement";
-    }
-
     public void onRoadRowSelect(SelectEvent event) {
         //TODO: Cast to Road Class
-        this.selectedRoad = ((KilometerRate)event.getObject()).getRoad();
-        FacesMessage msg = new FacesMessage("Road selected", ((KilometerRate) event.getObject()).getRoad());
+        this.selectedRoad = ((Road)event.getObject());
+        FacesMessage msg = new FacesMessage("Road selected", this.selectedRoad.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
     }
 
     public void onRoadRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Road Unselected", ((KilometerRate) event.getObject()).getRoad());
+        FacesMessage msg = new FacesMessage("Road Unselected", ((Road) event.getObject()).getName());
         this.selectedRoad = null;
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -122,7 +134,7 @@ public class RateRoadBean implements Serializable{
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Something went wrong while editing the cell", "Old: " + oldValue);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
-
         }
     }
+
 }

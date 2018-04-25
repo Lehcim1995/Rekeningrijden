@@ -18,9 +18,8 @@ public class Vehicle implements Serializable
     private int ID;
     @OneToOne
     private VehicleTracker tracker;
-    private String rateCategorie;
     private int weight;
-    //TODO: Make licenseplate unique value
+    @Column(unique = true)
     private String licensePlate;
     @Enumerated(EnumType.STRING)
     private FuelEnum fueltype;
@@ -31,14 +30,12 @@ public class Vehicle implements Serializable
     public Vehicle() {}
 
     public Vehicle(Vehicle vehicle) {
-        this.rateCategorie = vehicle.getRateCategorie();
         this.licensePlate = vehicle.getLicensePlate();
         this.buildYear = vehicle.getBuildYear();
     }
 
 
-    public Vehicle(String rateCategorie, String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
-        this.rateCategorie = rateCategorie;
+    public Vehicle(String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
         this.licensePlate = licensePlate;
         this.buildYear = buildYear;
         this.weight = weight;
@@ -62,14 +59,6 @@ public class Vehicle implements Serializable
         {
             this.tracker = tracker;
         }
-    }
-
-    public String getRateCategorie() {
-        return rateCategorie;
-    }
-
-    public void setRateCategorie(String rateCategorie) {
-        this.rateCategorie = rateCategorie;
     }
 
     public String getLicensePlate() {

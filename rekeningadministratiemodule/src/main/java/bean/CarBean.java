@@ -3,6 +3,7 @@ package bean;
 import classes.*;
 import classes.RateCategoryEnum;
 import classes.Vehicle;
+import service.RateService;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +27,6 @@ public class CarBean implements Serializable {
 
     private String licenseplate = "";
     private Date buildYear;
-    private String rateCategorie = "";
     private String fueltype = "";
     private List<RateCategoryEnum> classificationList = Arrays.asList(RateCategoryEnum.values());
     private List<FuelEnum> fueltypes = Arrays.asList(FuelEnum.values());
@@ -37,7 +37,6 @@ public class CarBean implements Serializable {
     public void init(){
         this.licenseplate = null;
         this.buildYear = null;
-        this.rateCategorie = null;
         this.fueltype = null;
     }
 
@@ -55,14 +54,6 @@ public class CarBean implements Serializable {
 
     public void setBuildYear(Date buildYear) {
         this.buildYear = buildYear;
-    }
-
-    public String getRateCategorie() {
-        return rateCategorie;
-    }
-
-    public void setRateCategorie(String rateCategorie) {
-        this.rateCategorie = rateCategorie;
     }
 
     public List<RateCategoryEnum> getClassificationList() {
@@ -97,18 +88,15 @@ public class CarBean implements Serializable {
         this.weight = weight;
     }
 
-    public void valueChanged(ValueChangeEvent event){
-        rateCategorie = event.getNewValue().toString();
-    }
     public void fueltypeValueChanged(ValueChangeEvent event){
         fueltype = event.getNewValue().toString();
     }
 
     public void createCar(){
         try{
-            if(rateCategorie != null && licenseplate != null && buildYear != null && fueltype != null)
+            if(licenseplate != null && buildYear != null && fueltype != null)
             {
-                Vehicle vehicle = vehicleService.createVehicleParam(this.rateCategorie, this.licenseplate , this.buildYear, this.weight, this.fueltype);
+                Vehicle vehicle = vehicleService.createVehicleParam(this.licenseplate , this.buildYear, this.weight, this.fueltype);
                 if(vehicle != null)
                 {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Added!", "Car with licenseplate " + this.licenseplate + " Added!"));
