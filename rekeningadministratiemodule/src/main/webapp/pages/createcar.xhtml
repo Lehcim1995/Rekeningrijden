@@ -13,10 +13,21 @@
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
 </h:head>
 <h:body>
-    <div id="header">
-        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
-        <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
-        <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+    <div id="super-header" class="flexbox column wrap">
+        <div id="header">
+            <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+            <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+            <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+        </div>
+        <h:form class="flexbox column wrap">
+            <ul class="nav flexbox row wrap evenly">
+                <li><p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/></li>
+                <li><p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/></li>
+                <li><p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/></li>
+                <li><p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/></li>
+                <li><p:commandLink value="Manage kilometerrate" action="#{routerBean.goToManageKilometerRate}"/></li>
+            </ul>
+        </h:form>
     </div>
     <div id="main" class="flexbox column wrap">
         <h3>Auto Aanmaken</h3>
@@ -29,35 +40,28 @@
                 <p:inputText value="#{carBean.licenseplate}" name="licenseplate" placeholder="e.g 'ZZ 92 394'" >
                     <f:validateLength minimum="7" maximum="9" />
                 </p:inputText>
-                <!--<h:message for="licenseplate" style="color:red" />-->
             </div>
             <div class="flexbox row wrap">
                 <h:outputLabel for="buildyear">Bouwjaar:</h:outputLabel>
                 <p:calendar readonly="" nly="true" value="#{carBean.buildYear}" locale="de" navigator="true" name="buildyear" pattern="yyyy-MMM-dd" class="correctCalendar"/>
             </div>
             <div class="flexbox row wrap">
-                <h:outputLabel for="category">Categorie:</h:outputLabel>
-                <h:selectOneMenu value="#{carBean.rateCategorie}" valueChangeListener="#{carBean.valueChanged}" name="category" class="input">
-                    <f:selectItems value="#{carBean.classificationList}" var="enumItem" />
+                <h:outputLabel for="weight">Gewicht:</h:outputLabel>
+                <p:inputText value="#{carBean.weight}" name="weight" />
+            </div>
+            <div class="flexbox row wrap">
+                <h:outputLabel for="fueltype">Brandstoftype:</h:outputLabel>
+                <h:selectOneMenu value="#{carBean.fueltype}" valueChangeListener="#{carBean.fueltypeValueChanged}" name="fueltype" class="input">
+                    <f:selectItems value="#{carBean.fueltypes}" var="enumItem" />
                 </h:selectOneMenu>
             </div>
-            <p:commandButton class="carFormSubmit" value="Invoeren" update=":allcarsform:allcarstable" action="#{carBean.createCar()}">
-            </p:commandButton>
+            <p:commandButton class="carFormSubmit" update=":allcarsform:cartable" value="Invoeren" action="#{carBean.createCar()}"/>
         </h:form>
 
         <h:form id="allcarsform">
-            <p:dataTable id="allcarstable" var="car" value="#{carBean.allCars}">
+            <p:dataTable id="cartable" var="car" value="#{carBean.allCars}">
                 <p:column headerText="Kentekenplaat">
                     <h:outputText value="#{car.licensePlate}" />
-                </p:column>
-                <p:column headerText="Bouwjaar">
-                    <h:outputText value="#{car.buildYear}" />
-                </p:column>
-                <p:column headerText="Tracker ID">
-                    <h:outputText value="#{car.tracker.ID}" />
-                </p:column>
-                <p:column headerText="Classificatie">
-                    <h:outputText value="#{car.rateCategorie}" />
                 </p:column>
                 <p:column headerText="Eigenaar BSN">
                     <h:outputText value="#{car.owner.citizenId}" />
@@ -65,10 +69,20 @@
                 <p:column headerText="Eigenaar achternaam">
                     <h:outputText value="#{car.owner.lastName}" />
                 </p:column>
+                <p:column headerText="Bouwjaar">
+                    <h:outputText value="#{car.buildYear}" />
+                </p:column>
+                <p:column headerText="Tracker ID">
+                    <h:outputText value="#{car.tracker.ID}" />
+                </p:column>
+                <p:column headerText="Gewicht">
+                    <h:outputText value="#{car.weight}" />
+                </p:column>
+                <p:column headerText="Brandstoftype">
+                    <h:outputText value="#{car.fueltype}" />
+                </p:column>
             </p:dataTable>
         </h:form>
-
-
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>

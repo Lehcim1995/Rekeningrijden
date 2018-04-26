@@ -1,8 +1,6 @@
 package bean;
 
 import Exceptions.CreationException;
-import classes.Invoice;
-import classes.RateCategory;
 import classes.VehicleTracker;
 import service.VehicleService;
 
@@ -10,12 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @RequestScoped
@@ -68,6 +63,7 @@ public class CartrackerBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CreationException", "Could not create the Cartracker, please check all the fields for spellingerrors. The Vehicletracker may already exist."));
         }
     }
+  
     public List<VehicleTracker> getAllCarTrackers() {
         return vehicleService.getVehicleTrackers();
     }

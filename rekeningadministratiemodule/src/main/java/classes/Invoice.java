@@ -3,7 +3,7 @@ package classes;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="invoice_class")
@@ -16,20 +16,31 @@ public class Invoice implements Serializable {
     private String vehicleTrackerId;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Owner owner;
-    private double overall;
+    private double total;
     @Enumerated(EnumType.STRING)
     private PaymentEnum paymentStatus;
     private MonthEnum date;
 
-    public Invoice(String vehicleTrackerId, Owner owner, double overall, PaymentEnum paymentStatus, MonthEnum date) {
+    @OneToMany
+    private List<InvoiceData> invoiceData;
+
+    public Invoice(String vehicleTrackerId, Owner owner, double total, PaymentEnum paymentStatus, MonthEnum date) {
         this.vehicleTrackerId = vehicleTrackerId;
         this.owner = owner;
-        this.overall = overall;
+        this.total = total;
         this.paymentStatus = paymentStatus;
         this.date = date;
     }
 
     public Invoice(){}
+
+    public List<InvoiceData> getInvoiceData() {
+        return invoiceData;
+    }
+
+    public void setInvoiceData(List<InvoiceData> invoiceData) {
+        this.invoiceData = invoiceData;
+    }
 
     public int getInvoiceId() {
         return invoiceId;
@@ -55,12 +66,12 @@ public class Invoice implements Serializable {
         this.owner = owner;
     }
 
-    public double getOverall() {
-        return overall;
+    public double getTotal() {
+        return total;
     }
 
-    public void setOverall(double overall) {
-        this.overall = overall;
+    public void setTotal(double overall) {
+        this.total = overall;
     }
 
     public PaymentEnum getPaymentStatus() {
