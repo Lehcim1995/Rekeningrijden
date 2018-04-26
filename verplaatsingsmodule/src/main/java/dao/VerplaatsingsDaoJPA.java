@@ -1,34 +1,58 @@
 package dao;
 
+import classes.Checkpoint;
 import classes.MissedVerplaatsing;
 import classes.Verplaatsing;
 import interfaces.JPA;
 import interfaces.VerplaatsingsDao;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 @JPA
 public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
 
-    @PersistenceContext(unitName = "kwetterPU")
+    @PersistenceContext(unitName = "displacementPU")
     private EntityManager em;
     private CriteriaBuilder cb;
     private CriteriaQuery<Verplaatsing> cp;
+    private CriteriaQuery<Checkpoint> cpcp;
     private Root<Verplaatsing> verplaatsingRoot;
+    private Root<Checkpoint> checkpointRoot;
+
+    @PostConstruct
+    public void init() {
+        System.out.print("Initializing profiles query");
+
+        cb = em.getCriteriaBuilder();
+        setupJPA();
+        setupCheckpointJPA();
+    }
 
     @Override
     public Verplaatsing create(Verplaatsing verplaatsing) {
-        
-        verplaatsing = new Verplaatsing(verplaatsing);
 
-        if (VerplaatsingMissing(verplaatsing)) LogMissedVerplaatsingen(verplaatsing);
+        List<Checkpoint> checkpoints = new ArrayList<>();
+
+        for (Checkpoint checkpoint : verplaatsing.getCheckpoints()) {
+            em.persist(checkpoint);
+            checkpoints.add(checkpoint);
+        }
+
+        verplaatsing.setCheckpoints(checkpoints);
+
+//        TODO fix
+//        if (VerplaatsingMissing(verplaatsing)) {
+//            LogMissedVerplaatsingen(verplaatsing);
+//        }
 
         em.persist(verplaatsing);
 
@@ -68,8 +92,11 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
      */
     @Override
     public List<Verplaatsing> getVerplaatsingen(String key) {
-        setupJPA();
-        return em.createQuery(cp.where(cb.equal(verplaatsingRoot.get("voertuigId"), key))).getResultList();
+//        setupJPA();
+//        return em.createQuery(cp.where(cb.equal(verplaatsingRoot.get("voertuigId"), key))).getResultList();
+        return em.createQuery("SELECT v FROM Verplaatsing v WHERE v.voertuigId = :key", Verplaatsing.class)
+                .setParameter("key", key)
+                .getResultList();
     }
 
     /**
@@ -81,11 +108,15 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
 
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 
-        if (verplaatsingen.isEmpty()) return verplaatsing.getSerieID() == 0;
-        else return verplaatsingen.get(verplaatsingen.size() - 1).getSerieID() == verplaatsing.getSerieID() - 1;
+        if (verplaatsingen.isEmpty()) {
+            return false;
+        }
+
+        return verplaatsingen.get(verplaatsingen.size() - 1)
+                .getSerieID() + 1 == verplaatsing.getSerieID();
     }
 
-    public void LogMissedVerplaatsingen(Verplaatsing verplaatsing) {
+    private void LogMissedVerplaatsingen(Verplaatsing verplaatsing) {
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 
         for (long i = verplaatsingen.get(verplaatsingen.size() - 1).getSerieID(); i < verplaatsing.getSerieID(); i++) {
@@ -93,9 +124,15 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
         }
     }
 
-    public void setupJPA() {
+    private void setupJPA() {
         cp = cb.createQuery(Verplaatsing.class);
         verplaatsingRoot = cp.from(Verplaatsing.class);
         cp.select(verplaatsingRoot);
+    }
+
+    private void setupCheckpointJPA() {
+        cpcp = cb.createQuery(Checkpoint.class);
+        checkpointRoot = cpcp.from(Checkpoint.class);
+        cpcp.select(checkpointRoot);
     }
 }

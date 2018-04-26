@@ -1,7 +1,6 @@
 package dao;
 
 import classes.Checkpoint;
-import classes.Verplaatsing;
 import interfaces.SimulatieDao;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +28,8 @@ public class SimulatieDaoImpl implements SimulatieDao
     @Override
     public Checkpoint create(Checkpoint object) {
         em.persist(object);
-        return checkpointMap.put(checkpointMap.size() + "", object);
+        checkpointMap.put(checkpointMap.size() + "", object);
+        return object;
     }
 
     @Override
