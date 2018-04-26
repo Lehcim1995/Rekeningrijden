@@ -51,16 +51,20 @@ body{
 .border{
     border:1px solid #f2f2f2;
 }
+#super-header
+{
+    width:100%;
+    margin-bottom: 15px;
+    background-image:url("#{resource['img/header_img.jpg']}");
+    background-size:cover;
+    color: #fcfcfc;
+}
 #header{
     width:100%;
     min-height: 200px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    background-image:url("#{resource['img/header_img.jpg']}");
-    background-size:cover;
-    margin-bottom: 15px;
-    color: #fcfcfc;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 #header p a{
@@ -68,10 +72,20 @@ body{
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     text-decoration:none;
 }
-#header form a{
+#super-header form a{
     color: #fcfcfc;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     text-decoration:none;
+}
+#super-header form ul{
+    margin:0;
+    padding: 0;
+}
+ul li a{
+    color:white;
+}
+ul li a:hover{
+    color:grey;
 }
 #header img{
     height:150px;
@@ -198,7 +212,7 @@ body{
     list-style-type:none;
 }
 .nav > *{
-    border:1px solid #f2f2f2;
+    /*border:1px solid #f2f2f2;*/
 }
 
 .createKilometerRate > *{
