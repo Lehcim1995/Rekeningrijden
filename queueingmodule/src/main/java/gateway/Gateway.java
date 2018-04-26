@@ -22,9 +22,9 @@ public class Gateway implements MessageListener {
     private final Gson gson = new Gson();
 
     // Localhost ActiveMQ URL
-    final private String URL = "tcp://localhost:61616";
+    //final private String URL = "tcp://localhost:61616";
     // TODO server ActiveMQ URL autoselect
-    //final private String URL = "tcp://192.168.25.137:61616";
+    final private String URL = "tcp://192.168.25.137:61616";
 
     public Gateway(IGatewayImplementor gatewayImplementor, String senderChannel, String receiverChannel) {
 
