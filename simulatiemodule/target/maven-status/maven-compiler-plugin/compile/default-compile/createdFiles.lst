@@ -1,4 +1,5 @@
 services\SimulatieService.class
+gateway\DisplacementGateway.class
 rest\SimulatieRest.class
 interfaces\SimulatieDao.class
 classes\DataObject.class

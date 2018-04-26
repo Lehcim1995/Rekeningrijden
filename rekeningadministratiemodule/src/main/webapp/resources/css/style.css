@@ -5,7 +5,7 @@ body{
     margin: 0px;
     background-color: #fcfcfc;
     width: 100%;
-    min-width:530px;
+    /*min-width:530px;*/
 }
 #main{
     width: 100%;
@@ -48,22 +48,44 @@ body{
 {
     align-self: flex-end;
 }
+.border{
+    border:1px solid #f2f2f2;
+}
+#super-header
+{
+    width:100%;
+    margin-bottom: 15px;
+    background-image:url("#{resource['img/header_img.jpg']}");
+    background-size:cover;
+    color: #fcfcfc;
+}
 #header{
     width:100%;
     min-height: 200px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    background-image:url("#{resource['img/header_img.jpg']}");
-    background-size:cover;
-    margin-bottom: 15px;
-    color: #fcfcfc;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 #header p a{
     color: #fcfcfc;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     text-decoration:none;
+}
+#super-header form a{
+    color: #fcfcfc;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-decoration:none;
+}
+#super-header form ul{
+    margin:0;
+    padding: 0;
+}
+ul li a{
+    color:white;
+}
+ul li a:hover{
+    color:grey;
 }
 #header img{
     height:150px;
@@ -149,6 +171,50 @@ body{
 .factuurColumn {
     flex: 0 0 49%;
     border: 2px solid #f2f2f2;
+}
+.carForm, cartrackerform{
+    max-width: 500px;
+}
+.carForm .row > span{
+    display:flex;
+    flex-wrap:wrap;
+}
+.carFormSubmit, .cartrackerFormSubmit{
+    max-width: 200px;
+}
+.carForm .row > *, .cartrackerform .row > *{
+    flex: 1;
+    margin:0;
+    min-width: 245px;
+}
+.carForm .row > span, .carForm .row > select
+ {
+     min-width:255px;
+ }
+.carForm .row > span input
+{
+    width:100%;
+}
+.carForm > div, .cartrackerform >div, #allcarsform{
+    margin: 5px 0 5px 0;
+}
 
+.cartrackersview > *, .carview > *
+{
+    flex:1;
+    margin: 0px 5px 0px 5px;
+}
+.table{
+    width: 100%;
+    margin: 0 0 5px 0;
+}
+.nav{
+    list-style-type:none;
+}
+.nav > *{
+    /*border:1px solid #f2f2f2;*/
+}
 
+.createKilometerRate > *{
+    flex:1;
 }

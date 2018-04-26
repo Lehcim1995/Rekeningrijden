@@ -9,6 +9,6 @@ public class VerplaatsingsDaoTest
     @Test
     public void test()
     {
-
+        assertEquals("", "");
     }
 }

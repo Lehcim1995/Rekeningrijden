@@ -1,29 +1,67 @@
 package classes;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Table
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Checkpoint implements Serializable
 {
-    long Long;
-    long lat;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    Date time;
+    private double lon;
+    private double lat;
+
+    private Date time;
 
     public Checkpoint() {}
 
     public Checkpoint(
-            long aLong,
-            long lat,
+            double lon,
+            double lat,
             Date time)
     {
-        Long = aLong;
+        this.lon = lon;
         this.lat = lat;
+        this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
         this.time = time;
     }
 }

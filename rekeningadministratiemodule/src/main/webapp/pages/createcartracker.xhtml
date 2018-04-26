@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tax&amp;Tracks - Tracker Toevoegen</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <div id="super-header" class="flexbox column wrap">
+        <div id="header">
+            <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+            <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+            <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+        </div>
+        <h:form class="flexbox column wrap">
+            <ul class="nav flexbox row wrap evenly">
+                <li><p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/></li>
+                <li><p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/></li>
+                <li><p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/></li>
+                <li><p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/></li>
+                <li><p:commandLink value="Manage kilometerrate" action="#{routerBean.goToManageKilometerRate}"/></li>
+            </ul>
+        </h:form>
+    </div>
+    <div id="main" class="flexbox column wrap">
+        <h3>Tracker Aanmaken</h3>
+        <div class="flexbox row wrap cartrackersview">
+            <h:form class="flexbox column carForm wrap" id="cartrackerform">
+                <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
+                </p:messages>
+
+                <div class="flexbox row wrap">
+                    <h:outputLabel for="trackerid">Tracker ID:</h:outputLabel>
+                    <p:inputText value="#{cartrackerBean.id}" name="trackerid" >
+                        <f:validateLength minimum="1"/>
+                    </p:inputText>
+                </div>
+
+                <div class="flexbox row wrap">
+                    <h:outputLabel for="manufacturer">Tracker fabrikant:</h:outputLabel>
+                    <p:inputText value="#{cartrackerBean.manufacturer}" name="manufacturer" >
+                        <f:validateLength minimum="1"/>
+                    </p:inputText>
+                </div>
+
+                <p:commandButton class="cartrackerFormSubmit" value="Invoeren" update=":trackerform:trackertable" action="#{cartrackerBean.createCartracker()}">
+                </p:commandButton>
+
+            </h:form>
+          
+            <h:form id="trackerform">
+                <p:dataTable id="trackertable" var="tracker" value="#{cartrackerBean.allCarTrackers}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{tracker.ID}" />
+                    </p:column>
+
+                    <p:column headerText="manufacturer">
+                        <h:outputText value="#{tracker.manufacturer}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </div>
+    <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
+</h:body>
+</html>

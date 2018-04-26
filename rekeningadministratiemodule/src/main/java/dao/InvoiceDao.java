@@ -13,6 +13,10 @@ public interface InvoiceDao {
 
     Invoice update(Invoice invoice);
 
+    boolean changePaymentStatusById(int invoiceId, String paymentStatus);
+
+    Invoice getInvoiceByInvoiceId(int invoiceId);
+
     List<Invoice> getAllInvoices();
 
     Invoice getInvoiceByTrackerId(String trackerId);
@@ -26,6 +30,4 @@ public interface InvoiceDao {
     List<Invoice> getInvoicesByOwnerAndMonth(Owner owner, MonthEnum monthEnum);
 
     List<Invoice> getInvoicesByPaymentStatusAndMonth(PaymentEnum paymentEnum, MonthEnum monthEnum);
-
-    Owner findOwnerById(int citizenId);
 }

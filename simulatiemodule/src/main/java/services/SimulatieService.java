@@ -2,17 +2,34 @@ package services;
 
 import classes.Checkpoint;
 import classes.Verplaatsing;
+import gateway.DisplacementGateway;
 import interfaces.SimulatieDao;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.Date;
 
+@Stateless
 public class SimulatieService
 {
     @Inject
     private SimulatieDao simulatieDao;
 
-    public Checkpoint create(Checkpoint object) {
-        return simulatieDao.create(object);
+    private DisplacementGateway displacementGateway;
+
+    @PostConstruct
+    public void init() {
+        this.displacementGateway = new DisplacementGateway();
+    }
+
+
+    public Checkpoint create(Checkpoint object, String id) {
+        Checkpoint checkpoint = simulatieDao.create(object);
+        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getID(), new Date());
+        displacementGateway.SendObject(verplaatsing);
+        return checkpoint;
     }
 
     public String delete(String s) {

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" filepath="$PROJECT_DIR$/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/monitoringsysteemmodule/monitoringsysteemmodule.iml" filepath="$PROJECT_DIR$/monitoringsysteemmodule/monitoringsysteemmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/politiesysteemmodule/politiesysteemmodule.iml" filepath="$PROJECT_DIR$/politiesysteemmodule/politiesysteemmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/queueingmodule/queueingmodule.iml" filepath="$PROJECT_DIR$/queueingmodule/queueingmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/rekeningadministratiemodule/rekeningadministratiemodule.iml" filepath="$PROJECT_DIR$/rekeningadministratiemodule/rekeningadministratiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" filepath="$PROJECT_DIR$/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/simulatiemodule/simulatiemodule.iml" filepath="$PROJECT_DIR$/simulatiemodule/simulatiemodule.iml" />

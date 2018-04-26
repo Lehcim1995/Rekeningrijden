@@ -1,8 +1,7 @@
 package classes;
 
-import javax.xml.crypto.Data;
 import java.io.Serializable;
-import java.lang.annotation.ElementType;
+import java.util.Date;
 import java.util.List;
 
 public class Verplaatsing implements Serializable
@@ -13,13 +12,13 @@ public class Verplaatsing implements Serializable
 
     private long serieID;
 
-    private Data time;
+    private Date time;
 
     public Verplaatsing(
             List<Checkpoint> checkpoints,
             String voertuigId,
             long serieID,
-            Data time)
+            Date time)
     {
         this.checkpoints = checkpoints;
         this.voertuigId = voertuigId;
@@ -39,7 +38,7 @@ public class Verplaatsing implements Serializable
         return serieID;
     }
 
-    public Data getTime() {
+    public Date getTime() {
         return time;
     }
 

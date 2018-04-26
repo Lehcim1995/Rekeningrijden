@@ -1,5 +1,6 @@
 classes\VerplaatsingPK.class
 interfaces\VerplaatsingsDao.class
+gateway\DisplacementReceiverGateway.class
 interfaces\JPA.class
 rest\VerplaatsingRestEndpoint.class
 services\VerplaatsingsService.class
@@ -7,6 +8,7 @@ dao\VerplaatsingsDaoCollection.class
 rest\RestApplication.class
 dao\VerplaatsingsDaoJPA.class
 classes\Verplaatsing.class
+initBean\InitBean.class
 classes\MissedVerplaatsing.class
 interfaces\DaoFacade.class
 classes\Checkpoint.class

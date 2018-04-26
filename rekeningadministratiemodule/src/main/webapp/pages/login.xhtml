@@ -9,14 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <h:outputStylesheet name="css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Tax&amp;Tracks - Facturen</title>
+    <title>Tax&amp;Tracks - Login</title>
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
 </h:head>
 <h:body>
-    <div id="header">
-        <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
-        <h1>Tax &amp; Tracks</h1>
-        <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+    <div id="super-header" class="flexbox column wrap">
+        <div id="header">
+            <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+            <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+            <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+        </div>
+        <h:form class="flexbox column wrap">
+            <ul class="nav flexbox row wrap evenly">
+                <li><p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/></li>
+                <li><p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/></li>
+                <li><p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/></li>
+                <li><p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/></li>
+                <li><p:commandLink value="Manage kilometerrate" action="#{routerBean.goToManageKilometerRate}"/></li>
+            </ul>
+        </h:form>
     </div>
     <div id="main" class="flexbox row wrap">
         <form method="post" action="j_security_check" id="login_form" class="flexbox column">

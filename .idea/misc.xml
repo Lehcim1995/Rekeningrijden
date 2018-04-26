@@ -23,10 +23,11 @@
         <option value="$PROJECT_DIR$/politiesysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/monitoringsysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/datauitwisselingssysteemmodule/pom.xml" />
+        <option value="$PROJECT_DIR$/queuingmodule/pom.xml" />
+        <option value="$PROJECT_DIR$/simulatiemodule/src/main/java/interfaces/pom.xml" />
+        <option value="$PROJECT_DIR$/queueingmodule/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="Java_JDK_1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="Java_JDK_1.8" project-jdk-type="JavaSDK" />
 </project>

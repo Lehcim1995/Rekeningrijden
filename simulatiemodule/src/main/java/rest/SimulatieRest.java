@@ -31,7 +31,7 @@ public class SimulatieRest {
 
         Checkpoint cp = new Checkpoint(dataObject.getStepLon(), dataObject.getStepLat());
 
-        simulatieService.create(cp);
+        simulatieService.create(cp, dataObject.getId());
 
         return Response.ok(dataObject).build();
     }
