@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -26,6 +27,8 @@ public class Vehicle implements Serializable
     private Date buildYear;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Owner owner;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Owner> previousOwners;
 
     public Vehicle() {}
 
@@ -95,5 +98,25 @@ public class Vehicle implements Serializable
 
     public void setFueltype(FuelEnum fueltype) {
         this.fueltype = fueltype;
+    }
+
+    public void setBuildYear(Date buildYear) {
+        this.buildYear = buildYear;
+    }
+
+    public List<Owner> getPreviousOwners() {
+        return previousOwners;
+    }
+
+    public void setPreviousOwners(List<Owner> previousOwners) {
+        this.previousOwners = previousOwners;
+    }
+
+    public void addOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public void addPreviousOwner(Owner owner) {
+        this.previousOwners.add(owner);
     }
 }

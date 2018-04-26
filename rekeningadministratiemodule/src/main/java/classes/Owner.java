@@ -150,7 +150,7 @@ public class Owner implements Serializable {
         this.vehicles.add(vehicle);
     }
     public void addPrevious(Vehicle vehicle){
-        vehicle.setOwner(null);
+        this.vehicles.remove(vehicle);
         this.previousVehicles.add(vehicle);
     }
 }

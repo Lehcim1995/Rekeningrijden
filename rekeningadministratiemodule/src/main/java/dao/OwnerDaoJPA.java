@@ -76,10 +76,17 @@ public class OwnerDaoJPA implements OwnerDao {
     }
 
     @Override
+    @Transactional
     public boolean linkPreviousVehicleToOwner(Vehicle vehicle, Owner owner) {
         try {
-            owner.addPrevious(vehicle);
+            Owner previousOwner = vehicle.getOwner();
+            previousOwner.addPrevious(vehicle);
+            vehicle.addPreviousOwner(previousOwner);
+            vehicle.addOwner(owner);
+            owner.add(vehicle);
+            em.merge(previousOwner);
             em.merge(owner);
+            em.merge(vehicle);
             return true;
         }
         catch(Exception e){
