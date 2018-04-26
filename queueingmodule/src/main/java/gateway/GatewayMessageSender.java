@@ -1,5 +1,6 @@
 package gateway;
 
+import com.google.gson.Gson;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
@@ -14,6 +15,7 @@ public class GatewayMessageSender {
     private Session session = null;
     private Destination destination = null;
     private MessageProducer producer = null;
+    final private Gson gson = new Gson();
 
     public GatewayMessageSender(String URL, String channelName) {
         try {
@@ -42,7 +44,9 @@ public class GatewayMessageSender {
 
     public void SendMessage(Serializable obj) {
         try {
-            ObjectMessage message = session.createObjectMessage(obj);
+            String json = gson.toJson(obj);
+            //ObjectMessage message = session.createObjectMessage(obj);
+            TextMessage message = session.createTextMessage(json);
             producer.send(message);
             System.out.println("Sent: " + obj.toString());
         }

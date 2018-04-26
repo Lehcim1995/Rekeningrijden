@@ -1,5 +1,6 @@
 package initBean;
 
+import gateway.DisplacementReceiverGateway;
 import services.VerplaatsingsService;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +15,6 @@ public class InitBean {
     private VerplaatsingsService service;
 
     public String isInitialized() {
-        service.init();
         return "Displacement system initialized";
     }
 }

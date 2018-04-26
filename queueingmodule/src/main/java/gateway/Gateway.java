@@ -1,9 +1,11 @@
 package gateway;
 
+import com.google.gson.Gson;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
+import javax.jms.TextMessage;
 import java.io.Serializable;
 
 /**
@@ -16,6 +18,8 @@ public class Gateway implements MessageListener {
 
     private GatewayMessageSender messageSender;
     private GatewayMessageReceiver messageReceiver;
+
+    private final Gson gson = new Gson();
 
     // Localhost ActiveMQ URL
     final private String URL = "tcp://localhost:61616";
@@ -36,10 +40,6 @@ public class Gateway implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
-        try {
-            gatewayImplementor.ProcessReceivedObject(((ObjectMessage) message).getObject());
-        } catch (JMSException e) {
-            e.printStackTrace();
-        }
+        gatewayImplementor.ProcessReceivedObject(message);
     }
 }

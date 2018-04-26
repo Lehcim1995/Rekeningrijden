@@ -7,9 +7,11 @@ import interfaces.VerplaatsingsDao;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 @Stateless
+@Default
 public class VerplaatsingsService
 {
     @Inject
@@ -19,9 +21,7 @@ public class VerplaatsingsService
     private DisplacementReceiverGateway gateway;
 
     @PostConstruct
-    public void init() {
-        gateway = new DisplacementReceiverGateway();
-    }
+    public void init(){};
 
     public void setVerplaatsingsDao(VerplaatsingsDao verplaatsingsDao)
     {

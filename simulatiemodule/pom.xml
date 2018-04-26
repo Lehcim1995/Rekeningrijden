@@ -42,10 +42,6 @@
       </dependency>
   </dependencies>
 
-    <!--<modules>-->
-        <!--<module>../queueingmodule</module>-->
-    <!--</modules>-->
-
   <build>
     <finalName>simulatiemodule</finalName>
   </build>

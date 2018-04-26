@@ -26,6 +26,7 @@
       <module name="rekeningadministratiemodule" target="1.8" />
       <module name="rekeningrijdersapplicatiemodule" target="1.8" />
       <module name="simulatiemodule" target="1.8" />
+      <module name="simulationmodule" target="1.5" />
       <module name="verplaatsingsmodule" target="1.8" />
     </bytecodeTargetLevel>
   </component>

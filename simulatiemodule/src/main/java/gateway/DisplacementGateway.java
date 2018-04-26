@@ -1,5 +1,6 @@
 package gateway;
 
+import javax.jms.Message;
 import java.io.Serializable;
 
 public class DisplacementGateway implements IGatewayImplementor {
@@ -18,7 +19,7 @@ public class DisplacementGateway implements IGatewayImplementor {
     }
 
     @Override
-    public void ProcessReceivedObject(Object obj) {
+    public void ProcessReceivedObject(Message message) {
         // Nothing TODO
     }
 }

@@ -6,8 +6,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,7 +20,7 @@ public class Verplaatsing implements Serializable
     @Id
     private long serieID;
 
-    private Data time;
+    private Date time;
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -35,7 +35,7 @@ public class Verplaatsing implements Serializable
         this.time = verplaatsing.getTime();
     }
 
-    public Verplaatsing(List<Checkpoint> checkpoints, String voertuigId, long serieID, Data time)
+    public Verplaatsing(List<Checkpoint> checkpoints, String voertuigId, long serieID, Date time)
     {
         this.voertuigId = voertuigId;
         this.serieID = serieID;
@@ -51,11 +51,15 @@ public class Verplaatsing implements Serializable
         return serieID;
     }
 
-    public Data getTime() {
+    public Date getTime() {
         return time;
     }
 
     public List<Checkpoint> getCheckpoints() {
         return checkpoints;
+    }
+
+    public void setCheckpoints(List<Checkpoint> checkpoints) {
+        this.checkpoints = checkpoints;
     }
 }

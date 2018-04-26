@@ -24,6 +24,8 @@
         <option value="$PROJECT_DIR$/monitoringsysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/datauitwisselingssysteemmodule/pom.xml" />
         <option value="$PROJECT_DIR$/queuingmodule/pom.xml" />
+        <option value="$PROJECT_DIR$/simulatiemodule/src/main/java/interfaces/pom.xml" />
+        <option value="$PROJECT_DIR$/queueingmodule/pom.xml" />
       </list>
     </option>
   </component>

@@ -6,7 +6,7 @@
     <persistence-unit name="displacementPU">
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
         <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
-        <jta-data-source>jdbc/EURR</jta-data-source>
+        <jta-data-source>java:app/jdbc/displacement</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> <!--drop-and-create-->

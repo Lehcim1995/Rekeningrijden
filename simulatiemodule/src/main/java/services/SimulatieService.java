@@ -8,6 +8,8 @@ import interfaces.SimulatieDao;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.Date;
 
 @Stateless
 public class SimulatieService
@@ -23,9 +25,11 @@ public class SimulatieService
     }
 
 
-    public Checkpoint create(Checkpoint object) {
-        displacementGateway.SendObject(object);
-        return simulatieDao.create(object);
+    public Checkpoint create(Checkpoint object, String id) {
+        Checkpoint checkpoint = simulatieDao.create(object);
+        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getID(), new Date());
+        displacementGateway.SendObject(verplaatsing);
+        return checkpoint;
     }
 
     public String delete(String s) {

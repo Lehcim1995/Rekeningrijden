@@ -11,12 +11,12 @@ public class Checkpoint implements Serializable
 {
     @Id
     @GeneratedValue
-    long id;
+   private  long id;
 
-    double lon;
-    double lat;
+   private  double lon;
+   private  double lat;
 
-    Date time;
+   private  Date time;
 
     public Checkpoint() {
     }
@@ -35,8 +35,12 @@ public class Checkpoint implements Serializable
             double stepLon,
             double stepLat)
     {
-
+        this.lon = stepLon;
+        this.lat = stepLat;
+        this.time = new Date();
     }
+
+    public long getID() { return id; }
 
     public double getLon() {
         return lon;
