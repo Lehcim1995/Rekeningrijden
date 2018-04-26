@@ -55,6 +55,10 @@ public class OwnerService implements Serializable{
     public boolean linkVehicleToOwner(int vehicleId, int citizenId) {
         try {
             Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
+
+            if (vehicle.getOwner() != null) {
+                return linkPreviousVehicleToOwner(vehicleId, citizenId);
+            }
             Owner owner = ownerDao.findOwnerById(citizenId);
             return ownerDao.linkVehicleToOwner(vehicle, owner);
         }
