@@ -10,7 +10,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/politiesysteemmodule/target/politiesysteemmodule/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="politiesysteemmodule/web/Web" />
+      <element id="javaee-facet-resources" facet="Rekeningrijden.politiesysteemmodule/web/Web" />
     </root>
   </artifact>
 </component>

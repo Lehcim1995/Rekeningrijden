@@ -10,7 +10,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/datauitwisselingssysteemmodule/target/datauitwisselingssysteemmodule/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="datauitwisselingssysteemmodule/web/Web" />
+      <element id="javaee-facet-resources" facet="Rekeningrijden.datauitwisselingssysteemmodule/web/Web" />
     </root>
   </artifact>
 </component>

@@ -58,6 +58,8 @@ cmake-build-release/
 # IntelliJ
 out/
 **/target/
+*/target/
+/target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -73,3 +75,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# sonar
+.idea/sonarIssues.xml
