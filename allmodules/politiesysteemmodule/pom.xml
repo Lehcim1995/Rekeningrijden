@@ -2,10 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>taxandtracks</groupId>
-  <artifactId>simulatiemodule</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>simulatiemodule Maven Webapp</name>
+  <artifactId>politiesysteemmodule</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>politiesysteemmodule Maven Webapp</name>
+    <parent>
+        <artifactId>allmodules</artifactId>
+        <groupId>taxandtracks</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
   <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,24 +30,8 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.glassfish.jersey.core</groupId>
-          <artifactId>jersey-client</artifactId>
-          <version>2.25.1</version>
-      </dependency>
-      <dependency>
-          <groupId>org.glassfish.jersey.media</groupId>
-          <artifactId>jersey-media-json-jackson</artifactId>
-          <version>2.25.1</version>
-      </dependency>
-      <dependency>
-          <groupId>queueingmodule</groupId>
-          <artifactId>queueingmodule</artifactId>
-          <version>1.0-SNAPSHOT</version>
-      </dependency>
   </dependencies>
-
   <build>
-    <finalName>simulatiemodule</finalName>
+    <finalName>politiesysteemmodule</finalName>
   </build>
 </project>

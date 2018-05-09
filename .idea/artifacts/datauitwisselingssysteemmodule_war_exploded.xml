@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="datauitwisselingssysteemmodule:war exploded">
-    <output-path>$PROJECT_DIR$/datauitwisselingssysteemmodule/target/datauitwisselingssysteemmodule</output-path>
+    <output-path>$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/target/datauitwisselingssysteemmodule</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -8,9 +8,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/datauitwisselingssysteemmodule/target/datauitwisselingssysteemmodule/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/target/datauitwisselingssysteemmodule/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="Rekeningrijden.datauitwisselingssysteemmodule/web/Web" />
+      <element id="javaee-facet-resources" facet="datauitwisselingssysteemmodule/web/Web" />
     </root>
   </artifact>
 </component>
