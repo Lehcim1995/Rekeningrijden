@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" filepath="$PROJECT_DIR$/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/monitoringsysteemmodule/monitoringsysteemmodule.iml" filepath="$PROJECT_DIR$/monitoringsysteemmodule/monitoringsysteemmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/politiesysteemmodule/politiesysteemmodule.iml" filepath="$PROJECT_DIR$/politiesysteemmodule/politiesysteemmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/queueingmodule/queueingmodule.iml" filepath="$PROJECT_DIR$/queueingmodule/queueingmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rekeningadministratiemodule/rekeningadministratiemodule.iml" filepath="$PROJECT_DIR$/rekeningadministratiemodule/rekeningadministratiemodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/core/core.iml" filepath="$PROJECT_DIR$/allmodules/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/politiesysteemmodule/politiesysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/politiesysteemmodule/politiesysteemmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/queueingmodule/queueingmodule.iml" filepath="$PROJECT_DIR$/allmodules/queueingmodule/queueingmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningadministratiemodule/rekeningadministratiemodule.iml" filepath="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/rekeningadministratiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningrijden.iml" filepath="$PROJECT_DIR$/allmodules/rekeningrijden.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" filepath="$PROJECT_DIR$/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/simulatiemodule/simulatiemodule.iml" filepath="$PROJECT_DIR$/simulatiemodule/simulatiemodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" filepath="$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" filepath="$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" filepath="$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" filepath="$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/verplaatsingsmodule/verplaatsingsmodule.iml" filepath="$PROJECT_DIR$/verplaatsingsmodule/verplaatsingsmodule.iml" />
     </modules>
   </component>

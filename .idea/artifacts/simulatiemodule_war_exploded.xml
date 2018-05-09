@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="simulatiemodule:war exploded">
-    <output-path>$PROJECT_DIR$/simulatiemodule/target/simulatiemodule</output-path>
+    <output-path>$PROJECT_DIR$/allmodules/simulatiemodule/target/simulatiemodule</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -39,10 +39,10 @@
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.6" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.6.3" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
-      </element>
+        </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/simulatiemodule/target/simulatiemodule/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/allmodules/simulatiemodule/target/simulatiemodule/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="simulatiemodule/web/Web" />
     </root>
