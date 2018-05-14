@@ -13,7 +13,6 @@
         <module name="politiesysteemmodule" />
         <module name="queueingmodule" />
         <module name="rekeningadministratiemodule" />
-        <module name="rekeningrijden" />
         <module name="rekeningrijdersapplicatiemodule" />
         <module name="simulatiemodule" />
         <module name="verplaatsingsmodule" />

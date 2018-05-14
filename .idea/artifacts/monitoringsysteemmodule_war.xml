@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="monitoringsysteemmodule:war">
-    <output-path>$PROJECT_DIR$/monitoringsysteemmodule/target</output-path>
+    <output-path>$PROJECT_DIR$/allmodules/monitoringsysteemmodule/target</output-path>
     <root id="archive" name="monitoringsysteemmodule.war">
       <element id="artifact" artifact-name="monitoringsysteemmodule:war exploded" />
     </root>

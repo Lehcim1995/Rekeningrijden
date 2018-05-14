@@ -7,42 +7,34 @@
     <groupId>taxandtracks</groupId>
     <artifactId>allmodules</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>datauitwisselingssysteemmodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>monitoringsysteemmodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>politiesysteemmodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>rekeningadministratiemodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>rekeningrijdersapplicatiemodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId>simulatiemodule</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>taxandtracks</groupId>
-            <artifactId> verplaatsingsmodule </artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
+    <modules>
+        <module>
+            monitoringsysteemmodule
+        </module>
+        <module>
+            datauitwisselingssysteemmodule
+        </module>
+        <module>
+            politiesysteemmodule
+        </module>
+        <module>
+            rekeningadministratiemodule
+        </module>
+        <module>
+            rekeningrijdersapplicatiemodule
+        </module>
+        <module>
+            simulatiemodule
+        </module>
+        <module>
+            verplaatsingsmodule
+        </module>
+        <module>
+            queueingmodule
+        </module>
+        <module>
+            core
+        </module>
+    </modules>
 </project>

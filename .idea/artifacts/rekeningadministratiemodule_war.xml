@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="rekeningadministratiemodule:war">
-    <output-path>$PROJECT_DIR$/rekeningadministratiemodule/target</output-path>
+    <output-path>$PROJECT_DIR$/allmodules/rekeningadministratiemodule/target</output-path>
     <root id="archive" name="rekeningadministratiemodule.war">
       <element id="artifact" artifact-name="rekeningadministratiemodule:war exploded" />
     </root>
