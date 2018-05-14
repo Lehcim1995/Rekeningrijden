@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" filepath="$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" filepath="$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" filepath="$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/verplaatsingsmodule/verplaatsingsmodule.iml" filepath="$PROJECT_DIR$/verplaatsingsmodule/verplaatsingsmodule.iml" />
     </modules>
   </component>
 </project>
