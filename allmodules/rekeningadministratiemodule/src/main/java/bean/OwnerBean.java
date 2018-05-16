@@ -1,11 +1,9 @@
 package bean;
 
-import classes.Owner;
+import domain.Owner;
 import service.OwnerService;
-import service.VehicleService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

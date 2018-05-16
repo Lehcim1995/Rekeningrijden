@@ -1,8 +1,7 @@
 package initialization;
 
-import classes.MonthEnum;
-import classes.Owner;
-import classes.PaymentEnum;
+import domain.MonthEnum;
+import domain.PaymentEnum;
 import service.InvoiceService;
 import service.OwnerService;
 

@@ -1,6 +1,6 @@
 package services;
 
-import classes.Verplaatsing;
+import domain.Verplaatsing;
 import gateway.DisplacementReceiverGateway;
 import interfaces.JPA;
 import interfaces.VerplaatsingsDao;

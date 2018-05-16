@@ -11,7 +11,6 @@
         <module name="datauitwisselingssysteemmodule" />
         <module name="monitoringsysteemmodule" />
         <module name="politiesysteemmodule" />
-        <module name="queueingmodule" />
         <module name="rekeningadministratiemodule" />
         <module name="rekeningrijdersapplicatiemodule" />
         <module name="simulatiemodule" />
@@ -19,7 +18,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="core" target="1.5" />
+      <module name="core" target="1.8" />
       <module name="datauitwisselingssysteemmodule" target="1.8" />
       <module name="monitoringsysteemmodule" target="1.8" />
       <module name="politiesysteemmodule" target="1.8" />

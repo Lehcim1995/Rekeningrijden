@@ -1,5 +1,7 @@
 package classes;
 
+import domain.VerplaatsingPK;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;

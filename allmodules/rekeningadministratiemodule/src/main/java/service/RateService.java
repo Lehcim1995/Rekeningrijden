@@ -1,10 +1,10 @@
 package service;
 
-import classes.FuelEnum;
-import classes.KilometerRate;
-import classes.RateCategory;
-import classes.Road;
 import dao.RateDao;
+import domain.FuelEnum;
+import domain.KilometerRate;
+import domain.RateCategory;
+import domain.Road;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;

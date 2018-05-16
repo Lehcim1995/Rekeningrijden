@@ -1,8 +1,7 @@
 package gateway;
 
-import classes.Verplaatsing;
 import com.google.gson.Gson;
-import interfaces.JPA;
+import domain.Verplaatsing;
 import services.VerplaatsingsService;
 
 import javax.annotation.PostConstruct;

@@ -1,7 +1,7 @@
 package bean;
 
 import Exceptions.CreationException;
-import classes.VehicleTracker;
+import domain.VehicleTracker;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;

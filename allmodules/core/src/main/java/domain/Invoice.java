@@ -1,4 +1,4 @@
-package classes;
+package domain;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

@@ -1,6 +1,7 @@
 package dao;
 
-import classes.Road;
+import domain.Road;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.SQLException;

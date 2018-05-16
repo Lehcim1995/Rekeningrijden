@@ -1,9 +1,8 @@
-package classes;
+package domain;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +31,15 @@ public class Checkpoint implements Serializable
         this.lat = lat;
         this.time = time;
     }
+
+    public Checkpoint(
+        double stepLon,
+        double stepLat)
+{
+    this.lon = stepLon;
+    this.lat = stepLat;
+    this.time = new Date();
+}
 
     public int getId() {
         return id;
