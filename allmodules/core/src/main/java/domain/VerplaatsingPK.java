@@ -1,4 +1,4 @@
-package classes;
+package domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,8 +19,7 @@ public class VerplaatsingPK implements Serializable {
     public boolean equals(Object o) {
         VerplaatsingPK verplaatsing = (VerplaatsingPK) o;
         if (verplaatsing == null || getClass() != verplaatsing.getClass()) return false;
-        if (this == verplaatsing) return true;
-        return voertuigId == verplaatsing.voertuigId && serieID == verplaatsing.serieID ? true : false;
+        return this == verplaatsing || voertuigId == verplaatsing.voertuigId && serieID == verplaatsing.serieID;
     }
 
     @Override

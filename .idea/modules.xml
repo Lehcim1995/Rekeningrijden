@@ -6,12 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/politiesysteemmodule/politiesysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/politiesysteemmodule/politiesysteemmodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/allmodules/queueingmodule/queueingmodule.iml" filepath="$PROJECT_DIR$/allmodules/queueingmodule/queueingmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningadministratiemodule/rekeningadministratiemodule.iml" filepath="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/rekeningadministratiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningrijden.iml" filepath="$PROJECT_DIR$/allmodules/rekeningrijden.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" filepath="$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule/rekeningrijdersapplicatiemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" filepath="$PROJECT_DIR$/allmodules/simulatiemodule/simulatiemodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" filepath="$PROJECT_DIR$/allmodules/simulationmodule/simulationmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" filepath="$PROJECT_DIR$/allmodules/verplaatsingsmodule/verplaatsingsmodule.iml" />
     </modules>
   </component>

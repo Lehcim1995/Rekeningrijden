@@ -1,16 +1,12 @@
 package service;
 
 import Exceptions.CreationException;
-import classes.FuelEnum;
-import classes.RateCategory;
-import classes.Vehicle;
-import classes.VehicleTracker;
 import dao.VehicleDao;
-import org.apache.commons.lang3.StringUtils;
+import domain.FuelEnum;
+import domain.Vehicle;
+import domain.VehicleTracker;
 
 import javax.inject.Inject;
-import javax.persistence.EntityExistsException;
-import javax.persistence.TransactionRequiredException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

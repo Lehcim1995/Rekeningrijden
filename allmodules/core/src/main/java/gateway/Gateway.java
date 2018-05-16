@@ -2,10 +2,8 @@ package gateway;
 
 import com.google.gson.Gson;
 
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.TextMessage;
 import java.io.Serializable;
 
 /**

@@ -1,6 +1,6 @@
 package dao;
 
-import classes.Checkpoint;
+import domain.Checkpoint;
 import interfaces.SimulatieDao;
 
 import javax.annotation.PostConstruct;

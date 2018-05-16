@@ -1,9 +1,9 @@
 package dao;
 
-import classes.Invoice;
-import classes.MonthEnum;
-import classes.Owner;
-import classes.PaymentEnum;
+import domain.Invoice;
+import domain.MonthEnum;
+import domain.Owner;
+import domain.PaymentEnum;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
 package rest;
 
-import classes.Verplaatsing;
+import domain.Verplaatsing;
 import services.VerplaatsingsService;
 
 import javax.ejb.Stateless;
