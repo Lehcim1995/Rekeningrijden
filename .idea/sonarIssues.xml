@@ -8,6 +8,11 @@
             <set />
           </value>
         </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/.gitignore">
           <value>
             <set />
@@ -44,6 +49,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/src/main/java/rest/InvoiceService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/src/main/java/rest/RestApplication.java">
           <value>
             <set />
           </value>
