@@ -7,6 +7,7 @@ import classes.Road;
 import dao.RateDao;
 
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Date;
@@ -66,20 +67,28 @@ public class RateService implements Serializable {
         return rateDao.getAllRateCategories();
     }
 
-    public KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException {
+    public List<KilometerRate> getAllKilomterRatesByRoad(int roadId) throws IllegalArgumentException {
+        return  rateDao.getAllKilometerRatesByRoad(roadId);
+    }
+
+    public List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws IllegalArgumentException {
+        return rateDao.getAllRateCategoriesByRoad(roadId);
+    }
+
+    public KilometerRate findKilometerRateById(int kilometerRateId) throws IllegalArgumentException, NoResultException {
         try {
             return rateDao.findKilometerRateById(kilometerRateId);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Could not find kilometer rate with id: " + kilometerRateId);
         }
     }
 
-    public RateCategory findRateCategoryById(int rateCategoryId) {
+    public RateCategory findRateCategoryById(int rateCategoryId) throws IllegalArgumentException, NoResultException{
         try {
             return rateDao.findRateCategoryById(rateCategoryId);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Could not find category rate with id: " + rateCategoryId);
         }
     }

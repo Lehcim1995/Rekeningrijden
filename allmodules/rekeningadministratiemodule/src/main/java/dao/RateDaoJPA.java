@@ -5,6 +5,7 @@ import classes.Owner;
 import classes.RateCategory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
@@ -80,26 +81,56 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
-    public KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException {
+    public List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws IllegalArgumentException {
+        try {
+            return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE Road.id = :roadId", KilometerRate.class)
+                    .setParameter("roadId", roadId)
+                    .getResultList();
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("The query or parameter is not correct");
+        }
+    }
+
+    @Override
+    public List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws IllegalArgumentException {
+        try {
+            return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE Road.id = :roadId", RateCategory.class)
+                    .setParameter("roadId", roadId)
+                    .getResultList();
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("The query or parameter is not correct");
+        }
+    }
+
+    @Override
+    public KilometerRate findKilometerRateById(int kilometerRateId) throws NoResultException, IllegalArgumentException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE kilometerRate.id = :kilometerRateId", KilometerRate.class)
                     .setParameter("kilometerRateId", kilometerRateId)
                     .getSingleResult();
         }
-        catch (Exception e) {
-            throw new SQLException("Could not find kilometer rate with id: " + kilometerRateId);
+        catch (NoResultException e) {
+            throw new NoResultException("Could not get any results");
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("The query or parameter is not correct");
         }
     }
 
     @Override
-    public RateCategory findRateCategoryById(int rateCategoryId) throws SQLException {
+    public RateCategory findRateCategoryById(int rateCategoryId) throws NoResultException, IllegalArgumentException {
         try {
             return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE rateCategory.id = :rateCategoryId", RateCategory.class)
                     .setParameter("rateCategoryId", rateCategoryId)
                     .getSingleResult();
         }
-        catch (Exception e) {
-            throw new SQLException("Could not find category rate with id: " + rateCategoryId);
+        catch (NoResultException e) {
+            throw new NoResultException("Could not get any results");
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("The query or parameter is not correct");
         }
     }
 
