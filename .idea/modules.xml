@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RRFrontend/RRFrontend.iml" filepath="$PROJECT_DIR$/RRFrontend/RRFrontend.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/core/core.iml" filepath="$PROJECT_DIR$/allmodules/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/datauitwisselingssysteemmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" filepath="$PROJECT_DIR$/allmodules/monitoringsysteemmodule/monitoringsysteemmodule.iml" />
