@@ -66,6 +66,14 @@ public class RateService implements Serializable {
         return rateDao.getAllRateCategories();
     }
 
+    public List<KilometerRate> getAllKilomterRatesByRoad(int roadId) throws SQLException {
+        return  rateDao.getAllKilometerRatesByRoad(roadId);
+    }
+
+    public List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws SQLException {
+        return rateDao.getAllRateCategoriesByRoad(roadId);
+    }
+
     public KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException {
         try {
             return rateDao.findKilometerRateById(kilometerRateId);

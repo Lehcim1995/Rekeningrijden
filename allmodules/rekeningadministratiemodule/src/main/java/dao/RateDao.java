@@ -20,6 +20,10 @@ public interface RateDao {
 
     List<RateCategory> getAllRateCategories() throws SQLException;
 
+    List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws SQLException;
+
+    List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws SQLException;
+
     KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException;
 
     RateCategory findRateCategoryById(int rateCategoryId) throws SQLException;

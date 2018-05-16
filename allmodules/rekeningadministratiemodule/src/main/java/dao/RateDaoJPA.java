@@ -80,6 +80,26 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    public List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws SQLException {
+        try {
+            return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE Road.id =" + roadId, KilometerRate.class).getResultList();
+        }
+        catch (Exception e) {
+            throw new SQLException("Could not get all kilometer rates with road id:" + roadId);
+        }
+    }
+
+    @Override
+    public List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws SQLException {
+        try {
+            return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE Road.id =" + roadId, RateCategory.class).getResultList();
+        }
+        catch (Exception e) {
+            throw new SQLException("Could not get all category rates with road id:" + roadId);
+        }
+    }
+
+    @Override
     public KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE kilometerRate.id = :kilometerRateId", KilometerRate.class)
