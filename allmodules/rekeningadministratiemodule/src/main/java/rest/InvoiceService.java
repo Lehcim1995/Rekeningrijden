@@ -48,7 +48,5 @@ public class InvoiceService
         }
 
         return Response.status(Response.Status.OK).entity(i).build();
-
-
     }
 }
