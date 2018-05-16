@@ -3,6 +3,7 @@ package dao;
 import classes.KilometerRate;
 import classes.RateCategory;
 
+import javax.persistence.NoResultException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,13 +21,13 @@ public interface RateDao {
 
     List<RateCategory> getAllRateCategories() throws SQLException;
 
-    List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws SQLException;
+    List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws IllegalArgumentException;
 
-    List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws SQLException;
+    List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws IllegalArgumentException;
 
-    KilometerRate findKilometerRateById(int kilometerRateId) throws SQLException;
+    KilometerRate findKilometerRateById(int kilometerRateId) throws IllegalArgumentException, NoResultException;
 
-    RateCategory findRateCategoryById(int rateCategoryId) throws SQLException;
+    RateCategory findRateCategoryById(int rateCategoryId) throws IllegalArgumentException, NoResultException;
 
     double calculateKilometerRatePriceByRateCategory(int kilomterRateId, int rateCategoryId) throws SQLException;
 
