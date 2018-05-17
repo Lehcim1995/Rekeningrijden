@@ -1,7 +1,7 @@
 package dao;
 
 import classes.MissedVerplaatsing;
-import classes.Verplaatsing;
+import domain.Verplaatsing;
 import interfaces.VerplaatsingsDao;
 
 import javax.ejb.Stateless;

@@ -1,3 +1,3 @@
 FROM openjdk:8-jre-alpine
-COPY target/verplaatsingsmodule*.war /app.war
+COPY target/rekeningadministratiemodule*.war /app.war
 CMD ["/usr/bin/java", "-jar", "/app.war"]

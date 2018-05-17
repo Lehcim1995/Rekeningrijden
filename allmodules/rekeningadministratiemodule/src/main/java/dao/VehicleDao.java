@@ -1,10 +1,9 @@
 package dao;
 
 import Exceptions.CreationException;
-import classes.FuelEnum;
-import classes.RateCategory;
-import classes.Vehicle;
-import classes.VehicleTracker;
+import domain.FuelEnum;
+import domain.Vehicle;
+import domain.VehicleTracker;
 
 import java.util.Date;
 import java.util.List;

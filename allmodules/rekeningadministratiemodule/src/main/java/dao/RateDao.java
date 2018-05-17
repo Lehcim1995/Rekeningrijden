@@ -1,7 +1,7 @@
 package dao;
 
-import classes.KilometerRate;
-import classes.RateCategory;
+import domain.KilometerRate;
+import domain.RateCategory;
 
 import java.sql.SQLException;
 import java.util.List;

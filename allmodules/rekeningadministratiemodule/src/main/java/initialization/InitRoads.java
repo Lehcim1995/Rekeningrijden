@@ -1,15 +1,11 @@
 package initialization;
 
-import classes.FuelEnum;
-import classes.RateCategory;
-import service.RateService;
 import service.RoadService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.util.Date;
 
 @Singleton
 @Startup

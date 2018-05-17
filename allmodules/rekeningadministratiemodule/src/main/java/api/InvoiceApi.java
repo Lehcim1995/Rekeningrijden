@@ -1,9 +1,8 @@
 package api;
 
-import classes.Invoice;
-import classes.MonthEnum;
-import classes.Owner;
-import classes.PaymentEnum;
+import domain.Invoice;
+import domain.MonthEnum;
+import domain.PaymentEnum;
 import jsonBodies.InvoiceBody;
 import service.InvoiceService;
 import service.OwnerService;

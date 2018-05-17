@@ -1,16 +1,14 @@
 package bean;
 
-import classes.Invoice;
-import classes.PaymentEnum;
+import domain.Invoice;
+import domain.PaymentEnum;
 import service.InvoiceService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

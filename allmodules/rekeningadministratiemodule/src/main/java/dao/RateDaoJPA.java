@@ -1,15 +1,13 @@
 package dao;
 
-import classes.KilometerRate;
-import classes.Owner;
-import classes.RateCategory;
+import domain.KilometerRate;
+import domain.RateCategory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RateDaoJPA implements RateDao{

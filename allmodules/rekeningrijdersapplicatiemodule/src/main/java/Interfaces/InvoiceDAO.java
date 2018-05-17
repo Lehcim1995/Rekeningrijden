@@ -1,8 +1,5 @@
 package Interfaces;
 
-import classes.Invoice;
-import classes.Owner;
-
 public interface InvoiceDAO {
 
     void create (Invoice invoice);

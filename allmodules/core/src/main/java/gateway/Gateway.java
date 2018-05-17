@@ -2,10 +2,8 @@ package gateway;
 
 import com.google.gson.Gson;
 
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.TextMessage;
 import java.io.Serializable;
 
 /**
@@ -22,7 +20,7 @@ public class Gateway implements MessageListener {
     private final Gson gson = new Gson();
 
     // Localhost ActiveMQ URL
-    //final private String URL = "tcp://localhost:61616";
+    final private String localURL = "tcp://localhost:61616";
     // TODO server ActiveMQ URL autoselect
     final private String URL = "tcp://192.168.25.137:61616";
 
@@ -30,8 +28,17 @@ public class Gateway implements MessageListener {
 
         this.gatewayImplementor = gatewayImplementor;
 
-        if (!senderChannel.isEmpty()) messageSender = new GatewayMessageSender(URL, senderChannel);
-        if (!receiverChannel.isEmpty()) messageReceiver = new GatewayMessageReceiver(this, URL, receiverChannel);
+        try {
+            if (!senderChannel.isEmpty()) messageSender = new GatewayMessageSender(URL, senderChannel);
+            if (!receiverChannel.isEmpty()) messageReceiver = new GatewayMessageReceiver(this, URL, receiverChannel);
+        } catch (NoPublicActiveMQConnectionException ex) {
+            try {
+                if (!senderChannel.isEmpty()) messageSender = new GatewayMessageSender(localURL, senderChannel);
+                if (!receiverChannel.isEmpty()) messageReceiver = new GatewayMessageReceiver(this, localURL, receiverChannel);
+            } catch (NoPublicActiveMQConnectionException fex) {
+                fex.printStackTrace();
+            }
+        }
     }
 
     public void SendMessage(Serializable obj) {

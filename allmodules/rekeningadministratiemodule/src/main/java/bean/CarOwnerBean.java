@@ -1,14 +1,13 @@
 package bean;
 
-import classes.Owner;
-import classes.Vehicle;
+import domain.Owner;
+import domain.Vehicle;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import service.OwnerService;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
