@@ -89,4 +89,13 @@ public class VehicleService implements Serializable {
     public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {
         vehicleDao.setVehicleTracker(vehicleID, vehicleTrackerID);
     }
+
+    public Vehicle editVehicle(int vehicleId, int weight, String licenseplate, FuelEnum fuelType, Date buildYear) {
+        Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
+        vehicle.setWeight(weight);
+        vehicle.setLicensePlate(licenseplate);
+        vehicle.setFueltype(fuelType);
+        vehicle.setBuildYear(buildYear);
+        return vehicleDao.editVehicle(vehicle);
+    }
 }

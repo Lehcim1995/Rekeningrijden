@@ -130,6 +130,17 @@ public class VehicleDaoJPA implements VehicleDao {
         }
     }
 
+    @Override
+    public Vehicle editVehicle(Vehicle vehicle) throws IllegalArgumentException{
+        try {
+            em.merge(vehicle);
+            return vehicle;
+        }
+        catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
     private void setupVehicleTrackerJPA() {
         cvt = cb.createQuery(VehicleTracker.class);
         vtr = cvt.from(VehicleTracker.class);
