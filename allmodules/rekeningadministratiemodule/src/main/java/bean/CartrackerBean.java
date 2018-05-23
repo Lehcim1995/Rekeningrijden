@@ -6,6 +6,7 @@ import service.VehicleService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@RequestScoped
+@SessionScoped
 @Named(value="cartrackerBean")
 public class CartrackerBean implements Serializable {
 

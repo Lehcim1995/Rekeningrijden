@@ -52,12 +52,12 @@ public class RoadService implements Serializable {
         }
     }
 
-    public List<Road> getAllRoads() throws SQLException {
+    public List<Road> getAllRoads() throws IllegalArgumentException {
         try {
             return roadDao.getAllRoads();
-        }
-        catch (Exception e) {
-            throw new IllegalArgumentException("Could not get all roads");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
+
 }

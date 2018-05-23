@@ -20,7 +20,7 @@ import java.util.List;
 @Stateless
 public class VehicleDaoJPA implements VehicleDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
     private CriteriaBuilder cb;
     private CriteriaQuery<VehicleTracker> cvt;

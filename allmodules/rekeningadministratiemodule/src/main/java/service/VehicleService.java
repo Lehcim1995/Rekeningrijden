@@ -6,15 +6,17 @@ import domain.FuelEnum;
 import domain.Vehicle;
 import domain.VehicleTracker;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@Stateless
 public class VehicleService implements Serializable {
 
     @Inject
-    private VehicleDao vehicleDao;
+    VehicleDao vehicleDao;
 
 
     public VehicleService() {}
@@ -90,7 +92,7 @@ public class VehicleService implements Serializable {
         vehicleDao.setVehicleTracker(vehicleID, vehicleTrackerID);
     }
 
-    public Vehicle editVehicle(int vehicleId, int weight, String licenseplate, FuelEnum fuelType, Date buildYear) {
+    public Vehicle editVehicle(int vehicleId, int weight, String licenseplate, FuelEnum fuelType, Date buildYear) throws IllegalArgumentException{
         Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
         vehicle.setWeight(weight);
         vehicle.setLicensePlate(licenseplate);

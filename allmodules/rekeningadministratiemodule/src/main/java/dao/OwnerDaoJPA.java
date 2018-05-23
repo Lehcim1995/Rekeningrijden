@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OwnerDaoJPA implements OwnerDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {
