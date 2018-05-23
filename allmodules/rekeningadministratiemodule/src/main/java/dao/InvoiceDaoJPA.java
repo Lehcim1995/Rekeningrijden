@@ -164,18 +164,4 @@ public class InvoiceDaoJPA implements InvoiceDao {
         }
         return new ArrayList<>();
     }
-
-    @Override
-    public List<Invoice> getInvoicesByVehicleAndOwner(int trackerId, Owner ownerById) {
-        try {
-            return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId AND invoice.owner = :owner", Invoice.class)
-                    .setParameter("trackerId", trackerId)
-                    .setParameter("owner", ownerById)
-                    .getResultList();
-        }
-        catch (Exception e) {
-            System.out.print(e.getMessage());
-        }
-        return null;
-    }
 }
