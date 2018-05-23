@@ -6,14 +6,13 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  hasVehicles: boolean = true;
-  hasInvoices: boolean = true;
   vehicles: any;
+
   invoices: any;
   invoices1: any;
   invoices2: any;
 
+  selectedInvoice: any;
 
   constructor() {
   }
@@ -37,6 +36,7 @@ export class HomeComponent implements OnInit {
       {date: Date(), licenseplate: "XL 54 423", price: "1283", trackerID: "17482", kmAmmount: "701", invoiceID:"543"},
       {date: Date(), licenseplate: "XL 54 423", price: "311", trackerID: "17482", kmAmmount: "210", invoiceID:"898939"}
     ];
+    this.selectedInvoice = [];
   }
 
 //vehicletracker id en owner id
@@ -45,14 +45,26 @@ export class HomeComponent implements OnInit {
 
     //invoices wordt returnwaarde van servicecall
 
-    console.log(' Aangekomen ');
-
     //mockcode for testing
     if (trackerId == 17453) {
       this.invoices = this.invoices1;
     }
     if (trackerId == 17482) {
       this.invoices = this.invoices2;
+    }
+
+  }
+
+  chooseInvoice(invoiceId:number)
+  {
+    //servicecall met invoiceid en ownerid
+
+    //invoicesdetails wordt returnwaarde van servicecall
+
+    //mockcode for testing
+    if(invoiceId == 123123)
+    {
+      this.selectedInvoice = this.invoices[0];
     }
 
   }

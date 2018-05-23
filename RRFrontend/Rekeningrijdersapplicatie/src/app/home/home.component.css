@@ -1,19 +1,35 @@
-#cars{
-  width:100%;
+#cars, #invoices {
+  width: 100%;
+  padding: 5px;
+  border-right: 2px solid #f2f2f2;
 }
-.car
-{
+
+.car {
   margin: 5px 0px;
 }
-.car-details{
-  margin:5px 0px;
+
+.car-details {
+  margin: 5px 0px;
 }
-.car-entry{
+
+.car-entry, .invoice-entry {
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.car-entry:hover, .invoice-entry:hover {
+  cursor: pointer;
+}
+
+#main > div:last-of-type {
+  flex: 2
+}
+
+#main div, .detailpanels > div {
+  flex: 1;
   width: 100%;
 }
-#main div{
-  flex:1;
-}
-#main div:nth-last-of-type(3){
-  flex:2
+
+.detailpanels > div {
+  margin: 5px;
 }
