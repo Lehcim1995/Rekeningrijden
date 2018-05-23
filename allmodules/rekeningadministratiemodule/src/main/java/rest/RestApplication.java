@@ -9,10 +9,10 @@ import java.util.Set;
 public class RestApplication extends Application
 {
     @Override
-    public Set<Class<?>> getClasses() {
+    public Set<Class<?>> getClasses()
+    {
         Set<Class<?>> classes = new HashSet<>();
 
-        
 
         return classes;
     }

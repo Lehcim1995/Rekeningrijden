@@ -1,5 +1,8 @@
 package Interfaces;
 
+import domain.Invoice;
+import domain.Owner;
+
 public interface InvoiceDAO {
 
     void create (Invoice invoice);
