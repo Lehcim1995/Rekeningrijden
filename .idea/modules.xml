@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RRFrontend/RRFrontend.iml" filepath="$PROJECT_DIR$/RRFrontend/RRFrontend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/allmodules/allmodules.iml" filepath="$PROJECT_DIR$/allmodules/allmodules.iml" />
-      <module fileurl="file://$PROJECT_DIR$/allmodules/core/core.iml" filepath="$PROJECT_DIR$/allmodules/core/core.iml" />
     </modules>
   </component>
 </project>

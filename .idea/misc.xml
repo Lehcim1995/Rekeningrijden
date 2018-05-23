@@ -1,31 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/monitoringsysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/politiesysteemmodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/rekeningadministratiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/simulatiemodule" />
-    <file type="web" url="file://$PROJECT_DIR$/allmodules/verplaatsingsmodule" />
-  </component>
-  <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
-        <option value="$PROJECT_DIR$/allmodules/pom.xml" />
-      </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/monitoringsysteemmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/politiesysteemmodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/rekeningadministratiemodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/rekeningrijdersapplicatiemodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/simulatiemodule/pom.xml" />
-        <option value="$PROJECT_DIR$/allmodules/verplaatsingsmodule/pom.xml" />
-      </set>
-    </option>
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
