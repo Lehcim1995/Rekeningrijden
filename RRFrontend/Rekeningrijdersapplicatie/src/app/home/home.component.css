@@ -1,0 +1,19 @@
+#cars{
+  width:100%;
+}
+.car
+{
+  margin: 5px 0px;
+}
+.car-details{
+  margin:5px 0px;
+}
+.car-entry{
+  width: 100%;
+}
+#main div{
+  flex:1;
+}
+#main div:nth-last-of-type(3){
+  flex:2
+}
