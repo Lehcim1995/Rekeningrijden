@@ -1,7 +1,7 @@
 package dao;
 
-import classes.Owner;
-import classes.Vehicle;
+import domain.Owner;
+import domain.Vehicle;
 
 import java.util.List;
 

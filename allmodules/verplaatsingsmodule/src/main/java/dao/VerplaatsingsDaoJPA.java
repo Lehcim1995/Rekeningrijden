@@ -1,8 +1,8 @@
 package dao;
 
-import classes.Checkpoint;
 import classes.MissedVerplaatsing;
-import classes.Verplaatsing;
+import domain.Checkpoint;
+import domain.Verplaatsing;
 import interfaces.JPA;
 import interfaces.VerplaatsingsDao;
 

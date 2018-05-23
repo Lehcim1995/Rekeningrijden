@@ -1,9 +1,9 @@
 package initialization;
 
-import classes.FuelEnum;
-import classes.KilometerRate;
-import classes.RateCategory;
-import classes.Road;
+import domain.FuelEnum;
+import domain.KilometerRate;
+import domain.RateCategory;
+import domain.Road;
 import service.RateService;
 import service.RoadService;
 

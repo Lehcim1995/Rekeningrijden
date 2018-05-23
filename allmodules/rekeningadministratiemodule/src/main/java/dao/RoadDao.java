@@ -1,6 +1,6 @@
 package dao;
 
-import classes.Road;
+import domain.Road;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,6 +1,6 @@
 package interfaces;
 
-import classes.Checkpoint;
+import domain.Checkpoint;
 
 public interface SimulatieDao extends DaoFacade<Checkpoint, String>
 {

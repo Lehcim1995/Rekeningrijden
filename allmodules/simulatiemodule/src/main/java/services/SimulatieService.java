@@ -1,7 +1,7 @@
 package services;
 
-import classes.Checkpoint;
-import classes.Verplaatsing;
+import domain.Checkpoint;
+import domain.Verplaatsing;
 import gateway.DisplacementGateway;
 import interfaces.SimulatieDao;
 
@@ -27,7 +27,7 @@ public class SimulatieService
 
     public Checkpoint create(Checkpoint object, String id) {
         Checkpoint checkpoint = simulatieDao.create(object);
-        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getID(), new Date());
+        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getId(), new Date());
         displacementGateway.SendObject(verplaatsing);
         return checkpoint;
     }

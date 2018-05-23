@@ -1,8 +1,8 @@
 package service;
 
-import classes.KilometerRate;
-import classes.Road;
 import dao.RoadDao;
+import domain.KilometerRate;
+import domain.Road;
 
 import javax.inject.Inject;
 import java.io.Serializable;

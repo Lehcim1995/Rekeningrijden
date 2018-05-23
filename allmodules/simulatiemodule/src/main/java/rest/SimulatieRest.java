@@ -1,7 +1,7 @@
 package rest;
 
-import classes.Checkpoint;
 import classes.DataObject;
+import domain.Checkpoint;
 import services.SimulatieService;
 
 import javax.inject.Inject;

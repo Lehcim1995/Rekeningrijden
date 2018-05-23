@@ -5,6 +5,7 @@
     <groovy codeStyle="LEGACY" />
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/allmodules/core" />
     <file type="web" url="file://$PROJECT_DIR$/allmodules/datauitwisselingssysteemmodule" />
     <file type="web" url="file://$PROJECT_DIR$/allmodules/monitoringsysteemmodule" />
     <file type="web" url="file://$PROJECT_DIR$/allmodules/politiesysteemmodule" />
@@ -37,6 +38,11 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/allmodules/queueingmodule/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="Java_JDK_1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
