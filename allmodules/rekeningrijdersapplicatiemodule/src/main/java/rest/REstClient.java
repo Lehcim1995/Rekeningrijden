@@ -8,18 +8,33 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import javax.ws.rs.core.GenericEntity;
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 
+@Stateless
 public class REstClient
 {
-
     private Client client;
 
     public REstClient() {
         client = Client.create();
     }
 
-    private <F> F getREstResponse(String url, Class<F> expectedObject)
+    @PostConstruct
+    public void init()
+    {
+        client = Client.create();
+    }
+
+    /**
+     * A get response on a Url and an expected object (can be a list)
+     *
+     * @param url The url for the call
+     * @param expectedObject The class of the expected object
+     * @param <F> // The generic of the class
+     * @return Object of type <F>
+     */
+    public <F> F getREstResponse(String url, Class<F> expectedObject)
     {
         F returnObject;
 
@@ -44,11 +59,5 @@ public class REstClient
         returnObject = gson.fromJson(json, expectedObject);
 
         return returnObject;
-    }
-
-
-    public void collectInvoices()
-    {
-        getREstResponse("", Invoice.class);
     }
 }

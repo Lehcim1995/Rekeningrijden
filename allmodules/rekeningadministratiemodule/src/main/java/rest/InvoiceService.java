@@ -1,7 +1,9 @@
 package rest;
 
 import classes.Invoice;
+import classes.Owner;
 import dao.InvoiceDao;
+import dao.OwnerDao;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -19,6 +21,9 @@ public class InvoiceService
 
     @Inject
     private InvoiceDao invoiceDao;
+
+    @Inject
+    private OwnerDao ownerDao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +50,23 @@ public class InvoiceService
         if (i == null)
         {
             return Response.status(Response.Status.NOT_FOUND).entity("Could not found invoice with id " + id).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(i).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/cpr/{id}")
+    public Response getInvoiceByUser(@PathParam("id") int cpr)
+    {
+        Owner o = ownerDao.findOwnerById(cpr);
+
+        List<Invoice> i = invoiceDao.getInvoicesByOwner(o);
+
+        if (i == null || i.isEmpty())
+        {
+            return Response.status(Response.Status.NOT_FOUND).entity("Could not found invoices for cpr " + cpr).build();
         }
 
         return Response.status(Response.Status.OK).entity(i).build();
