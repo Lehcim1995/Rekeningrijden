@@ -17,7 +17,7 @@ public class GatewayMessageSender {
     private MessageProducer producer = null;
     final private Gson gson = new Gson();
 
-    public GatewayMessageSender(String URL, String channelName) {
+    public GatewayMessageSender(String URL, String channelName) throws NoPublicActiveMQConnectionException {
         try {
             ConnectionFactory factory = new ActiveMQConnectionFactory(URL);
             Connection connection = factory.createConnection();
@@ -29,6 +29,7 @@ public class GatewayMessageSender {
         }
         catch (JMSException e) {
             e.printStackTrace();
+            throw new NoPublicActiveMQConnectionException();
         }
     }
 
