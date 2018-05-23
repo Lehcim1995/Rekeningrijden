@@ -1,6 +1,7 @@
 package rest;
 
 import domain.Invoice;
+import domain.Owner;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,4 +20,21 @@ public class CollectInvoicesREst
     {
         return restClient.getREstResponse(REST_END_POINT, List.class);
     }
+
+    public List<Invoice> collectInvoicesOwner(Owner owner)
+    {
+        return collectInvoicesOwner(owner.getId());
+    }
+
+    public List<Invoice> collectInvoicesOwner(int ownerId)
+    {
+        return restClient.getREstResponse(REST_END_POINT + "/cpr/" + ownerId, List.class);
+    }
+
+    public Invoice getInvoice(int id)
+    {
+        return restClient.getREstResponse(REST_END_POINT + "/" + id, Invoice.class);
+    }
+
+
 }
