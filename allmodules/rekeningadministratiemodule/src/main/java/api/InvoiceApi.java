@@ -41,6 +41,13 @@ public class InvoiceApi {
 
     @GET
     @Produces(APPLICATION_JSON)
+    @Path("/{vehicleId}/vehicleownerinvoices/{ownerId}")
+    public List<Invoice> getInvoicesByVehicleAndOwner(@PathParam("vehicleId") int vehicleId, @PathParam("ownerId") int ownerId) {
+        return invoiceService.getInvoicesByVehicleAndOwner(vehicleId, ownerService.findOwnerById(ownerId));
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
     @Path("/owner/{ownerId}")
     public List<Invoice> getInvoicesByOwner(@PathParam("ownerId") int ownerId) {
         return invoiceService.getInvoicesByOwner(ownerService.findOwnerById(ownerId));
