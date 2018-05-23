@@ -1,9 +1,9 @@
 package rest;
 
-import classes.Invoice;
-import classes.Owner;
 import dao.InvoiceDao;
 import dao.OwnerDao;
+import domain.Invoice;
+import domain.Owner;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

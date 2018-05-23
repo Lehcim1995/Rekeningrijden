@@ -1,6 +1,6 @@
 package rest;
 
-import classes.Invoice;
+import domain.Invoice;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
