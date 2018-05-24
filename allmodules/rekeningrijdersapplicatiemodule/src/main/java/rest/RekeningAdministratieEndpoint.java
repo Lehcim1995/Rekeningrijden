@@ -5,7 +5,6 @@ import rest.JsonBodyClasses.LoginProfileBody;
 import service.RekeningAdministratieService;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -22,7 +21,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 public class RekeningAdministratieEndpoint {
 
     @Inject
-    RekeningAdministratieService service;
+    RekeningAdministratieService rekeningAdministratieService;
 
     @POST
     @Path("/login")
@@ -32,10 +31,10 @@ public class RekeningAdministratieEndpoint {
         try {
 
             // Authenticate the user using the credentials provided
-            service.authenticate(loginProfileBody.getLogin(), loginProfileBody.getPassword());
+            rekeningAdministratieService.authenticate(loginProfileBody.getLogin(), loginProfileBody.getPassword());
 
             // Issue a token for the user
-            String token = service.issueToken(loginProfileBody.getLogin());
+            String token = rekeningAdministratieService.issueToken(loginProfileBody.getLogin());
 
             // Return the token on the response
             return Response.ok("\"" + token + "\"")
@@ -50,6 +49,6 @@ public class RekeningAdministratieEndpoint {
     @Produces(APPLICATION_JSON)
     @Path("/{vehicleId}/vehicleownerinvoices/{ownerId}")
     public List<Invoice> getInvoicesByVehicleAndOwner(@PathParam("vehicleId") int vehicleId, @PathParam("ownerId") int ownerId) {
-        return service.GetInvoicesByVehicleAndOwner(vehicleId, ownerId);
+        return rekeningAdministratieService.GetInvoicesByVehicleAndOwner(vehicleId, ownerId);
     }
 }

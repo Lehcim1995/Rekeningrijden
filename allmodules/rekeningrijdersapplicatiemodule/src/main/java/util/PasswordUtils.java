@@ -12,7 +12,7 @@ public class PasswordUtils {
             byte[] passwordDigest = md.digest();
             return new String(Base64.getEncoder().encode(passwordDigest));
         } catch (Exception e) {
-            throw new RuntimeException("Exception encoding password", e);
+            throw new RuntimeException("exception encoding password", e);
         }
     }
 }

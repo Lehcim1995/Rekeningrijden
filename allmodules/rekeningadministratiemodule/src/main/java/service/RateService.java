@@ -128,7 +128,7 @@ public class RateService implements Serializable {
         try{
             return rateDao.findRateCategoryByName(rateCategorie);
         }
-        catch(Exception e)
+        catch(exception e)
         {
             throw new IllegalArgumentException("Could not find rate category with name "+ rateCategorie);
         }

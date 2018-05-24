@@ -13,16 +13,20 @@ import java.io.Serializable;
 public class Profile implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
 
     private String password;
 
-    public Profile()
-    {
+    public Profile() {
 
+    }
+
+    public Profile(String login, String password) {
+        this.username = login;
+        this.password = password;
     }
 
     public Long getId() {

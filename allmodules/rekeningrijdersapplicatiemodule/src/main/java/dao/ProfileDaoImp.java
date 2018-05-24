@@ -7,10 +7,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import util.DateUtil;
 import util.KeyGenerator;
+import exception.CouldNotCreateProfileException;
 
 import javax.inject.Inject;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TransactionRequiredException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
@@ -60,5 +63,18 @@ public class ProfileDaoImp implements ProfileDao, Serializable {
                 .compact();
         System.out.println("#### generating token for a key : " + jwtToken + " - " + key);
         return jwtToken;
+    }
+
+    @Override
+    public Profile addProfile(String login, String password) throws CouldNotCreateProfileException {
+        try{
+            Profile profile = new Profile(login, Hashing.sha256()
+                    .hashString(password, StandardCharsets.UTF_8).toString());
+            em.persist(profile);
+        }
+        catch(EntityExistsException | IllegalArgumentException | TransactionRequiredException e ){
+            throw new CouldNotCreateProfileException(e.getMessage());
+        }
+        return null;
     }
 }
