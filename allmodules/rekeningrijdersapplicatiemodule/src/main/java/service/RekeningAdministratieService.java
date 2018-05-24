@@ -13,7 +13,7 @@ public class RekeningAdministratieService {
     @Inject
     CollectInvoicesREst rest;
 
-    public List<Invoice> GetInvoicesByVehicleAndOwner(int trackerId, int ownerId) {
+    public List<Invoice> GetInvoicesByVehicleAndOwner(String trackerId, int ownerId) {
         return rest.getVehicleOwnerInvoices(trackerId, ownerId);
     }
 }

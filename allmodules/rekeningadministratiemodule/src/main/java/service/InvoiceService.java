@@ -57,7 +57,7 @@ public class InvoiceService implements Serializable{
         return invoiceDao.getInvoicesByPaymentStatusAndMonth(paymentEnum, monthEnum);
     }
 
-    public List<Invoice> getInvoicesByVehicleAndOwner(int vehicleId, Owner ownerById) {
+    public List<Invoice> getInvoicesByVehicleAndOwner(String vehicleId, Owner ownerById) {
         return invoiceDao.getInvoicesByVehicleAndOwner(vehicleId, ownerById);
     }
 }

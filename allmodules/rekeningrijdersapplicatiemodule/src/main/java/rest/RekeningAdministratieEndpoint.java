@@ -22,9 +22,14 @@ public class RekeningAdministratieEndpoint {
     RekeningAdministratieService service;
 
     @GET
+    public String test() {
+        return "test";
+    }
+
+    @GET
     @Produces(APPLICATION_JSON)
     @Path("/{vehicleId}/vehicleownerinvoices/{ownerId}")
-    public List<Invoice> getInvoicesByVehicleAndOwner(@PathParam("vehicleId") int vehicleId, @PathParam("ownerId") int ownerId) {
+    public List<Invoice> getInvoicesByVehicleAndOwner(@PathParam("vehicleId") String vehicleId, @PathParam("ownerId") int ownerId) {
         return service.GetInvoicesByVehicleAndOwner(vehicleId, ownerId);
     }
 }
