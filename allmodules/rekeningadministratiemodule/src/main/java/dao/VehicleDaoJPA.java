@@ -14,11 +14,12 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class VehicleDaoJPA implements VehicleDao {
+public class VehicleDaoJPA implements VehicleDao, Serializable {
 
     @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;

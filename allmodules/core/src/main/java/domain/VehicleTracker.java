@@ -42,6 +42,7 @@ public class VehicleTracker implements Serializable {
     {
         this.ID = id;
         this.manufacturer = manufacturer;
+        this.addDate = new Date();
     }
 
     public String getID() {
