@@ -1,0 +1,35 @@
+#cars, #invoices {
+  width: 100%;
+  padding: 5px;
+  border-right: 2px solid #f2f2f2;
+}
+
+.car {
+  margin: 5px 0px;
+}
+
+.car-details {
+  margin: 5px 0px;
+}
+
+.car-entry, .invoice-entry {
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.car-entry:hover, .invoice-entry:hover {
+  cursor: pointer;
+}
+
+#main > div:last-of-type {
+  flex: 2
+}
+
+#main div, .detailpanels > div {
+  flex: 1;
+  width: 100%;
+}
+
+.detailpanels > div {
+  margin: 5px;
+}
