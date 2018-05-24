@@ -17,8 +17,6 @@ public class Gateway implements MessageListener {
     private GatewayMessageSender messageSender;
     private GatewayMessageReceiver messageReceiver;
 
-    private final Gson gson = new Gson();
-
     // Localhost ActiveMQ URL
     final private String localURL = "tcp://localhost:61616";
     // TODO server ActiveMQ URL autoselect

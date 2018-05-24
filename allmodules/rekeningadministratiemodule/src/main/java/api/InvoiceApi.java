@@ -4,6 +4,7 @@ import domain.Invoice;
 import domain.MonthEnum;
 import domain.PaymentEnum;
 import jsonBodies.InvoiceBody;
+import model.InvoiceListModel;
 import service.InvoiceService;
 import service.OwnerService;
 
@@ -37,6 +38,14 @@ public class InvoiceApi {
     @Path("/tracker/{trackerId}")
     public Invoice getInvoiceByTrackerId(@PathParam("trackerId") String trackerId) {
         return invoiceService.getInvoiceByTrackerId(trackerId);
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/{vehicleId}/vehicleownerinvoices/{ownerId}")
+    public InvoiceListModel getInvoicesByVehicleAndOwner(@PathParam("vehicleId") String vehicleId, @PathParam("ownerId") int ownerId) {
+        InvoiceListModel model = new InvoiceListModel(invoiceService.getInvoicesByVehicleAndOwner(vehicleId, ownerService.findOwnerById(ownerId)));
+        return model;
     }
 
     @GET
