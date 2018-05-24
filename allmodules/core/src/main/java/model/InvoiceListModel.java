@@ -2,9 +2,10 @@ package model;
 
 import domain.Invoice;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class InvoiceListModel {
+public class InvoiceListModel implements Serializable {
 
     private List<Invoice> invoices;
 

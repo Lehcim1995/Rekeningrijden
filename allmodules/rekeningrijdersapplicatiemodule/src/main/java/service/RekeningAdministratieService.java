@@ -15,7 +15,7 @@ public class RekeningAdministratieService {
 
     @Inject
     CollectInvoicesREst rest;
-
+  
     @Inject
     ProfileDao profileDao;
 

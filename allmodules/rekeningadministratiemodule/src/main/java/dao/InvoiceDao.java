@@ -31,5 +31,5 @@ public interface InvoiceDao {
 
     List<Invoice> getInvoicesByPaymentStatusAndMonth(PaymentEnum paymentEnum, MonthEnum monthEnum);
 
-    List<Invoice> getInvoicesByVehicleAndOwner(int vehicleId, Owner ownerById);
+    List<Invoice> getInvoicesByVehicleAndOwner(String vehicleId, Owner ownerById);
 }

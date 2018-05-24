@@ -15,7 +15,7 @@ import java.util.List;
 @Stateless
 public class InvoiceDaoJPA implements InvoiceDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {
@@ -166,7 +166,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
-    public List<Invoice> getInvoicesByVehicleAndOwner(int trackerId, Owner ownerById) {
+    public List<Invoice> getInvoicesByVehicleAndOwner(String trackerId, Owner ownerById) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId AND invoice.owner = :owner", Invoice.class)
                     .setParameter("trackerId", trackerId)

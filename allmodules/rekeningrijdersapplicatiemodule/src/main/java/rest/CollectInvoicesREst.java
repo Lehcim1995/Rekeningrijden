@@ -1,14 +1,11 @@
 package rest;
 
-import com.google.gson.reflect.TypeToken;
 import domain.Invoice;
 import domain.Owner;
 import model.InvoiceListModel;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -39,7 +36,7 @@ public class CollectInvoicesREst
         return restClient.getREstResponse(REST_END_POINT + "/" + id, Invoice.class);
     }
 
-    public List<Invoice> getVehicleOwnerInvoices(int trackerId, int ownerId) {
+    public List<Invoice> getVehicleOwnerInvoices(String trackerId, int ownerId) {
         return restClient.getREstResponse(REST_END_POINT + "/" + trackerId + "/vehicleownerinvoices/" + ownerId, InvoiceListModel.class).getInvoices();
     }
 }

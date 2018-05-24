@@ -46,9 +46,15 @@ public class RekeningAdministratieEndpoint {
     }
 
     @GET
+    public String test() {
+        return "test";
+    }
+
+    @GET
     @Produces(APPLICATION_JSON)
     @Path("/{vehicleId}/vehicleownerinvoices/{ownerId}")
     public List<Invoice> getInvoicesByVehicleAndOwner(@PathParam("vehicleId") int vehicleId, @PathParam("ownerId") int ownerId) {
         return rekeningAdministratieService.GetInvoicesByVehicleAndOwner(vehicleId, ownerId);
+
     }
 }

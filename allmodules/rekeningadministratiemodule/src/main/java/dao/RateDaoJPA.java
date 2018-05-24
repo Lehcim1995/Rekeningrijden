@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RateDaoJPA implements RateDao{
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {

@@ -31,4 +31,6 @@ public interface VehicleDao {
     Vehicle createVehicle(Vehicle vehicle);
 
     void setVehicleTracker(int vehicleID, String vehicleTrackerID);
+
+    Vehicle editVehicle(Vehicle vehicle) throws IllegalArgumentException;
 }
