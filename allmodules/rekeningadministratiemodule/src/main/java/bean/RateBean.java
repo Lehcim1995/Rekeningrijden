@@ -94,7 +94,7 @@ public class RateBean implements Serializable{
         try{
             return roadService.getAllRoads();
         }
-        catch(SQLException e)
+        catch(IllegalArgumentException e)
         {
             FacesMessage msg = new FacesMessage("Something went wrong when getting al the Roads " +
                     e.getMessage());
