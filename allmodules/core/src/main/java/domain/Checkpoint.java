@@ -20,6 +20,8 @@ public class Checkpoint implements Serializable
 
     private Date time;
 
+    private int carId;
+
     public Checkpoint() {}
 
     public Checkpoint(
@@ -33,13 +35,13 @@ public class Checkpoint implements Serializable
     }
 
     public Checkpoint(
-        double stepLon,
-        double stepLat)
-{
-    this.lon = stepLon;
-    this.lat = stepLat;
-    this.time = new Date();
-}
+            double stepLon,
+            double stepLat)
+    {
+        this.lon = stepLon;
+        this.lat = stepLat;
+        this.time = new Date();
+    }
 
     public int getId() {
         return id;
@@ -71,5 +73,13 @@ public class Checkpoint implements Serializable
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 }

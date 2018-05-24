@@ -41,6 +41,8 @@
             <element id="module-output" name="core" />
           </element>
           <element id="library" level="project" name="Maven: org.apache.activemq:activemq-all:5.15.3" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-client:1.8" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.8" />
         </element>
       </element>
       <element id="directory" name="META-INF">
