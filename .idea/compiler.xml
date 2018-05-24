@@ -7,6 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
+        <module name="datauitwisselingssysteemmodule" />
+        <module name="monitoringsysteemmodule" />
+        <module name="politiesysteemmodule" />
+        <module name="rekeningadministratiemodule" />
+        <module name="rekeningrijdersapplicatiemodule" />
+        <module name="simulatiemodule" />
+        <module name="verplaatsingsmodule" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

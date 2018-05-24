@@ -27,7 +27,7 @@ public class SimulatieDaoImpl implements SimulatieDao
 
     @Override
     public Checkpoint create(Checkpoint object) {
-        em.persist(object);
+//        em.persist(object);
         checkpointMap.put(checkpointMap.size() + "", object);
         return object;
     }
