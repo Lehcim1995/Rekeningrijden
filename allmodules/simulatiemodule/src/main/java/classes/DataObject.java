@@ -13,8 +13,9 @@ public class DataObject
     private double stepLat;
     private double stepLon;
     private String id;
-//    private Date date;
+    private Date date;
     private long stepId;
+    private int carId;
 
     public DataObject() {
     }
@@ -43,13 +44,13 @@ public class DataObject
         this.id = id;
     }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public long getStepId() {
         return stepId;
@@ -57,5 +58,13 @@ public class DataObject
 
     public void setStepId(long stepId) {
         this.stepId = stepId;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 }
