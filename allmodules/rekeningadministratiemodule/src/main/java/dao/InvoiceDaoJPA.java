@@ -15,7 +15,7 @@ import java.util.List;
 @Stateless
 public class InvoiceDaoJPA implements InvoiceDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {

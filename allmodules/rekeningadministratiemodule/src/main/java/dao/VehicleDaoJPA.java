@@ -14,13 +14,14 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class VehicleDaoJPA implements VehicleDao {
+public class VehicleDaoJPA implements VehicleDao, Serializable {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
     private CriteriaBuilder cb;
     private CriteriaQuery<VehicleTracker> cvt;
@@ -127,6 +128,17 @@ public class VehicleDaoJPA implements VehicleDao {
         if (vehicle != null && tracker != null) {
             vehicle.setTracker(tracker);
             em.merge(vehicle);
+        }
+    }
+
+    @Override
+    public Vehicle editVehicle(Vehicle vehicle) throws IllegalArgumentException{
+        try {
+            em.merge(vehicle);
+            return vehicle;
+        }
+        catch (IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
