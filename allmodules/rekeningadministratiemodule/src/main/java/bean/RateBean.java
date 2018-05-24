@@ -101,7 +101,6 @@ public class RateBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
-
     }
 
     public void onRoadRowSelect(SelectEvent event) {
