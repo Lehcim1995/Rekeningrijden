@@ -14,7 +14,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@SessionScoped
+@RequestScoped
 @Named(value="cartrackerBean")
 public class CartrackerBean implements Serializable {
 
