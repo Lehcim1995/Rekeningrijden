@@ -7,11 +7,13 @@ import services.SimulatieService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Stateless
 public class VerplaatsingPackageTimerBean
 {
     private static final int packegeSize = 10;
