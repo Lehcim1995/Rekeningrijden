@@ -19,6 +19,7 @@ export class ProfileService {
     this.httpClient.post(`${this.postLoginURL}`, body, {observe: 'response'}).subscribe(
       (res) => {
         let token = res.headers.get('Authorization');
+        console.log(res);
         console.log(token);
         if (token != null) {
           this.token = token;
