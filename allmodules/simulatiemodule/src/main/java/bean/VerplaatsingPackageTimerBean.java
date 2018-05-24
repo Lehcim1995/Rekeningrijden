@@ -27,14 +27,14 @@ public class VerplaatsingPackageTimerBean
     }
 
 
-    @Schedule(minute = "*", hour = "*/1", persistent = true)
+    @Schedule(minute = "*/1", hour = "*", persistent = false)
     private void sendVerplaatsing()
     {
+        System.out.println("Sending shizzel");
+
         for (Map.Entry<Integer, List<Checkpoint>> entry : simulatieService.getAll()
                                                                           .entrySet())
         {
-
-
             Verplaatsing v = new Verplaatsing(entry.getValue(), entry.getKey() + "", 0, new Date());
 
             displacementGateway.SendObject(v);
