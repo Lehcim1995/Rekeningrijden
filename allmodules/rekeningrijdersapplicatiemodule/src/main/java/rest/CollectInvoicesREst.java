@@ -1,14 +1,11 @@
 package rest;
 
-import com.google.gson.reflect.TypeToken;
 import domain.Invoice;
 import domain.Owner;
 import model.InvoiceListModel;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
