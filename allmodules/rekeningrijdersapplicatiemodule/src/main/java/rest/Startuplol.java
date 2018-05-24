@@ -19,9 +19,9 @@ public class Startuplol
     public void init()
     {
         System.out.println("collecting invoices");
-        List<Invoice> invoice = rest.collectInvoices();
+        //List<Invoice> invoice = rest.collectInvoices();
 
-        System.out.println(invoice.size());
+        //System.out.println(invoice.size());
         System.out.println("Works lol");
     }
 
