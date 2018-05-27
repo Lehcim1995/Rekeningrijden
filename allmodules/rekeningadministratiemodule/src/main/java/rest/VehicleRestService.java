@@ -37,4 +37,13 @@ public class VehicleRestService
 
         return Response.ok(v).build();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{kenteken}/locationdata")
+    public Response getCarsLocation(@PathParam("kenteken") String id)
+    {
+
+        return Response.ok("nothing here").build();
+    }
 }

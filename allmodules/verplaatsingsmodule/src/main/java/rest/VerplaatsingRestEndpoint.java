@@ -5,6 +5,7 @@ import services.VerplaatsingsService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -35,5 +36,13 @@ public class VerplaatsingRestEndpoint
 
         return Response.ok("added waypoints")
                        .build();
+    }
+
+    @GET
+    @Path("/{car_id}/waypoints")
+    public Response getWayPointFromCar()
+    {
+
+        return Response.ok().build();
     }
 }
