@@ -56,6 +56,11 @@ public class VehicleService implements Serializable {
         return vehicleDao.getVehicles();
     }
 
+    public Vehicle getVehicleByLicencePlate(String plate)
+    {
+        return vehicleDao.getVehicleByLicencePlate(plate);
+    }
+
     public Vehicle getVehicleByID(int ID) {
         if(ID <= 0) return null;
         else return vehicleDao.getVehicleByID(ID);
