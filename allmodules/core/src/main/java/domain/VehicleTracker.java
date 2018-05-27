@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VehicleTracker implements Serializable {
 
@@ -40,6 +42,7 @@ public class VehicleTracker implements Serializable {
     {
         this.ID = id;
         this.manufacturer = manufacturer;
+        this.addDate = new Date();
     }
 
     public String getID() {

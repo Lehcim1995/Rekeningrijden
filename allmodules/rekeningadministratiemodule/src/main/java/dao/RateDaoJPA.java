@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RateDaoJPA implements RateDao{
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {
@@ -149,7 +149,7 @@ public class RateDaoJPA implements RateDao{
                     .setParameter("rateCategoryName", rateCategorie)
                     .getSingleResult();
         }
-        catch(Exception e){
+        catch(exception e){
             throw new SQLException("Dao could not find Ratecategory with name " + rateCategorie);
         }
         return null;

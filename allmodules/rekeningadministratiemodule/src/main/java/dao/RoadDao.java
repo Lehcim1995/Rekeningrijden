@@ -15,5 +15,5 @@ public interface RoadDao {
 
     Road findRoadById (int id) throws SQLException;
 
-    List<Road> getAllRoads () throws SQLException;
+    List<Road> getAllRoads () throws IllegalArgumentException;
 }

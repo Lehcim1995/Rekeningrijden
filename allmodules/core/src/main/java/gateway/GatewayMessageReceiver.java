@@ -10,7 +10,7 @@ import javax.jms.*;
 
 public class GatewayMessageReceiver {
 
-    public GatewayMessageReceiver(MessageListener listener, String URL, String channelName) {
+    public GatewayMessageReceiver(MessageListener listener, String URL, String channelName) throws NoPublicActiveMQConnectionException {
         try {
             ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(URL);
             factory.setTrustAllPackages(true);
@@ -24,6 +24,7 @@ public class GatewayMessageReceiver {
         }
         catch (JMSException e) {
             e.printStackTrace();
+            throw new NoPublicActiveMQConnectionException();
         }
     }
 }

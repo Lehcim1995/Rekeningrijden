@@ -7,14 +7,16 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Stateless
 public class SimulatieDaoImpl implements SimulatieDao
 {
 
-    Map<String, Checkpoint> checkpointMap;
+    Map<Integer, List<Checkpoint>> checkpointMap;
 
     @PersistenceContext(unitName = "simPU")
     private EntityManager em;
@@ -27,8 +29,18 @@ public class SimulatieDaoImpl implements SimulatieDao
 
     @Override
     public Checkpoint create(Checkpoint object) {
-        em.persist(object);
-        checkpointMap.put(checkpointMap.size() + "", object);
+//        em.persist(object);
+
+        if (checkpointMap.containsKey(object.getCarId()))
+        {
+            checkpointMap.get(object.getCarId()).add(object);
+        }
+        else
+        {
+            checkpointMap.put(object.getCarId(), new ArrayList<>());
+        }
+
+
         return object;
     }
 
@@ -56,5 +68,23 @@ public class SimulatieDaoImpl implements SimulatieDao
             Checkpoint object)
     {
 
+    }
+
+    @Override
+    public List<Checkpoint> getCheckpointFromCar(int carId)
+    {
+        return checkpointMap.get(carId);
+    }
+
+    @Override
+    public Map<Integer, List<Checkpoint>> getAllCheckpoints()
+    {
+        return checkpointMap;
+    }
+
+    @Override
+    public void clearData()
+    {
+        checkpointMap.clear();
     }
 }

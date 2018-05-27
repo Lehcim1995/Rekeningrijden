@@ -7,7 +7,11 @@
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
         <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <jta-data-source>java:app/jdbc/displacement</jta-data-source>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+        <class>domain.Checkpoint</class>
+        <class>domain.Verplaatsing</class>
+        <class>domain.VerplaatsingPK</class>
+
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> <!--drop-and-create-->
             <property name="eclipselink.logging.logger" value="DefaultLogger"/>

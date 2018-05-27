@@ -21,7 +21,7 @@ import java.util.List;
 public class CarBean implements Serializable {
 
     @Inject
-    private VehicleService vehicleService;
+    VehicleService vehicleService;
 
     private String licenseplate = "";
     private Date buildYear;

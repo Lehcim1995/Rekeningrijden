@@ -2,7 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -18,17 +17,14 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="allmodules" target="1.5" />
       <module name="core" target="1.8" />
       <module name="datauitwisselingssysteemmodule" target="1.8" />
       <module name="monitoringsysteemmodule" target="1.8" />
       <module name="politiesysteemmodule" target="1.8" />
-      <module name="queueingmodule" target="1.8" />
-      <module name="queuingmodule" target="1.8" />
       <module name="rekeningadministratiemodule" target="1.8" />
-      <module name="rekeningrijden" target="1.5" />
       <module name="rekeningrijdersapplicatiemodule" target="1.8" />
       <module name="simulatiemodule" target="1.8" />
-      <module name="simulationmodule" target="1.5" />
       <module name="verplaatsingsmodule" target="1.8" />
     </bytecodeTargetLevel>
   </component>

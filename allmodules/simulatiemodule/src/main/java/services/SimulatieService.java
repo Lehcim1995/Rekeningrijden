@@ -4,12 +4,15 @@ import domain.Checkpoint;
 import domain.Verplaatsing;
 import gateway.DisplacementGateway;
 import interfaces.SimulatieDao;
+import org.hibernate.annotations.Check;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class SimulatieService
@@ -26,9 +29,12 @@ public class SimulatieService
 
 
     public Checkpoint create(Checkpoint object, String id) {
+
         Checkpoint checkpoint = simulatieDao.create(object);
-        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getId(), new Date());
-        displacementGateway.SendObject(verplaatsing);
+
+//        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getId(), new Date());
+//
+//        displacementGateway.SendObject(verplaatsing);
         return checkpoint;
     }
 
@@ -52,5 +58,26 @@ public class SimulatieService
             Checkpoint object)
     {
         simulatieDao.edit(s, object);
+    }
+
+    public Checkpoint create(Checkpoint cp) {
+        Checkpoint checkpoint = simulatieDao.create(cp);
+
+//        Verplaatsing verplaatsing = new Verplaatsing(Arrays.asList(checkpoint), id, checkpoint.getId(), new Date());
+//
+//        displacementGateway.SendObject(verplaatsing);
+        return checkpoint;
+    }
+
+    public List<Checkpoint> getCheckpointFromCar(int carId) {
+        return simulatieDao.getCheckpointFromCar(carId);
+    }
+
+    public Map<Integer, List<Checkpoint>> getAll() {
+        return simulatieDao.getAllCheckpoints();
+    }
+
+    public void clearData() {
+        simulatieDao.clearData();
     }
 }

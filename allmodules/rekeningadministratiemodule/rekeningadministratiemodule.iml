@@ -15,9 +15,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping>
-          <factory-entry name="accountAdministrationPU" />
-        </datasource-mapping>
+        <datasource-mapping />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
@@ -123,12 +121,7 @@
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:5.0.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.apache.activemq:activemq-all:5.15.3" level="project" />
-  </component>
-  <component name="sonarModuleSettings">
-    <option name="alternativeWorkingDirPath" value="" />
-    <option name="localAnalysisScripName" value="&lt;PROJECT&gt;" />
-    <option name="serverName" value="&lt;PROJECT&gt;" />
-    <option name="useAlternativeWorkingDir" value="false" />
-    <option name="workingDirSelection" value="&lt;MODULE&gt;" />
+    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-client:1.8" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.8" level="project" />
   </component>
 </module>
