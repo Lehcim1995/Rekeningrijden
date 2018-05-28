@@ -1,6 +1,6 @@
 package api;
 
-import classes.Owner;
+import domain.Owner;
 import jsonBodies.OwnerBody;
 import service.OwnerService;
 

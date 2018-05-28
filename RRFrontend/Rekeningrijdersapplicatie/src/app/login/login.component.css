@@ -1,0 +1,33 @@
+.loginform {
+  max-width: 350px;
+  border-radius: 15px;
+  border: 1px solid #f2f2f2;
+  padding: 15px;
+}
+
+@keyframes focus {
+  0% {
+
+  }
+  100% {
+    -webkit-box-shadow: 10px 10px 17px 5px rgba(217, 217, 217, 1);
+    -moz-box-shadow: 10px 10px 17px 5px rgba(217, 217, 217, 1);
+    box-shadow: 10px 10px 17px 5px rgba(217, 217, 217, 1);
+    background-color: #eeeeee;
+  }
+}
+
+.loginform {
+  animation: 1s ease-out 0s 1 focus;
+  animation-fill-mode: forwards;
+}
+
+.form-field > *, .form-buttons > * {
+  flex: 1;
+  margin: 5px;
+}
+
+#main {
+  min-height: 400px;
+}
+

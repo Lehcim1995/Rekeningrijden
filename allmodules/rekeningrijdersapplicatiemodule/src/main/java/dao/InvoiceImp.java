@@ -1,8 +1,8 @@
 package dao;
 
 import Interfaces.InvoiceDAO;
-import classes.Invoice;
-import classes.Owner;
+import domain.Invoice;
+import domain.Owner;
 
 import java.util.Map;
 

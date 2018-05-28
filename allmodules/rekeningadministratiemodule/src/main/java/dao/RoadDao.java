@@ -1,6 +1,6 @@
 package dao;
 
-import classes.Road;
+import domain.Road;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,5 +15,5 @@ public interface RoadDao {
 
     Road findRoadById (int id) throws SQLException;
 
-    List<Road> getAllRoads () throws SQLException;
+    List<Road> getAllRoads () throws IllegalArgumentException;
 }

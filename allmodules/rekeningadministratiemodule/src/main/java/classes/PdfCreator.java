@@ -2,6 +2,7 @@ package classes;
 
 import com.openhtmltopdf.DOMBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import domain.*;
 import org.jsoup.Jsoup;
 
 import java.beans.BeanInfo;

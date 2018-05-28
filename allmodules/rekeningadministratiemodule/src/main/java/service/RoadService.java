@@ -1,8 +1,8 @@
 package service;
 
-import classes.KilometerRate;
-import classes.Road;
 import dao.RoadDao;
+import domain.KilometerRate;
+import domain.Road;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -52,12 +52,12 @@ public class RoadService implements Serializable {
         }
     }
 
-    public List<Road> getAllRoads() throws SQLException {
+    public List<Road> getAllRoads() throws IllegalArgumentException {
         try {
             return roadDao.getAllRoads();
-        }
-        catch (Exception e) {
-            throw new IllegalArgumentException("Could not get all roads");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
+
 }

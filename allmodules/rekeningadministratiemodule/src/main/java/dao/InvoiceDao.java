@@ -1,9 +1,9 @@
 package dao;
 
-import classes.Invoice;
-import classes.MonthEnum;
-import classes.Owner;
-import classes.PaymentEnum;
+import domain.Invoice;
+import domain.MonthEnum;
+import domain.Owner;
+import domain.PaymentEnum;
 
 import java.util.List;
 
@@ -30,4 +30,6 @@ public interface InvoiceDao {
     List<Invoice> getInvoicesByOwnerAndMonth(Owner owner, MonthEnum monthEnum);
 
     List<Invoice> getInvoicesByPaymentStatusAndMonth(PaymentEnum paymentEnum, MonthEnum monthEnum);
+
+    List<Invoice> getInvoicesByVehicleAndOwner(String vehicleId, Owner ownerById);
 }

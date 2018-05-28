@@ -1,9 +1,9 @@
 package service;
 
-import classes.Owner;
-import classes.Vehicle;
 import dao.OwnerDao;
 import dao.VehicleDao;
+import domain.Owner;
+import domain.Vehicle;
 
 import javax.inject.Inject;
 import java.io.Serializable;

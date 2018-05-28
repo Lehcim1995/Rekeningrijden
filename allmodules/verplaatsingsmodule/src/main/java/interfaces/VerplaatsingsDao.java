@@ -1,6 +1,6 @@
 package interfaces;
 
-import classes.Verplaatsing;
+import domain.Verplaatsing;
 
 import java.util.List;
 
