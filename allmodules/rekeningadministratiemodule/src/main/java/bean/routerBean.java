@@ -42,5 +42,9 @@ public class routerBean implements Serializable{
         return "/pages/managekilometerrate.xhtml?faces-redirect=true&includeViewParams=true";
     }
 
+    public String goToManagement() {
+        return "/pages/management.xhtml?faces-redirect=true&includeViewParams=true";
+    }
+
 
 }

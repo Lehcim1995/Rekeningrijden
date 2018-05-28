@@ -1,7 +1,7 @@
 package Interfaces;
 
-import classes.Invoice;
-import classes.Owner;
+import domain.Invoice;
+import domain.Owner;
 
 public interface InvoiceDAO {
 

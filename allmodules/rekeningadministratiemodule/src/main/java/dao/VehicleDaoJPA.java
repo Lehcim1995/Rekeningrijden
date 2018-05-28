@@ -1,10 +1,9 @@
 package dao;
 
 import Exceptions.CreationException;
-import classes.FuelEnum;
-import classes.RateCategory;
-import classes.Vehicle;
-import classes.VehicleTracker;
+import domain.FuelEnum;
+import domain.Vehicle;
+import domain.VehicleTracker;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -15,13 +14,15 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class VehicleDaoJPA implements VehicleDao {
+public class VehicleDaoJPA implements VehicleDao, Serializable
+{
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
     private CriteriaBuilder cb;
     private CriteriaQuery<VehicleTracker> cvt;
@@ -41,13 +42,23 @@ public class VehicleDaoJPA implements VehicleDao {
     @Override
     public List<VehicleTracker> getVehicleTrackers() {
         setupVehicleTrackerJPA();
-        return em.createQuery(cvt).getResultList();
+        return em.createQuery(cvt)
+                 .getResultList();
     }
 
     @Override
     public VehicleTracker getVehicleTrackerByID(String ID) {
         setupVehicleTrackerJPA();
         return em.find(VehicleTracker.class, ID);
+    }
+
+    @Override
+    public Vehicle getVehicleByLicencePlate(String plate)
+    {
+
+        return em.createQuery("SELECT v FROM Vehicle v WHERE v.licensePlate = :plate", Vehicle.class)
+                 .setParameter("plate", plate)
+                 .getSingleResult();
     }
 
     @Override
@@ -66,14 +77,19 @@ public class VehicleDaoJPA implements VehicleDao {
 
         return vehicleTracker;
     }
+
     @Override
-    public VehicleTracker createVehicleTrackerId(String Id, String manufacturer) throws CreationException {
-        try{
+    public VehicleTracker createVehicleTrackerId(
+            String Id,
+            String manufacturer) throws CreationException
+    {
+        try
+        {
             VehicleTracker vehicleTracker = new VehicleTracker(Id, manufacturer);
             em.persist(vehicleTracker);
             return vehicleTracker;
         }
-        catch(IllegalArgumentException | TransactionRequiredException | EntityExistsException e)
+        catch (IllegalArgumentException | TransactionRequiredException | EntityExistsException e)
         {
             throw new CreationException("Could not create Vehicletracker due to an error: " + e.getMessage());
         }
@@ -84,7 +100,8 @@ public class VehicleDaoJPA implements VehicleDao {
     @Override
     public List<Vehicle> getVehicles() {
         setupVehicleJPA();
-        return em.createQuery(cv).getResultList();
+        return em.createQuery(cv)
+                 .getResultList();
     }
 
     @Override
@@ -103,7 +120,12 @@ public class VehicleDaoJPA implements VehicleDao {
     }
 
     @Override
-    public Vehicle createVehicleParam(String licensePlate, Date buildYear, int weight, FuelEnum fueltype) {
+    public Vehicle createVehicleParam(
+            String licensePlate,
+            Date buildYear,
+            int weight,
+            FuelEnum fueltype)
+    {
         Vehicle createdVehicle = new Vehicle(licensePlate, buildYear, weight, fueltype);
         em.persist(createdVehicle);
 
@@ -115,19 +137,42 @@ public class VehicleDaoJPA implements VehicleDao {
 
         VehicleTracker tracker = em.find(VehicleTracker.class, ID);
 
-        if (tracker != null) return tracker.getVehicle();
-        else return null;
+        if (tracker != null)
+        {
+            return tracker.getVehicle();
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
-    public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {
+    public void setVehicleTracker(
+            int vehicleID,
+            String vehicleTrackerID)
+    {
 
         Vehicle vehicle = em.find(Vehicle.class, vehicleID);
         VehicleTracker tracker = em.find(VehicleTracker.class, vehicleTrackerID);
 
-        if (vehicle != null && tracker != null) {
+        if (vehicle != null && tracker != null)
+        {
             vehicle.setTracker(tracker);
             em.merge(vehicle);
+        }
+    }
+
+    @Override
+    public Vehicle editVehicle(Vehicle vehicle) throws IllegalArgumentException {
+        try
+        {
+            em.merge(vehicle);
+            return vehicle;
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

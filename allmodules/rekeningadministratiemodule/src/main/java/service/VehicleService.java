@@ -1,24 +1,22 @@
 package service;
 
 import Exceptions.CreationException;
-import classes.FuelEnum;
-import classes.RateCategory;
-import classes.Vehicle;
-import classes.VehicleTracker;
 import dao.VehicleDao;
-import org.apache.commons.lang3.StringUtils;
+import domain.FuelEnum;
+import domain.Vehicle;
+import domain.VehicleTracker;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityExistsException;
-import javax.persistence.TransactionRequiredException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@Stateless
 public class VehicleService implements Serializable {
 
     @Inject
-    private VehicleDao vehicleDao;
+    VehicleDao vehicleDao;
 
 
     public VehicleService() {}
@@ -58,6 +56,11 @@ public class VehicleService implements Serializable {
         return vehicleDao.getVehicles();
     }
 
+    public Vehicle getVehicleByLicencePlate(String plate)
+    {
+        return vehicleDao.getVehicleByLicencePlate(plate);
+    }
+
     public Vehicle getVehicleByID(int ID) {
         if(ID <= 0) return null;
         else return vehicleDao.getVehicleByID(ID);
@@ -92,5 +95,14 @@ public class VehicleService implements Serializable {
 
     public void setVehicleTracker(int vehicleID, String vehicleTrackerID) {
         vehicleDao.setVehicleTracker(vehicleID, vehicleTrackerID);
+    }
+
+    public Vehicle editVehicle(int vehicleId, int weight, String licenseplate, FuelEnum fuelType, Date buildYear) throws IllegalArgumentException{
+        Vehicle vehicle = vehicleDao.getVehicleByID(vehicleId);
+        vehicle.setWeight(weight);
+        vehicle.setLicensePlate(licenseplate);
+        vehicle.setFueltype(fuelType);
+        vehicle.setBuildYear(buildYear);
+        return vehicleDao.editVehicle(vehicle);
     }
 }

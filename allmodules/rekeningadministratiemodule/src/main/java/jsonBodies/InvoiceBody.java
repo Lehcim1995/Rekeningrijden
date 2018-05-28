@@ -1,8 +1,8 @@
 package jsonBodies;
 
-import classes.MonthEnum;
-import classes.Owner;
-import classes.PaymentEnum;
+import domain.MonthEnum;
+import domain.Owner;
+import domain.PaymentEnum;
 
 import java.io.Serializable;
 

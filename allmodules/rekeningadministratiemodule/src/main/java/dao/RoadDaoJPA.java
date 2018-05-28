@@ -1,6 +1,7 @@
 package dao;
 
-import classes.Road;
+import domain.Road;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.SQLException;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class RoadDaoJPA implements RoadDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {
@@ -52,12 +53,12 @@ public class RoadDaoJPA implements RoadDao {
     }
 
     @Override
-    public List<Road> getAllRoads() throws SQLException {
+    public List<Road> getAllRoads() throws IllegalArgumentException {
         try {
             return em.createQuery("SELECT road FROM Road road", Road.class).getResultList();
         }
-        catch (Exception e) {
-            throw new SQLException("Could not get all roads");
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Could not get all roads");
         }
     }
 }

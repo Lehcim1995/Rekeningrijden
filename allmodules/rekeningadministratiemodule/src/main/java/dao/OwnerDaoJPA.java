@@ -1,7 +1,7 @@
 package dao;
 
-import classes.Owner;
-import classes.Vehicle;
+import domain.Owner;
+import domain.Vehicle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OwnerDaoJPA implements OwnerDao {
 
-    @PersistenceContext(unitName = "accountAdministrationPU")
+    @PersistenceContext(name = "accountAdministrationPU")
     private EntityManager em;
 
     public void setEm(EntityManager em) {

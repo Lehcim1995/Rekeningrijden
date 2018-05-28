@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet name="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tax&amp;Tracks - Beheer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <div id="super-header" class="flexbox column wrap">
+        <div id="header">
+            <h:link outcome="#"><h:graphicImage value="/resources/img/logo.png" /></h:link>
+            <h:form><p:commandLink action="#{routerBean.goToHome()}"><h1>Tax &amp; Tracks</h1></p:commandLink></h:form>
+            <p><h:link value="Login" outcome="user/login.xhtml"/></p>
+        </div>
+        <h:form class="flexbox column wrap">
+            <ul class="nav flexbox row wrap evenly">
+                <li><p:commandLink value="Overzicht Facturen" action="#{routerBean.goToInvoices()}"/></li>
+                <li><p:commandLink value="Auto's Toevoegen" action="#{routerBean.goToCreateCar()}"/></li>
+                <li><p:commandLink value="Cartrackers Toevoegen" action="#{routerBean.goToCreateCartracker()}"/></li>
+                <li><p:commandLink value="Koppel account aan een auto" action="#{routerBean.goToLinkcarowner()}"/></li>
+                <li><p:commandLink value="Manage kilometerrate" action="#{routerBean.goToManageKilometerRate}"/></li>
+                <li><p:commandLink value="Beheer" action="#{routerBean.goToManagement}"/></li>
+            </ul>
+        </h:form>
+    </div>
+    <div id="main" class="flexbox column wrap">
+    <h2>Beheer</h2>
+
+        <h:form id="allUsersForm">
+            <p:growl id="msgs" showDetail="true"/>
+            <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
+            </p:messages>
+            <div>
+                   <p:dataTable id="ownerTable" editable="true" var="owner" value="#{ownerBean.allCarOwners}"
+                                 editMode="cell">
+
+                        <f:facet name="header">
+                            Pas een gebruiker aan
+                        </f:facet>
+
+                        <p:ajax event="cellEdit" listener="#{ownerBean.onOwnerEdit}"
+                                immediate="true"
+                                update=":allUsersForm:msgs"/>
+
+                        <p:column headerText="Gebruiker">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{owner.firstName} #{owner.middleName} #{owner.lastName}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{owner.firstName} #{owner.middleName} #{owner.lastName}"
+                                                                   label="Gebruiker"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Stad">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{owner.city}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{owner.city}"
+                                                 label="Stad"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Adres">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{owner.address}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{owner.address}"
+                                                 label="Adres"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+        </h:form>
+    </div>
+    <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
+</h:body>
+</html>

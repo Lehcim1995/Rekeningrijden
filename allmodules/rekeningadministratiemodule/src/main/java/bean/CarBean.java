@@ -1,9 +1,7 @@
 package bean;
 
-import classes.*;
-import classes.RateCategoryEnum;
-import classes.Vehicle;
-import service.RateService;
+import domain.FuelEnum;
+import domain.Vehicle;
 import service.VehicleService;
 
 import javax.annotation.PostConstruct;
@@ -23,12 +21,11 @@ import java.util.List;
 public class CarBean implements Serializable {
 
     @Inject
-    private VehicleService vehicleService;
+    VehicleService vehicleService;
 
     private String licenseplate = "";
     private Date buildYear;
     private String fueltype = "";
-    private List<RateCategoryEnum> classificationList = Arrays.asList(RateCategoryEnum.values());
     private List<FuelEnum> fueltypes = Arrays.asList(FuelEnum.values());
     private int weight;
 
@@ -54,14 +51,6 @@ public class CarBean implements Serializable {
 
     public void setBuildYear(Date buildYear) {
         this.buildYear = buildYear;
-    }
-
-    public List<RateCategoryEnum> getClassificationList() {
-        return classificationList;
-    }
-
-    public void setClassificationList(List<RateCategoryEnum> classificationList) {
-        this.classificationList = classificationList;
     }
 
     public String getFueltype() {

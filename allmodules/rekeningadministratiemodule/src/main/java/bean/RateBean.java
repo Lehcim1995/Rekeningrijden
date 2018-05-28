@@ -1,9 +1,8 @@
 package bean;
 
-import classes.KilometerRate;
-import classes.RateCategory;
-import classes.Road;
-import javafx.scene.control.TableColumn;
+import domain.KilometerRate;
+import domain.RateCategory;
+import domain.Road;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
@@ -95,14 +94,13 @@ public class RateBean implements Serializable{
         try{
             return roadService.getAllRoads();
         }
-        catch(SQLException e)
+        catch(IllegalArgumentException e)
         {
             FacesMessage msg = new FacesMessage("Something went wrong when getting al the Roads " +
                     e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
-
     }
 
     public void onRoadRowSelect(SelectEvent event) {
