@@ -5,14 +5,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-
 //Auth routes
 Auth::routes();
 
-//Car routes
-Route::get('/car', 'CarController@index')->middleware('auth');
+//Only allow logged in users
+Route::middleware(['auth'])->group(function () {
+    //Home view
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/car', 'CarController@store')->middleware('auth');
+    //Car routes
+    Route::get('/car', 'CarController@index');
 
-Route::get('/car/{car}', 'CarController@show')->middleware('auth');
+    Route::post('/car', 'CarController@store');
+
+    Route::get('/car/{car}', 'CarController@show');
+
+    Route::get('/car/{car}/retrieve', 'CarController@retrieve');
+
+    Route::get('/cords', 'CarController@cords');
+
+    Route::get('/spoofPerson', 'CarController@spoofPerson');
+});
+

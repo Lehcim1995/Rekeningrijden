@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -15,7 +16,7 @@ class CarController extends Controller
     public function index()
     {
         //Get all cars
-        $cars = Car::all();
+        $cars = Car::orderBy('retrieved', 'asc')->get();
 
         //Load view with all cars
         return view('car.index', compact('cars'));
@@ -39,7 +40,6 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $car = new Car();
         $car->license_plate = $request->input('license_plate');
         $car->retrieved = false;
@@ -92,5 +92,42 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function retrieve(Car $car)
+    {
+        $car->retrieved = true;
+        $car->save();
+
+        return redirect('/car');
+    }
+
+    public function cords()
+    {
+        return [['lat' => 37.77, 'lon' => -122.21], ['lat' => 21.29, 'lon' => -157.82], ['lat' => -18.14, 'lon' => 178.43], ['lat' => -27.46, 'lon' => 153.03]];
+    }
+
+    public function spoofPerson()
+    {
+        return [
+            'id' => 1,
+            'tracker' => [
+                'manufacturer' => 'Skoda',
+            ],
+            'weight' => 1234,
+            'licensePlate' => 'ab-123-a',
+            'fueltype' => 'diesel',
+            'buildYear' => Carbon::now()->year,
+            'owner' => [
+                'id' => 2,
+                'citizenId' => 2,
+                'firstName' => 'Luuk',
+                'middleName' => 'de',
+                'lastName' => 'Weijer',
+                'address' => 'Leonard van Vechelstraat 51',
+                'city' => 'tilburg',
+            ],
+            'perviousOwners' => [],
+        ];
     }
 }

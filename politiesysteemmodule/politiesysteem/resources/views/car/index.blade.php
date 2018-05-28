@@ -22,9 +22,9 @@
                             <td>
                                 @if($car->retrieved)
                                     <i class="fa fa-check" aria-hidden="true"
-                                       style="color: green; font-size: 24px;"></i>
+                                       style="color: green; font-size: 15px;"></i>
                                 @else
-                                    <i class="fa fa-times" aria-hidden="true" style="color: red; font-size: 24px;"></i>
+                                    <i class="fa fa-times" aria-hidden="true" style="color: red; font-size: 15px;"></i>
                                 @endif
                             </td>
                         </tr>
@@ -34,16 +34,16 @@
             </div>
         </div>
 
-        <div class="row">
-            <form method="POST" action="/car" style="width: 100%">
+        <form method="POST" action="/car">
+            <div class="row">
                 {{ csrf_field() }}
                 <div class="col-lg-8">
-                    <input id="license_plate" required class="form-control" placeholder="12-abc-1" style="width: 100%">
+                    <input name="license_plate" required class="form-control" placeholder="12-abc-1">
                 </div>
                 <div class="col-lg-3">
                     <button type="submit" class="btn btn-primary">Voeg auto toe</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 @endsection
