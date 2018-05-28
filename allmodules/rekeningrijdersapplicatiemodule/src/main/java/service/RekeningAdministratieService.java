@@ -20,7 +20,7 @@ public class RekeningAdministratieService {
     ProfileDao profileDao;
 
     public List<Invoice> GetInvoicesByVehicleAndOwner(int trackerId, int ownerId) {
-        return rest.getVehicleOwnerInvoices(trackerId, ownerId);
+        return rest.getVehicleOwnerInvoices(trackerId + "", ownerId);
     }
 
     public void authenticate(String login, String password) throws SecurityException {
