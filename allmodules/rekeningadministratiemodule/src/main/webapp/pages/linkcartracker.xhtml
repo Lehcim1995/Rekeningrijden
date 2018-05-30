@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <h:outputStylesheet name="css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Tax&amp;Tracks - Auto Toevoegen</title>
+    <title>Tax&amp;Tracks - Link cartrackers with cars</title>
     <link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon.ico']}"/>
 </h:head>
 <h:body>
@@ -32,58 +32,58 @@
         </h:form>
     </div>
     <div id="main" class="flexbox column wrap">
-        <h3>Auto Aanmaken</h3>
-        <h:form class="flexbox column carForm wrap" id="carform">
+        <h2>Koppel een cartracker aan een auto</h2>
+        <h:form id="linkform">
+            <p:growl id="msgs" showDetail="true" />
             <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
             </p:messages>
+            <p:dataTable id="vehicleTrackerTable" class="table" var="cartracker" value="#{cartrackerBean.allCarTrackers}" selectionMode="single" selection="#{cartrackerCarBean.selectedVehicleTracker}" rowKey="#{cartracker.ID}">
 
-            <div class="flexbox row wrap">
-                <h:outputLabel for="licenseplate">Kentekenplaat:</h:outputLabel>
-                <p:inputText value="#{carBean.licenseplate}" name="licenseplate" placeholder="e.g 'ZZ 92 394'" >
-                    <f:validateLength minimum="7" maximum="9" />
-                </p:inputText>
-            </div>
-            <div class="flexbox row wrap">
-                <h:outputLabel for="buildyear">Bouwjaar:</h:outputLabel>
-                <p:calendar readonly="" nly="true" value="#{carBean.buildYear}" locale="de" navigator="true" name="buildyear" pattern="yyyy-MMM-dd" class="correctCalendar"/>
-            </div>
-            <div class="flexbox row wrap">
-                <h:outputLabel for="weight">Gewicht:</h:outputLabel>
-                <p:inputText value="#{carBean.weight}" name="weight" />
-            </div>
-            <div class="flexbox row wrap">
-                <h:outputLabel for="fueltype">Brandstoftype:</h:outputLabel>
-                <h:selectOneMenu value="#{carBean.fueltype}" valueChangeListener="#{carBean.fueltypeValueChanged}" name="fueltype" class="input">
-                    <f:selectItems value="#{carBean.fueltypes}" var="enumItem" />
-                </h:selectOneMenu>
-            </div>
-            <p:commandButton class="carFormSubmit" update=":allcarsform:cartable" value="Invoeren" action="#{carBean.createCar()}"/>
-        </h:form>
-
-        <h:form id="allcarsform">
-            <p:dataTable id="cartable" var="car" value="#{carBean.allCars}">
-                <p:column headerText="Kentekenplaat">
-                    <h:outputText value="#{car.licensePlate}" />
+                <f:facet name="header">
+                    Selecteer een cartracker
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{cartrackerCarBean.onVehicleTrackerRowSelect}" update=":linkform:msgs" />
+                <p:ajax event="rowUnselect" listener="#{cartrackerCarBean.onVehicleTrackerRowUnselect}" update=":linkform:msgs" />
+                <p:column headerText="ID">
+                    <h:outputText value="#{cartracker.ID}" />
                 </p:column>
-                <p:column headerText="Eigenaar BSN">
-                    <h:outputText value="#{car.owner.citizenId}" />
+                <p:column headerText="Manufacturer">
+                    <h:outputText value="#{cartracker.manufacturer}" />
                 </p:column>
-                <p:column headerText="Eigenaar achternaam">
-                    <h:outputText value="#{car.owner.lastName}" />
-                </p:column>
-                <p:column headerText="Bouwjaar">
-                    <h:outputText value="#{car.buildYear}" />
-                </p:column>
-                <p:column headerText="Tracker ID">
-                    <h:outputText value="#{car.tracker.ID}" />
-                </p:column>
-                <p:column headerText="Gewicht">
-                    <h:outputText value="#{car.weight}" />
-                </p:column>
-                <p:column headerText="Brandstoftype">
-                    <h:outputText value="#{car.fueltype}" />
+                <p:column headerText="Auto">
+                    <h:outputText value="#{cartracker.vehicle.licensePlate}" />
                 </p:column>
             </p:dataTable>
+
+
+            <p:dataTable id="vehicleTable" class="table" var="vehicle" value="#{carBean.allCars}" selectionMode="single" selection="#{cartrackerCarBean.selectedCar}" rowKey="#{vehicle.licensePlate}">
+
+                <f:facet name="header">
+                    Selecteer een Voertuig
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{carOwnerBean.onVehicleRowSelect}" update=":linkform:msgs" />
+                <p:ajax event="rowUnselect" listener="#{carOwnerBean.onVehicleRowUnselect}" update=":linkform:msgs" />
+                <p:column headerText="Kenteken">
+                    <h:outputText value="#{vehicle.licensePlate}" />
+                </p:column>
+                <p:column headerText="Bouwjaar">
+                    <h:outputText value="#{vehicle.buildYear}" />
+                </p:column>
+                <p:column headerText="Brandstoftype">
+                    <h:outputText value="#{vehicle.fueltype}" />
+                </p:column>
+                <p:column headerText="Gewicht">
+                    <h:outputText value="#{vehicle.weight}" />
+                </p:column>
+                <p:column headerText="Cartracker ID">
+                    <h:outputText value="#{vehicle.tracker.ID}" />
+                </p:column>
+                <p:column headerText="Cartracker manufacturer">
+                    <h:outputText value="#{vehicle.tracker.manufacturer}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton class="linkOwnerVehicle" update=":linkform:vehicleTrackerTable,:linkform:vehicleTable" value="Koppel" action="#{cartrackerCarBean.linkCartrackerToCar()}"/>
         </h:form>
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
