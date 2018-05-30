@@ -79,7 +79,6 @@ export class InvoiceComponent implements OnInit {
 
   }
 
-
   chooseInvoice(invoice: any) {
     this.lastInvoice = invoice.invoiceID;
     //servicecall met invoiceid en ownerid
@@ -91,4 +90,6 @@ export class InvoiceComponent implements OnInit {
       this.selectedInvoice = this.invoices[0];
     }
   }
+
+
 }
