@@ -1,6 +1,6 @@
 package rest;
 
-import classes.DataObject;
+import domain.DataObject;
 import domain.Checkpoint;
 import domain.Vehicle;
 import services.SimulatieService;
@@ -35,7 +35,7 @@ public class SimulatieRest
     public Response setPoints(DataObject dataObject) {
         System.out.println("Lon " + dataObject.getStepLon() + " \n" + "Lat " + dataObject.getStepLat() + " \n" + "car id " + dataObject.getCarId() + " \n" + "stepid " + dataObject.getStepId() + " \n" + "date " + dataObject.getDate());
 
-        Checkpoint cp = new Checkpoint(dataObject.getStepLon(), dataObject.getStepLat());
+        Checkpoint cp = new Checkpoint(dataObject);
 
         simulatieService.create(cp);
 

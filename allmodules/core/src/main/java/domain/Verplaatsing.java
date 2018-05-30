@@ -3,10 +3,7 @@ package domain;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
@@ -25,7 +22,7 @@ public class Verplaatsing implements Serializable
 
     private Date time;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Checkpoint> checkpoints;
 
@@ -38,7 +35,11 @@ public class Verplaatsing implements Serializable
         this.time = verplaatsing.getTime();
     }
 
-    public Verplaatsing(List<Checkpoint> checkpoints, String voertuigId, long serieID, Date time)
+    public Verplaatsing(
+            List<Checkpoint> checkpoints,
+            String voertuigId,
+            long serieID,
+            Date time)
     {
         this.voertuigId = voertuigId;
         this.serieID = serieID;
@@ -68,11 +69,13 @@ public class Verplaatsing implements Serializable
 
     private double distance()
     {
-        double distance= 0;
+        double distance = 0;
 
         Checkpoint curr = null;
-        for (Checkpoint next: checkpoints) {
-            if (curr != null) {
+        for (Checkpoint next : checkpoints)
+        {
+            if (curr != null)
+            {
                 // compare
                 distance += calcDisBetweenPoints(curr, next);
             }

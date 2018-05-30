@@ -24,10 +24,10 @@ public class DisplacementReceiverGateway implements IGatewayImplementor {
     private final Gson gson = new Gson();
 
     @Inject
-    private VerplaatsingsService service;
+    private VerplaatsingsService verplaatsingsService;
 
-    public void setService(VerplaatsingsService service) {
-        this.service = service;
+    public void setVerplaatsingsService(VerplaatsingsService verplaatsingsService) {
+        this.verplaatsingsService = verplaatsingsService;
     }
 
     @PostConstruct
@@ -49,8 +49,9 @@ public class DisplacementReceiverGateway implements IGatewayImplementor {
         try {
             Verplaatsing verplaatsing = gson.fromJson(((TextMessage) message).getText(), Verplaatsing.class);
             //Verplaatsing verplaatsing = (Verplaatsing) ((ObjectMessage) message).getObject();
-            service.create(verplaatsing);
+            verplaatsingsService.create(verplaatsing);
         } catch (JMSException e) {
+            System.out.println("Receiving message failed");
             e.printStackTrace();
         }
         catch (NullPointerException npe)

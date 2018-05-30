@@ -37,6 +37,7 @@ public class VerplaatsingPackageTimerBean
         for (Map.Entry<Integer, List<Checkpoint>> entry : simulatieService.getAll()
                                                                           .entrySet())
         {
+            // TODO how to fix serie id?
             Verplaatsing v = new Verplaatsing(entry.getValue(), entry.getKey() + "", 0, new Date());
 
             displacementGateway.SendObject(v);
