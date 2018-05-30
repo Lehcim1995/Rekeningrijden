@@ -10,6 +10,7 @@ import {FooterComponent} from './footer/footer.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./auth/token.interceptor";
 import {ProfileService} from "./profile.service";
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {ProfileService} from "./profile.service";
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,

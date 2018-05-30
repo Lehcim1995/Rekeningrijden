@@ -8,14 +8,10 @@ import {Component, OnInit} from '@angular/core';
 export class HomeComponent implements OnInit {
   vehicles: any;
 
-  invoices: any;
-  invoices1: any;
-  invoices2: any;
-
-  selectedInvoice: any;
+  selectedInvoices: any;
+  selectedCar: any;
 
   lastCar: any;
-  lastInvoice: any;
 
   constructor() {
   }
@@ -26,41 +22,14 @@ export class HomeComponent implements OnInit {
       {name: "auto 2", licenseplate: "XL 54 423", classification: "Diesel", trackerID: "17482", ownerID: "8"}
     ];
 
+    this.selectedInvoices = [];
 
-    this.invoices = [];
-    this.invoices1 = [
-      {
-        date: Date(),
-        licenseplate: "XL 89 555",
-        price: "1500",
-        trackerID: "17453",
-        kmAmmount: "549",
-        invoiceID: "123123"
-      },
-      {date: Date(), licenseplate: "XL 89 555", price: "124", trackerID: "17453", kmAmmount: "80", invoiceID: "541234"},
-      {date: Date(), licenseplate: "XL 89 555", price: "1413", trackerID: "17453", kmAmmount: "423", invoiceID: "423"}
-    ];
-    this.invoices2 = [
-      {
-        date: Date(),
-        licenseplate: "XL 54 423",
-        price: "34232",
-        trackerID: "17482",
-        kmAmmount: "89477",
-        invoiceID: "34"
-      },
-      {date: Date(), licenseplate: "XL 54 423", price: "4", trackerID: "17482", kmAmmount: "2", invoiceID: "1"},
-      {date: Date(), licenseplate: "XL 54 423", price: "1283", trackerID: "17482", kmAmmount: "701", invoiceID: "543"},
-      {date: Date(), licenseplate: "XL 54 423", price: "311", trackerID: "17482", kmAmmount: "210", invoiceID: "898939"}
-    ];
-    this.selectedInvoice = [];
+    this.selectedCar = "";
+
   }
 
 //vehicletracker id en owner id
   chooseCar(vehicle) {
-    this.selectedInvoice = '';
-    this.invoices = [];
-
     this.lastCar = vehicle.trackerID;
     //servicecall met vehicletrackerid en ownerid
 
@@ -68,25 +37,20 @@ export class HomeComponent implements OnInit {
 
     //mockcode for testing
     if (+vehicle.trackerID == 17453) {
-      this.invoices = this.invoices1;
+      this.selectedCar = vehicle;
     }
     if (+vehicle.trackerID == 17482) {
-      this.invoices = this.invoices2;
+      this.selectedCar = vehicle;
     }
 
   }
 
-  chooseInvoice(invoice: any) {
-    this.lastInvoice = invoice.invoiceID;
-    //servicecall met invoiceid en ownerid
+  addInvoice(invoice: any) {
+    this.selectedInvoices.push(invoice);
+  }
 
-    //invoicesdetails wordt returnwaarde van servicecall
-
-    //mockcode for testing
-    if (invoice.invoiceID == 123123) {
-      this.selectedInvoice = this.invoices[0];
-    }
-
+  goBack() {
+    this.selectedCar = '';
   }
 
 }
