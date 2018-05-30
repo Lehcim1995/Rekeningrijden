@@ -34,7 +34,7 @@ public class PdfCreator
 
     // todo split generation from invoice and pdf and html
 
-    private static final String RESOURCE_PATH = "rekeningadministratiemodule/src/main/resources/";
+    private static final String RESOURCE_PATH = "allmodules/rekeningadministratiemodule/src/main/resources/";
 
     //D:\School\JavaProjects\ProftaakSem6\rekeningadministratiemodule\src\main\resources\templates\invoiceTemplate.html
     private static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
@@ -61,7 +61,6 @@ public class PdfCreator
         }
 
         invoice.setInvoiceData(data);
-
 
         new PdfCreator().createInvoicePdf(invoice);
     }

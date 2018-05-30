@@ -113,10 +113,10 @@ public class VehicleDaoJPA implements VehicleDao, Serializable
     @Override
     public Vehicle createVehicle(Vehicle vehicle) {
 
-        Vehicle createdVehicle = new Vehicle(vehicle);
-        em.persist(createdVehicle);
+//        Vehicle createdVehicle = new Vehicle(vehicle);
+        em.persist(vehicle);
 
-        return createdVehicle;
+        return vehicle;
     }
 
     @Override

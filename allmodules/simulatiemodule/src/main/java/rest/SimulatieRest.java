@@ -33,7 +33,7 @@ public class SimulatieRest
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response setPoints(DataObject dataObject) {
-        System.out.println("Lon " + dataObject.getStepLon() + " \n" + "Lat " + dataObject.getStepLat() + " \n" + "id " + dataObject.getId() + " \n" + "stepid " + dataObject.getStepId() + " \n" + "date " + dataObject.getDate());
+        System.out.println("Lon " + dataObject.getStepLon() + " \n" + "Lat " + dataObject.getStepLat() + " \n" + "car id " + dataObject.getCarId() + " \n" + "stepid " + dataObject.getStepId() + " \n" + "date " + dataObject.getDate());
 
         Checkpoint cp = new Checkpoint(dataObject.getStepLon(), dataObject.getStepLat());
 
