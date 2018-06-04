@@ -67,7 +67,7 @@ public class AuthenticationBean implements Serializable {
             return "/login.html?faces-redirect=true";
         }
     }
-
+/*
     public String getEmail() {
         return email;
     }
@@ -86,5 +86,5 @@ public class AuthenticationBean implements Serializable {
 
     public Employee getEmployee() {
         return employee;
-    }
+    }*/
 }
