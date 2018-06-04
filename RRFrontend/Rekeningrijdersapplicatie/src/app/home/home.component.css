@@ -1,7 +1,6 @@
-#cars, #invoices {
+#cars {
   width: 100%;
-  padding: 5px;
-  border-right: 2px solid #f2f2f2;
+  padding: 5px
 }
 
 .car {
@@ -17,27 +16,22 @@
   border-bottom: 1px solid #f2f2f2;
 }
 
-.car-entry:hover, .invoice-entry:hover {
+.car-entry:hover, .link {
   cursor: pointer;
 }
 
-#main > div:last-of-type {
-  flex: 2
+
+#cars h3 , #cars h5{
+  margin: 0px;
 }
 
-#main div, .detailpanels > div {
-  flex: 1;
-  width: 100%;
+a {
+  color: #616770;
 }
 
-.detailpanels > div {
-  margin: 5px;
-}
-.active{
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f2f2+0,ffffff+100&1+0,0+100 */
-  background: -moz-linear-gradient(top, rgba(242,242,242,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(242,242,242,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(242,242,242,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-  border-radius: 5px;
+input[type=text], select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
