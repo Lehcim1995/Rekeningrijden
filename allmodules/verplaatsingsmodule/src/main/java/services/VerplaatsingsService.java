@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 @Default
@@ -34,5 +36,10 @@ public class VerplaatsingsService
 
     public String delete(String s) {
         return verplaatsingsDao.delete(s);
+    }
+
+    public List<Verplaatsing> getVerplaatsingsForVehicle(String licence)
+    {
+        return new ArrayList<>();
     }
 }

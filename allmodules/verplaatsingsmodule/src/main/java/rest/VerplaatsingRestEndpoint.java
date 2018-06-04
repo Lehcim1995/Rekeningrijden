@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -40,9 +42,9 @@ public class VerplaatsingRestEndpoint
 
     @GET
     @Path("/{car_id}/waypoints")
-    public Response getWayPointFromCar()
+    public Response getWayPointFromCar(@PathParam("car_id") String licencePlate)
     {
-
-        return Response.ok().build();
+        GenericEntity<List<Verplaatsing>> entity = new GenericEntity<List<Verplaatsing>>(verplaatsingsService.getVerplaatsingsForVehicle(licencePlate)) {};
+        return Response.ok().entity(entity).build();
     }
 }
