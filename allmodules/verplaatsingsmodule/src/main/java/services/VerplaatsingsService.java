@@ -23,7 +23,7 @@ public class VerplaatsingsService
     private DisplacementReceiverGateway gateway;
 
     @PostConstruct
-    public void init(){};
+    public void init(){}
 
     public void setVerplaatsingsDao(VerplaatsingsDao verplaatsingsDao)
     {
@@ -40,6 +40,7 @@ public class VerplaatsingsService
 
     public List<Verplaatsing> getVerplaatsingsForVehicle(String licence)
     {
-        return new ArrayList<>();
+
+        return verplaatsingsDao.getVerplaatsingen(licence);
     }
 }
