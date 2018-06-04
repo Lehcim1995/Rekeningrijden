@@ -12,7 +12,9 @@ import {TokenInterceptor} from "./auth/token.interceptor";
 import {ProfileService} from "./profile.service";
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoicesComponent } from './invoices/invoices.component';
-import { NameFilterPipe } from './name-filter.pipe';
+import { CarFilterPipe } from './carFilter.pipe';
+import { InvoiceFilterPipe } from './invoice-filter.pipe';
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -24,14 +26,15 @@ import { NameFilterPipe } from './name-filter.pipe';
     FooterComponent,
     InvoiceComponent,
     InvoicesComponent,
-    NameFilterPipe
+    CarFilterPipe,
+    InvoiceFilterPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {
@@ -40,6 +43,7 @@ import { NameFilterPipe } from './name-filter.pipe';
       multi: true
     },
     ProfileService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

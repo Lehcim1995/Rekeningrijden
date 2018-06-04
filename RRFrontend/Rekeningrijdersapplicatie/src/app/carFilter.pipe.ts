@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'nameFilter'
 })
-export class NameFilterPipe implements PipeTransform {
+export class CarFilterPipe implements PipeTransform {
 
   transform(items: any, name: string, license: string, fuel: string){
     if (items && items.length){
@@ -11,7 +11,6 @@ export class NameFilterPipe implements PipeTransform {
         if (name && item.name.toLowerCase().indexOf(name.toLowerCase()) === -1){
           return false;
         }
-        console.log(license == undefined);
         if (license && item.licenseplate.toLowerCase().indexOf(license.toLowerCase()) === -1){
           return false;
         }

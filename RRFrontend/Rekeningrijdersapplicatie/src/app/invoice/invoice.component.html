@@ -7,7 +7,10 @@
 
         <div class="flexbox column wrap">
           <h3>Invoices</h3>
-          <ng-container *ngFor="let invoice of invoices">
+          <div class="flexbox row wrap">
+            <input id="invoiceFilter" [(ngModel)]="invoiceFiltertje" type="text" placeholder="Filter...">
+          </div>
+          <ng-container *ngFor="let invoice of invoices | invoiceFilter: { invoiceFiltertje: invoiceFiltertje}: false">
             <a [ngClass]="{'active': lastInvoice == invoice.invoiceID}" (click)="chooseInvoice(invoice)"
                class="flexbox row wrap between invoice-entry">
               <div class="flexbox column wrap">

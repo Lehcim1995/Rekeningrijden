@@ -1,32 +1,39 @@
-.invoices>  div:nth-of-type(1){
-  flex:2;
+.invoices > div:nth-of-type(1) {
+  flex: 2;
   min-width: 196px;
 }
-.invoices > div:nth-of-type(2){
-  flex:5;
-  min-width:500px;
+
+.invoices > div:nth-of-type(2) {
+  flex: 5;
+  min-width: 500px;
 }
-.invoice-entry{
+
+.invoice-entry {
   border-bottom: 1px solid #f2f2f2;
-  padding:5px;
+  padding: 5px;
 }
-.invoice-entry p, .invoices h3, .invoice-panel h3{
+
+.invoice-entry p, .invoices h3, .invoice-panel h3 {
   margin: 0px 5px 0px 5px;
 }
-.invoice-entry:hover{
-  cursor:pointer;
+
+.invoice-entry:hover {
+  cursor: pointer;
 }
-.invoice-details{
+
+.invoice-details {
   font-size: 10px;
-  color:#616770;
+  color: #616770;
 }
-.invoice{
+
+.invoice {
   font-size: 13px;
 
 }
-.invoice-panel{
-  border-left:1px solid #f2f2f2;
-  padding:5px;
+
+.invoice-panel {
+  border-left: 1px solid #f2f2f2;
+  padding: 5px;
 }
 
 .active {
@@ -38,11 +45,21 @@
   border-radius: 5px;
 }
 
-.detailpanel >  div{
+.detailpanel > div {
   flex: 1;
 }
-#selected_invoices{
+
+#selected_invoices {
   flex: 1;
   border-left: 1px solid #f2f2f2;
-  padding:5px;
+  padding: 5px;
+}
+
+input[type=text], select {
+  margin:5px;
+  width:100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

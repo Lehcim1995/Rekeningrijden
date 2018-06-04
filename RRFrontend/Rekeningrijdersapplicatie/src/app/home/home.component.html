@@ -18,7 +18,6 @@
         </div>
       </div>
 
-
       <ng-container *ngFor="let vehicle of vehicles | nameFilter: name:license:fuel">
         <a (click)="chooseCar(vehicle)" class="flexbox row wrap car-entry" routerLink="/invoices/">
           <div class="flexbox row wrap vehicles between max-width">
