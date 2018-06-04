@@ -16,6 +16,14 @@ export class InvoiceComponent implements OnInit {
   selectedInvoices: any;
   carFilter: any;
   timeFilter: any;
+  rides: any[][] = [
+    [
+      {lat: 37.77, lon: -122.21}, {lat: 21.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}
+    ],
+    [{lat: 40.77, lon: -122.21}, {lat: 25.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}]
+  ];
+  lat: number = this.rides[0][0].lat;
+  lng: number = this.rides[0][0].lon;
 
   constructor() {
   }

@@ -45,6 +45,19 @@
                   <p>Prijs: {{selectedInvoice.price}} DKK</p>
                 </div>
               </div>
+              <!-- google maps -->
+              <agm-map [latitude]="lat" [longitude]="lng">
+                <ng-container *ngFor="let ride of rides">
+                  <agm-polyline  [strokeColor]="'#2196f3'">
+                    <ng-container *ngFor="let point of ride">
+                      <agm-polyline-point [latitude]="point.lat" [longitude]="point.lon">
+                      </agm-polyline-point>
+                    </ng-container>
+                  </agm-polyline>
+                </ng-container>
+              </agm-map>
+
+
             </div>
           </div>
         </div>
