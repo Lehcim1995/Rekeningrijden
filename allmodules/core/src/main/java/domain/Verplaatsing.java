@@ -17,6 +17,7 @@ public class Verplaatsing implements Serializable
 {
     @Id
     private String voertuigId;
+
     @Id
     private long serieID;
 
@@ -65,6 +66,10 @@ public class Verplaatsing implements Serializable
 
     public void setCheckpoints(List<Checkpoint> checkpoints) {
         this.checkpoints = checkpoints;
+    }
+
+    public void setSerieId(int serieId) {
+        this.serieID = serieId;
     }
 
     private double distance()

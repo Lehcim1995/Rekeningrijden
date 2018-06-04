@@ -18,6 +18,8 @@ public class SimulatieDaoImpl implements SimulatieDao
 
     Map<Integer, List<Checkpoint>> checkpointMap;
 
+//    Map<Integer, Integer>
+
     @PersistenceContext(unitName = "simPU")
     private EntityManager em;
 
@@ -37,9 +39,6 @@ public class SimulatieDaoImpl implements SimulatieDao
         }
 
         checkpointMap.get(object.getCarId()).add(object);
-
-        System.out.println("adding checkpoint with carid " + object.getCarId());
-        System.out.println("adding checkpoint with id " + object.getId());
 
         return object;
     }

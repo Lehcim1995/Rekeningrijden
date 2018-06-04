@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Stateless
 @JPA
@@ -38,21 +39,30 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao
     }
 
     @Override
-    public Verplaatsing create(Verplaatsing verplaatsing) {
+    public Verplaatsing create(Verplaatsing verplaatsing)
+    {
+        try
+        {
+            List<Long> ids = em.createQuery("SELECT v.serieID FROM Verplaatsing v WHERE v.voertuigId = :id")
+                            .setParameter("id", verplaatsing.getVoertuigId())
+                            .getResultList();
 
-//        List<Checkpoint> checkpoints = new ArrayList<>();
+            AtomicInteger serieId = new AtomicInteger();
 
-//        for (Checkpoint checkpoint : verplaatsing.getCheckpoints()) {
-//            em.persist(checkpoint);
-//            checkpoints.add(checkpoint);
-//        }
-//
-//        verplaatsing.setCheckpoints(checkpoints);
+            ids.forEach(integer -> {
+                if (integer > serieId.get())
+                {
+                    serieId.set(integer.intValue());
+                }
+            });
 
-//        TODO fix
-//        if (VerplaatsingMissing(verplaatsing)) {
-//            LogMissedVerplaatsingen(verplaatsing);
-//        }
+            serieId.addAndGet(1);
+            verplaatsing.setSerieId(serieId.get());
+        }
+        catch (Exception e)
+        {
+            System.out.println("Adding verplaatsing error " + e.getMessage());
+        }
 
         em.persist(verplaatsing);
 
