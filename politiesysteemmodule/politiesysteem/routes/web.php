@@ -25,5 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/spoofCords', 'CarController@spoofCords');
 
     Route::get('/spoofPerson', 'CarController@spoofPerson');
+
+    Route::get('/car/check/{license}', 'CarController@checkLicense');
 });
 

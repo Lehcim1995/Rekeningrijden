@@ -38,7 +38,7 @@
             <div class="row">
                 {{ csrf_field() }}
                 <div class="col-lg-8">
-                    <input name="license_plate" required class="form-control" placeholder="12-abc-3">
+                    <input id="license_plate" name="license_plate" required class="form-control" placeholder="12-abc-3">
                 </div>
                 <div class="col-lg-3">
                     <button id="submitForm" type="submit" class="btn btn-primary">Voeg auto toe</button>
@@ -59,10 +59,16 @@
             $('#submitForm').click(function (e) {
                  e.preventDefault();
 
-                 $.get('/as', function(result) {
-                     //TODO: parse result and handle accordingly
-                     $('#addCarForm').submit();
-                 });
+                $.ajax({
+                    type: 'GET',
+                    url: '/car/check/' + $('#license_plate').val(),
+                    success: function (data, text) {
+                        $('#addCarForm').submit();
+                    },
+                    error: function (request, status, error) {
+                        alert('Kan ikke tilføje nummerplade');
+                    }
+                });
             });
         });
     </script>

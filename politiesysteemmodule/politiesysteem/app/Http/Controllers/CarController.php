@@ -64,6 +64,13 @@ class CarController extends Controller
         return redirect('/car');
     }
 
+    public function checkLicense($license)
+    {
+        $car = Car::where('license_plate', $license)->first();
+
+        return $car == null || $car->retrieved;
+    }
+
     public function spoofCords()
     {
         return [['lat' => 37.77, 'lon' => -122.21], ['lat' => 21.29, 'lon' => -157.82], ['lat' => -18.14, 'lon' => 178.43], ['lat' => -27.46, 'lon' => 153.03]];
