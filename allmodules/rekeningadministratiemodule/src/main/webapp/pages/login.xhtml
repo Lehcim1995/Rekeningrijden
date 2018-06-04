@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -31,17 +32,19 @@
         </h:form>
     </div>
     <div id="main" class="flexbox row wrap">
-        <form method="post" action="j_security_check" id="login_form" class="flexbox column">
-            <h3>Vul je gegevens in om in te loggen</h3>
-            <h:outputLabel for="j_username" value="Username" />
-            <input type="text" name="j_username" class="input" />
-
-            <h:outputLabel for="j_password" value="Password" />
-            <input type="password" name="j_password" class="input" />
-
-            <input type="submit" name="submit" value="Login" class="input" />
-            <h:button outcome="/index.xhmtl" value="Cancel" class="input" />
-        </form>
+        <div class="login">
+            <h:panelGroup>
+                <h:form>
+                    <h1>Login</h1>
+                    <h:inputText a:placeholder="email" class="inputField" value="#{authenticationBean.email}"/>
+                    <br/>
+                    <h:inputSecret a:placeholder="password" class="inputField" value="#{authenticationBean.password}"/>
+                    <br/>
+                    <h:commandButton value="Log in" id="login" class="button"
+                                     action="#{authenticationBean.login()}"/>
+                </h:form>
+            </h:panelGroup>
+        </div>
     </div>
     <div id="footer"><p>Tax&amp;Tracks &copy; 2018</p></div>
 </h:body>

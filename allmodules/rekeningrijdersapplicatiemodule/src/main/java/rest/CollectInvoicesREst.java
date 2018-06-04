@@ -17,15 +17,15 @@ public class CollectInvoicesREst
     private static final String WEB_URL = "http://localhost:8080/";
     private static final String REST_END_POINT = WEB_URL + "rekeningadministratiemodule/rest/invoices";
 
-    public List<Invoice> collectInvoices()
+    /*public List<Invoice> collectInvoices()
     {
         return restClient.getREstResponse(REST_END_POINT, List.class);
-    }
+    }*/
 
-    public List<Invoice> collectInvoicesOwner(Owner owner)
+    /*public List<Invoice> collectInvoicesOwner(Owner owner)
     {
         return collectInvoicesOwner(owner.getId());
-    }
+    }*/
 
     public List<Invoice> collectInvoicesOwner(int ownerId) {
         return restClient.getREstResponse(REST_END_POINT + "/cpr/" + ownerId, List.class);
