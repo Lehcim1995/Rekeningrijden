@@ -74,7 +74,20 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4>Rit gegevens <i id="map-spinner" class="fa fa-refresh fa-spin" style="float:right; margin-top: 6px; cursor:pointer" onclick="refreshMap()"></i></h4>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Rit gegevens</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <span style="float: right; margin-top: 5px; font-size: 17px">checkpoints: </span>
+                            </div>
+                            <div class="col-md-1">
+                                <input id="checkpointAmount" type="number" value="10" class="form-control" style="width: 4vw; text-align: center;">
+                            </div>
+                            <div class="col-md-1">
+                                <h4><i id="map-spinner" class="fa fa-refresh fa-spin" style="float:right; margin-top: 6px; cursor:pointer" onclick="refreshMap()"></i></h4>
+                            </div>
+                        </div>
                     </div>
                     <div id="map-holder" class="card-body">
                         <div id="map" style="height: 43vh ;  width: 100% !important; min-height: 100% !important"></div>
@@ -112,7 +125,6 @@
             });
 
             flightPath.setMap(map);
-            //Stop the spinner
             $('#map-spinner').removeClass('fa-spin');
         }
 
@@ -123,8 +135,8 @@
 
         //Get the last location the car was registered
         function getLastPoints() {
-//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license, function (data) {
-            $.get('/cords' , function (data) {
+//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license + '/locationdata?limit=' + $('#checkpointAmount').val(), function (data) {
+            $.get('/spoofCords' , function (data) {
                 parseData(data)
             });
         }
@@ -142,7 +154,7 @@
 
         //Use AJAX to get car info
         function getCarInfo() {
-//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license + '/locationdata', function (data) {
+//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license, function (data) {
             $.get('/spoofPerson', function (data) {
                 displayCarInfo(data);
             });

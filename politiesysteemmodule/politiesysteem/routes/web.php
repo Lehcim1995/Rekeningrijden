@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/car/{car}/retrieve', 'CarController@retrieve');
 
-    Route::get('/cords', 'CarController@cords');
+    Route::get('/spoofCords', 'CarController@spoofCords');
 
     Route::get('/spoofPerson', 'CarController@spoofPerson');
 });
