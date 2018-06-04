@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\RegisterCode;
 use App\User;
+use App\RegisterCode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller {
+class RegisterController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -35,7 +36,8 @@ class RegisterController extends Controller {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('guest');
     }
 
@@ -45,7 +47,8 @@ class RegisterController extends Controller {
      * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data) {
+    protected function validator(array $data)
+    {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -60,18 +63,19 @@ class RegisterController extends Controller {
      * @param  array $data
      * @return \App\User
      */
-    protected function create(array $data) {
+    protected function create(array $data)
+    {
         $succesCode = RegisterCode::where('code', $data['registerCode'])->where('used', 0)->first();
 
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ]);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
 
-            $succesCode->used = true;
-            $succesCode->save();
+        $succesCode->used = true;
+        $succesCode->save();
 
-            return $user;
+        return $user;
     }
 }
