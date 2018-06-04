@@ -1,4 +1,4 @@
-#cars{
+#cars {
   width: 100%;
   padding: 5px
 }
@@ -20,13 +20,18 @@
   cursor: pointer;
 }
 
-#main > div:last-of-type {
-  flex: 1;
-  border-left: 1px solid #f2f2f2;
-  padding:5px;
+
+#cars h3 , #cars h5{
+  margin: 0px;
 }
 
-#main div {
-  flex: 3;
-  width: 100%;
+a {
+  color: #616770;
+}
+
+input[type=text], select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

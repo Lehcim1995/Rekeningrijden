@@ -59,6 +59,10 @@ body {
   align-self: flex-end;
 }
 
+.max-width{
+  width:100%;
+}
+
 a {
   text-decoration: none;
 }

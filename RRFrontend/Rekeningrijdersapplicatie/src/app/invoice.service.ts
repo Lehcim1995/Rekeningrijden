@@ -6,23 +6,20 @@ import {HttpClient} from "@angular/common/http";
 export class InvoiceService {
 
   private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
+
+
   constructor(protected httpClient: HttpClient, private router: Router) {
 
 
   }
 
-  getcars()
-  {
+  getcars() {
 
   }
 
-  getInvoiceByCar(licensePlate:string)
-  {
+  getInvoiceByCar(licensePlate: string) {
     return this.httpClient.get(`${this.getInvoicesByCar}/${licensePlate}`)
   }
-
-
-
 
 
 }

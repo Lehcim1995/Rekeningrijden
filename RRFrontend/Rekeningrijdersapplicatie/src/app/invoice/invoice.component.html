@@ -1,49 +1,74 @@
-<div id="invoices">
-  <p *ngIf="invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
-    hier.</p>
-  <div *ngIf="invoices.length != 0" class="flexbox column wrap invoice-entries">
-    <div class="flexbox row wrap invoices">
+<div id="main" class="flexbox row wrap">
+  <div id="invoices">
+    <p *ngIf="invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
+      hier.</p>
+    <div *ngIf="invoices.length != 0" class="flexbox column wrap invoice-entries">
+      <div class="flexbox row wrap invoices">
 
-      <div class="flexbox column wrap">
-        <h3>Invoices</h3>
-        <ng-container *ngFor="let invoice of invoices">
-          <a [ngClass]="{'active': lastInvoice == invoice.invoiceID}" (click)="chooseInvoice(invoice)"
-             class="flexbox row wrap between invoice-entry">
-            <div class="flexbox column wrap">
-              <p class="invoice">{{invoice.date | date:'MMM y' }} - #{{invoice.invoiceID}} </p>
-              <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
-            </div>
-
-            <div class="flexbox row wrap">
-              <!-- add the invoice through a servicecall-->
-              <p> + </p>
-              <p> > </p>
-            </div>
-
-          </a>
-        </ng-container>
-      </div>
-
-      <div class="invoice-panel flexbox column wrap">
-        <h3 *ngIf="selectedInvoice == ''">Geen factuur geselecteerd</h3>
-        <h3 *ngIf="selectedInvoice != ''">#{{selectedInvoice.invoiceID}}</h3>
-        <div id="invoice-details">
-          <p *ngIf="selectedInvoice == ''">Factuurdetails verschijnen hier. Selecteer eerst een
-            factuur.</p>
-          <div *ngIf="selectedInvoice != ''" class="flexbox column wrap">
-            <div class="flexbox row wrap detailpanel">
-              <div>
-                <p>Datum: {{selectedInvoice.date | date:'MMM y'}}</p>
-                <p>Kentekenplaat: {{selectedInvoice.licenseplate}}</p>
-                <p>Tracker Id: {{selectedInvoice.trackerID}}</p>
+        <div class="flexbox column wrap">
+          <h3>Invoices</h3>
+          <ng-container *ngFor="let invoice of invoices">
+            <a [ngClass]="{'active': lastInvoice == invoice.invoiceID}" (click)="chooseInvoice(invoice)"
+               class="flexbox row wrap between invoice-entry">
+              <div class="flexbox column wrap">
+                <p class="invoice">{{invoice.date | date:'MMM y' }} - #{{invoice.invoiceID}} </p>
+                <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
               </div>
-              <div>
-                <p>Gereden kilometers: {{selectedInvoice.kmAmmount}}</p>
-                <p>Prijs: {{selectedInvoice.price}} DKK</p>
+
+              <div class="flexbox row wrap">
+                <!-- add the invoice through a servicecall-->
+                <p> + </p>
+                <p> > </p>
+              </div>
+            </a>
+          </ng-container>
+        </div>
+
+        <div class="invoice-panel flexbox column wrap">
+          <h3 *ngIf="selectedInvoice == ''">Geen factuur geselecteerd</h3>
+          <h3 *ngIf="selectedInvoice != ''">#{{selectedInvoice.invoiceID}}</h3>
+          <div id="invoice-details">
+            <p *ngIf="selectedInvoice == ''">Factuurdetails verschijnen hier. Selecteer eerst een
+              factuur.</p>
+            <div *ngIf="selectedInvoice != ''" class="flexbox column wrap">
+              <div class="flexbox row wrap detailpanel">
+                <div>
+                  <p>Datum: {{selectedInvoice.date | date:'MMM y'}}</p>
+                  <p>Kentekenplaat: {{selectedInvoice.licenseplate}}</p>
+                  <p>Tracker Id: {{selectedInvoice.trackerID}}</p>
+                </div>
+                <div>
+                  <p>Gereden kilometers: {{selectedInvoice.kmAmmount}}</p>
+                  <p>Prijs: {{selectedInvoice.price}} DKK</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- ########## selected invoices panel ###########-->
+        <diV id="selected_invoices">
+          <h3>Geselecteerde facturen</h3>
+          <p *ngIf="selectedInvoices.length == 0">U heeft nog geen facturen geselecteerd.</p>
+          <div *ngIf="selectedInvoices.length != 0" class="flexbox column wrap">
+            <ng-container *ngFor="let invoice of selectedInvoices">
+              <a [ngClass]="{ 'active': lastInvoice == invoice.trackerID }"
+                 class="flexbox row wrap between invoice-entry">
+                <div class="flexbox row wrap center">
+                  <div>
+                    <p>Datum: {{invoice.date | date:'MMM y'}}</p>
+                    <p>Kentekenplaat: {{invoice.licenseplate}}</p>
+                    <p>Tracker Id: {{invoice.trackerID}}</p>
+                  </div>
+                  <div>
+                    <p>Gereden kilometers: {{invoice.kmAmmount}}</p>
+                    <p>Prijs: {{invoice.price}} DKK</p>
+                  </div>
+                </div>
+              </a>
+            </ng-container>
+          </div>
+        </diV>
       </div>
     </div>
   </div>

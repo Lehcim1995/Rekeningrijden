@@ -1,51 +1,37 @@
-<div id="main-box">
-  <div id="main" class="flexbox row wrap">
-    <!-- ########## cars panel ###########-->
-
-
-    <div id="cars" *ngIf="selectedCar == ''">
-      <p *ngIf="vehicles.length == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
-        tevoorschijn.</p>
-      <div *ngIf="vehicles.length != 0" class="flexbox column wrap">
-        <h3>Voertuigen</h3>
-        <ng-container *ngFor="let vehicle of vehicles">
-          <a (click)="chooseCar(vehicle)" class="flexbox row wrap between car-entry">
-            <div class="flexbox row wrap vehicles center">
-              <h3 class="car">{{vehicle.name}} </h3>
-              <p class="car-details"> - {{vehicle.licenseplate}} - {{vehicle.classification}}</p>
-            </div>
-          </a>
-        </ng-container>
+<div id="main" class="flexbox row wrap">
+  <!-- ########## cars panel ###########-->
+  <div id="cars" class="max-width">
+    <h3>Voertuigen</h3>
+    <p *ngIf="vehicles.length == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
+      tevoorschijn.</p>
+    <div *ngIf="vehicles.length != 0" class="flexbox column wrap">
+      <h5>Filters</h5>
+      <div class="flexbox row wrap between">
+        <div class="flexbox row wrap"><label for="filter" class="self_center">Filter:</label>
+          <input [(ngModel)]="name" id="filter" type="text" placeholder="auto 1">
+        </div>
+        <div class="flexbox row wrap"><label for="licensePlateFilter" class="self_center">Filter kenteken:</label>
+          <input id="licensePlateFilter" [(ngModel)]="license" type="text" placeholder="XJ 328 89">
+        </div>
+        <div class="flexbox row wrap"><label for="fuelFilter" class="self_center">Filter brandstof:</label>
+          <input id="fuelFilter" [(ngModel)]="fuel" type="text" placeholder="Benzine">
+        </div>
       </div>
-    </div>
-    <div id="invoices" *ngIf="selectedCar != ''">
-      <a class="link" (click)="goBack()"> < {{selectedCar.name}}</a>
-      <app-invoice [selectedCar]="selectedCar"></app-invoice>
-    </div>
 
 
-    <!-- ########## selected invoices panel ###########-->
-    <diV id="selected_invoices">
-      <h3>Geselecteerde facturen</h3>
-      <p *ngIf="selectedInvoices.length == 0">U heeft nog geen facturen geselecteerd.</p>
-      <div *ngIf="selectedInvoices.length != 0" class="flexbox column wrap">
-        <ng-container *ngFor="let invoice of selectedInvoices">
-          <a [ngClass]="{ 'active': lastInvoice == invoice.trackerID }" class="flexbox row wrap between invoice-entry">
-            <div class="flexbox row wrap center">
-              <div>
-                <p>Datum: {{invoice.date | date:'MMM y'}}</p>
-                <p>Kentekenplaat: {{invoice.licenseplate}}</p>
-                <p>Tracker Id: {{invoice.trackerID}}</p>
-              </div>
-              <div>
-                <p>Gereden kilometers: {{invoice.kmAmmount}}</p>
-                <p>Prijs: {{invoice.price}} DKK</p>
-              </div>
-            </div>
-            <a (click)="addInvoice(invoice)"><h3> + </h3></a>
-          </a>
-        </ng-container>
-      </div>
-    </diV>
+      <ng-container *ngFor="let vehicle of vehicles | nameFilter: name:license:fuel">
+        <a (click)="chooseCar(vehicle)" class="flexbox row wrap car-entry" routerLink="/invoices/">
+          <div class="flexbox row wrap vehicles between max-width">
+            <h3 class="car">{{vehicle.name}}</h3>
+            <p class="car-details">{{vehicle.licenseplate}}</p>
+            <p>{{vehicle.classification}}</p>
+          </div>
+        </a>
+      </ng-container>
+    </div>
   </div>
+  <!--<div id="invoices" *ngIf="selectedCar != ''">-->
+  <!--&lt;!&ndash;<a class="link" (click)="goBack()"> < {{selectedCar.name}}</a>&ndash;&gt;-->
+  <!--<app-invoice [selectedCar]="selectedCar"></app-invoice>-->
+  <!--</div>-->
 </div>

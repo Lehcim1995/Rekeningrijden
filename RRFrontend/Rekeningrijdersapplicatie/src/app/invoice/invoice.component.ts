@@ -13,6 +13,9 @@ export class InvoiceComponent implements OnInit {
   invoices: any;
   invoices1: any;
   invoices2: any;
+  selectedInvoices: any;
+  carFilter: any;
+  timeFilter: any;
 
   constructor() {
   }
@@ -66,16 +69,20 @@ export class InvoiceComponent implements OnInit {
         invoiceID: "898939"
       }
     ];
-    if (+this.selectedCar.trackerID == 17453) {
-      {
+    if (this.selectedCar != '' && this.selectedCar != undefined) {
+      if (+this.selectedCar.trackerID == 17453) {
         this.invoices = this.invoices1;
       }
-    }
-    if (+this.selectedCar.trackerID == 17482) {
-      {
+      if (+this.selectedCar.trackerID == 17482) {
         this.invoices = this.invoices2;
       }
     }
+
+    this.invoices = this.invoices1.concat(this.invoices2);
+
+    this.selectedInvoices = [];
+    this.carFilter = '';
+    this.timeFilter = [];
 
   }
 
@@ -89,6 +96,10 @@ export class InvoiceComponent implements OnInit {
     if (invoice.invoiceID == 123123) {
       this.selectedInvoice = this.invoices[0];
     }
+  }
+
+  addInvoice(invoice: any) {
+    this.selectedInvoices.push(invoice);
   }
 
 

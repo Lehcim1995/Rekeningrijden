@@ -8,8 +8,8 @@ import {Component, OnInit} from '@angular/core';
 export class HomeComponent implements OnInit {
   vehicles: any;
 
-  selectedInvoices: any;
   selectedCar: any;
+  searchText: any;
 
   lastCar: any;
 
@@ -21,8 +21,6 @@ export class HomeComponent implements OnInit {
       {name: "auto 1", licenseplate: "XL 89 555", classification: "Benzine", trackerID: "17453", ownerID: "8"},
       {name: "auto 2", licenseplate: "XL 54 423", classification: "Diesel", trackerID: "17482", ownerID: "8"}
     ];
-
-    this.selectedInvoices = [];
 
     this.selectedCar = "";
 
@@ -43,10 +41,8 @@ export class HomeComponent implements OnInit {
       this.selectedCar = vehicle;
     }
 
-  }
 
-  addInvoice(invoice: any) {
-    this.selectedInvoices.push(invoice);
+
   }
 
   goBack() {
