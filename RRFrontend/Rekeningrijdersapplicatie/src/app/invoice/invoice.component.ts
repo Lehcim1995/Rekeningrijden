@@ -43,7 +43,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
       return actions.payment.create({
         payment: {
           transactions: [
-            { amount: { total: this.amount, currency: 'USD' } }
+            { amount: { total: this.amount, currency: 'DKK' } }
           ]
         }
       });
