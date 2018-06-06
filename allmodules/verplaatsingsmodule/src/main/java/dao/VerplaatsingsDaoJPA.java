@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -97,15 +98,26 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao
     }
 
     /**
-     * @param key
+     * @param licencePlate
      * @return
      */
     @Override
-    public List<Verplaatsing> getVerplaatsingen(String key) {
-//        setupJPA();
-//        return em.createQuery(cp.where(cb.equal(verplaatsingRoot.get("voertuigId"), key))).getResultList();
+    public List<Verplaatsing> getVerplaatsingen(String licencePlate) {
+
+
         return em.createQuery("SELECT v FROM Verplaatsing v WHERE v.voertuigId = :key", Verplaatsing.class)
-                 .setParameter("key", key)
+                 .setParameter("key", licencePlate)
+                 .getResultList();
+    }
+
+    @Override
+    public List<Verplaatsing> getVerplaatsingen(String licencePlate, Date start, Date end) {
+
+
+        return em.createQuery("SELECT v FROM Verplaatsing v WHERE v.voertuigId = :key AND v.time > :starttime AND v.time < :endtime", Verplaatsing.class)
+                 .setParameter("key", licencePlate)
+                 .setParameter("starttime", start)
+                 .setParameter("endtime", end)
                  .getResultList();
     }
 

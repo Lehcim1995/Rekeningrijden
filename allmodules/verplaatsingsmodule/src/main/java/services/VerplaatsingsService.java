@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -42,5 +43,13 @@ public class VerplaatsingsService
     {
 
         return verplaatsingsDao.getVerplaatsingen(licence);
+    }
+
+    public List<Verplaatsing> getVerplaatsingsForVehicle(
+            String licencePlate,
+            Date start,
+            Date end)
+    {
+        return verplaatsingsDao.getVerplaatsingen(licencePlate, start, end);
     }
 }

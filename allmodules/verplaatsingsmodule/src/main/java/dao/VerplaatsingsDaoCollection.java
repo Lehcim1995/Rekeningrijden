@@ -7,6 +7,7 @@ import interfaces.VerplaatsingsDao;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -80,5 +81,14 @@ public class VerplaatsingsDaoCollection implements VerplaatsingsDao
 
         if (verplaatsingen.isEmpty()) return verplaatsing.getSerieID() == 0 ? true : false;
         else return verplaatsingen.get(verplaatsingen.size() - 1).getSerieID() == verplaatsing.getSerieID() - 1 ? true : false;
+    }
+
+    @Override
+    public List<Verplaatsing> getVerplaatsingen(
+            String licencePlate,
+            Date start,
+            Date end)
+    {
+        return null;
     }
 }
