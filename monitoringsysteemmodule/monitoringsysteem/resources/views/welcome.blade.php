@@ -25,7 +25,8 @@
             <table class="table table-striped table-bordered table-dark table-hover">
                 <thead>
                     <tr>
-                        <td width="70%"><strong>Domein</strong></td>
+                        <td width="55%"><strong>Domein</strong></td>
+                        <td width="15%"><strong>Naam</strong></td>
                         <td width="15%"><strong>Status</strong></td>
                         <td width="15%"><strong>Tijd</strong></td>
                     </tr>
@@ -45,7 +46,11 @@
 
         $(document).ready(function () {
             endpoints.forEach(function (endpoint) {
-                $('#tableBody').append('<tr><td>' + endpoint[0] + '</td><td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td><td id="' + endpoint[1] +'" style="text-align: center"></td></tr>');
+                $('#tableBody').append('<tr><td>' + endpoint[0] + '</td>' +
+                    '<td>' + endpoint[1] + '</td>' +
+                    '<td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td>' +
+                    '<td id="' + endpoint[1] +'" style="text-align: center"></td></tr>');
+                
                 checkUptime(endpoint);
             });
 
@@ -54,18 +59,29 @@
         function checkUptime(url) {
             let selector = '.' + url[1];
             let ajaxTime = new Date().getTime();
+
             $.ajax({
                 url: url[0],
                 type: "GET",
                 success: function (response) {
                     console.log(response.status);
-                    displayLoadTime('#' + url[1], ajaxTime);
-                    displaySuccess(selector, new Date().getTime() - ajaxTime);
+                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
+                    displaySuccess(selector);
                 },
                 error: function (request, status, error) {
-                    console.log(request.statusCode());
-                    displayFailure(selector);
-                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime)
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
+
+                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
+
+                    let statusCode = 403;
+
+                    if(statusCode != 404) {
+                        displaySuccess(selector);
+                    } else {
+                        displayFailure(selector);
+                    }
                 }
             });
         }
