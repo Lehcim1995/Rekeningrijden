@@ -24,7 +24,7 @@ public class InitProfiles {
     public void initData() {
 
         try {
-            rekeningAdminisntratieService.addProfile("Hans", "Admin");
+            rekeningAdminisntratieService.addProfile("Hans", "Admin", 253468129);
         } catch (CouldNotCreateProfileException e) {
             System.out.println("Error occured during creation of a profile see the stacktrace:");
             e.printStackTrace();

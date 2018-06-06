@@ -18,4 +18,6 @@ public interface OwnerDao {
     boolean linkVehicleToOwner(Vehicle vehicle, Owner owner);
 
     boolean linkPreviousVehicleToOwner(Vehicle vehicle, Owner owner);
+
+    void setOwnerUsingRRA(Owner ownerById);
 }

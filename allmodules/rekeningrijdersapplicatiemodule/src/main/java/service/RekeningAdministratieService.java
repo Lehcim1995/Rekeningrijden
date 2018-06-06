@@ -36,7 +36,7 @@ public class RekeningAdministratieService {
         return profileDao.issueToken(login);
     }
 
-    public Profile addProfile(String login, String password) throws CouldNotCreateProfileException {
-        return profileDao.addProfile(login, password);
+    public Profile addProfile(String login, String password, int bsn) throws CouldNotCreateProfileException {
+        return profileDao.addProfile(login, password, bsn);
     }
 }
