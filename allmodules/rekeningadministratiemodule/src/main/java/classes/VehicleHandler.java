@@ -6,10 +6,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.*;
 
 public class VehicleHandler extends DefaultHandler
 {
@@ -138,6 +138,31 @@ public class VehicleHandler extends DefaultHandler
 
                     System.out.println("Vehicle id (int): " + id);
                     vehicle.setID(id);
+                }
+
+                if (entry.getKey()
+                         .equals("Vehicle weight total"))
+                {
+                    int weight = Integer.valueOf(value);
+
+                    vehicle.setWeight(weight);
+                }
+
+                if (entry.getKey()
+                         .equals("Vehicle build year"))
+                {
+
+                    Date buildYear = null;
+                    try
+                    {
+                        buildYear = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+                        System.out.println("Parsed build year " +  buildYear);
+                        vehicle.setBuildYear(buildYear);
+                    }
+                    catch (ParseException e)
+                    {
+                        System.out.println("Could not parse date");
+                    }
                 }
             }
         }

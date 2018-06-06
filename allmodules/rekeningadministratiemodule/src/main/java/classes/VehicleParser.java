@@ -2,35 +2,13 @@ package classes;
 
 import domain.Vehicle;
 
-import javax.xml.parsers.*;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleParser
 {
-
-    public List<Vehicle> Parse(String file)
-    {
-        List<Vehicle> cars = new ArrayList<>();
-
-        try {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
-
-            VehicleHandler vehicleHandler = new VehicleHandler();
-
-            saxParser.parse(file, vehicleHandler);
-
-            cars = vehicleHandler.getVehicles();
-
-            System.out.println(cars); // TODO remove maybe?
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return cars;
-    }
 
     public static void main(String argv[]) {
 
@@ -65,5 +43,42 @@ public class VehicleParser
 //        {
 //            e.printStackTrace();
 //        }
+    }
+
+    public List<Vehicle> Parse(String file)
+    {
+        List<Vehicle> cars = new ArrayList<>();
+
+        try
+        {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+
+            VehicleHandler vehicleHandler = new VehicleHandler();
+
+            saxParser.parse(file, vehicleHandler);
+
+            cars = vehicleHandler.getVehicles();
+
+            List<String> licence = new ArrayList<>();
+
+            cars.removeIf(vehicle -> {
+                if (!licence.contains(vehicle.getLicensePlate()))
+                {
+                    licence.add(vehicle.getLicensePlate());
+                    return false;
+                }
+                return true;
+            });
+
+            System.out.println(cars); // TODO remove maybe?
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return cars;
     }
 }

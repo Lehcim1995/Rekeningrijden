@@ -9,6 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Stateless
 @Default
@@ -21,7 +24,7 @@ public class VerplaatsingsService
     private DisplacementReceiverGateway gateway;
 
     @PostConstruct
-    public void init(){};
+    public void init(){}
 
     public void setVerplaatsingsDao(VerplaatsingsDao verplaatsingsDao)
     {
@@ -34,5 +37,19 @@ public class VerplaatsingsService
 
     public String delete(String s) {
         return verplaatsingsDao.delete(s);
+    }
+
+    public List<Verplaatsing> getVerplaatsingsForVehicle(String licence)
+    {
+
+        return verplaatsingsDao.getVerplaatsingen(licence);
+    }
+
+    public List<Verplaatsing> getVerplaatsingsForVehicle(
+            String licencePlate,
+            Date start,
+            Date end)
+    {
+        return verplaatsingsDao.getVerplaatsingen(licencePlate, start, end);
     }
 }
