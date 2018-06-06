@@ -30,7 +30,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   lat: number = this.rides[0][0].lat;
   lng: number = this.rides[0][0].lon;
   //this parameter should be the total price of all the selected invoices
-  amount: any = 100;
+  amount: any = 0;
 
   paypalConfig = {
     env: 'sandbox',
@@ -43,7 +43,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
       return actions.payment.create({
         payment: {
           transactions: [
-            { amount: { total: this.amount, currency: 'DKK' } }
+            {amount: {total: this.amount, currency: 'DKK'}}
           ]
         }
       });
@@ -51,6 +51,10 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then((payment) => {
         alert("payment succesfull");
+        this.amount = 0;
+        //update status of all the invoices that have been paid.
+
+        this.selectedInvoices = [];
       })
     }
   };
@@ -160,6 +164,12 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
 
   addInvoice(invoice: any) {
     this.selectedInvoices.push(invoice);
+    this.amount += +invoice.price;
+  }
+
+  removeInvoice(index: number){
+    this.amount -= this.selectedInvoices[index].price;
+    this.selectedInvoices.splice(index, 1);
   }
 
 

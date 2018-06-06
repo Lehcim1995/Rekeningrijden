@@ -17,7 +17,7 @@
   margin: 0px 5px 0px 5px;
 }
 
-.invoice-entry:hover {
+.invoice-entry:hover .addInvoice:hover, .removeinvoice:hover{
   cursor: pointer;
 }
 
