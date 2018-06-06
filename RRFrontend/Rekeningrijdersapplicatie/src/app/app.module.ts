@@ -17,6 +17,7 @@ import { CarFilterPipe } from './carFilter.pipe';
 import { InvoiceFilterPipe } from './invoice-filter.pipe';
 import {DatePipe} from "@angular/common";
 import { AgmCoreModule } from '@agm/core';
+import {InvoiceService} from "./invoice.service";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AgmCoreModule } from '@agm/core';
       multi: true
     },
     ProfileService,
+    InvoiceService,
     DatePipe
   ],
   bootstrap: [AppComponent]

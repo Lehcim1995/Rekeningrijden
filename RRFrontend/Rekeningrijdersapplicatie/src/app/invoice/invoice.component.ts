@@ -1,4 +1,5 @@
 import {Component, EventEmitter, AfterViewChecked, Input, OnInit, Output} from '@angular/core';
+import {InvoiceService} from "../invoice.service";
 
 declare let paypal: any;
 
@@ -21,7 +22,8 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   selectedInvoices: any;
   carFilter: any;
   timeFilter: any;
-  rides: any[][] = [
+  drivenRoutes: any;
+  rides: any = [
     [
       {lat: 37.77, lon: -122.21}, {lat: 21.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}
     ],
@@ -60,7 +62,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   };
 
 
-  constructor() {
+  constructor(protected invoiceService: InvoiceService) {
   }
 
   ngOnInit() {
@@ -154,11 +156,20 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     this.lastInvoice = invoice.invoiceID;
     //servicecall met invoiceid en ownerid
 
+
     //invoicesdetails wordt returnwaarde van servicecall
 
     //mockcode for testing
+
+    //let carId = this.invoiceService.getCarIdFromLicenseplate(invoice.licenseplate);
+
+    //update rides to driveroutes to display polylines on map
+    //this.drivenRoutes = this.invoiceService.getMovementsForCarWithMonth(carId, new Date(invoice.date));
+
+
     if (invoice.invoiceID == 123123) {
       this.selectedInvoice = this.invoices[0];
+      this.invoiceService.getMovementsForCarWithMonth("402", new Date());
     }
   }
 
@@ -167,7 +178,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     this.amount += +invoice.price;
   }
 
-  removeInvoice(index: number){
+  removeInvoice(index: number) {
     this.amount -= this.selectedInvoices[index].price;
     this.selectedInvoices.splice(index, 1);
   }
