@@ -1,11 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, AfterViewChecked, Input, OnInit, Output} from '@angular/core';
+
+declare let paypal: any;
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceComponent implements OnInit, AfterViewChecked {
+
+  addScript: boolean = false;
+  paypalLoad: boolean = true;
 
   @Input() selectedCar: any;
   lastInvoice: any;
@@ -16,6 +21,40 @@ export class InvoiceComponent implements OnInit {
   selectedInvoices: any;
   carFilter: any;
   timeFilter: any;
+  rides: any[][] = [
+    [
+      {lat: 37.77, lon: -122.21}, {lat: 21.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}
+    ],
+    [{lat: 40.77, lon: -122.21}, {lat: 25.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}]
+  ];
+  lat: number = this.rides[0][0].lat;
+  lng: number = this.rides[0][0].lon;
+  //this parameter should be the total price of all the selected invoices
+  amount: any = 100;
+
+  paypalConfig = {
+    env: 'sandbox',
+    client: {
+      sandbox: 'Aa-dYoaxN06RJoUM-jjVk1iO4aGa-hXQr2k2bRxWKytXYqV_jC5GYmhMvq3VLQgvzhLhOzPJeheFSKFO',
+      production: 'AYL17kXYM_MH5s93vfaLeLnKuOENhU1IywuAv9cjXWBCO9ZVNbM-i58lUFYObofBfbTCjFd923t4-wEc'
+    },
+    commit: true,
+    payment: (data, actions) => {
+      return actions.payment.create({
+        payment: {
+          transactions: [
+            { amount: { total: this.amount, currency: 'DKK' } }
+          ]
+        }
+      });
+    },
+    onAuthorize: (data, actions) => {
+      return actions.payment.execute().then((payment) => {
+        alert("payment succesfull");
+      })
+    }
+  };
+
 
   constructor() {
   }
@@ -84,7 +123,28 @@ export class InvoiceComponent implements OnInit {
     this.carFilter = '';
     this.timeFilter = [];
 
+    if (!this.addScript) {
+      this.addPaypalScript().then(() => {
+        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
+        this.paypalLoad = false;
+      })
+    }
   }
+
+  ngAfterViewChecked(): void {
+
+  }
+
+  addPaypalScript() {
+    this.addScript = true;
+    return new Promise((resolve, reject) => {
+      let scripttagElement = document.createElement('script');
+      scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
+      scripttagElement.onload = resolve;
+      document.body.appendChild(scripttagElement);
+    })
+  }
+
 
   chooseInvoice(invoice: any) {
     this.lastInvoice = invoice.invoiceID;

@@ -1,5 +1,6 @@
+import * as ngCore from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {Component, ElementRef, NgModule, NgZone} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {AppRoutingModule} from './/app-routing.module';
@@ -15,7 +16,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { CarFilterPipe } from './carFilter.pipe';
 import { InvoiceFilterPipe } from './invoice-filter.pipe';
 import {DatePipe} from "@angular/common";
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,9 @@ import {DatePipe} from "@angular/common";
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDXdAc0zDyz_bjoXzZRLGv8IfzxphVlhfU'
+    }),
   ],
   providers: [
     {

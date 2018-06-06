@@ -45,12 +45,24 @@
                   <p>Prijs: {{selectedInvoice.price}} DKK</p>
                 </div>
               </div>
+
+              <!-- google maps -->
+              <agm-map [latitude]="lat" [longitude]="lng">
+                <ng-container *ngFor="let ride of rides">
+                  <agm-polyline [strokeColor]="'#2196f3'">
+                    <ng-container *ngFor="let point of ride">
+                      <agm-polyline-point [latitude]="point.lat" [longitude]="point.lon">
+                      </agm-polyline-point>
+                    </ng-container>
+                  </agm-polyline>
+                </ng-container>
+              </agm-map>
             </div>
           </div>
         </div>
 
         <!-- ########## selected invoices panel ###########-->
-        <diV id="selected_invoices">
+        <div id="selected_invoices">
           <h3>Geselecteerde facturen</h3>
           <p *ngIf="selectedInvoices.length == 0">U heeft nog geen facturen geselecteerd.</p>
           <div *ngIf="selectedInvoices.length != 0" class="flexbox column wrap">
@@ -71,7 +83,8 @@
               </a>
             </ng-container>
           </div>
-        </diV>
+          <div id="paypal-checkout-btn"></div>
+        </div>
       </div>
     </div>
   </div>
