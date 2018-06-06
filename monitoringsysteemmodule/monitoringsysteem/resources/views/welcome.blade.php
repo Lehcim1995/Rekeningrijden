@@ -50,7 +50,7 @@
                     '<td>' + endpoint[1] + '</td>' +
                     '<td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td>' +
                     '<td id="' + endpoint[1] +'" style="text-align: center"></td></tr>');
-                
+
                 checkUptime(endpoint);
             });
 
@@ -64,7 +64,6 @@
                 url: url[0],
                 type: "GET",
                 success: function (response) {
-                    console.log(response.status);
                     displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
                     displaySuccess(selector);
                 },
@@ -77,11 +76,7 @@
 
                     let statusCode = 403;
 
-                    if(statusCode != 404) {
-                        displaySuccess(selector);
-                    } else {
-                        displayFailure(selector);
-                    }
+                    statusCode !== 404 ? displaySuccess(selector) : displayFailure(selector);
                 }
             });
         }
