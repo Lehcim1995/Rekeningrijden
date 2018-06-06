@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
@@ -24,6 +25,7 @@ public class OwnerBean implements Serializable {
     private OwnerService ownerService;
     private Owner selectedOwner;
     private List<Owner> allOwners;
+    private String city;
 
     @PostConstruct
     public void init() {
@@ -38,19 +40,29 @@ public class OwnerBean implements Serializable {
         this.selectedOwner = selectedOwner;
     }
 
-    public List<Owner> getAllCarOwners()
-    {
-        try{
-            return ownerService.getAllOwners();
-        }
-        catch(IllegalArgumentException e)
-        {
-            FacesMessage msg = new FacesMessage("Something went wrong when getting al the Owners " +
-                    e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return null;
-        }
+    public String getCity() {
+        return city;
     }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<Owner> getAllCarOwners() {
+        if (allOwners == null) {
+            try {
+                allOwners = new ArrayList<Owner>();
+                allOwners = ownerService.getAllOwners();
+            } catch (IllegalArgumentException e) {
+                FacesMessage msg = new FacesMessage("Something went wrong when getting al the Owners " +
+                        e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                return null;
+            }
+        }
+        return allOwners;
+    }
+
 
     public void onOwnerRowSelect(SelectEvent event) {
         //TODO: Cast to Road Class
@@ -84,10 +96,10 @@ public class OwnerBean implements Serializable {
     }
 
     public List<Owner> getAllOwners() {
-        return allOwners;
+        return ownerService.getAllOwners();
     }
 
-    public void setAllOwners(List<Owner> allOwners) {
-        this.allOwners = allOwners;
-    }
+//    public void setAllOwners(List<Owner> allOwners) {
+//        this.allOwners = allOwners;
+//    }
 }
