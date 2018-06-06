@@ -35,6 +35,7 @@ public class Owner implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(nullable = true)
     private List<Vehicle> previousVehicles;
+    private boolean usesRekeningRijdersApp;
 
     public Owner() {}
 
@@ -49,6 +50,7 @@ public class Owner implements Serializable {
         this.password = password;
         vehicles = new ArrayList<>();
         previousVehicles = new ArrayList<>();
+        usesRekeningRijdersApp = false;
     }
 
     public Owner(int citizenId, String firstName, String middleName, String lastName, String address, String city) {
@@ -60,6 +62,7 @@ public class Owner implements Serializable {
         this.city = city;
         vehicles = new ArrayList<>();
         previousVehicles = new ArrayList<>();
+        usesRekeningRijdersApp = false;
     }
 
     public int getId() {
@@ -157,5 +160,13 @@ public class Owner implements Serializable {
     public void addPrevious(Vehicle vehicle){
         this.vehicles.remove(vehicle);
         this.previousVehicles.add(vehicle);
+    }
+
+    public boolean isUsesRekeningRijdersApp() {
+        return usesRekeningRijdersApp;
+    }
+
+    public void setUsesRekeningRijdersApp() {
+        this.usesRekeningRijdersApp = true;
     }
 }
