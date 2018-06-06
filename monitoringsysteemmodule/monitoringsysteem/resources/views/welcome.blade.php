@@ -25,8 +25,9 @@
             <table class="table table-striped table-bordered table-dark table-hover">
                 <thead>
                     <tr>
-                        <td width="80%"><strong>Domein</strong></td>
-                        <td width="20%"><strong>Status</strong></td>
+                        <td width="70%"><strong>Domein</strong></td>
+                        <td width="15%"><strong>Status</strong></td>
+                        <td width="15%"><strong>Tijd</strong></td>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -39,12 +40,12 @@
     <script>
         let endpoints = [
             ['http://192.168.25.135:8080/', 'home'],
-            ['http://192.168.25.135:8080/verplaatsingsmodule', 'nothome']
+            ['http://192.168.25.135:9996/verplaatsingsmodule', 'nothome']
         ];
 
         $(document).ready(function () {
             endpoints.forEach(function (endpoint) {
-                $('#tableBody').append('<tr><td>' + endpoint[0] + '</td><td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td></tr>');
+                $('#tableBody').append('<tr><td>' + endpoint[0] + '</td><td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td><td id="' + endpoint[1] +'" style="text-align: center"></td></tr>');
                 checkUptime(endpoint);
             });
 
@@ -52,24 +53,41 @@
 
         function checkUptime(url) {
             let selector = '.' + url[1];
+            let ajaxTime = new Date().getTime();
             $.ajax({
                 url: url[0],
                 type: "GET",
                 success: function (response) {
-                    $(selector).removeClass('fa-spinner');
-                    $(selector).removeClass('fa-spin');
-                    $(selector).removeClass('fa-times');
-                    $(selector).addClass('fa-check');
-                    $(selector).css('color', 'green');
+                    console.log(response.status);
+                    displayLoadTime('#' + url[1], ajaxTime);
+                    displaySuccess(selector, new Date().getTime() - ajaxTime);
                 },
-                error: function (xhr, status) {
-                    $(selector).removeClass('fa-spinner');
-                    $(selector).removeClass('fa-spin');
-                    $(selector).removeClass('fa-check');
-                    $(selector).addClass('fa-times');
-                    $(selector).css('color', 'red');
+                error: function (request, status, error) {
+                    console.log(request.statusCode());
+                    displayFailure(selector);
+                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime)
                 }
             });
+        }
+
+        function displaySuccess(selector) {
+            $(selector).removeClass('fa-spinner');
+            $(selector).removeClass('fa-spin');
+            $(selector).removeClass('fa-times');
+            $(selector).addClass('fa-check');
+            $(selector).css('color', 'green');
+        }
+
+        function displayFailure(selector) {
+            $(selector).removeClass('fa-spinner');
+            $(selector).removeClass('fa-spin');
+            $(selector).removeClass('fa-check');
+            $(selector).addClass('fa-times');
+            $(selector).css('color', 'red');
+        }
+
+        function displayLoadTime(id, responseTime) {
+            $(id).append(responseTime + 'ms');
         }
     </script>
 </html>
