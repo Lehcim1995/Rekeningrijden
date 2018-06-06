@@ -1,6 +1,7 @@
 package service;
 
 import dao.InvoiceDao;
+import dao.OwnerDao;
 import domain.Invoice;
 import domain.MonthEnum;
 import domain.Owner;
@@ -16,6 +17,9 @@ public class InvoiceService implements Serializable{
 
     @Inject
     private InvoiceDao invoiceDao;
+
+    @Inject
+    private OwnerDao ownerDao;
 
     public boolean createInvoice(String vehicleTrackerId, Owner owner, double overall, PaymentEnum paymentStatus, MonthEnum month) {
         Invoice invoice = new Invoice(vehicleTrackerId, owner, overall, paymentStatus, month);
@@ -57,7 +61,7 @@ public class InvoiceService implements Serializable{
         return invoiceDao.getInvoicesByPaymentStatusAndMonth(paymentEnum, monthEnum);
     }
 
-    public List<Invoice> getInvoicesByVehicleAndOwner(String vehicleId, Owner ownerById) {
-        return invoiceDao.getInvoicesByVehicleAndOwner(vehicleId, ownerById);
+    public List<Invoice> getInvoicesByVehicleAndOwner(String vehicleId, int ownerById) {
+        return invoiceDao.getInvoicesByVehicleAndOwner(vehicleId, ownerDao.findOwnerById(ownerById));
     }
 }

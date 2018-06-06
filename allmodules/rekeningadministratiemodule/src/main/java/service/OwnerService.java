@@ -7,6 +7,7 @@ import domain.Vehicle;
 
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.List;
 
 public class OwnerService implements Serializable{
@@ -16,6 +17,10 @@ public class OwnerService implements Serializable{
 
     @Inject
     private VehicleDao vehicleDao;
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
 
     public boolean create(int citizenId, String firstName, String middleName, String lastName, String address, String city, String accountNumber, String password) {
         try {
@@ -78,5 +83,14 @@ public class OwnerService implements Serializable{
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public String processRegistration(int citizenId) {
+        ownerDao.setOwnerUsingRRA(findOwnerById(citizenId));
+
+        StringBuilder sb = new StringBuilder(8);
+        for( int i = 0; i < 8; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
     }
 }

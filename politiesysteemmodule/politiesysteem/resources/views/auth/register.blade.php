@@ -40,6 +40,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="registerCode" class="col-md-4 col-form-label text-md-right">{{ __('Registreer code') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="registerCode" class="form-control{{ $errors->has('registerCode') ? ' is-invalid' : '' }}" name="registerCode" value="{{ old('registerCode') }}" required>
+
+                                @if ($errors->has('registerCode'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('registerCode') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

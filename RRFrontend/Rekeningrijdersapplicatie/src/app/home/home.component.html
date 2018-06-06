@@ -1,59 +1,36 @@
-<div id="main-box">
-  <div id="main" class="flexbox row wrap">
-    <!-- ########## cars panel ###########-->
-    <div id="cars">
-      <p *ngIf="vehicles.length == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
-        tevoorschijn.</p>
-      <div *ngIf="vehicles.length != 0" class="flexbox column wrap">
-        <h3>Voertuigen</h3>
-        <ng-container *ngFor="let vehicle of vehicles">
-          <a [ngClass]="{ 'active': lastCar == vehicle.trackerID }" (click)="chooseCar(vehicle)" class="flexbox row wrap between car-entry">
-            <div class="flexbox column wrap">
-              <h3 class="car">{{vehicle.name}}</h3>
-              <p class="car-details">{{vehicle.licenseplate}} - {{vehicle.classification}}</p>
-            </div>
-            <h2> > </h2>
-          </a>
-        </ng-container>
-      </div>
-    </div>
-
-    <!-- ########## invoice panel ###########-->
-    <div id="invoices">
-      <p *ngIf="invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
-        hier.</p>
-      <div *ngIf="invoices.length != 0" class="flexbox column wrap invoice-entries">
-        <h3>Invoices</h3>
-        <ng-container *ngFor="let invoice of invoices">
-          <a [ngClass]="{'active': lastInvoice == invoice.invoiceID}" (click)="chooseInvoice(invoice)" class="flexbox row wrap between invoice-entry">
-            <div class="flexbox column wrap">
-              <h3 class="invoice">{{invoice.date | date:'MMM y' }} - FactuurNo. {{invoice.invoiceID}} </h3>
-              <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
-            </div>
-            <h2> > </h2>
-          </a>
-        </ng-container>
-      </div>
-    </div>
-
-    <!-- ########## invoice details panel ########### -->
-    <div id="invoice-details">
-      <p *ngIf="selectedInvoice == ''">Factuurdetails verschijnen hier. Selecteer eerst een
-        factuur.</p>
-      <div *ngIf="selectedInvoice != ''" class="flexbox column wrap">
-        <h3>Factuurdetails</h3>
-        <div class="flexbox row wrap detailpanels">
-          <div>
-            <p>Datum: {{selectedInvoice.date | date:'MMM y'}}</p>
-            <p>Kentekenplaat: {{selectedInvoice.licenseplate}}</p>
-            <p>Tracker Id: {{selectedInvoice.trackerID}}</p>
-          </div>
-          <div>
-            <p>Gereden kilometers: {{selectedInvoice.kmAmmount}}</p>
-            <p>Prijs: {{selectedInvoice.price}} DKK</p>
-          </div>
+<div id="main" class="flexbox row wrap">
+  <!-- ########## cars panel ###########-->
+  <div id="cars" class="max-width">
+    <h3>Voertuigen</h3>
+    <p *ngIf="vehicles.length == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
+      tevoorschijn.</p>
+    <div *ngIf="vehicles.length != 0" class="flexbox column wrap">
+      <h5>Filters</h5>
+      <div class="flexbox row wrap between">
+        <div class="flexbox row wrap"><label for="filter" class="self_center">Filter:</label>
+          <input [(ngModel)]="name" id="filter" type="text" placeholder="auto 1">
+        </div>
+        <div class="flexbox row wrap"><label for="licensePlateFilter" class="self_center">Filter kenteken:</label>
+          <input id="licensePlateFilter" [(ngModel)]="license" type="text" placeholder="XJ 328 89">
+        </div>
+        <div class="flexbox row wrap"><label for="fuelFilter" class="self_center">Filter brandstof:</label>
+          <input id="fuelFilter" [(ngModel)]="fuel" type="text" placeholder="Benzine">
         </div>
       </div>
+
+      <ng-container *ngFor="let vehicle of vehicles | nameFilter: name:license:fuel">
+        <a (click)="chooseCar(vehicle)" class="flexbox row wrap car-entry" routerLink="/invoices/">
+          <div class="flexbox row wrap vehicles between max-width">
+            <h3 class="car">{{vehicle.name}}</h3>
+            <p class="car-details">{{vehicle.licenseplate}}</p>
+            <p>{{vehicle.classification}}</p>
+          </div>
+        </a>
+      </ng-container>
     </div>
   </div>
+  <!--<div id="invoices" *ngIf="selectedCar != ''">-->
+  <!--&lt;!&ndash;<a class="link" (click)="goBack()"> < {{selectedCar.name}}</a>&ndash;&gt;-->
+  <!--<app-invoice [selectedCar]="selectedCar"></app-invoice>-->
+  <!--</div>-->
 </div>

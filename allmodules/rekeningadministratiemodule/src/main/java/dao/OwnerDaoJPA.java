@@ -94,4 +94,16 @@ public class OwnerDaoJPA implements OwnerDao {
         }
         return false;
     }
+
+    @Override
+    @Transactional
+    public void setOwnerUsingRRA(Owner ownerById) {
+        try {
+            Owner owner = findOwnerById(ownerById.getCitizenId());
+            owner.setUsesRekeningRijdersApp();
+            em.merge(owner);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

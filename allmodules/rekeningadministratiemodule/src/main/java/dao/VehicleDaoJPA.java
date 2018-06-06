@@ -160,6 +160,8 @@ public class VehicleDaoJPA implements VehicleDao, Serializable
         {
             vehicle.setTracker(tracker);
             em.merge(vehicle);
+            tracker.setVehicle(vehicle);
+            em.merge(tracker);
         }
     }
 

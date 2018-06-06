@@ -2,6 +2,7 @@ package api;
 
 import domain.Owner;
 import jsonBodies.OwnerBody;
+import model.RegisteredModel;
 import service.OwnerService;
 
 import javax.enterprise.context.RequestScoped;
@@ -81,5 +82,14 @@ public class OwnerApi {
         catch (Exception e) {
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
         }
+    }
+
+    @GET
+    @Produces(APPLICATION_JSON)
+    @Path("/{email}/register/{bsn}")
+    public Response registerProfile(@PathParam("email") String email, @PathParam("bsn") int bsn) {
+
+        String password = ownerService.processRegistration(bsn);
+        return Response.ok(new RegisteredModel(email, password, bsn)).build();
     }
 }
