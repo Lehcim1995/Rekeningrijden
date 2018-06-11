@@ -19,6 +19,8 @@
 
         <!-- Font awesome import -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <div class="container" style="margin: auto auto">
@@ -40,13 +42,20 @@
 
     <script>
         let endpoints = [
-            ['http://192.168.25.135:8080/', 'home'],
-            ['http://192.168.25.135:9996/verplaatsingsmodule', 'nothome']
+            ['http://192.168.25.135:8000', 'Politie'],
+            ['http://i310866.hera.fhict.nl/', 'Portal'],
+            ['http://i310866.hera.fhict.nl/pages/simulation/simulatie.html', 'Simulatie'],
+            ['http://192.168.25.135:8080/rekeningadministratiemodule/', 'Administratie'],
+            ['http://192.168.25.135:8090', 'Rekeningrijder'],
+            ['http://192.168.25.130:8000', 'Splunk'],
+            ['http://192.168.25.135:9000', 'Sonarqube'],
+            ['http://192.168.25.135:8080', 'Jenkins'],
+            ['http://192.168.25.135:8081', 'Artifactory']
         ];
 
         $(document).ready(function () {
             endpoints.forEach(function (endpoint) {
-                $('#tableBody').append('<tr><td>' + endpoint[0] + '</td>' +
+                $('#tableBody').append('<tr><td><a href="' + endpoint[0] + '">' + endpoint[0] + '</a></td>' +
                     '<td>' + endpoint[1] + '</td>' +
                     '<td style="text-align: center"><i class="fa fa-spinner fa-spin ' + endpoint[1] + '"></i></td>' +
                     '<td id="' + endpoint[1] +'" style="text-align: center"></td></tr>');
@@ -60,25 +69,26 @@
             let selector = '.' + url[1];
             let ajaxTime = new Date().getTime();
 
-            $.ajax({
-                url: url[0],
-                type: "GET",
-                success: function (response) {
-                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
-                    displaySuccess(selector);
-                },
-                error: function (request, status, error) {
-                    console.log(request);
-                    console.log(status);
-                    console.log(error);
-
+            axios.get(url[0])
+                .then(function (response) {
                     displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
 
-                    let statusCode = 403;
-
-                    statusCode !== 404 ? displaySuccess(selector) : displayFailure(selector);
-                }
-            });
+                    console.log(response);
+                    response.status !== 404 ? displaySuccess(selector) : displayFailure(selector);
+                })
+                .catch(function (error) {
+                    displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
+//                    error.response.status !== 404 ? displaySuccess(selector) : displayFailure(selector);
+                    if(error.response === undefined) {
+                        displayFailure(selector);
+                    } else if(error.response.status !== 404) {
+                        displaySuccess(selector);
+                    } else {
+                        displayFailure(selector)
+                    }
+//                    console.log(error.request);
+//                    return Promise.reject(error.response);
+                });
         }
 
         function displaySuccess(selector) {
@@ -97,8 +107,16 @@
             $(selector).css('color', 'red');
         }
 
+        function displayLoading(selector) {
+            $(selector).removeClass('fa-check');
+            $(selector).removeClass('fa-times');
+            $(selector).addClass('fa-spinner');
+            $(selector).addClass('fa-spin');
+            $(selector).css('color', 'white');
+        }
+
         function displayLoadTime(id, responseTime) {
-            $(id).append(responseTime + 'ms');
+            $(id).html(responseTime + 'ms');
         }
     </script>
 </html>
