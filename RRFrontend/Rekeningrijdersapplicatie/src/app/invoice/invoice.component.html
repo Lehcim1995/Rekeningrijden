@@ -43,6 +43,9 @@
                 <div>
                   <p>Gereden kilometers: {{selectedInvoice.kmAmmount}}</p>
                   <p>Prijs: {{selectedInvoice.price}} DKK</p>
+
+                  <!-- pdf -->
+                  <input type="button" class="pdf" value="Download PDF" (click)="downloadPDF(selectedInvoice.invoiceID)">
                 </div>
               </div>
 
@@ -57,6 +60,7 @@
                   </agm-polyline>
                 </ng-container>
               </agm-map>
+
             </div>
           </div>
         </div>
