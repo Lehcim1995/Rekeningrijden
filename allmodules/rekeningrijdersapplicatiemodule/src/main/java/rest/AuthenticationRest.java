@@ -29,6 +29,7 @@ public class AuthenticationRest {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(RegisterModel profile) {
 
+
         // TODO return profile and show password
         if(authenticationService.findByBSN(profile.getBsn()) != null) {
             return Response.status(Response.Status.CONFLICT).entity("Account already registered").build();

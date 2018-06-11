@@ -21,4 +21,12 @@ public class RegisterModel implements Serializable {
     public int getBsn() {
         return bsn;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBsn(int bsn) {
+        this.bsn = bsn;
+    }
 }

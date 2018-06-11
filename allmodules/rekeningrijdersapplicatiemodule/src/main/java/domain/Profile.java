@@ -26,7 +26,7 @@ public class Profile implements Serializable {
     }
 
     public Profile(String login, String password, int ownerId) {
-        this.username = login;
+        this.username = login; //Email
         this.password = password;
         this.ownerId = ownerId;
     }
