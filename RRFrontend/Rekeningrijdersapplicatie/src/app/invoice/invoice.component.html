@@ -20,7 +20,7 @@
 
               <div class="flexbox row wrap">
                 <!-- add the invoice through a servicecall-->
-                <p> + </p>
+                <p class="addInvoice" (click)="addInvoice(invoice)"> + </p>
                 <p> > </p>
               </div>
             </a>
@@ -64,26 +64,22 @@
         <!-- ########## selected invoices panel ###########-->
         <div id="selected_invoices">
           <h3>Geselecteerde facturen</h3>
+          <div id="paypal-checkout-btn"></div>
           <p *ngIf="selectedInvoices.length == 0">U heeft nog geen facturen geselecteerd.</p>
           <div *ngIf="selectedInvoices.length != 0" class="flexbox column wrap">
-            <ng-container *ngFor="let invoice of selectedInvoices">
+            <ng-container *ngFor="let invoice of selectedInvoices; let index = index" [attr.data-index]="index">
               <a [ngClass]="{ 'active': lastInvoice == invoice.trackerID }"
                  class="flexbox row wrap between invoice-entry">
                 <div class="flexbox row wrap center">
-                  <div>
-                    <p>Datum: {{invoice.date | date:'MMM y'}}</p>
-                    <p>Kentekenplaat: {{invoice.licenseplate}}</p>
-                    <p>Tracker Id: {{invoice.trackerID}}</p>
-                  </div>
-                  <div>
-                    <p>Gereden kilometers: {{invoice.kmAmmount}}</p>
-                    <p>Prijs: {{invoice.price}} DKK</p>
+                  <div class="flexbox column wrap">
+                    <p class="invoice">{{invoice.date | date:'MMM y' }} - #{{invoice.invoiceID}} </p>
+                    <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
+                    <p class="removeinvoice" (click)="removeInvoice(index)"> - </p>
                   </div>
                 </div>
               </a>
             </ng-container>
           </div>
-          <div id="paypal-checkout-btn"></div>
         </div>
       </div>
     </div>
