@@ -5,6 +5,9 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import domain.*;
 import org.jsoup.Jsoup;
 
+import javax.ejb.Stateless;
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -28,13 +31,17 @@ import java.util.stream.Collectors;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+@Stateless
 public class PdfCreator
 {
     // todo add files here
 
     // todo split generation from invoice and pdf and html
 
-    private static final String RESOURCE_PATH = "allmodules/rekeningadministratiemodule/src/main/resources/";
+    @Context
+    private ServletContext context;
+
+    private static final String RESOURCE_PATH = "/resources/";
 
     //D:\School\JavaProjects\ProftaakSem6\rekeningadministratiemodule\src\main\resources\templates\invoiceTemplate.html
     private static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
@@ -68,11 +75,17 @@ public class PdfCreator
     /**
      * @param invoice
      */
-    public void createInvoicePdf(Invoice invoice)
+    public File createInvoicePdf(Invoice invoice)
     {
         String path = createHTMLTemplateForInvoice(invoice);
 
-        String output = INVOICES_FOLDER + createFileName(invoice, "pdf");
+        String realPath = context.getRealPath("");
+
+        String output = realPath + INVOICES_FOLDER + createFileName(invoice, "pdf");
+
+
+        System.out.println(path);
+        System.out.println(output);
 
         exportToPdfBox(path, output);
 
@@ -80,13 +93,16 @@ public class PdfCreator
         {
             URL url = new URL(path);
             File f = new File(url.getFile());
-            f.delete();
+//            f.delete();
+            return new File(output);
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
             // TODO throw nice error
         }
+
+        return null;
     }
 
     /**
@@ -99,6 +115,7 @@ public class PdfCreator
             String urlStr,
             int timeoutMs) throws IOException
     {
+        System.out.println(urlStr);
         URL url = new URL(urlStr);
         org.jsoup.nodes.Document doc;
 
@@ -233,11 +250,6 @@ public class PdfCreator
             return "<p> no data found </p>";
         }
 
-        // Load first item
-        // TODO try, to load field header even if there is no data
-        T single = data.get(0);
-
-
         String table; // return this
 
         String header;
@@ -273,13 +285,13 @@ public class PdfCreator
 
 
         // Start table data
-        String tableData = "";
 
         // loop though the list of data
+        StringBuilder tableDataBuilder = new StringBuilder();
         for (T d : data)
         {
 
-            String tableItem = "<tr class=\"item\">";
+            StringBuilder tableItem = new StringBuilder("<tr class=\"item\">");
             for (String fields : objectFields)
             {
                 // get the field name and capitalize the first letter
@@ -297,24 +309,26 @@ public class PdfCreator
                                   .toString();
 
                     // add result to the table
-                    tableItem += "<td>" + get + "</td> \n";
+                    tableItem.append("<td>")
+                             .append(get)
+                             .append("</td> \n");
                 }
                 catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
                 {
                     e.printStackTrace();
                     // TODO make error nice
-                    tableItem += "<td> no data found </td> \n";
+                    tableItem.append("<td> no data found </td> \n");
                 }
             }
-            tableItem += "</tr> \n";
-            tableData += tableItem;
+            tableItem.append("</tr> \n");
+            tableDataBuilder.append(tableItem);
 
         }
+        String tableData = tableDataBuilder.toString();
 
         tableData += "\n";
 
         table = header + "\n" + tableData;
-
 
         return table;
     }
@@ -353,15 +367,19 @@ public class PdfCreator
         Path output = null;
         try
         {
+            String realPath = context.getRealPath("");
+
             String filename = createFileName(invoice, "html");
 
-            File file = new File(INVOICE_TEMPLATE);
+            File file = new File(realPath + INVOICE_TEMPLATE);
 
-            File outputFile = new File(INVOICES_FOLDER + filename);
+            File outputFile = new File(realPath + INVOICES_FOLDER + filename);
 
             output = outputFile.toPath();
 
-            Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING);
+            System.out.println(file.toPath() + " : " +  outputFile.toPath());
+
+            Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING );
 
             setInvoiceNumber(outputFile.toPath()
                                        .toString(), invoice);
