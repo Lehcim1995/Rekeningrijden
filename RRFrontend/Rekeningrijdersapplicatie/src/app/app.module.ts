@@ -18,6 +18,7 @@ import { InvoiceFilterPipe } from './invoice-filter.pipe';
 import {DatePipe} from "@angular/common";
 import { AgmCoreModule } from '@agm/core';
 import {InvoiceService} from "./invoice.service";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {InvoiceService} from "./invoice.service";
     InvoicesComponent,
     CarFilterPipe,
     InvoiceFilterPipe,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

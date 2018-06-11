@@ -1,0 +1,19 @@
+<div id="main-box">
+  <div id="main" class="flexbox column wrap">
+    <form (ngSubmit)="register()" class="center middle loginform flexbox column wrap">
+      <h2>Registreer uwzelf voor Deens Rekeningrijden.</h2>
+      <div class="form-field flexbox row wrap">
+        <label for="email">Email</label>
+        <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" id="email" name="email">
+      </div>
+      <div class="form-field flexbox row wrap">
+        <label for="cpr">CPR:</label>
+        <input [(ngModel)]="cpr" [ngModelOptions]="{standalone: true}" id="cpr" name="CPR" type="text">
+      </div>
+      <div class="form-buttons">
+        <input type="submit" class="button button-primary">
+      </div>
+      <div *ngIf="password"><p>Uw wachtwoord is: <span class="password">{{password}}</span></p><p>Bewaar uw wachtwoord goed!</p></div>
+    </form>
+  </div>
+</div>
