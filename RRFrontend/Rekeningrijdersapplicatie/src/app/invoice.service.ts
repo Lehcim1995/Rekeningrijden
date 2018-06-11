@@ -9,6 +9,7 @@ export class InvoiceService {
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
   private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
   private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
+  private getInvoices = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/cpr";
 
 
 
@@ -20,8 +21,8 @@ export class InvoiceService {
   getcars() {
 
   }
-  getInvoicesByCar(){
-
+  getInvoicesByCPR(cpr:string){
+    return this.httpClient.get(`${this.getInvoices}/${cpr}`,{observe: 'response'});
   }
 
   public getCarIdFromLicenseplate(licenseplate: any)

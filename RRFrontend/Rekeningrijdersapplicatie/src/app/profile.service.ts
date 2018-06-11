@@ -24,6 +24,7 @@ export class ProfileService {
         console.log(token);
         if (token != null) {
           this.token = token;
+          //set actual cpr in localstorage
           localStorage.setItem('currentUser', JSON.stringify({username: login, token: token}));
           localStorage.setItem('loggedinuser', login);
           localStorage.setItem('token', token);
@@ -57,6 +58,11 @@ export class ProfileService {
     console.log(cpr);
 
     return this.httpClient.post(`${this.postRegisterURL}`, body, {observe: 'response'});
+  }
+
+  public getCPR(){
+    return "7";
+    //return localStorage.getItem('CPR');
   }
 
 }
