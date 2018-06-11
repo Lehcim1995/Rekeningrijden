@@ -67,3 +67,31 @@ input[type=text], select {
 agm-map {
   height: 500px;
 }
+
+.pdf {
+  background: #3cd934;
+  background-image: -webkit-linear-gradient(top, #3cd934, #2bb863);
+  background-image: -moz-linear-gradient(top, #3cd934, #2bb863);
+  background-image: -ms-linear-gradient(top, #3cd934, #2bb863);
+  background-image: -o-linear-gradient(top, #3cd934, #2bb863);
+  background-image: linear-gradient(to bottom, #3cd934, #2bb863);
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+
+.pdf:hover {
+  background: #2bb863;
+  background-image: -webkit-linear-gradient(top, #2bb863, #3cd934);
+  background-image: -moz-linear-gradient(top, #2bb863, #3cd934);
+  background-image: -ms-linear-gradient(top, #2bb863, #3cd934);
+  background-image: -o-linear-gradient(top, #2bb863, #3cd934);
+  background-image: linear-gradient(to bottom, #2bb863, #3cd934);
+  text-decoration: none;
+  cursor:pointer;
+}

@@ -183,5 +183,8 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     this.selectedInvoices.splice(index, 1);
   }
 
+  downloadPDF(invoiceid: string){
+    this.invoiceService.downloadPDF(invoiceid);
+  }
 
 }

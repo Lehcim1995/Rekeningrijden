@@ -8,6 +8,7 @@ export class InvoiceService {
 
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
   private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
+  private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
 
 
 
@@ -64,5 +65,23 @@ export class InvoiceService {
     return this.httpClient.get(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`)
   }
 
+  downloadPDF(invoiceid: string){
+    invoiceid = "4";
+
+    this.httpClient.get(`${this.getPDF}/${invoiceid}/download`,{observe: 'response'}).subscribe(
+      (res) => {
+        console.log(res);
+        if (res != null) {
+          //redirect to new page to download pdf
+          this.router.navigateByUrl('/home');
+        }
+      },
+      err => {
+        if (err.status == 401) {
+          alert("Not logged in!");
+        }
+      }
+    );
+  }
 
 }
