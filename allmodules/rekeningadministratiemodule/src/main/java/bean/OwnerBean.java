@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -77,16 +78,19 @@ public class OwnerBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onOwnerEdit(CellEditEvent event) {
-        String oldValue = event.getOldValue().toString();
-        String newValue = event.getNewValue().toString();
+    public void onValueQuantityChange(ValueChangeEvent event) {
+        city = (String) event.getNewValue();
+    }
 
-        if (newValue != null && !newValue.equals(oldValue)) {
+    public void onOwnerEdit(ValueChangeEvent event) {
+        String oldValue = event.getOldValue().toString();
+
+        if (city != null && !city.equals(oldValue)) {
             try {
                 Owner entity = (Owner) ((DataTable) event.getComponent()).getRowData();
                 //TODO set new ownervalues to owner.
                 //rateService.editKilometerRate(entity.getKilometerRate().getId(), Double.valueOf(newValue));
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + newValue);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + city);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             } catch (Exception e) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Something went wrong while editing the cell", "error: " + e.getMessage());

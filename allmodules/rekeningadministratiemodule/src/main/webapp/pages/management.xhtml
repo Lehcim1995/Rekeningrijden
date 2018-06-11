@@ -69,7 +69,7 @@
                                     <h:outputText value="#{owner.city}"/>
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{owner.city}"
+                                    <p:inputText value="#{owner.city}" valueChangeListener="#{ownerBean.onValueQuantityChange}"
                                                  label="Stad"/>
                                 </f:facet>
                             </p:cellEditor>
@@ -81,7 +81,7 @@
                                     <h:outputText value="#{owner.address}"/>
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{owner.address}"
+                                    <p:inputText value="#{owner.address}" valueChangeListener="#{ownerBean.onValueQuantityChange}"
                                                  label="Adres"/>
                                 </f:facet>
                             </p:cellEditor>
