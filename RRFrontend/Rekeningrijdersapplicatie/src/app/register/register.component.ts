@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.profileService.register(this.email, this.cpr).subscribe(
-      (res) => {
+      (res:any) => {
         let owner = res;
         console.log(res.body.password);
         if (res.body.password != null) {
