@@ -1,5 +1,6 @@
 import {Component, EventEmitter, AfterViewChecked, Input, OnInit, Output} from '@angular/core';
 import {InvoiceService} from "../invoice.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 declare let paypal: any;
 
@@ -24,7 +25,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   selectedInvoices: any;
   carFilter: any;
   timeFilter: any;
-  drivenRoutes: any;
+  drivenRoutes: any = [];
   rides: any = [
     [
       {lat: 37.77, lon: -122.21}, {lat: 21.29, lon: -157.82}, {lat: -18.14, lon: 178.43}, {lat: -27.46, lon: 153.03}
@@ -180,7 +181,29 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     this.invoiceService.getMovementsForCarWithMonth(this.selectedCar.ID, new Date().setMonth(this.months.indexOf(invoice.date))).subscribe(
       (res:any) => {
         console.log(res);
-        this.drivenRoutes = res;
+        let data = res;
+
+        let parsed = [];
+
+        data.forEach(function(verplaatsing)
+        {
+
+          let l = [];
+
+          verplaatsing.checkpoints.forEach(function(checkpoint){
+
+            let lat =  checkpoint.lat;
+            let lon = checkpoint.lon;
+
+            parsed.push({"lat" : lat, "lon" : lon});
+
+          });
+          // parsed.push();
+        });
+        console.log("mock = ", this.rides);
+        console.log("parsed = ", [parsed]);
+
+        this.drivenRoutes = [parsed];
       },
       err => {
         if (err.status == 401) {

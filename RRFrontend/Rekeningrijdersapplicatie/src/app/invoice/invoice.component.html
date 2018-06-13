@@ -1,6 +1,7 @@
 <div id="main" class="flexbox row wrap">
   <div id="invoices">
-    <p *ngIf="invoiceService.invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
+    <p *ngIf="invoiceService.invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft,
+      verschijnen ze
       hier.</p>
     <div *ngIf="invoiceService.invoices.length != 0" class="flexbox column wrap invoice-entries">
       <div class="flexbox row wrap invoices">
@@ -10,7 +11,8 @@
           <div class="flexbox row wrap">
             <input id="invoiceFilter" [(ngModel)]="invoiceFiltertje" type="text" placeholder="Filter...">
           </div>
-          <ng-container *ngFor="let invoice of invoiceService.invoices | invoiceFilter: { invoiceFiltertje: invoiceFiltertje}: false">
+          <ng-container
+            *ngFor="let invoice of invoiceService.invoices | invoiceFilter: { invoiceFiltertje: invoiceFiltertje}: false">
             <a [ngClass]="{'active': lastInvoice == invoice.invoiceId}" (click)="chooseInvoice(invoice)"
                class="flexbox row wrap between invoice-entry">
               <div class="flexbox column wrap">
@@ -46,21 +48,25 @@
                   <p>Prijs: {{selectedInvoice.total}} DKK</p>
 
                   <!-- pdf -->
-                  <input type="button" class="pdf" value="Download PDF" (click)="downloadPDF(selectedInvoice.invoiceID)">
+                  <input type="button" class="pdf" value="Download PDF"
+                         (click)="downloadPDF(selectedInvoice.invoiceID)">
                 </div>
               </div>
 
               <!-- google maps -->
-              <agm-map [latitude]="lat" [longitude]="lng">
-                <ng-container *ngFor="let ride of drivesRoutes">
-                  <agm-polyline [strokeColor]="'#2196f3'">
-                    <ng-container *ngFor="let point of ride">
-                      <agm-polyline-point [latitude]="point.lat" [longitude]="point.lon">
-                      </agm-polyline-point>
-                    </ng-container>
-                  </agm-polyline>
-                </ng-container>
-              </agm-map>
+              <ng-container *ngIf="drivenRoutes.length != 0">
+                <agm-map [latitude]="55.8837213" [longitude]="10.5169774" [zoom]="7">
+                  <ng-container *ngFor="let ride of drivenRoutes">
+                    <agm-polyline [strokeColor]="'#2196f3'">
+                      <ng-container *ngFor="let point of ride">
+                        <agm-polyline-point [latitude]="point.lat" [longitude]="point.lon">
+                        </agm-polyline-point>
+                      </ng-container>
+                    </agm-polyline>
+                  </ng-container>
+                </agm-map>
+              </ng-container>
+
 
             </div>
           </div>
