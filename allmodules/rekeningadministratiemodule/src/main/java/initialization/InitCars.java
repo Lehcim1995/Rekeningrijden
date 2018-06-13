@@ -21,6 +21,7 @@ public class InitCars
     {
         try
         {
+            // TODO link must be gud
             new VehicleParser().Parse("D:/School/Javaprojects/Rekeningrijden/allmodules/rekeningadministratiemodule/src/main/resources/newdata.xml")
                                .forEach(vehicle -> {
                                    try
