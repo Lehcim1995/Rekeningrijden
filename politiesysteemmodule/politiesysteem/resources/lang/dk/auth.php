@@ -13,16 +13,16 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'login' => 'Login',
+    'failed' => 'Disse legitimationsoplysninger svarer ikke til vores poster.',
+    'throttle' => 'For mange login forsøg. Prøv igen i sekunder sekunder.',
+    'login' => 'Log på',
     'email' => "Email",
-    'password' => 'Password',
-    'remember' => 'Remember me',
-    'forgotpass' => 'Forgot password?',
-    'name' => 'Name',
+    'password' => 'Adgangskode',
+    'remember' => 'Husk mig',
+    'forgotpass' => 'Glemt kodeord?',
+    'name' => 'Navn',
     'confirmpass' => 'Confirm password',
-    'registercode' => 'Register code',
-    'register' => 'Register',
+    'registercode' => 'Bekræft adgangskode',
+    'register' => 'Tilmeld',
 
 ];

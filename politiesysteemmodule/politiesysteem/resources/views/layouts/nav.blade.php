@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/home') }}">
-            Politie
+        <a class="navbar-brand" href="{{ url('/car') }}">
+            {{ __('nav.title') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,15 +11,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li><a class="nav-link" href="/car">Auto's</a></li>
+                <li><a class="nav-link" href="/car">{{ __('nav.cars') }}</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('nav.login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('nav.register') }}</a></li>
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -31,7 +31,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('nav.logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"

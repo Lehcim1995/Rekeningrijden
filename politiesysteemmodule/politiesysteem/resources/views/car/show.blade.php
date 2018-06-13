@@ -28,14 +28,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4>Auto informatie</h4>
+                                <h4>{{ __('carshow.carinfo') }}</h4>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Merk</label><br>
-                                        <label>Kenteken</label><br>
-                                        <label>Gewicht</label><br>
-                                        <label>Brandstof</label><br>
-                                        <label>Bouwjaar</label><br>
+                                        <label>{{ __('carshow.brand') }}</label><br>
+                                        <label>{{ __('carshow.license') }}</label><br>
+                                        <label>{{ __('carshow.weight') }}</label><br>
+                                        <label>{{ __('carshow.fuel') }}</label><br>
+                                        <label>{{ __('carshow.year') }}</label><br>
                                     </div>
 
                                     <div class="col-md-6">
@@ -49,13 +49,13 @@
                             </div>
 
                             <div class="col-md-6">
-                                <h4>Eigenaar informatie</h4>
+                                <h4>{{ __('carshow.ownerinfo') }}</h4>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Naam</label><br>
-                                        <label>BSN</label><br>
-                                        <label>Adres</label><br>
-                                        <label>Woonplaats</label><br>
+                                        <label>{{ __('carshow.name') }}</label><br>
+                                        <label>{{ __('carshow.bsn') }}</label><br>
+                                        <label>{{ __('carshow.address') }}</label><br>
+                                        <label>{{ __('carshow.city') }}</label><br>
                                     </div>
 
                                     <div class="col-md-6">
@@ -76,10 +76,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-8">
-                                <h4>Rit gegevens</h4>
+                                <h4>{{ __('carshow.ridehistory') }}</h4>
                             </div>
                             <div class="col-md-2">
-                                <span style="float: right; margin-top: 5px; font-size: 17px">checkpoints: </span>
+                                <span style="float: right; margin-top: 5px; font-size: 17px">{{ __('carshow.checkpoints') }}: </span>
                             </div>
                             <div class="col-md-1">
                                 <input id="checkpointAmount" type="number" value="10" class="form-control" style="width: 4vw; text-align: center;">
@@ -97,7 +97,7 @@
                 @if(!$car->retrieved)
                     <div class="row" style="margin-top: 1.5vh">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" style="float: right" onclick="window.location.href = '/car/{{ $car->id }}/retrieve'">Auto terug gevonden</button>
+                            <button class="btn btn-primary" style="float: right" onclick="window.location.href = '/car/{{ $car->id }}/retrieve'">{{ __('carshow.carfound') }}</button>
                         </div>
                     </div>
                 @endif
@@ -154,7 +154,7 @@
 
         //Use AJAX to get car info
         function getCarInfo() {
-//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license, function (data) {
+//            $.get('[ip]:[port]/rekeningadministratiemodule/rest/vehicle/' + license, function (data) {
             $.get('/spoofPerson', function (data) {
                 displayCarInfo(data);
             });
