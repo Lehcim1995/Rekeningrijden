@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class CarController extends Controller
 {
@@ -13,8 +14,9 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($locale)
     {
+        App::setLocale($locale);
         //Get all cars
         $cars = Car::orderBy('retrieved', 'asc')->get();
 
@@ -36,7 +38,7 @@ class CarController extends Controller
 
         $car->save();
 
-        return view('car.show', compact('car'));
+        return redirect('/' . App::getLocale(). '/car/' . $car->id);
     }
 
     /**
@@ -45,8 +47,10 @@ class CarController extends Controller
      * @param Car $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function show($locale, Car $car)
     {
+        App::setLocale($locale);
+
         return view('car.show', compact('car'));
     }
 
@@ -61,7 +65,7 @@ class CarController extends Controller
         $car->retrieved = true;
         $car->save();
 
-        return redirect('/car');
+        return redirect('/' . App::getLocale() . '/car');
     }
 
     public function checkLicense($license)

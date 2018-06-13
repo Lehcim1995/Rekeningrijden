@@ -13,16 +13,16 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Je login gegevens kloppen niet.',
+    'throttle' => 'Te veel login pogingen, wacht :seconds seconden.',
     'login' => 'Login',
     'email' => "Email",
-    'password' => 'Password',
-    'remember' => 'Remember me',
-    'forgotpass' => 'Forgot password?',
-    'name' => 'Name',
-    'confirmpass' => 'Confirm password',
-    'registercode' => 'Register code',
-    'register' => 'Register',
+    'password' => 'Wachtwoord',
+    'remember' => 'onthoud mij',
+    'forgotpass' => 'Wachtwoord vergeten?',
+    'name' => 'Naam',
+    'confirmpass' => 'Bevestig wachtwoord',
+    'registercode' => 'Registreer code',
+    'register' => 'Registreer',
 
 ];
