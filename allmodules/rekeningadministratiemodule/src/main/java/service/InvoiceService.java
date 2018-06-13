@@ -46,10 +46,9 @@ public class InvoiceService implements Serializable{
 
         REstClient client = new REstClient();
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        LocalDate localDate = LocalDate.now(); // TODO get month
+        LocalDate localDate = LocalDate.now().withMonth(monthEnum.ordinal() + 1);
         LocalDate localDateStart = localDate.minusMonths(1);
         localDateStart = localDateStart.withDayOfMonth(localDateStart.lengthOfMonth());
         LocalDate localDateEnd = localDate.plusMonths(1);
@@ -64,16 +63,27 @@ public class InvoiceService implements Serializable{
         AtomicReference<Float> total = new AtomicReference<>((float) 0);
 
         List<InvoiceData> invoiceData = new ArrayList<>();
+        Random r = new Random();
+        int totalDistance = 0;
 
         verplaatsings.forEach(verplaatsing -> {
 
-            total.updateAndGet(v -> (float) (v + verplaatsing.distance() * 1.1f));
-            invoiceData.add(new InvoiceData());
+            final float rate = 1 + r.nextFloat();
+            final double cost = verplaatsing.distance() * rate;
+
+            total.updateAndGet(v -> (float) (v + cost));
+            invoiceData.add(new InvoiceData(vehicle.getID() + "", new Date(), cost));
 
         });
 
+        for (Verplaatsing verplaatsing : verplaatsings)
+        {
+            totalDistance += verplaatsing.distance();
+        }
+
         Invoice invoice = new Invoice(vehicle.getTracker().getID(), vehicle.getOwner(), total.get(),PaymentEnum.Open,  monthEnum);
         invoice.setInvoiceData(invoiceData);
+        invoice.setTotalDistance(totalDistance);
 
         invoiceDao.create(invoice);
 
