@@ -137,14 +137,25 @@ public class VehicleDaoJPA implements VehicleDao, Serializable
 
         VehicleTracker tracker = em.find(VehicleTracker.class, ID);
 
-        if (tracker != null)
-        {
-            return tracker.getVehicle();
-        }
-        else
+        try {
+            Vehicle v = em.createQuery("SELECT vehicle FROM Vehicle  vehicle WHERE Vehicle .tracker.ID = :id", Vehicle.class)
+                    .setParameter("id", ID)
+                    .getSingleResult();
+            return v;
+        }catch (Exception e)
         {
             return null;
         }
+
+//
+//        if (tracker != null)
+//        {
+//            return tracker.getVehicle();
+//        }
+//        else
+//        {
+//            return null;
+//        }
     }
 
     @Override

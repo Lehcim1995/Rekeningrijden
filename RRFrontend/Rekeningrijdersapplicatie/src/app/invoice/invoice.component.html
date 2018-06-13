@@ -38,7 +38,7 @@
               <div class="flexbox row wrap detailpanel">
                 <div>
                   <p>Datum: {{selectedInvoice.date}}</p>
-                  <p>Kentekenplaat: {{selectedInvoice.licenseplate}}</p>
+                  <p>Kentekenplaat: {{selectedCar.licensePlate}}</p>
                   <p>Tracker Id: {{selectedInvoice.vehicleTrackerId}}</p>
                 </div>
                 <div>
@@ -52,7 +52,7 @@
 
               <!-- google maps -->
               <agm-map [latitude]="lat" [longitude]="lng">
-                <ng-container *ngFor="let ride of rides">
+                <ng-container *ngFor="let ride of drivesRoutes">
                   <agm-polyline [strokeColor]="'#2196f3'">
                     <ng-container *ngFor="let point of ride">
                       <agm-polyline-point [latitude]="point.lat" [longitude]="point.lon">

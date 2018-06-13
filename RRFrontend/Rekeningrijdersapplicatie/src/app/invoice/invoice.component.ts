@@ -15,7 +15,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
 
   months: any = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
 
-  @Input() selectedCar: any;
+  @Input() selectedCar: any = "";
   lastInvoice: any;
   selectedInvoice: any;
   invoices: any;
@@ -157,19 +157,28 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   chooseInvoice(invoice: any) {
     this.lastInvoice = invoice.invoiceId;
     //TODO:
-    //let carId = this.invoiceService.getCarIdFromLicenseplate(invoice.licenseplate);
-    //update rides to driveroutes to display polylines on map
-    //this.drivenRoutes = this.invoiceService.getMovementsForCarWithMonth(carId, new Date(invoice.date));
-
     this.selectedInvoice = invoice;
-
 
     console.log(new Date().setMonth(this.months.indexOf(invoice.date)));
 
-    this.invoiceService.getMovementsForCarWithMonth(invoice.vehicleTrackerId, new Date().setMonth(this.months.indexOf(invoice.date))).subscribe(
+    let carId = this.invoiceService.getCarByTrackerid(invoice.vehicleTrackerId).subscribe(
       (res:any) => {
-        //TODO:
-        //update driveRoutes
+        console.log("selectedcar", res.body);
+        this.selectedCar = res.body;
+        this.getMovements(invoice);
+      },
+      err => {
+        if (err.status == 401) {
+          alert("Error");
+        }
+      }
+    );
+
+  }
+
+  getMovements(invoice : any){
+    this.invoiceService.getMovementsForCarWithMonth(this.selectedCar.ID, new Date().setMonth(this.months.indexOf(invoice.date))).subscribe(
+      (res:any) => {
         console.log(res);
         this.drivenRoutes = res;
       },
