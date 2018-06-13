@@ -72,7 +72,7 @@ public class Verplaatsing implements Serializable
         this.serieID = serieId;
     }
 
-    private double distance()
+    public double distance()
     {
         double distance = 0;
 
@@ -90,7 +90,7 @@ public class Verplaatsing implements Serializable
         return distance;
     }
 
-    private double calcDisBetweenPoints(
+    public static double calcDisBetweenPoints(
             Checkpoint checkPointA,
             Checkpoint checkPointB)
     {

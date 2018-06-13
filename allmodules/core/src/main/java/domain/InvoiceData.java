@@ -1,5 +1,8 @@
 package domain;
 
+import annotations.IgnoreInTable;
+import annotations.Name;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,9 +13,13 @@ public class InvoiceData
 {
     @Id
     @GeneratedValue
+    @IgnoreInTable
     private long id;
+    @IgnoreInTable
     private String vehicleId;
+    @Name(name = "Datum")
     private Date date;
+    @Name(name = "Kosten")
     private double costs;
 
     public InvoiceData() {

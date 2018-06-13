@@ -69,6 +69,11 @@ public class InvoiceService
 
 
         File file = pdfCreator.createInvoicePdf(invoice);
+
+        if (file == null)
+        {
+            return Response.noContent().build();
+        }
 //        File file = new File("D:\\School\\Javaprojects\\Rekeningrijden\\allmodules\\rekeningadministratiemodule\\src\\main\\resources\\invoices\\6_firstname.pdf");
 
         Response.ResponseBuilder response = Response.ok(file);

@@ -1,5 +1,7 @@
 package classes;
 
+import annotations.IgnoreInTable;
+import annotations.Name;
 import com.openhtmltopdf.DOMBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import domain.*;
@@ -16,7 +18,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,16 +39,12 @@ public class PdfCreator
 
     // todo split generation from invoice and pdf and html
 
-    @Context
-    private ServletContext context;
-
     private static final String RESOURCE_PATH = "/resources/";
-
     //D:\School\JavaProjects\ProftaakSem6\rekeningadministratiemodule\src\main\resources\templates\invoiceTemplate.html
     private static final String INVOICE_TEMPLATE = RESOURCE_PATH + "templates/invoiceTemplate.html";
-
     private static final String INVOICES_FOLDER = RESOURCE_PATH + "invoices/";
-
+    @Context
+    private ServletContext context;
 
     public static void main(String[] args)
     {
@@ -69,7 +66,16 @@ public class PdfCreator
 
         invoice.setInvoiceData(data);
 
-        new PdfCreator().createInvoicePdf(invoice);
+//        new PdfCreator().createInvoicePdf(invoice);
+
+        System.out.println(new PdfCreator().s(data, InvoiceData.class));
+    }
+
+    public <T> String s(
+            List<T> data,
+            Class<T> instance)
+    {
+        return createHtmlTable(data, instance);
     }
 
     /**
@@ -257,27 +263,36 @@ public class PdfCreator
         // get all the field names and store them in a list
         // TODO java.beans is better
 
-        try
-        {
-            final BeanInfo beanInfo = Introspector.getBeanInfo(instance);
-            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+//        try
+//        {
+//            final BeanInfo beanInfo = Introspector.getBeanInfo(instance);
+//            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+//            for (PropertyDescriptor propertyDescriptor : propertyDescriptors)
+//            {
+//                System.out.println(propertyDescriptor.getReadMethod()
+//                                                     .getName());
+//            }
+//
+//        }
+//        catch (IntrospectionException e)
+//        {
+//            e.printStackTrace();
+//        }
 
-        }
-        catch (IntrospectionException e)
-        {
-            e.printStackTrace();
-        }
 
-        List<String> objectFields = new ArrayList<>(Arrays.asList(instance.getDeclaredFields())).stream()
-                                                                                                .map(Field::getName)
-                                                                                                .collect(Collectors.toList());
+        List<String[]> objectFields = Arrays.stream(instance.getDeclaredFields())
+                                            .filter(field -> field.getAnnotation(IgnoreInTable.class) == null)
+                                            .map(field1 -> field1.getAnnotation(Name.class) != null
+                                                    ? new String[]{field1.getName(), field1.getAnnotation(Name.class).name()}
+                                                    : new String[]{field1.getName(), field1.getName()})
+                                            .collect(Collectors.toList());
 
         // loop though all the field names and create the table header
         StringBuilder headerBuilder = new StringBuilder("<tr class=\"heading\">");
-        for (String fields : objectFields)
+        for (String[] fields : objectFields)
         {
             headerBuilder.append("<td>")
-                         .append(fields)
+                         .append(fields[1])
                          .append("</td> \n");
         }
         header = headerBuilder.toString();
@@ -292,11 +307,12 @@ public class PdfCreator
         {
 
             StringBuilder tableItem = new StringBuilder("<tr class=\"item\">");
-            for (String fields : objectFields)
+
+            for (String[] fields : objectFields)
             {
                 // get the field name and capitalize the first letter
-                String field = fields.substring(0, 1)
-                                     .toUpperCase() + fields.substring(1);
+                String field = fields[0].substring(0, 1)
+                                        .toUpperCase() + fields[0].substring(1);
 
                 // try to make the method name
                 String methodName = "get" + field;
@@ -320,6 +336,7 @@ public class PdfCreator
                     tableItem.append("<td> no data found </td> \n");
                 }
             }
+
             tableItem.append("</tr> \n");
             tableDataBuilder.append(tableItem);
 
@@ -377,9 +394,9 @@ public class PdfCreator
 
             output = outputFile.toPath();
 
-            System.out.println(file.toPath() + " : " +  outputFile.toPath());
+            System.out.println(file.toPath() + " : " + outputFile.toPath());
 
-            Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING );
+            Files.copy(file.toPath(), outputFile.toPath(), REPLACE_EXISTING);
 
             setInvoiceNumber(outputFile.toPath()
                                        .toString(), invoice);

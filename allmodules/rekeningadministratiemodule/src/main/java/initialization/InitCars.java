@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
 
 @Singleton
 @Startup
@@ -16,12 +18,17 @@ public class InitCars
     @Inject
     VehicleService vehicleService;
 
+    @Context
+    private ServletContext context;
+
     @PostConstruct
     public void initData()
     {
         try
         {
-            new VehicleParser().Parse("D:/School/Javaprojects/Rekeningrijden/allmodules/rekeningadministratiemodule/src/main/resources/newdata.xml")
+            String path = context.getRealPath("") + "/resources/cars/newdata.xml";
+
+            new VehicleParser().Parse(path)
                                .forEach(vehicle -> {
                                    try
                                    {
