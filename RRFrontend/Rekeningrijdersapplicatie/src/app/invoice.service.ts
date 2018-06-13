@@ -10,10 +10,10 @@ export class InvoiceService {
 
 
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
-  private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
-  private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
-  private getInvoices = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/cpr";
-  private getCarByCarTracker  = "http://localhost:8080/rekeningadministratiemodule/api/vehicle/getcarbycartracker";
+  private getMovementsForCarWithMonthUL = "http://192.168.25.135:8080/verplaatsingsmodule/rest/verplaatsing";
+  private getPDF = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice";
+  private getInvoices = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice/cpr";
+  private getCarByCarTracker  = "http://192.168.25.135:8080/rekeningadministratiemodule/api/vehicle/getcarbycartracker";
 
 
 
