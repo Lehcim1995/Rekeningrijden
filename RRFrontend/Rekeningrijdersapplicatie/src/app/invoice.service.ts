@@ -30,6 +30,7 @@ export class InvoiceService {
 
   public getCarIdFromLicenseplate(licenseplate: any)
   {
+
     //restcall to get car with licenseplate
       return "402";
   }
@@ -58,12 +59,11 @@ export class InvoiceService {
     let year = moment(invoiceDate).format("YYYY");
     console.log("year", year);
 
-    invoiceDate.setDate(1);
-    invoiceDate.setHours(-1);
-    let lastDayOfLastMonth = invoiceDate.getDate();
-    console.log("dayofPreviousmonth", lastDayOfLastMonth);
-
-    //let carId = 402;
+    let newDate : Date;
+    newDate = new Date(parseInt(year), parseInt(lastMonth), 1);
+    newDate.setHours(-1);
+    let lastDayOfLastMonth = newDate.getDate();
+    console.log("dayofPreviousmonth ( "+ lastMonth + ") = ", lastDayOfLastMonth);
 
     console.log(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`);
     return this.httpClient.get(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`)

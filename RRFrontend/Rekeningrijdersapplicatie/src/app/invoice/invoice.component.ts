@@ -13,6 +13,8 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   addScript: boolean = false;
   paypalLoad: boolean = true;
 
+  months: any = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+
   @Input() selectedCar: any;
   lastInvoice: any;
   selectedInvoice: any;
@@ -153,33 +155,39 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
 
 
   chooseInvoice(invoice: any) {
-    this.lastInvoice = invoice.invoiceID;
-    //servicecall met invoiceid en ownerid
-
-
-    //invoicesdetails wordt returnwaarde van servicecall
-
-    //mockcode for testing
-
+    this.lastInvoice = invoice.invoiceId;
+    //TODO:
     //let carId = this.invoiceService.getCarIdFromLicenseplate(invoice.licenseplate);
-
     //update rides to driveroutes to display polylines on map
     //this.drivenRoutes = this.invoiceService.getMovementsForCarWithMonth(carId, new Date(invoice.date));
 
+    this.selectedInvoice = invoice;
 
-    if (invoice.invoiceID == 123123) {
-      this.selectedInvoice = this.invoices[0];
-      this.invoiceService.getMovementsForCarWithMonth("402", new Date());
-    }
+
+    console.log(new Date().setMonth(this.months.indexOf(invoice.date)));
+
+    this.invoiceService.getMovementsForCarWithMonth(invoice.vehicleTrackerId, new Date().setMonth(this.months.indexOf(invoice.date))).subscribe(
+      (res:any) => {
+        //TODO:
+        //update driveRoutes
+        console.log(res);
+        this.drivenRoutes = res;
+      },
+      err => {
+        if (err.status == 401) {
+          alert("Error");
+        }
+      }
+    );
   }
 
   addInvoice(invoice: any) {
     this.selectedInvoices.push(invoice);
-    this.amount += +invoice.price;
+    this.amount += +invoice.total;
   }
 
   removeInvoice(index: number) {
-    this.amount -= this.selectedInvoices[index].price;
+    this.amount -= this.selectedInvoices[index].total;
     this.selectedInvoices.splice(index, 1);
   }
 

@@ -30,20 +30,20 @@
 
         <div class="invoice-panel flexbox column wrap">
           <h3 *ngIf="selectedInvoice == ''">Geen factuur geselecteerd</h3>
-          <h3 *ngIf="selectedInvoice != ''">#{{selectedInvoice.invoiceID}}</h3>
+          <h3 *ngIf="selectedInvoice != ''">#{{selectedInvoice.invoiceId}}</h3>
           <div id="invoice-details">
             <p *ngIf="selectedInvoice == ''">Factuurdetails verschijnen hier. Selecteer eerst een
               factuur.</p>
             <div *ngIf="selectedInvoice != ''" class="flexbox column wrap">
               <div class="flexbox row wrap detailpanel">
                 <div>
-                  <p>Datum: {{selectedInvoice.date | date:'MMM y'}}</p>
+                  <p>Datum: {{selectedInvoice.date}}</p>
                   <p>Kentekenplaat: {{selectedInvoice.licenseplate}}</p>
-                  <p>Tracker Id: {{selectedInvoice.trackerID}}</p>
+                  <p>Tracker Id: {{selectedInvoice.vehicleTrackerId}}</p>
                 </div>
                 <div>
-                  <p>Gereden kilometers: {{selectedInvoice.kmAmmount}}</p>
-                  <p>Prijs: {{selectedInvoice.price}} DKK</p>
+                  <p>Gereden kilometers: {{selectedInvoice.totalDistance}}</p>
+                  <p>Prijs: {{selectedInvoice.total}} DKK</p>
 
                   <!-- pdf -->
                   <input type="button" class="pdf" value="Download PDF" (click)="downloadPDF(selectedInvoice.invoiceID)">
@@ -69,16 +69,18 @@
         <!-- ########## selected invoices panel ###########-->
         <div id="selected_invoices">
           <h3>Geselecteerde facturen</h3>
+
           <div id="paypal-checkout-btn"></div>
+
           <p *ngIf="selectedInvoices.length == 0">U heeft nog geen facturen geselecteerd.</p>
           <div *ngIf="selectedInvoices.length != 0" class="flexbox column wrap">
             <ng-container *ngFor="let invoice of selectedInvoices; let index = index" [attr.data-index]="index">
-              <a [ngClass]="{ 'active': lastInvoice == invoice.trackerID }"
+              <a [ngClass]="{ 'active': lastInvoice == invoice.invoiceId }"
                  class="flexbox row wrap between invoice-entry">
                 <div class="flexbox row wrap center">
                   <div class="flexbox column wrap">
-                    <p class="invoice">{{invoice.date | date:'MMM y' }} - #{{invoice.invoiceID}} </p>
-                    <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
+                    <p class="invoice">{{invoice.date }} - #{{invoice.invoiceId}} </p>
+                    <p class="invoice-details">{{invoice.totalDistance}}km - {{invoice.total}} DKK</p>
                     <p class="removeinvoice" (click)="removeInvoice(index)"> - </p>
                   </div>
                 </div>

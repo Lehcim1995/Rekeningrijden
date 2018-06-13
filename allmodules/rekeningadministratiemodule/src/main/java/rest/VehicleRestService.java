@@ -46,6 +46,15 @@ public class VehicleRestService
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("getcarbycartracker/{cartracker}")
+    public Response getCarByTracker(@PathParam("cartracker") String cartracker)
+    {
+        Vehicle v = vehicleService.getVehicleByVehicleTracker(cartracker);
+        return Response.ok(v).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{kenteken}/locationdata")
     public Response getCarsLocation(@PathParam("kenteken") String id)
     {
