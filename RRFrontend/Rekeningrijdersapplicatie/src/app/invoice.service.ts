@@ -10,9 +10,10 @@ export class InvoiceService {
 
 
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
-  private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
-  private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
-  private getInvoices = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/cpr";
+  private getMovementsForCarWithMonthUL = "http://192.168.25.135:8080/verplaatsingsmodule/rest/verplaatsing";
+  private getPDF = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice";
+  private getInvoices = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice/cpr";
+  private getCarByCarTracker  = "http://192.168.25.135:8080/rekeningadministratiemodule/api/vehicle/getcarbycartracker";
 
 
 
@@ -27,6 +28,10 @@ export class InvoiceService {
   getInvoicesByCPR(cpr:string){
     return this.httpClient.get(`${this.getInvoices}/${cpr}`,{observe: 'response'});
   }
+  public getCarByTrackerid(trackerId){
+    console.log(`${this.getCarByCarTracker}/${trackerId}`);
+    return this.httpClient.get(`${this.getCarByCarTracker}/${trackerId}`,{observe: 'response'});
+  }
 
   public getCarIdFromLicenseplate(licenseplate: any)
   {
@@ -36,10 +41,8 @@ export class InvoiceService {
   }
 
   public getMovementsForCarWithMonth(carId: string, invoiceDate: any) {
-
     let date = new Date();
     console.log("formatted time",moment(invoiceDate).format());
-
 
     let thisMonth = moment(invoiceDate).format("MM");
     console.log("thismonth", thisMonth);

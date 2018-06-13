@@ -8,6 +8,7 @@ export class InvoiceFilterPipe implements PipeTransform {
 
   constructor(public datepipe: DatePipe) {
   }
+
   transform(items: any, filter: any, isAnd: boolean): any {
     if (filter && Array.isArray(items)) {
       let filterKeys = Object.keys(filter);
@@ -16,9 +17,8 @@ export class InvoiceFilterPipe implements PipeTransform {
           console.log(filter);
           let found: boolean = false;
 
-          found = this.filter(item.licenseplate, filter.invoiceFiltertje) &&
-                          this.filter(item.date, filter.invoiceFiltertje) &&
-                          this.filter(item.invoiceID, filter.invoiceFiltertje);
+          found = this.filter(item.date, filter.invoiceFiltertje) &&
+            this.filter(item.invoiceId + "", filter.invoiceFiltertje);
           return !found;
         });
       });
@@ -28,7 +28,7 @@ export class InvoiceFilterPipe implements PipeTransform {
     }
   }
 
-  filter(property: string, filter: string) : boolean {
+  filter(property: string, filter: string): boolean {
     //returns false when the filter is not found in the value of the specified property
     return (filter !== undefined && property.toLowerCase().indexOf(filter.toLowerCase()) === -1);
   }

@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,6 +28,7 @@ public class Vehicle implements Serializable
     private FuelEnum fueltype;
     private Date buildYear;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Owner owner;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Owner> previousOwners;
