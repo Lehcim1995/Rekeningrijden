@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
     if (val.cpr && val.password) {
       this.profileService.login(val.cpr, val.password);
       this.invoiceService.getInvoicesByCPR(this.profileService.getCPR()).subscribe(
-        (res) => {
+        (res:any) => {
 
-          console.log(res);
+          console.log(res.body);
+          this.invoiceService.setInvoices(res.body);
           //set list of invoices in service
           if (res != null) {
             //redirect to new page to download pdf

@@ -6,6 +6,9 @@ import * as moment from 'moment';
 @Injectable()
 export class InvoiceService {
 
+  public invoices: any = [];
+
+
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
   private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
   private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
@@ -83,6 +86,11 @@ export class InvoiceService {
         }
       }
     );
+  }
+
+  setInvoices(invoices : any){
+    this.invoices = invoices;
+    console.log("invoices set");
   }
 
 }

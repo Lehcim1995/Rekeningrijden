@@ -18,15 +18,18 @@ export class ProfileService {
   public login(login: string, password: string) {
     let body = {login: login, password: password};
     this.httpClient.post(`${this.postLoginURL}`, body, {observe: 'response'}).subscribe(
-      (res) => {
+      (res:any) => {
         let token = res.headers.get('Authorization');
         console.log(res);
-        console.log(token);
+        console.log(res.body.ownerId);
+        console.log(res.body.username);
+
         if (token != null) {
           this.token = token;
           //set actual cpr in localstorage
           localStorage.setItem('currentUser', JSON.stringify({username: login, token: token}));
-          localStorage.setItem('loggedinuser', login);
+          localStorage.setItem('loggedinuser', res.body.username);
+          localStorage.setItem('cpr', res.body.ownerId);
           localStorage.setItem('token', token);
           this.router.navigateByUrl('/home');
         }
@@ -61,8 +64,7 @@ export class ProfileService {
   }
 
   public getCPR(){
-    return "7";
-    //return localStorage.getItem('CPR');
+    return localStorage.getItem('cpr');
   }
 
 }

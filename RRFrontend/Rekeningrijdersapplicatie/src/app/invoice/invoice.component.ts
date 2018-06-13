@@ -62,7 +62,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
   };
 
 
-  constructor(protected invoiceService: InvoiceService) {
+  constructor(public invoiceService: InvoiceService) {
   }
 
   ngOnInit() {

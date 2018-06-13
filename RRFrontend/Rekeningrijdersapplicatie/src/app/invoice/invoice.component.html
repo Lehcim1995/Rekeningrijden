@@ -1,8 +1,8 @@
 <div id="main" class="flexbox row wrap">
   <div id="invoices">
-    <p *ngIf="invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
+    <p *ngIf="invoiceService.invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft, verschijnen ze
       hier.</p>
-    <div *ngIf="invoices.length != 0" class="flexbox column wrap invoice-entries">
+    <div *ngIf="invoiceService.invoices.length != 0" class="flexbox column wrap invoice-entries">
       <div class="flexbox row wrap invoices">
 
         <div class="flexbox column wrap">
@@ -10,12 +10,13 @@
           <div class="flexbox row wrap">
             <input id="invoiceFilter" [(ngModel)]="invoiceFiltertje" type="text" placeholder="Filter...">
           </div>
-          <ng-container *ngFor="let invoice of invoices | invoiceFilter: { invoiceFiltertje: invoiceFiltertje}: false">
-            <a [ngClass]="{'active': lastInvoice == invoice.invoiceID}" (click)="chooseInvoice(invoice)"
+          <ng-container *ngFor="let invoice of invoiceService.invoices | invoiceFilter: { invoiceFiltertje: invoiceFiltertje}: false">
+            <a [ngClass]="{'active': lastInvoice == invoice.invoiceId}" (click)="chooseInvoice(invoice)"
                class="flexbox row wrap between invoice-entry">
               <div class="flexbox column wrap">
-                <p class="invoice">{{invoice.date | date:'MMM y' }} - #{{invoice.invoiceID}} </p>
-                <p class="invoice-details">{{invoice.kmAmmount}}km - {{invoice.price}} DKK</p>
+                <script>console.log(invoice.date)</script>
+                <p class="invoice">{{invoice.date }} - #{{invoice.invoiceId}}</p>
+                <p class="invoice-details">{{invoice.totalDistance}}km - {{invoice.total}} DKK</p>
               </div>
 
               <div class="flexbox row wrap">
