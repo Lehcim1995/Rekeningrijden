@@ -1,6 +1,7 @@
 package rest;
 
 import domain.Invoice;
+import domain.Profile;
 import rest.JsonBodyClasses.LoginProfileBody;
 import service.RekeningAdministratieService;
 
@@ -31,13 +32,13 @@ public class RekeningAdministratieEndpoint {
         try {
 
             // Authenticate the user using the credentials provided
-            rekeningAdministratieService.authenticate(loginProfileBody.getLogin(), loginProfileBody.getPassword());
+            Profile profile = rekeningAdministratieService.authenticate(loginProfileBody.getLogin(), loginProfileBody.getPassword());
 
             // Issue a token for the user
             String token = rekeningAdministratieService.issueToken(loginProfileBody.getLogin());
 
             // Return the token on the response
-            return Response.ok("\"" + token + "\"")
+            return Response.ok(profile)
                     .header(AUTHORIZATION, token)
                     .build();
         } catch (Exception e) {

@@ -6,9 +6,13 @@ import * as moment from 'moment';
 @Injectable()
 export class InvoiceService {
 
+  public invoices: any = [];
+
+
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
   private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
   private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
+  private getInvoices = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/cpr";
 
 
 
@@ -20,12 +24,13 @@ export class InvoiceService {
   getcars() {
 
   }
-  getInvoicesByCar(){
-
+  getInvoicesByCPR(cpr:string){
+    return this.httpClient.get(`${this.getInvoices}/${cpr}`,{observe: 'response'});
   }
 
   public getCarIdFromLicenseplate(licenseplate: any)
   {
+
     //restcall to get car with licenseplate
       return "402";
   }
@@ -54,12 +59,11 @@ export class InvoiceService {
     let year = moment(invoiceDate).format("YYYY");
     console.log("year", year);
 
-    invoiceDate.setDate(1);
-    invoiceDate.setHours(-1);
-    let lastDayOfLastMonth = invoiceDate.getDate();
-    console.log("dayofPreviousmonth", lastDayOfLastMonth);
-
-    //let carId = 402;
+    let newDate : Date;
+    newDate = new Date(parseInt(year), parseInt(lastMonth), 1);
+    newDate.setHours(-1);
+    let lastDayOfLastMonth = newDate.getDate();
+    console.log("dayofPreviousmonth ( "+ lastMonth + ") = ", lastDayOfLastMonth);
 
     console.log(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`);
     return this.httpClient.get(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`)
@@ -82,6 +86,11 @@ export class InvoiceService {
         }
       }
     );
+  }
+
+  setInvoices(invoices : any){
+    this.invoices = invoices;
+    console.log("invoices set");
   }
 
 }

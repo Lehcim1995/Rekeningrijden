@@ -36,13 +36,14 @@ public class ProfileDaoImp implements ProfileDao, Serializable {
 
 
     @Override
-    public void authenticate(String username, String password) throws SecurityException {
+    public Profile authenticate(String username, String password) throws SecurityException {
         try {
             Profile profile = em.createQuery("SELECT p FROM Profile p WHERE p.username = :username AND p.password = :password", Profile.class)
                     .setParameter("username", username).setParameter("password", Hashing.sha256()
                             .hashString(password, StandardCharsets.UTF_8)
                             .toString())
                     .getSingleResult();
+            return profile;
         } catch (Exception e) {
             throw new SecurityException("Invalid user/password");
         }

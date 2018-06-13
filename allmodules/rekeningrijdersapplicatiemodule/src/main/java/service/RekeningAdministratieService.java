@@ -23,9 +23,9 @@ public class RekeningAdministratieService {
         return rest.getVehicleOwnerInvoices(trackerId + "", ownerId);
     }
 
-    public void authenticate(String login, String password) throws SecurityException {
+    public Profile authenticate(String login, String password) throws SecurityException {
         try{
-            profileDao.authenticate(login, password);
+            return profileDao.authenticate(login, password);
         }
         catch(Exception e){
             throw new SecurityException(e.getMessage());

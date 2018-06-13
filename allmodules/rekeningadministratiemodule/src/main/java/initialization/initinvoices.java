@@ -1,14 +1,16 @@
 package initialization;
 
-import domain.MonthEnum;
-import domain.PaymentEnum;
+import domain.*;
+import org.apache.activemq.state.Tracked;
 import service.InvoiceService;
 import service.OwnerService;
+import service.VehicleService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import java.util.Date;
 
 @Singleton
 @Startup
@@ -18,6 +20,8 @@ public class initinvoices {
     private InvoiceService invoiceService;
     @Inject
     private OwnerService ownerService;
+    @Inject
+    private VehicleService vehicleService;
 
     public initinvoices() {
 
@@ -35,9 +39,15 @@ public class initinvoices {
             //Owner nick = new Owner(874687, "Nick", "", "Liebregts", "Steenkoolfabriek", "Gilze", "INGB1823971", "Cactus");
 
 
-            invoiceService.createInvoice("DEN0849", ownerService.findOwnerById(878746),  50, PaymentEnum.Open, MonthEnum.April);
-            invoiceService.createInvoice("DEN0984", ownerService.findOwnerById(887746),  70, PaymentEnum.Open, MonthEnum.April);
-            invoiceService.createInvoice("DEN9084", ownerService.findOwnerById(874687),  9050, PaymentEnum.Open, MonthEnum.April);
+            Vehicle v = vehicleService.createVehicleParam("ez 123 32", new Date(), 4200, FuelEnum.Diesel.toString());
+            Owner o = ownerService.findOwnerById(878746);
+            v.addOwner(o);
+            VehicleTracker vt = vehicleService.createVehicleTrackerId("DEN0849", "TrackIT");
+            v.setTracker(vt);
+
+            invoiceService.createInvoice(v.getTracker().getID(), ownerService.findOwnerById(878746),  50, PaymentEnum.Open, MonthEnum.April);
+            invoiceService.createInvoice(v.getTracker().getID(), ownerService.findOwnerById(878746),  70, PaymentEnum.Open, MonthEnum.Mei);
+            invoiceService.createInvoice(v.getTracker().getID(), ownerService.findOwnerById(878746),  48, PaymentEnum.Open, MonthEnum.Juni);
 
         }
         catch(Exception e){
