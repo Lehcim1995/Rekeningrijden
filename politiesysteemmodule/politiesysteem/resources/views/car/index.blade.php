@@ -16,7 +16,7 @@
                     </thead>
                     <tbody id="carsTable">
                     @foreach($cars as $car)
-                        <tr onclick="window.location.href = '/car/{{ $car->id }}'" style="cursor: pointer;">
+                        <tr onclick="window.location.href = '/{{ App::getLocale() }}/car/{{ $car->id }}'" style="cursor: pointer;">
                             <th scope="row" style="text-align: left;">{{ $car->id }}</th>
                             <td>{{ $car->license_plate }}</td>
                             <td>{{ $car->created_at }}</td>

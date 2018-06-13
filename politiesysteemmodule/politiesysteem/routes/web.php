@@ -10,15 +10,16 @@ Auth::routes();
 
 //Only allow logged in users
 Route::middleware(['auth'])->group(function () {
-    //Home view
-    Route::get('/home', 'HomeController@index')->name('home');
-
     //Car routes
-    Route::get('/car', 'CarController@index');
+    Route::get('/{locale}/car', 'CarController@index');
+
+    Route::get('/car', function () {
+        return redirect('/' . App::getLocale() . '/car');
+    });
 
     Route::post('/car', 'CarController@store');
 
-    Route::get('/car/{car}', 'CarController@show');
+    Route::get('/{locale}/car/{car}', 'CarController@show');
 
     Route::get('/car/{car}/retrieve', 'CarController@retrieve');
 
@@ -27,5 +28,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/spoofPerson', 'CarController@spoofPerson');
 
     Route::get('/car/check/{license}', 'CarController@checkLicense');
+
+    Route::get('welcome/{locale}', function ($locale) {
+        App::setLocale($locale);
+
+        return redirect('/' . App::getLocale() . '/car');
+    });
 });
 

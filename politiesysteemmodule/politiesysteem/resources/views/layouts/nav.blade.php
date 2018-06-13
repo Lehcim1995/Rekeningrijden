@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li><a class="nav-link" href="/car">{{ __('nav.cars') }}</a></li>
+                <li><a class="nav-link" href="/{{ App::getLocale() }}/car">{{ __('nav.cars') }}</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -28,6 +28,18 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/welcome/nl">
+                                    Nederlands
+                                </a>
+                                <a class="dropdown-item" href="/welcome/en">
+                                    English
+                                </a>
+                                <a class="dropdown-item" href="/welcome/dk">
+                                    Dansk
+                                </a>
+
+                                <hr>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
