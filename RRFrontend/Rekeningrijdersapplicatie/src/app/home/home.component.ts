@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {InvoiceService} from "../invoice.service";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   lastCar: any;
 
-  constructor() {
+  constructor(protected invoiceService : InvoiceService) {
   }
 
   ngOnInit() {

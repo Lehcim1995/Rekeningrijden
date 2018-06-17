@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class InvoiceService {
 
   public invoices: any = [];
-  public cars: any = [];
+  public vehicles: any = [];
 
 
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
@@ -104,7 +104,7 @@ export class InvoiceService {
   }
 
   setCars(body: any) {
-    this.cars = body;
-    console.log("cars set");
+    this.vehicles = body;
+    console.log("vehicles set");
   }
 }
