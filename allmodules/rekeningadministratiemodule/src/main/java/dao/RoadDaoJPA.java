@@ -4,6 +4,7 @@ import domain.Road;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class RoadDaoJPA implements RoadDao {
     }
 
     @Override
+    @Transactional
     public Road createRoad(Road road) {
         if (road == null) {
             throw new IllegalArgumentException("Road is null");
@@ -26,6 +28,7 @@ public class RoadDaoJPA implements RoadDao {
     }
 
     @Override
+    @Transactional
     public Road editRoad(Road road) {
         if (road == null) {
             throw new IllegalArgumentException("Road is null");
@@ -35,12 +38,14 @@ public class RoadDaoJPA implements RoadDao {
     }
 
     @Override
+    @Transactional
     public boolean deleteRoad(int id) throws SQLException {
         em.remove(findRoadById(id));
         return true;
     }
 
     @Override
+    @Transactional
     public Road findRoadById(int id) throws SQLException {
         try {
             return em.createQuery("SELECT road FROM Road road WHERE road.id = :id", Road.class)
@@ -53,6 +58,7 @@ public class RoadDaoJPA implements RoadDao {
     }
 
     @Override
+    @Transactional
     public List<Road> getAllRoads() throws IllegalArgumentException {
         try {
             return em.createQuery("SELECT road FROM Road road", Road.class).getResultList();

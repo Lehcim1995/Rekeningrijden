@@ -49,9 +49,9 @@
                             Selecteer een weg
                         </f:facet>
                         <p:ajax event="rowSelect" listener="#{rateBean.onRoadRowSelect}"
-                                update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate, :editRateForm:rateTable"/>
+                                update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate,:editRateForm:rateTable,:kilometerRateForm:kilometerRateHistory,:rateForm:rateTableHistory"/>
                         <p:ajax event="rowUnselect" listener="#{rateBean.onRoadRowUnselect}"
-                                update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate"/>
+                                update=":addRateForm:msgs"/>
                         <p:column headerText="Weg">
                             <h:outputText value="#{road.name}"/>
                         </p:column>
@@ -61,17 +61,19 @@
         </h:form>
 
         <h:form id="editkilometerRateForm">
-            <p:growl id="editkilometerRateFormMsgs" showDetail="true"/>
+            <!--<p:growl id="editkilometerRateFormMsgs" showDetail="true"/>
             <p:messages id="editKilometerRateFormMessages" showDetail="true" closable="true" autoUpdate="true">
-            </p:messages>
+            </p:messages>-->
 
-            <p:dataTable id="kilometerRate" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell">
+            <p:dataTable id="kilometerRate" var="road" value="#{rateBean.selectedRoad}" editable="true">
                 <f:facet name="header">
                     Edit Kilometerrate
                 </f:facet>
 
-                <p:ajax event="cellEdit" listener="#{rateBean.onKilometerRateEdit}"
-                        update=":editkilometerRateForm:editkilometerRateFormMsgs"/>
+                <p:ajax event="rowEdit" listener="#{rateBean.editRow}"
+                        update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate,:editRateForm:rateTable,:kilometerRateForm:kilometerRateHistory,:rateForm:rateTableHistory"/>
+                <p:ajax event="rowEditCancel" listener="#{rateBean.onRowCancel}"
+                        update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate"/>
 
                 <p:column headerText="Kilometerrate id">
                     <h:outputText value="#{road.kilometerRate.id}"/>
@@ -92,56 +94,122 @@
                 <p:column headerText="Ingangsdatum">
                     <p:cellEditor>
                         <!--TODO:Calender inputfield -->
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.startDate}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.startDate}"
-                                                           label="kilometerRateStartdatum"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{rateBean.ToFormat(road.kilometerRate.startDate)}"/></f:facet>
+                        <f:facet name="input"><!--<p:inputText value="#{rateBean.newStartDate}"
+                                                           label="kilometerRateStartdatum"/>-->
+                            <p:calendar readonly="" nly="true" value="#{road.kilometerRate.startDate}" locale="nl" navigator="true" name="startdatekmr" pattern="dd/MM/yyyy" class="correctCalendar"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column headerText="Startdatum">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"
-                                                           label="startdate"/></f:facet>
-                    </p:cellEditor>
+
+                <p:column style="width:32px">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>
 
         <h:form id="editRateForm">
-            <p:growl id="editRateFormMsgs" showDetail="true"/>
+            <!--<p:growl id="editRateFormMsgs" showDetail="true"/>
             <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
-            </p:messages>
+            </p:messages>-->
 
-            <p:dataTable id="rateTable" var="road" value="#{rateBean.selectedRoad}" editable="true" editMode="cell" >
+            <p:dataTable id="rateTable" var="category" value="#{rateBean.selectedRoad.rateCategories}" editable="true">
                 <f:facet name="header">
                     Edit RateCategory
                 </f:facet>
+                <!--<p:ajax event="rowSelect" listener="#{rateBean.onCategorieRowSelect}"
+                        update=":editRateForm:rateTable"/>-->
 
-                <p:ajax event="cellEdit" listener="#{rateBean.onRatecategoryCellEdit}"
-                        update=":editRateForm:editRateFormMsgs"/>
+                <p:ajax event="rowEdit" listener="#{rateBean.onCategoryRowEdit}"
+                        update=":addRateForm:msgs,:editkilometerRateForm:kilometerRate,:editRateForm:rateTable,:kilometerRateForm:kilometerRateHistory,:rateForm:rateTableHistory"/>
+                <p:ajax event="rowEditCancel" listener="#{rateBean.onCategoryRowCancel}"
+                        update=":addRateForm:msgs,:editRateForm:rateTable"/>
 
                 <p:column headerText="Ratecategory ID">
-                    <h:outputText value="#{road.kilometerRate.rateCategoryEnum.id}"/>
+                    <h:outputText value="#{category.id}"/>
                 </p:column>
 
                 <p:column headerText="Brandstof type">
-                    <h:outputText value="#{road.kilometerRate.rateCategoryEnum.fuelEnum}"/>
+                    <h:outputText value="#{category.fuelEnum}"/>
                 </p:column>
 
                 <p:column headerText="Percentage prijs">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText
-                                value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}"/></f:facet>
+                                value="#{category.percentagePrice}"/></f:facet>
                         <f:facet name="input"><p:inputText
-                                value="#{road.kilometerRate.rateCategoryEnum.percentagePrice}" label="percentagePrice"/></f:facet>
+                                value="#{category.percentagePrice}" label="percentagePrice"/></f:facet>
                     </p:cellEditor>
                 </p:column>
                 <p:column headerText="Startdatum">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"/></f:facet>
-                        <f:facet name="input"><p:inputText value="#{road.kilometerRate.rateCategoryEnum.startDate}"
-                                                           label="startdate"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{rateBean.ToFormat(category.startDate)}"/></f:facet>
+                        <f:facet name="input"><!--<p:inputText value="#{rateBean.format}"
+                                                           label="startdate"/>-->
+                            <p:calendar readonly="" nly="true" value="#{category.startDate}" locale="nl" navigator="true" name="startdaterc" pattern="dd/MM/yyyy" class="correctCalendar"/></f:facet>
                     </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="kilometerRateForm">
+
+            <p:dataTable id="kilometerRateHistory" var="rate" value="#{rateBean.selectedRoad.previousRates}">
+                <f:facet name="header">
+                    Kilometerrate History
+                </f:facet>
+
+                <p:column headerText="Kilometerrate id">
+                    <h:outputText value="#{rate.id}"/>
+                </p:column>
+
+                <p:column headerText="Weg">
+                    <h:outputText value="#{rate.road.name}"/>
+                </p:column>
+
+                <p:column headerText="Heffing per kilometer">
+                        <h:outputText value="#{rate.kilometerPrice}"/>
+                </p:column>
+
+                <p:column headerText="Startdatum">
+                        <h:outputText value="#{rateBean.ToFormat(rate.startDate)}"/>
+                </p:column>
+
+                <p:column headerText="Einddatum">
+                    <h:outputText value="#{rateBean.ToFormat(rate.endDate)}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <h:form id="rateForm">
+            <!--<p:growl id="editRateFormMsgs" showDetail="true"/>
+            <p:messages id="editRateFormMsgsMessages" showDetail="true" closable="true" autoUpdate="true">
+            </p:messages>-->
+
+            <p:dataTable id="rateTableHistory" var="category" value="#{rateBean.selectedRoad.previousCategories}">
+                <f:facet name="header">
+                    RateCategory History
+                </f:facet>
+
+                <p:column headerText="Ratecategory ID">
+                    <h:outputText value="#{category.id}"/>
+                </p:column>
+
+                <p:column headerText="Brandstof type">
+                    <h:outputText value="#{category.fuelEnum}"/>
+                </p:column>
+
+                <p:column headerText="Percentage prijs">
+                        <h:outputText value="#{category.percentagePrice}"/>
+                </p:column>
+                <p:column headerText="Startdatum">
+                        <h:outputText value="#{rateBean.ToFormat(category.startDate)}"/>
+                </p:column>
+
+                <p:column headerText="Einddatum">
+                    <h:outputText value="#{rateBean.ToFormat(category.endDate)}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

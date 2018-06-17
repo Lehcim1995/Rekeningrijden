@@ -1,6 +1,7 @@
 package domain;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,6 +25,11 @@ public class Road implements Serializable {
     private KilometerRate kilometerRate;
     @OneToMany
     private List<KilometerRate> previousRates;
+    @OneToMany
+    private List<RateCategory> rateCategories;
+    @OneToMany
+    @JoinTable(name = "ROAD_PREVIOUSCATEGORIERATES")
+    private List<RateCategory> previousCategories;
     private Date date;
 
 
@@ -32,6 +38,8 @@ public class Road implements Serializable {
         this.geocodedAdresses = geocodedAdresses;
         this.kilometerRate = kilometerRate;
         this.previousRates = new ArrayList<>();
+        this.rateCategories = new ArrayList<>();
+        this.previousCategories = new ArrayList<>();
         this.date = new Date();
     }
 
@@ -84,5 +92,21 @@ public class Road implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<RateCategory> getRateCategories() {
+        return rateCategories;
+    }
+
+    public void setRateCategories(List<RateCategory> rateCategories) {
+        this.rateCategories = rateCategories;
+    }
+
+    public List<RateCategory> getPreviousCategories() {
+        return previousCategories;
+    }
+
+    public void setPreviousCategories(List<RateCategory> previousCategories) {
+        this.previousCategories = previousCategories;
     }
 }

@@ -11,9 +11,11 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @SessionScoped
@@ -24,6 +26,7 @@ public class OwnerBean implements Serializable {
     private OwnerService ownerService;
     private Owner selectedOwner;
     private List<Owner> allOwners;
+    private String city;
 
     @PostConstruct
     public void init() {
@@ -38,19 +41,29 @@ public class OwnerBean implements Serializable {
         this.selectedOwner = selectedOwner;
     }
 
-    public List<Owner> getAllCarOwners()
-    {
-        try{
-            return ownerService.getAllOwners();
-        }
-        catch(IllegalArgumentException e)
-        {
-            FacesMessage msg = new FacesMessage("Something went wrong when getting al the Owners " +
-                    e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return null;
-        }
+    public String getCity() {
+        return city;
     }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<Owner> getAllCarOwners() {
+        if (allOwners == null) {
+            try {
+                allOwners = new ArrayList<Owner>();
+                allOwners = ownerService.getAllOwners();
+            } catch (IllegalArgumentException e) {
+                FacesMessage msg = new FacesMessage("Something went wrong when getting al the Owners " +
+                        e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                return null;
+            }
+        }
+        return allOwners;
+    }
+
 
     public void onOwnerRowSelect(SelectEvent event) {
         //TODO: Cast to Road Class
@@ -65,16 +78,19 @@ public class OwnerBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onOwnerEdit(CellEditEvent event) {
-        String oldValue = event.getOldValue().toString();
-        String newValue = event.getNewValue().toString();
+    public void onValueQuantityChange(ValueChangeEvent event) {
+        city = (String) event.getNewValue();
+    }
 
-        if (newValue != null && !newValue.equals(oldValue)) {
+    public void onOwnerEdit(ValueChangeEvent event) {
+        String oldValue = event.getOldValue().toString();
+
+        if (city != null && !city.equals(oldValue)) {
             try {
                 Owner entity = (Owner) ((DataTable) event.getComponent()).getRowData();
                 //TODO set new ownervalues to owner.
                 //rateService.editKilometerRate(entity.getKilometerRate().getId(), Double.valueOf(newValue));
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + newValue);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell edited", "Old: " + oldValue + ", New:" + city);
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             } catch (Exception e) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Something went wrong while editing the cell", "error: " + e.getMessage());
@@ -84,10 +100,10 @@ public class OwnerBean implements Serializable {
     }
 
     public List<Owner> getAllOwners() {
-        return allOwners;
+        return ownerService.getAllOwners();
     }
 
-    public void setAllOwners(List<Owner> allOwners) {
-        this.allOwners = allOwners;
-    }
+//    public void setAllOwners(List<Owner> allOwners) {
+//        this.allOwners = allOwners;
+//    }
 }

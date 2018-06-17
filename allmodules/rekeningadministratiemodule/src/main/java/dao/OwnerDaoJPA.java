@@ -20,6 +20,7 @@ public class OwnerDaoJPA implements OwnerDao {
 
 
     @Override
+    @Transactional
     public Owner create(Owner owner) {
         if (owner == null) {
             throw new IllegalArgumentException("Owner is null");
@@ -29,6 +30,7 @@ public class OwnerDaoJPA implements OwnerDao {
     }
 
     @Override
+    @Transactional
     public Owner update(Owner owner) {
         if (owner == null) {
             throw new IllegalArgumentException("Owner is null");
@@ -38,6 +40,7 @@ public class OwnerDaoJPA implements OwnerDao {
     }
 
     @Override
+    @Transactional
     public Owner findOwnerById(int citizenId) {
         try {
             return em.createQuery("SELECT owner FROM Owner owner WHERE owner.citizenId = :citizenId", Owner.class)
@@ -51,6 +54,7 @@ public class OwnerDaoJPA implements OwnerDao {
     }
 
     @Override
+    @Transactional
     public List<Owner> getAllOwners() {
         try {
             return em.createQuery("SELECT owner FROM Owner owner", Owner.class).getResultList();

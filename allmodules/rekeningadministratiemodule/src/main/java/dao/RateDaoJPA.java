@@ -21,6 +21,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public KilometerRate create(KilometerRate kilometerRate) {
         if (kilometerRate == null) {
             throw new IllegalArgumentException("Kilometer rate is null");
@@ -30,6 +31,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public RateCategory create(RateCategory rateCategory) {
         if (rateCategory == null) {
             throw new IllegalArgumentException("Category rate is null");
@@ -59,6 +61,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public List<KilometerRate> getAllKilometerRates() throws SQLException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate", KilometerRate.class).getResultList();
@@ -69,6 +72,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public List<RateCategory> getAllRateCategories() throws SQLException {
         try {
             return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory", RateCategory.class).getResultList();
@@ -79,6 +83,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public List<KilometerRate> getAllKilometerRatesByRoad(int roadId) throws IllegalArgumentException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE Road.id = :roadId", KilometerRate.class)
@@ -91,6 +96,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public List<RateCategory> getAllRateCategoriesByRoad(int roadId) throws IllegalArgumentException {
         try {
             return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE Road.id = :roadId", RateCategory.class)
@@ -103,6 +109,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public KilometerRate findKilometerRateById(int kilometerRateId) throws NoResultException, IllegalArgumentException {
         try {
             return em.createQuery("SELECT kilometerRate FROM KilometerRate kilometerRate WHERE kilometerRate.id = :kilometerRateId", KilometerRate.class)
@@ -118,6 +125,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public RateCategory findRateCategoryById(int rateCategoryId) throws NoResultException, IllegalArgumentException {
         try {
             return em.createQuery("SELECT rateCategory FROM RateCategory rateCategory WHERE rateCategory.id = :rateCategoryId", RateCategory.class)
@@ -133,6 +141,7 @@ public class RateDaoJPA implements RateDao{
     }
 
     @Override
+    @Transactional
     public double calculateKilometerRatePriceByRateCategory(int kilomterRateId, int rateCategoryId) throws SQLException {
         KilometerRate kilometerRate = findKilometerRateById(kilomterRateId);
         RateCategory rateCategory = findRateCategoryById(rateCategoryId);
