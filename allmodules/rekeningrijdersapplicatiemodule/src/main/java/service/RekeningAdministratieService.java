@@ -23,9 +23,9 @@ public class RekeningAdministratieService {
         return rest.getVehicleOwnerInvoices(trackerId + "", ownerId);
     }
 
-    public void authenticate(String login, String password) throws SecurityException {
+    public Profile authenticate(String login, String password) throws SecurityException {
         try{
-            profileDao.authenticate(login, password);
+            return profileDao.authenticate(login, password);
         }
         catch(Exception e){
             throw new SecurityException(e.getMessage());
@@ -36,7 +36,7 @@ public class RekeningAdministratieService {
         return profileDao.issueToken(login);
     }
 
-    public Profile addProfile(String login, String password) throws CouldNotCreateProfileException {
-        return profileDao.addProfile(login, password);
+    public Profile addProfile(String login, String password, int bsn) throws CouldNotCreateProfileException {
+        return profileDao.addProfile(login, password, bsn);
     }
 }

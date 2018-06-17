@@ -14,6 +14,7 @@ public class REstApplication extends Application {
         Set<Class<?>> setClass = new HashSet<>();
         setClass.add(CORSFilter.class);
         setClass.add(RekeningAdministratieEndpoint.class);
+        setClass.add(AuthenticationRest.class);
         return setClass;
     }
 }

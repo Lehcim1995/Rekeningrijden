@@ -20,6 +20,7 @@ public class Invoice implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentEnum paymentStatus;
     private MonthEnum date;
+    private int totalDistance;
 
     @OneToMany
     private List<InvoiceData> invoiceData;
@@ -88,6 +89,14 @@ public class Invoice implements Serializable {
 
     public void setDate(MonthEnum date) {
         this.date = date;
+    }
+
+    public int getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(int totalDistance) {
+        this.totalDistance = totalDistance;
     }
 }
 

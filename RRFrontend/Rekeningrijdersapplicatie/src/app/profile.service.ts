@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 export class ProfileService {
 
   private postLoginURL = "http://localhost:8080/rekeningrijdersapplicatiemodule/rest/rekeningadministratie/login";
+  private postRegisterURL = "http://localhost:8080/rekeningrijdersapplicatiemodule/rest/authenticate/register";
   public token: string;
   private loggedInUser: string;
 
@@ -17,14 +18,18 @@ export class ProfileService {
   public login(login: string, password: string) {
     let body = {login: login, password: password};
     this.httpClient.post(`${this.postLoginURL}`, body, {observe: 'response'}).subscribe(
-      (res) => {
+      (res:any) => {
         let token = res.headers.get('Authorization');
         console.log(res);
-        console.log(token);
+        console.log(res.body.ownerId);
+        console.log(res.body.username);
+
         if (token != null) {
           this.token = token;
+          //set actual cpr in localstorage
           localStorage.setItem('currentUser', JSON.stringify({username: login, token: token}));
-          localStorage.setItem('loggedinuser', login);
+          localStorage.setItem('loggedinuser', res.body.username);
+          localStorage.setItem('cpr', res.body.ownerId);
           localStorage.setItem('token', token);
           this.router.navigateByUrl('/home');
         }
@@ -48,6 +53,18 @@ export class ProfileService {
 
   public getToken(): string {
     return localStorage.getItem('token');
+  }
+
+  public register(email: string, cpr: string) {
+    let body = {email: email, bsn: cpr};
+    console.log(email);
+    console.log(cpr);
+
+    return this.httpClient.post(`${this.postRegisterURL}`, body, {observe: 'response'});
+  }
+
+  public getCPR(){
+    return localStorage.getItem('cpr');
   }
 
 }

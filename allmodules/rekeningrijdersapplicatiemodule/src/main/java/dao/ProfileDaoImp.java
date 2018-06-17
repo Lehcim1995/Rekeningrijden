@@ -10,10 +10,7 @@ import util.KeyGenerator;
 import exception.CouldNotCreateProfileException;
 
 import javax.inject.Inject;
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TransactionRequiredException;
+import javax.persistence.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
@@ -36,14 +33,17 @@ public class ProfileDaoImp implements ProfileDao, Serializable {
     @Inject
     private DateUtil dateutil;
 
+
+
     @Override
-    public void authenticate(String username, String password) throws SecurityException {
+    public Profile authenticate(String username, String password) throws SecurityException {
         try {
             Profile profile = em.createQuery("SELECT p FROM Profile p WHERE p.username = :username AND p.password = :password", Profile.class)
                     .setParameter("username", username).setParameter("password", Hashing.sha256()
                             .hashString(password, StandardCharsets.UTF_8)
                             .toString())
                     .getSingleResult();
+            return profile;
         } catch (Exception e) {
             throw new SecurityException("Invalid user/password");
         }
@@ -66,15 +66,28 @@ public class ProfileDaoImp implements ProfileDao, Serializable {
     }
 
     @Override
-    public Profile addProfile(String login, String password) throws CouldNotCreateProfileException {
+    public Profile addProfile(String login, String password, int bsn) throws CouldNotCreateProfileException {
         try{
             Profile profile = new Profile(login, Hashing.sha256()
-                    .hashString(password, StandardCharsets.UTF_8).toString());
+                    .hashString(password, StandardCharsets.UTF_8).toString(), bsn);
             em.persist(profile);
         }
         catch(EntityExistsException | IllegalArgumentException | TransactionRequiredException e ){
             throw new CouldNotCreateProfileException(e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public Profile findByBSN(int bsn) {
+
+        try {
+            Profile profile = em.createQuery("SELECT p FROM Profile p WHERE p.ownerId = :username", Profile.class)
+                    .setParameter("username", bsn)
+                    .getSingleResult();
+            return profile;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

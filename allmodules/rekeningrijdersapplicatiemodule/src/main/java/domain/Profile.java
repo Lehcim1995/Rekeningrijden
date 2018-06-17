@@ -9,31 +9,33 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Profile")
-@Table(name = "profile")
 public class Profile implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String username;
 
     private String password;
 
+    private int ownerId;
+
     public Profile() {
 
     }
 
-    public Profile(String login, String password) {
-        this.username = login;
+    public Profile(String login, String password, int ownerId) {
+        this.username = login; //Email
         this.password = password;
+        this.ownerId = ownerId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -51,5 +53,13 @@ public class Profile implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }

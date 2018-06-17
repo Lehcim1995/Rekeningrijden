@@ -35,4 +35,6 @@ public interface VehicleDao {
     Vehicle editVehicle(Vehicle vehicle) throws IllegalArgumentException;
 
     Vehicle getVehicleByLicencePlate(String plate);
+
+    List<Vehicle> getCarsOfOwner(String ownerid);
 }

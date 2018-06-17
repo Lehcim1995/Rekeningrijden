@@ -24,6 +24,14 @@ public class Checkpoint implements Serializable
 
     public Checkpoint() {}
 
+    public Checkpoint(DataObject dataObject)
+    {
+        this.lon = dataObject.getStepLon();
+        this.lat = dataObject.getStepLat();
+        this.time = dataObject.getDate();
+        this.carId = dataObject.getCarId();
+    }
+
     public Checkpoint(
             double lon,
             double lat,

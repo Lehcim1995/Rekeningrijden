@@ -8,16 +8,17 @@ import java.util.List;
 
 public class CollectVehicleLocationService
 {
-    private static final String BASE_URL = "";
-    private static final String REST_URL = BASE_URL + "";
+//    private static final String WEB_URL = "http://localhost:8080/";
+    private static final String BASE_URL = "http://localhost:8080/";
+    private static final String REST_URL = BASE_URL + "verplaatsingsmodule/rest/vehicle/";
 
     @Inject
     REstClient restClient;
 
     public List<Checkpoint> getVehicleCheckpoints(String plate)
     {
-        restClient.getREstResponse(REST_URL, List.class);
+//        restClient.getREstResponse(REST_URL, List.class);
 
-        return new ArrayList<>();
+        return restClient.getREstResponse(REST_URL + plate + "/waypoints", List.class);
     }
 }

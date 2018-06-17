@@ -13,12 +13,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Stateless
 @JPA
-public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
+public class VerplaatsingsDaoJPA implements VerplaatsingsDao
+{
 
     @PersistenceContext(unitName = "displacementPU")
     private EntityManager em;
@@ -38,21 +40,30 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
     }
 
     @Override
-    public Verplaatsing create(Verplaatsing verplaatsing) {
+    public Verplaatsing create(Verplaatsing verplaatsing)
+    {
+        try
+        {
+            List<Long> ids = em.createQuery("SELECT v.serieID FROM Verplaatsing v WHERE v.voertuigId = :id")
+                            .setParameter("id", verplaatsing.getVoertuigId())
+                            .getResultList();
 
-        List<Checkpoint> checkpoints = new ArrayList<>();
+            AtomicInteger serieId = new AtomicInteger();
 
-        for (Checkpoint checkpoint : verplaatsing.getCheckpoints()) {
-            em.persist(checkpoint);
-            checkpoints.add(checkpoint);
+            ids.forEach(integer -> {
+                if (integer > serieId.get())
+                {
+                    serieId.set(integer.intValue());
+                }
+            });
+
+            serieId.addAndGet(1);
+            verplaatsing.setSerieId(serieId.get());
         }
-
-        verplaatsing.setCheckpoints(checkpoints);
-
-//        TODO fix
-//        if (VerplaatsingMissing(verplaatsing)) {
-//            LogMissedVerplaatsingen(verplaatsing);
-//        }
+        catch (Exception e)
+        {
+            System.out.println("Adding verplaatsing error " + e.getMessage());
+        }
 
         em.persist(verplaatsing);
 
@@ -87,16 +98,27 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
     }
 
     /**
-     * @param key
+     * @param licencePlate
      * @return
      */
     @Override
-    public List<Verplaatsing> getVerplaatsingen(String key) {
-//        setupJPA();
-//        return em.createQuery(cp.where(cb.equal(verplaatsingRoot.get("voertuigId"), key))).getResultList();
+    public List<Verplaatsing> getVerplaatsingen(String licencePlate) {
+
+
         return em.createQuery("SELECT v FROM Verplaatsing v WHERE v.voertuigId = :key", Verplaatsing.class)
-                .setParameter("key", key)
-                .getResultList();
+                 .setParameter("key", licencePlate)
+                 .getResultList();
+    }
+
+    @Override
+    public List<Verplaatsing> getVerplaatsingen(String licencePlate, Date start, Date end) {
+
+
+        return em.createQuery("SELECT v FROM Verplaatsing v WHERE v.voertuigId = :key AND v.time > :starttime AND v.time < :endtime", Verplaatsing.class)
+                 .setParameter("key", licencePlate)
+                 .setParameter("starttime", start)
+                 .setParameter("endtime", end)
+                 .getResultList();
     }
 
     /**
@@ -108,18 +130,21 @@ public class VerplaatsingsDaoJPA implements VerplaatsingsDao {
 
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 
-        if (verplaatsingen.isEmpty()) {
+        if (verplaatsingen.isEmpty())
+        {
             return false;
         }
 
         return verplaatsingen.get(verplaatsingen.size() - 1)
-                .getSerieID() + 1 == verplaatsing.getSerieID();
+                             .getSerieID() + 1 == verplaatsing.getSerieID();
     }
 
     private void LogMissedVerplaatsingen(Verplaatsing verplaatsing) {
         List<Verplaatsing> verplaatsingen = getVerplaatsingen(verplaatsing.getVoertuigId());
 
-        for (long i = verplaatsingen.get(verplaatsingen.size() - 1).getSerieID(); i < verplaatsing.getSerieID(); i++) {
+        for (long i = verplaatsingen.get(verplaatsingen.size() - 1)
+                                    .getSerieID(); i < verplaatsing.getSerieID(); i++)
+        {
             em.persist(new MissedVerplaatsing(verplaatsing.getVoertuigId(), i));
         }
     }
