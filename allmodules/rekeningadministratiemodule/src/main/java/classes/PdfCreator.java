@@ -6,9 +6,12 @@ import com.openhtmltopdf.DOMBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import domain.*;
 import org.jsoup.Jsoup;
+import service.VehicleService;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import javax.validation.constraints.Null;
 import javax.ws.rs.core.Context;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -45,6 +48,9 @@ public class PdfCreator
     private static final String INVOICES_FOLDER = RESOURCE_PATH + "invoices/";
     @Context
     private ServletContext context;
+
+    @Inject
+    private VehicleService vehicleService;
 
     public static void main(String[] args)
     {
@@ -192,7 +198,21 @@ public class PdfCreator
             Invoice invoice)
     {
 
-        replaceOnFile(file, "\\{\\{ car_info \\}\\}", "<p> TODO fix this </p> ");
+        String carInfo = invoice.getVehicleTrackerId();
+        Vehicle v = vehicleService.getVehicleByVehicleTracker(carInfo);
+
+        String table;
+        if (v != null)
+        {
+            table = createHtmlTable(Collections.singletonList(v), Vehicle.class);
+        }
+        else
+        {
+            table = "car not found";
+        }
+
+        replaceOnFile(file, "\\{\\{ car_info \\}\\}", table);
+
     }
 
     /**
@@ -238,6 +258,24 @@ public class PdfCreator
         String outputString = createHtmlTable(invoice.getInvoiceData(), InvoiceData.class);
 
         replaceOnFile(file, "\\{\\{ car_invoice \\}\\}", outputString);
+    }
+
+    private void setInvoiceTotalPrice(
+            String file,
+            Invoice invoice)
+    {
+        String outputString = invoice.getTotal() + "";
+
+        replaceOnFile(file, "\\{\\{ invoice_total \\}\\}", outputString);
+    }
+
+    private void setInvoiceUserLocation(
+            String file,
+            Invoice invoice)
+    {
+        String outputString = invoice.getOwner().getAddress() + "<br />" + invoice.getOwner().getCity() + "<br /> Denemarken";
+
+        replaceOnFile(file, "\\{\\{ location_user \\}\\}", outputString);
     }
 
     /**
@@ -329,7 +367,7 @@ public class PdfCreator
                              .append(get)
                              .append("</td> \n");
                 }
-                catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
+                catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | NoSuchMethodError | NullPointerException e)
                 {
                     e.printStackTrace();
                     // TODO make error nice
@@ -415,6 +453,15 @@ public class PdfCreator
 
             setInvoiceVehicleInformation(outputFile.toPath()
                                                    .toString(), invoice);
+
+            setInvoiceCarData(outputFile.toPath()
+                                        .toString(), invoice);
+
+            setInvoiceTotalPrice(outputFile.toPath()
+                                           .toString(), invoice);
+
+            setInvoiceUserLocation(outputFile.toPath()
+                                             .toString(), invoice);
         }
         catch (IOException e)
         {
