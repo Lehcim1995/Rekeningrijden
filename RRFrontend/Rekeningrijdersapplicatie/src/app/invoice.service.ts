@@ -7,13 +7,16 @@ import * as moment from 'moment';
 export class InvoiceService {
 
   public invoices: any = [];
+  public cars: any = [];
 
 
   // private getInvoicesByCar = "http://localhost:8080/administratie/api/vehicle/";
-  private getMovementsForCarWithMonthUL = "http://192.168.25.135:8080/verplaatsingsmodule/rest/verplaatsing";
-  private getPDF = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice";
-  private getInvoices = "http://192.168.25.135:8080/rekeningadministratiemodule/rest/invoice/cpr";
-  private getCarByCarTracker  = "http://192.168.25.135:8080/rekeningadministratiemodule/api/vehicle/getcarbycartracker";
+  private getMovementsForCarWithMonthUL = "http://localhost:8080/verplaatsingsmodule/rest/verplaatsing";
+  private getPDF = "http://localhost:8080/rekeningadministratiemodule/rest/invoice";
+  private getInvoices = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/cpr";
+  private getCarOfOwner = "http://localhost:8080/rekeningadministratiemodule/rest/vehicle/cars";
+  private getCarByCarTracker  = "http://localhost:8080/rekeningadministratiemodule/api/vehicle/getcarbycartracker";
+  private payInvoiceURL  = "http://localhost:8080/rekeningadministratiemodule/rest/invoice/pay";
 
 
 
@@ -22,9 +25,6 @@ export class InvoiceService {
 
   }
 
-  getcars() {
-
-  }
   getInvoicesByCPR(cpr:string){
     return this.httpClient.get(`${this.getInvoices}/${cpr}`,{observe: 'response'});
   }
@@ -72,23 +72,8 @@ export class InvoiceService {
     return this.httpClient.get(`${this.getMovementsForCarWithMonthUL}/${carId}/waypoints?startdate=${lastDayOfLastMonth}/${lastMonth}/${year}&enddate=01/${nextMonth}/${year}`)
   }
 
-  downloadPDF(invoiceid: string){
-    invoiceid = "4";
-
-    this.httpClient.get(`${this.getPDF}/${invoiceid}/download`,{observe: 'response'}).subscribe(
-      (res) => {
-        console.log(res);
-        if (res != null) {
-          //redirect to new page to download pdf
-          this.router.navigateByUrl('/home');
-        }
-      },
-      err => {
-        if (err.status == 401) {
-          alert("Not logged in!");
-        }
-      }
-    );
+  public downloadPDF(invoiceid: string){
+    window.open(`${this.getPDF}/${invoiceid}/download`, "_blank");
   }
 
   setInvoices(invoices : any){
@@ -96,4 +81,30 @@ export class InvoiceService {
     console.log("invoices set");
   }
 
+  public payInvoice(invoiceId : any){
+    this.httpClient.get(`${this.payInvoiceURL}/${invoiceId}`,{observe: 'response'}).subscribe(
+      (res) => {
+        console.log(res);
+        if (res != null) {
+
+
+        }
+      },
+      err => {
+        if (err.status == 304) {
+          alert("Paymentstatus not succefully changed");
+        }
+      }
+    );
+  }
+
+  public getCarsOfOwner(cpr :any)
+  {
+    return this.httpClient.get(`${this.getCarOfOwner}/${cpr}`,{observe: 'response'});
+  }
+
+  setCars(body: any) {
+    this.cars = body;
+    console.log("cars set");
+  }
 }

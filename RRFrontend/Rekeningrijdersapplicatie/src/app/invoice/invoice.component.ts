@@ -58,12 +58,13 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
         alert("payment succesfull");
         this.amount = 0;
         //update status of all the invoices that have been paid.
-
+        for (let y in this.selectedInvoices.length) {
+          this.invoiceService.payInvoice(this.selectedInvoices[y].invoiceID);
+        }
         this.selectedInvoices = [];
-      })
+      });
     }
   };
-
 
   constructor(public invoiceService: InvoiceService) {
   }
@@ -163,7 +164,7 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     console.log(new Date().setMonth(this.months.indexOf(invoice.date)));
 
     let carId = this.invoiceService.getCarByTrackerid(invoice.vehicleTrackerId).subscribe(
-      (res:any) => {
+      (res: any) => {
         console.log("selectedcar", res.body);
         this.selectedCar = res.body;
         this.getMovements(invoice);
@@ -177,25 +178,24 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
 
   }
 
-  getMovements(invoice : any){
+  getMovements(invoice: any) {
     this.invoiceService.getMovementsForCarWithMonth(this.selectedCar.ID, new Date().setMonth(this.months.indexOf(invoice.date))).subscribe(
-      (res:any) => {
+      (res: any) => {
         console.log(res);
         let data = res;
 
         let parsed = [];
 
-        data.forEach(function(verplaatsing)
-        {
+        data.forEach(function (verplaatsing) {
 
           let l = [];
 
-          verplaatsing.checkpoints.forEach(function(checkpoint){
+          verplaatsing.checkpoints.forEach(function (checkpoint) {
 
-            let lat =  checkpoint.lat;
+            let lat = checkpoint.lat;
             let lon = checkpoint.lon;
 
-            parsed.push({"lat" : lat, "lon" : lon});
+            parsed.push({"lat": lat, "lon": lon});
 
           });
           // parsed.push();
@@ -223,7 +223,9 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
     this.selectedInvoices.splice(index, 1);
   }
 
-  downloadPDF(invoiceid: string){
+  downloadPDF(invoiceid: string) {
+    console.log("Selected invoice" , this.selectedInvoice);
+    console.log("Selected invoiceid" , this.selectedInvoice.invoiceId);
     this.invoiceService.downloadPDF(invoiceid);
   }
 

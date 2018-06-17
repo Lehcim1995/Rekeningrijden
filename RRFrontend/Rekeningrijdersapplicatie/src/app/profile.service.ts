@@ -5,8 +5,8 @@ import {Router} from "@angular/router";
 @Injectable()
 export class ProfileService {
 
-  private postLoginURL = "http://192.168.25.135:8080/rekeningrijdersapplicatiemodule/rest/rekeningadministratie/login";
-  private postRegisterURL = "http://192.168.25.135:8080/rekeningrijdersapplicatiemodule/rest/authenticate/register";
+  private postLoginURL = "http://localhost:8080/rekeningrijdersapplicatiemodule/rest/rekeningadministratie/login";
+  private postRegisterURL = "http://localhost:8080/rekeningrijdersapplicatiemodule/rest/authenticate/register";
   public token: string;
   private loggedInUser: string;
 

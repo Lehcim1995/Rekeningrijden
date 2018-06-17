@@ -32,13 +32,26 @@ export class LoginComponent implements OnInit {
           this.invoiceService.setInvoices(res.body);
           //set list of invoices in service
           if (res != null) {
-            //redirect to new page to download pdf
+
           }
         },
         err => {
           if (err.status == 401) {
             alert("Not logged in!");
           }
+        }
+      );
+
+      this.invoiceService.getCarsOfOwner(this.profileService.getCPR()).subscribe(
+        (res:any) => {
+          console.log("cars", res.body);
+          this.invoiceService.setCars(res.body);
+          if (res != null) {
+
+          }
+        },
+        err => {
+          console.log("Something went wrong while getting the cars of the logged in user");
         }
       );
 
