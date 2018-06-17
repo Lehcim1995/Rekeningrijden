@@ -80,11 +80,11 @@
                     displayLoadTime('#' + url[1], new Date().getTime() - ajaxTime);
 //                    error.response.status !== 404 ? displaySuccess(selector) : displayFailure(selector);
                     if(error.response === undefined) {
-                        displayFailure(selector);
-                    } else if(error.response.status !== 404) {
                         displaySuccess(selector);
-                    } else {
+                    } else if(error.response.status === 404) {
                         displayFailure(selector)
+                    } else {
+                        displaySuccess(selector);
                     }
 //                    console.log(error.request);
 //                    return Promise.reject(error.response);
