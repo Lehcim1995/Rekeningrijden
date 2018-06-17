@@ -11,7 +11,6 @@ import service.VehicleService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
-import javax.validation.constraints.Null;
 import javax.ws.rs.core.Context;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -202,14 +201,7 @@ public class PdfCreator
         Vehicle v = vehicleService.getVehicleByVehicleTracker(carInfo);
 
         String table;
-        if (v != null)
-        {
-            table = createHtmlTable(Collections.singletonList(v), Vehicle.class);
-        }
-        else
-        {
-            table = "car not found";
-        }
+        table = createHtmlTable(Collections.singletonList(v), Vehicle.class);
 
         replaceOnFile(file, "\\{\\{ car_info \\}\\}", table);
 
@@ -291,7 +283,7 @@ public class PdfCreator
 
         if (data == null || data.isEmpty())
         {
-            return "<p> no data found </p>";
+            return "<tr> no data found </tr>";
         }
 
         String table; // return this

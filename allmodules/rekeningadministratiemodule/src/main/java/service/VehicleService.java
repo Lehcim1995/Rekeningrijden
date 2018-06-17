@@ -18,7 +18,6 @@ public class VehicleService implements Serializable {
     @Inject
     VehicleDao vehicleDao;
 
-
     public VehicleService() {}
 
     public List<VehicleTracker> getVehicleTrackers() {
