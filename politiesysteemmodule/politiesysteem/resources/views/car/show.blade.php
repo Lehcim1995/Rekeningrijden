@@ -79,13 +79,17 @@
                                 <h4>{{ __('carshow.ridehistory') }}</h4>
                             </div>
                             <div class="col-md-2">
-                                <span style="float: right; margin-top: 5px; font-size: 17px">{{ __('carshow.checkpoints') }}: </span>
+                                <span style="float: right; margin-top: 5px; font-size: 17px">{{ __('carshow.checkpoints') }}
+                                    : </span>
                             </div>
                             <div class="col-md-1">
-                                <input id="checkpointAmount" type="number" value="10" class="form-control" style="width: 4vw; text-align: center;">
+                                <input id="checkpointAmount" type="number" value="10" class="form-control"
+                                       style="width: 4vw; text-align: center;">
                             </div>
                             <div class="col-md-1">
-                                <h4><i id="map-spinner" class="fa fa-refresh fa-spin" style="float:right; margin-top: 6px; cursor:pointer" onclick="refreshMap()"></i></h4>
+                                <h4><i id="map-spinner" class="fa fa-refresh fa-spin"
+                                       style="float:right; margin-top: 6px; cursor:pointer" onclick="refreshMap()"></i>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -97,7 +101,8 @@
                 @if(!$car->retrieved)
                     <div class="row" style="margin-top: 1.5vh">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" style="float: right" onclick="window.location.href = '/car/{{ $car->id }}/retrieve'">{{ __('carshow.carfound') }}</button>
+                            <button class="btn btn-primary" style="float: right"
+                                    onclick="window.location.href = '/car/{{ $car->id }}/retrieve'">{{ __('carshow.carfound') }}</button>
                         </div>
                     </div>
                 @endif
@@ -105,26 +110,37 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script>
-        var license = '{{ $car->license_plate }}';
+        let license = '{{ $car->license_plate }}';
 
         //Generate the map to show last locations
-        function generateMap(route) {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 3,
-                center: {lat: route[0].lat, lng: route[1].lng},
-                mapTypeId: 'terrain'
-            });
+        function generateMap(routes) {
+            if (routes.length != 0) {
+                $('#map').html('');
 
-            var flightPath = new google.maps.Polyline({
-                path: route,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 1
-            });
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 11,
+                    center: {lat: routes[0][1].lat, lng: routes[0][1].lng},
+                    mapTypeId: 'terrain'
+                });
 
-            flightPath.setMap(map);
+                routes.forEach(function (route) {
+                    var flightPath = new google.maps.Polyline({
+                        path: route,
+                        geodesic: true,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 1
+                    });
+
+                    flightPath.setMap(map);
+                });
+            } else {
+                $('#map').html('<h1 style="text-align: center;">Er is geen route beschikbaar</h1>');
+            }
+
             $('#map-spinner').removeClass('fa-spin');
         }
 
@@ -134,30 +150,43 @@
         });
 
         //Get the last location the car was registered
-        function getLastPoints() {
-//            $.get('[ip]:[port]/rekeningsadministratiemodule/rest/vehicle/' + license + '/locationdata?limit=' + $('#checkpointAmount').val(), function (data) {
-            $.get('/spoofCords' , function (data) {
-                parseData(data)
-            });
+        function getLastPoints(carId) {
+            axios.get('http://192.168.25.135:8080/verplaatsingsmodule/rest/verplaatsing/' + carId + '/waypoints?limit=' + $('#checkpointAmount').val())
+                .then(function (response) {
+                    console.log(response.data);
+                    parseData(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
 
         //Parse data for Google maps
         function parseData(data) {
+            var routes = [];
             var route = [];
 
-            for(var i = 0, y = data.length; i < y; i++) {
-                route.push({'lat': data[i].lat, 'lng': data[i].lon});
-            }
+            data.forEach(function (movement) {
+                movement.checkpoints.forEach(function(checkpoint){
+                    route.push({'lat': checkpoint.lat, 'lng': checkpoint.lon});
+                });
+            });
+            routes.push(route);
 
-            generateMap(route)
+            console.log(routes);
+            generateMap(routes)
         }
 
         //Use AJAX to get car info
         function getCarInfo() {
-//            $.get('[ip]:[port]/rekeningadministratiemodule/rest/vehicle/' + license, function (data) {
-            $.get('/spoofPerson', function (data) {
-                displayCarInfo(data);
-            });
+            axios.get('http://192.168.25.135:8080/rekeningadministratiemodule/rest/vehicle/' + license)
+                .then(function (response) {
+                    getLastPoints(response.data.ID);
+                    displayCarInfo(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
         //Display the information in the correct labels
@@ -178,7 +207,7 @@
 
         //Refresh the map
         function refreshMap() {
-            if(!$('#map-spinner').hasClass('fa-spin')) {
+            if (!$('#map-spinner').hasClass('fa-spin')) {
                 $('#map-spinner').addClass('fa-spin');
                 getLastPoints();
             }
@@ -186,5 +215,6 @@
     </script>
 
     {{--Google api script include--}}
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXdAc0zDyz_bjoXzZRLGv8IfzxphVlhfU&callback=getLastPoints"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXdAc0zDyz_bjoXzZRLGv8IfzxphVlhfU"></script>
 @endsection

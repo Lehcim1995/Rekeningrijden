@@ -41,7 +41,7 @@
                     <input id="license_plate" name="license_plate" required class="form-control" placeholder="12-abc-3">
                 </div>
                 <div class="col-lg-3">
-                    <button id="submitForm" type="submit" class="btn btn-primary">{{ __('carindex.add') }}</button>
+                    <button id="submitForm" class="btn btn-primary">{{ __('carindex.add') }}</button>
                 </div>
             </div>
         </form>
@@ -57,34 +57,37 @@
             });
 
             $('#submitForm').click(function (e) {
-                 e.preventDefault();
+                console.log('lel');
+//                 e.preventDefault();
 
-                 var check = true;
+                 {{--var check = false;--}}
 
-                $.ajax({
-                    type: 'GET',
-                    url: '/rekeningadministratiemodule/rest/vehicle/' + $('#license_plate').val(),
-                    success: function (data, text) {
-                        $('#addCarForm').submit();
-                    },
-                    error: function (request, status, error) {
-                        alert('Kan ikke tilføje nummerplade');
-                        check = false;
-                    }
-                });
+                {{--$.ajax({--}}
+                    {{--type: 'GET',--}}
+                    {{--url: 'http://192.168.25.135:8080/rekeningadministratiemodule/rest/vehicle/' + $('#license_plate').val(),--}}
+                    {{--success: function (data, text) {--}}
+                        {{--console.log('kanker');--}}
+                        {{--check = true;--}}
+                    {{--},--}}
+                    {{--error: function (request, status, error) {--}}
+                        {{--console.log('anal');--}}
+                        {{--alert({{ __('carindex.noexist') }});--}}
+                        {{--check = false;--}}
+                    {{--}--}}
+                {{--});--}}
 
-                if(check) {
-                    $.ajax({
-                        type: 'GET',
-                        url: '/car/check/' + $('#license_plate').val(),
-                        success: function (data, text) {
-                            $('#addCarForm').submit();
-                        },
-                        error: function (request, status, error) {
-                            alert('Kan ikke tilføje nummerplade');
-                        }
-                    });
-                }
+                {{--if(check) {--}}
+                    {{--$.ajax({--}}
+                        {{--type: 'GET',--}}
+                        {{--url: '/car/check/' + $('#license_plate').val(),--}}
+                        {{--success: function (data, text) {--}}
+{{--//                            $('#addCarForm').submit();--}}
+                        {{--},--}}
+                        {{--error: function (request, status, error) {--}}
+                            {{--alert({{ __('carindex.exist') }});--}}
+                        {{--}--}}
+                    {{--});--}}
+                {{--}--}}
             });
         });
     </script>

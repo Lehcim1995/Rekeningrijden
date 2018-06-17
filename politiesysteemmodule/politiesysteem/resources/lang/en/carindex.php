@@ -7,5 +7,7 @@ return [
     'since' => 'Since',
     'solved' => 'Solved',
     'add' => 'Add car',
+    'noexist' => 'The car isn\'t recognized in the system',
+    'exist' => 'The car is already reported stolen'
 
 ];

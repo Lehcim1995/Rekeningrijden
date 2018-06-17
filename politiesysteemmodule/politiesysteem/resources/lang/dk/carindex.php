@@ -7,5 +7,7 @@ return [
     'since' => 'Siden',
     'solved' => 'Løst',
     'add' => 'Tilføj bil',
+    'noexist' => 'Bilen findes ikke i systemet',
+    'exist' => 'Bilen er allerede blevet rapporteret som stjålet'
 
 ];

@@ -70,9 +70,15 @@ class CarController extends Controller
 
     public function checkLicense($license)
     {
-        $car = Car::where('license_plate', $license)->first();
+        $car = Car::where('license_plate', $license)
+            ->where('retrieved', 0)
+            ->first();
 
-        return $car == null || $car->retrieved;
+        if($car === null) {
+            return response('Success', 200);
+        } else {
+            return response('Success', 500);
+        }
     }
 
     public function spoofCords()
