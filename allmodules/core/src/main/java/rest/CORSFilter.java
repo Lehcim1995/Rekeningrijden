@@ -15,7 +15,7 @@ public class CORSFilter implements ContainerResponseFilter
             final ContainerResponseContext cres)
     {
         cres.getHeaders().add("Access-Control-Allow-Origin", "*");
-        cres.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, Set-Cookie, Auth, Access-Control-Allow-Origin, Authorization, User-Agent");
+        cres.getHeaders().add("Access-Control-Allow-Headers", "X-CSRF-TOKEN, origin, content-type, accept, authorization, Set-Cookie, Auth, Access-Control-Allow-Origin, Authorization, User-Agent");
         cres.getHeaders().add("Access-Control-Allow-Credentials", "true");
         cres.getHeaders().add("Access-Control-Expose-Headers", "Authorization");
         cres.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");

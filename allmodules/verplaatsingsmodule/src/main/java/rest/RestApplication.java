@@ -11,8 +11,8 @@ public class RestApplication extends Application
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<>();
-        classes.add(VerplaatsingRestEndpoint.class);
         classes.add(CORSFilter.class);
+        classes.add(VerplaatsingRestEndpoint.class);
         return classes;
     }
 }

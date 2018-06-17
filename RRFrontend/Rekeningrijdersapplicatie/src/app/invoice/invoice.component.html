@@ -1,6 +1,6 @@
 <div id="main" class="flexbox row wrap">
   <div id="invoices">
-    <p *ngIf="invoiceService.invoices.length == 0">Dit voertuig heeft nog geen facturen. Wanneer u facturen heeft,
+    <p *ngIf="invoiceService.invoices.length == 0">U heeft nog geen facturen. Wanneer u facturen heeft,
       verschijnen ze
       hier.</p>
     <div *ngIf="invoiceService.invoices.length != 0" class="flexbox column wrap invoice-entries">
@@ -49,7 +49,7 @@
 
                   <!-- pdf -->
                   <input type="button" class="pdf" value="Download PDF"
-                         (click)="downloadPDF(selectedInvoice.invoiceID)">
+                         (click)="downloadPDF(selectedInvoice.invoiceId)">
                 </div>
               </div>
 
@@ -84,9 +84,11 @@
               <a [ngClass]="{ 'active': lastInvoice == invoice.invoiceId }"
                  class="flexbox row wrap between invoice-entry">
                 <div class="flexbox row wrap center">
-                  <div class="flexbox column wrap">
-                    <p class="invoice">{{invoice.date }} - #{{invoice.invoiceId}} </p>
-                    <p class="invoice-details">{{invoice.totalDistance}}km - {{invoice.total}} DKK</p>
+                  <div class="flexbox row wrap">
+                    <div class="flexbox column wrap">
+                      <p class="invoice">{{invoice.date }} - #{{invoice.invoiceId}} </p>
+                      <p class="invoice-details">{{invoice.totalDistance}}km - {{invoice.total}} DKK</p>
+                    </div>
                     <p class="removeinvoice" (click)="removeInvoice(index)"> - </p>
                   </div>
                 </div>

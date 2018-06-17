@@ -65,4 +65,13 @@ public class VehicleRestService
                        .entity(entity)
                        .build();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("cars/{ownerid}")
+    public Response getCarsOfOwner(@PathParam("ownerid") String ownerid)
+    {
+        List<Vehicle> carsOfOWner = vehicleService.getCarsOfOwner(ownerid);
+        return Response.ok().entity(carsOfOWner).build();
+    }
 }

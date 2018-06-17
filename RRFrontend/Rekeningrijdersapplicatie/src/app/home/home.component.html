@@ -2,28 +2,29 @@
   <!-- ########## cars panel ###########-->
   <div id="cars" class="max-width">
     <h3>Voertuigen</h3>
-    <p *ngIf="vehicles.length == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
+    <p *ngIf="invoiceService.vehicles == 0">U heeft nog geen voertuigen geregistreerd. Mocht u voertuigen beheren, komen ze hier
       tevoorschijn.</p>
-    <div *ngIf="vehicles.length != 0" class="flexbox column wrap">
+    <div *ngIf="invoiceService.vehicles != 0" class="flexbox column wrap">
       <h5>Filters</h5>
       <div class="flexbox row wrap between">
-        <div class="flexbox row wrap"><label for="filter" class="self_center">Filter:</label>
-          <input [(ngModel)]="name" id="filter" type="text" placeholder="auto 1">
-        </div>
-        <div class="flexbox row wrap"><label for="licensePlateFilter" class="self_center">Filter kenteken:</label>
-          <input id="licensePlateFilter" [(ngModel)]="license" type="text" placeholder="XJ 328 89">
-        </div>
-        <div class="flexbox row wrap"><label for="fuelFilter" class="self_center">Filter brandstof:</label>
-          <input id="fuelFilter" [(ngModel)]="fuel" type="text" placeholder="Benzine">
+        <div class="flexbox row wrap"><label for="carFilter" class="self_center">Filter:</label>
+          <input id="carFilter" [(ngModel)]="carFiltertje" type="text" placeholder="FilterText">
         </div>
       </div>
+      <div class="flexbox row wrap between">
+        <p>Kentekenplaat</p>
+        <p>Brandstoftype</p>
+        <p>TrackerID</p>
+        <p>Gewicht</p>
+      </div>
 
-      <ng-container *ngFor="let vehicle of vehicles | nameFilter: name:license:fuel">
-        <a (click)="chooseCar(vehicle)" class="flexbox row wrap car-entry" routerLink="/invoices/">
+      <ng-container *ngFor="let vehicle of invoiceService.vehicles | carFilter: { carFiltertje: carFiltertje}: false">
+        <a (click)="chooseCar(vehicle)" class="flexbox row wrap car-entry">
           <div class="flexbox row wrap vehicles between max-width">
-            <h3 class="car">{{vehicle.name}}</h3>
-            <p class="car-details">{{vehicle.licenseplate}}</p>
-            <p>{{vehicle.classification}}</p>
+            <h3 class="car">{{vehicle.licensePlate}}</h3>
+            <p class="car-details">{{vehicle.fueltype}}</p>
+            <p class="car-details">{{vehicle.tracker.ID}}</p>
+            <p class="car-details">{{vehicle.weight}}kg</p>
           </div>
         </a>
       </ng-container>

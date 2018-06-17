@@ -105,4 +105,8 @@ public class VehicleService implements Serializable {
         vehicle.setBuildYear(buildYear);
         return vehicleDao.editVehicle(vehicle);
     }
+
+    public List<Vehicle> getCarsOfOwner(String ownerid) {
+        return vehicleDao.getCarsOfOwner(ownerid);
+    }
 }

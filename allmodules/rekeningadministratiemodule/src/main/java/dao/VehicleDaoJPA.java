@@ -62,6 +62,14 @@ public class VehicleDaoJPA implements VehicleDao, Serializable
     }
 
     @Override
+    public List<Vehicle> getCarsOfOwner(String ownerid) {
+
+        return em.createQuery("SELECT v FROM Vehicle v WHERE v.owner.id in (SELECT o.id FROM Owner o WHERE o.citizenId = :ownerid)", Vehicle.class)
+                .setParameter("ownerid", Integer.parseInt(ownerid))
+                .getResultList();
+    }
+
+    @Override
     public VehicleTracker createVehicleTracker(VehicleTracker tracker) {
 
         VehicleTracker vehicleTracker = new VehicleTracker(tracker);
