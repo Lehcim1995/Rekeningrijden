@@ -58,8 +58,12 @@ export class InvoiceComponent implements OnInit, AfterViewChecked {
         alert("payment succesfull");
         this.amount = 0;
         //update status of all the invoices that have been paid.
-        for (let y in this.selectedInvoices.length) {
-          this.invoiceService.payInvoice(this.selectedInvoices[y].invoiceID);
+        for (let y in this.selectedInvoices) {
+          console.log("changing payment status");
+          console.log("selectedinvoice", this.selectedInvoices[y]);
+          console.log("selectedinvoiceid", this.selectedInvoices[y].invoiceId);
+          console.log(this.selectedInvoices[y]);
+          this.invoiceService.payInvoice(this.selectedInvoices[y].invoiceId);
         }
         this.selectedInvoices = [];
       });

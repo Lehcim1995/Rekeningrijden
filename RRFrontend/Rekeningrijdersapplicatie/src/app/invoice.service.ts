@@ -82,7 +82,7 @@ export class InvoiceService {
   }
 
   public payInvoice(invoiceId : any){
-    this.httpClient.get(`${this.payInvoiceURL}/${invoiceId}`,{observe: 'response'}).subscribe(
+    this.httpClient.post(`${this.payInvoiceURL}/${invoiceId}`,{observe: 'response'}).subscribe(
       (res) => {
         console.log(res);
         if (res != null) {
