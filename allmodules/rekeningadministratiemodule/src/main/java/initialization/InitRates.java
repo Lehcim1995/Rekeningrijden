@@ -12,6 +12,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.util.Date;
+import java.util.List;
 
 @Singleton
 @Startup
@@ -37,16 +38,26 @@ public class InitRates {
             Road road1 = roadService.createRoad("Weg 1", null, null);
             Road road2 = roadService.createRoad("Weg 2", null, null);
 
-            RateCategory rateRoad1 = rateService.create(FuelEnum.Benzine, 1.05, new Date(), null);
-            RateCategory rateRoad2 = rateService.create(FuelEnum.Diesel, 1.03, new Date(), null);
+            List<RateCategory> categories = road1.getRateCategories();
+            List<RateCategory> categories2 = road2.getRateCategories();
 
-            KilometerRate kilometerRateRoad1 = rateService.create(road1, 11, new Date(), null, rateRoad1);
-            KilometerRate kilometerRateRoad2 = rateService.create(road2, 17, new Date(), null, rateRoad2);
+            for (FuelEnum type : FuelEnum.values()) {
+                categories.add(rateService.create(type, road1, 1, new Date(), null));
+                categories2.add(rateService.create(type, road2, 1, new Date(), null));
+            }
+
+
+            KilometerRate kilometerRateRoad1 = rateService.create(road1, 11, new Date(), null);
+            KilometerRate kilometerRateRoad2 = rateService.create(road2, 17, new Date(), null);
 
             road1.setKilometerRate(kilometerRateRoad1);
+            road1.setRateCategories(categories);
+
             road2.setKilometerRate(kilometerRateRoad2);
+            road2.setRateCategories(categories2);
 
-
+            roadService.editRoad(road1);
+            roadService.editRoad(road2);
 
         } catch (Exception e) {
             System.out.print("Something went wrong when initializing the rates: " + e.getStackTrace());

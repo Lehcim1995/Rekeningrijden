@@ -34,6 +34,11 @@ public class RoadService implements Serializable {
         }
     }
 
+    public Road editRoad(Road road)
+    {
+        return roadDao.editRoad(road);
+    }
+
     public boolean deleteRoad(int id) throws SQLException {
         try {
             return roadDao.deleteRoad(id);

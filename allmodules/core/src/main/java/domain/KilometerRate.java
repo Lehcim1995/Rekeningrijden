@@ -1,14 +1,13 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -18,23 +17,27 @@ public class KilometerRate implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @OneToOne
+    @OneToOne (mappedBy = "kilometerRate")
     private Road road;
     private double kilometerPrice;
     private Date startDate;
     private Date endDate;
-    @OneToOne
-    private RateCategory rateCategoryEnum;
 
-    public KilometerRate(Road road, double kilometerPrice, Date startDate, Date endDate, RateCategory rateCategoryEnum) {
+    public KilometerRate(Road road, double kilometerPrice, Date startDate, Date endDate) {
         this.road = road;
         this.kilometerPrice = kilometerPrice;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.rateCategoryEnum = rateCategoryEnum;
     }
 
     public KilometerRate() {
+    }
+
+    public KilometerRate(KilometerRate newKilometerRate) {
+        this.road = newKilometerRate.getRoad();
+        this.kilometerPrice = newKilometerRate.getKilometerPrice();
+        this.startDate = newKilometerRate.getStartDate();
+        this.endDate = newKilometerRate.getEndDate();
     }
 
     public int getId() {
@@ -75,13 +78,5 @@ public class KilometerRate implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public RateCategory getRateCategoryEnum() {
-        return rateCategoryEnum;
-    }
-
-    public void setRateCategoryEnum(RateCategory rateCategoryEnum) {
-        this.rateCategoryEnum = rateCategoryEnum;
     }
 }

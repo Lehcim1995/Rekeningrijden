@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TransactionRequiredException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public Invoice create(Invoice invoice) {
         if (invoice == null) {
             throw new IllegalArgumentException("Invoice is null");
@@ -32,6 +34,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public Invoice update(Invoice invoice) {
         if (invoice == null) {
             throw new IllegalArgumentException("Invoice is null");
@@ -41,6 +44,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public boolean changePaymentStatusById(int invoiceId, String paymentStatus) {
         if(!paymentStatus.equals("Open"))
         {
@@ -58,6 +62,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public Invoice getInvoiceByInvoiceId(int invoiceId) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.invoiceId = :invoiceId", Invoice.class)
@@ -71,6 +76,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getAllInvoices() {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice", Invoice.class).getResultList();
@@ -82,6 +88,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public Invoice getInvoiceByTrackerId(String trackerId) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId", Invoice.class)
@@ -95,6 +102,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByOwner(Owner owner) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.owner = :owner", Invoice.class)
@@ -108,6 +116,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByPaymentStatus(PaymentEnum paymentEnum) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.paymentStatus = :paymentEnum", Invoice.class)
@@ -121,6 +130,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByTrackerIdAndMonth(String trackerId, MonthEnum monthEnum) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId " +
@@ -136,6 +146,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByOwnerAndMonth(Owner owner, MonthEnum monthEnum) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.owner = :owner " +
@@ -151,6 +162,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByPaymentStatusAndMonth(PaymentEnum paymentEnum, MonthEnum monthEnum) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.paymentStatus = :paymentEnum " +
@@ -166,6 +178,7 @@ public class InvoiceDaoJPA implements InvoiceDao {
     }
 
     @Override
+    @Transactional
     public List<Invoice> getInvoicesByVehicleAndOwner(String trackerId, Owner ownerById) {
         try {
             return em.createQuery("SELECT invoice FROM Invoice invoice WHERE invoice.vehicleTrackerId = :trackerId AND invoice.owner = :owner", Invoice.class)
